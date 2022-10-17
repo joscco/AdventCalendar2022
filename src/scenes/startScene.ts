@@ -1,7 +1,8 @@
-import { Application, Container, Sprite } from 'pixi.js';
+import {Application, Sprite} from 'pixi.js';
 import {Game} from "../index";
+import Scene from "../Scene";
 
-export class StartScene extends Container {
+export class StartScene extends Scene {
     app: Application;
     sprite: Sprite;
     state: { velocity: { x: number; y: number } };
@@ -18,12 +19,9 @@ export class StartScene extends Container {
         this.sprite.x = Game.GAME_WIDTH / 2 - this.sprite.width / 2;
         this.sprite.y = Game.GAME_HEIGHT / 2 - this.sprite.height / 2;
         this.addChild(this.sprite);
-
-        // Handle update
-        app.ticker.add(this.update);
     }
 
-    update(_: any, delta: number) {
+    update(delta: number) {
         if (
             this.sprite.x <= 0 ||
             this.sprite.x >= Game.GAME_WIDTH - this.sprite.width

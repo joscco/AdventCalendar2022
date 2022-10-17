@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { StartScene } from './scenes/startScene';
+import SceneManager from './SceneManager';
 
 export class Game {
     static GAME_WIDTH = 1920
@@ -36,9 +37,10 @@ const main = async () => {
     await load(app);
     document.body.appendChild(app.view);
 
-    // Set scene
+    let sceneManager = new SceneManager(app);
     var scene = new StartScene(app);
-    app.stage.addChild(scene);
+    sceneManager.add("startScene", scene)
+    sceneManager.start("startScene")
 };
 
 main();

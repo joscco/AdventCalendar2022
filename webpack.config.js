@@ -33,14 +33,14 @@ module.exports = {
         // Do not accumulate files in ./dist
         new CleanWebpackPlugin(),
         // Copy assets to serve them
-        new CopyPlugin([{ from: 'assets', to: 'assets' }]),
+        new CopyPlugin({patterns: [{ from: "assets", to: "assets" },]}),
     ],
     devServer: {
         // webpack-dev-server configuration
-        contentBase: path.join(__dirname, 'dist'),
-        port: 8080,
-        // Hot-reloading, the sole reason to use webpack here <3
-        hot: true,
-        writeToDisk: true,
+        static: {
+            directory: path.join(__dirname, 'dist'),
+        },
+        compress: true,
+        port: 8080
     },
 }
