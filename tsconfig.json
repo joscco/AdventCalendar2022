@@ -5,6 +5,7 @@
         "target": "es6",
         "module": "CommonJS",
         "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
         // Set your preferences here for TypeScript
         "strict": true
     }

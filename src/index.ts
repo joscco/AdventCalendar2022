@@ -1,6 +1,8 @@
-import * as PIXI from 'pixi.js';
-import { StartScene } from './scenes/startScene';
+import {Application} from 'pixi.js';
+import {StartScene} from './scenes/startScene';
 import SceneManager from './SceneManager';
+import {gsap} from "gsap";
+import {Assets} from "@pixi/assets";
 
 export class Game {
     static GAME_WIDTH = 1920
@@ -9,22 +11,24 @@ export class Game {
     static CANVAS_HEIGHT = 540
 }
 
-const load = (app: PIXI.Application) => {
-    return new Promise<void>((resolve) => {
-        app.loader.add('assets/hello-world.png').load(() => {
-            resolve();
-        });
-    });
-};
-
 const main = async () => {
     // Main app
-    let app = new PIXI.Application(
+    let app = new Application(
         {
             width: Game.GAME_WIDTH,
             height: Game.GAME_HEIGHT
         }
     );
+
+    // Synchronize tickers by using the gsap one
+    app.ticker.stop()
+    gsap.ticker.add(() => app.ticker.update())
+
+    // Add all loading bundles
+    Assets.addBundle("textures", {
+        worldi: 'assets/hello-world.png'
+    });
+    await Assets.loadBundle("textures")
 
     // Display application properly
     document.body.style.margin = '0';
@@ -34,7 +38,6 @@ const main = async () => {
     app.renderer.view.style.height = Game.CANVAS_HEIGHT + "px"
 
     // Load assets
-    await load(app);
     document.body.appendChild(app.view);
 
     let sceneManager = new SceneManager(app);

@@ -20,7 +20,7 @@ export default class Scene extends PIXI.Container implements IScene {
     public scenes: SceneManager|null;
 
     /**
-     * If the scene has been started before from it's current SceneManager.
+     * If the scene has been started before from its current SceneManager.
      * The SceneManager will use this to check if the init should be run.
      */
     public hasRun: boolean;
@@ -39,7 +39,7 @@ export default class Scene extends PIXI.Container implements IScene {
     public init(): void {}
 
     /**
-     * Called after removing this scene from the SceneManager and it has ran before.
+     * Called after removing this scene from the SceneManager, and it has run before.
      * You should destroy all of your elements from this scene here.
      */
     public destroy(): void {}
