@@ -1,32 +1,68 @@
 import {Application, Sprite} from 'pixi.js';
-import {Game} from "../index";
+import {GAME_HEIGHT, GAME_WIDTH, SceneManager} from "../index";
 import Scene from "../Scene";
-import * as gsap from "gsap";
 import {Assets} from "@pixi/assets";
+import {ScalingButton} from "../ui/ScalingButton";
+import {Texture} from "@pixi/core";
+
+interface StartSceneAssets {
+    buttonStart: Texture;
+    buttonTutorial: Texture;
+    title: Texture;
+}
 
 export class StartScene extends Scene {
-    app: Application;
-    sprite: Sprite;
-    state: { velocity: { x: number; y: number } };
 
     constructor(app: Application) {
         super();
-        this.app = app;
-        this.sprite = new Sprite()
-        this.state = { velocity: { x: 1, y: 1 } };
+        this.app = app
         this.update = this.update.bind(this);
     }
 
     async start() {
-        const assets = await Assets.loadBundle("textures")
+        const assets: StartSceneAssets = await Assets.loadBundle("startSceneAssets")
 
-        this.sprite.texture = assets.worldi;
-        this.sprite.x = Game.GAME_WIDTH / 2 - this.sprite.width / 2;
-        this.sprite.y = Game.GAME_HEIGHT / 2 - this.sprite.height / 2;
-        this.addChild(this.sprite);
+        this.addBackground();
+        this.addTitle(assets);
+        this.addStartButton(assets);
+        this.addTutorialButton(assets);
+    }
 
-        gsap.gsap.to(this.sprite, {
-            x: Game.GAME_WIDTH - 200, duration: 2, ease: "back.out(1.2)"
-        })
+    private addTutorialButton(assets: StartSceneAssets) {
+        let tutorialButton = new ScalingButton(
+            GAME_WIDTH / 2,
+            GAME_HEIGHT / 2 + 300,
+            assets.buttonTutorial,
+            () => {
+                SceneManager.start("startScene")
+            })
+        this.addChild(tutorialButton);
+    }
+
+    private addStartButton(assets: StartSceneAssets) {
+        let startButton = new ScalingButton(
+            GAME_WIDTH / 2,
+            GAME_HEIGHT / 2 + 50,
+            assets.buttonStart,
+            () => {
+                SceneManager.start("startScene")
+            })
+        this.addChild(startButton);
+    }
+
+    private addTitle(assets: StartSceneAssets) {
+        let titleSprite = new Sprite(assets.title);
+        titleSprite.x = GAME_WIDTH / 2;
+        titleSprite.y = GAME_HEIGHT / 2 - 250;
+        titleSprite.anchor.set(0.5)
+        this.addChild(titleSprite);
+    }
+
+    private addBackground() {
+        let background = new Sprite(Texture.WHITE)
+        background.width = GAME_WIDTH
+        background.height = GAME_HEIGHT
+        background.tint = 0xEEEEEE;
+        this.addChild(background);
     }
 }

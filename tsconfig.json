@@ -6,6 +6,7 @@
         "module": "CommonJS",
         "sourceMap": true,
         "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
         // Set your preferences here for TypeScript
         "strict": true
     }

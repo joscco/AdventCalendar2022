@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import SceneManager from "./SceneManager";
+import SceneManagerImpl from "./SceneManagerImpl";
 import IScene from "./IScene";
 
 /**
@@ -17,7 +17,7 @@ export default class Scene extends PIXI.Container implements IScene {
      * Reference to the SceneManager this Scene has been added to.
      * This will automatically be set by the SceneManager after it has been added.
      */
-    public scenes: SceneManager|null;
+    public scenes: SceneManagerImpl|null;
 
     /**
      * If the scene has been started before from its current SceneManager.

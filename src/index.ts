@@ -1,49 +1,51 @@
-import {Application} from 'pixi.js';
 import {StartScene} from './scenes/startScene';
-import SceneManager from './SceneManager';
+import SceneManagerImpl from './SceneManagerImpl';
 import {gsap} from "gsap";
 import {Assets} from "@pixi/assets";
+import {Application} from "pixi.js";
 
-export class Game {
-    static GAME_WIDTH = 1920
-    static GAME_HEIGHT = 1080
-    static CANVAS_WIDTH = 960
-    static CANVAS_HEIGHT = 540
-}
+export const GAME_WIDTH = 1920;
+export const GAME_HEIGHT = 1080;
+export const CANVAS_WIDTH = 960;
+export const CANVAS_HEIGHT = 540;
+export var App: Application;
+export var SceneManager: SceneManagerImpl;
 
 const main = async () => {
     // Main app
-    let app = new Application(
+    App = new Application(
         {
-            width: Game.GAME_WIDTH,
-            height: Game.GAME_HEIGHT
+            width: GAME_WIDTH,
+            height: GAME_HEIGHT
         }
     );
 
     // Synchronize tickers by using the gsap one
-    app.ticker.stop()
-    gsap.ticker.add(() => app.ticker.update())
+    App.ticker.stop()
+    gsap.ticker.add(() => App.ticker.update())
 
     // Add all loading bundles
-    Assets.addBundle("textures", {
-        worldi: 'assets/hello-world.png'
+    Assets.addBundle("startSceneAssets", {
+        buttonStart: 'assets/startScreen/buttonStart.png',
+        buttonTutorial: 'assets/startScreen/buttonTutorial.png',
+        title: 'assets/startScreen/title.png'
     });
     await Assets.loadBundle("textures")
 
     // Display application properly
     document.body.style.margin = '0';
-    app.renderer.view.style.position = 'absolute';
-    app.renderer.view.style.display = 'block';
-    app.renderer.view.style.width = Game.CANVAS_WIDTH + "px"
-    app.renderer.view.style.height = Game.CANVAS_HEIGHT + "px"
+    App.renderer.view.style.position = 'absolute';
+    App.renderer.view.style.display = 'block';
+    App.renderer.view.style.width = CANVAS_WIDTH + "px"
+    App.renderer.view.style.height = CANVAS_HEIGHT + "px"
 
     // Load assets
-    document.body.appendChild(app.view);
+    document.body.appendChild(App.view);
 
-    let sceneManager = new SceneManager(app);
-    var scene = new StartScene(app);
-    sceneManager.add("startScene", scene)
-    sceneManager.start("startScene")
+    SceneManager = new SceneManagerImpl(App);
+    var startScene = new StartScene(App);
+    SceneManager.add("startScene", startScene)
+    SceneManager.start("startScene")
 };
 
 main();

@@ -5,7 +5,7 @@ import IScene from "./IScene";
  * Manages numerous Scenes and makes sure they function as they should.
  * @param {PIXI.Application} app The pixi application the scenes will be bound to.
  */
-export default class SceneManager {
+export default class SceneManagerImpl {
 
     private app: PIXI.Application;
     private scenes: {[name: string]: IScene};
