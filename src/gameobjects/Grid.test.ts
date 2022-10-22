@@ -1,6 +1,6 @@
 import {Grid} from "./Grid";
 
-describe('Grid suite', () => {
+describe('Grid Tests', () => {
     test('Setting up a grid with two dimensions work', () => {
         let grid = new Grid(2, 3)
         expect(grid)
