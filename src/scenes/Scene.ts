@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import SceneManagerImpl from "./SceneManagerImpl";
+import SceneManagerImpl from "../general/SceneManagerImpl";
 import IScene from "./IScene";
 
 /**

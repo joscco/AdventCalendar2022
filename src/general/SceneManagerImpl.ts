@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import IScene from "./IScene";
+import IScene from "../scenes/IScene";
 
 /**
  * Manages numerous Scenes and makes sure they function as they should.

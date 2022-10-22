@@ -1,5 +1,5 @@
-import {StartScene} from './scenes/startScene';
-import SceneManagerImpl from './SceneManagerImpl';
+import {StartScene} from './scenes/StartScene';
+import SceneManagerImpl from './general/SceneManagerImpl';
 import {gsap} from "gsap";
 import {Assets} from "@pixi/assets";
 import {Application} from "pixi.js";

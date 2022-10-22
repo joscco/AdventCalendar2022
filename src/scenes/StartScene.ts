@@ -1,6 +1,6 @@
 import {Application, Sprite} from 'pixi.js';
 import {GAME_HEIGHT, GAME_WIDTH, SceneManager} from "../index";
-import Scene from "../Scene";
+import Scene from "./Scene";
 import {Assets} from "@pixi/assets";
 import {ScalingButton} from "../ui/ScalingButton";
 import {Texture} from "@pixi/core";
