@@ -1,4 +1,4 @@
-import {Ingredient} from "./Ingredient";
+import {Ingredient} from "../Ingredient";
 
 describe('Ingredient Tests', () => {
         test('Ingredient is set up as cream per default', () => {
@@ -37,6 +37,4 @@ describe('Ingredient Tests', () => {
             expect(ingredient.getTooltipText()).toBe("Butter")
         })
     }
-
-    // Test Tooltip
 )
