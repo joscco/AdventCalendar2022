@@ -1,15 +1,16 @@
 import {StartScene} from './scenes/StartScene';
-import SceneManagerImpl from './general/SceneManagerImpl';
+import SceneManager from './general/SceneManager';
 import {gsap} from "gsap";
 import {Assets} from "@pixi/assets";
 import {Application} from "pixi.js";
 
-export const GAME_WIDTH = 1920;
-export const GAME_HEIGHT = 1080;
-export const CANVAS_WIDTH = 960;
-export const CANVAS_HEIGHT = 540;
+export const GAME_WIDTH: number = 1920;
+export const GAME_HEIGHT: number = 1080;
+export const CANVAS_WIDTH: number = 960;
+export const CANVAS_HEIGHT: number = 540;
+export var MAIN_FONT: FontFace
 export var App: Application;
-export var SceneManager: SceneManagerImpl;
+export var SCENE_MANAGER: SceneManager;
 
 const main = async () => {
     // Main app
@@ -24,13 +25,21 @@ const main = async () => {
     App.ticker.stop()
     gsap.ticker.add(() => App.ticker.update())
 
+
     // Add all loading bundles
+    Assets.add("font", "assets/fonts/FuturaHandwritten.ttf")
+    Assets.addBundle("tooltipAssets", {
+        tooltipRectangle: 'assets/gameScreen/tooltip/tooltipRect.png',
+        tooltipSpike: 'assets/gameScreen/tooltip/tooltipTriangle.png'
+    })
+
     Assets.addBundle("startSceneAssets", {
         buttonStart: 'assets/startScreen/buttonStart.png',
         buttonTutorial: 'assets/startScreen/buttonTutorial.png',
         title: 'assets/startScreen/title.png'
     });
     await Assets.loadBundle("textures")
+    MAIN_FONT = await Assets.load("font") as FontFace
 
     // Display application properly
     document.body.style.margin = '0';
@@ -42,10 +51,10 @@ const main = async () => {
     // Load assets
     document.body.appendChild(App.view);
 
-    SceneManager = new SceneManagerImpl(App);
+    SCENE_MANAGER = new SceneManager(App);
     var startScene = new StartScene(App);
-    SceneManager.add("startScene", startScene)
-    SceneManager.start("startScene")
+    SCENE_MANAGER.add("startScene", startScene)
+    SCENE_MANAGER.start("startScene")
 };
 
 main();

@@ -1,0 +1,1 @@
+// Klasse zur Darstellung einer Zutat (Sprite, Animation, Partikel, Tweening) und als Tooltip-Hover

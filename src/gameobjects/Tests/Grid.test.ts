@@ -1,4 +1,4 @@
-import {Grid} from "../Grid";
+import {Grid} from "../Grid/Grid";
 
 describe('Grid Tests', () => {
     test('Setting up a grid with two dimensions work', () => {

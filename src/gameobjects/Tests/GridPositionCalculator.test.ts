@@ -1,4 +1,4 @@
-import {GridPositionCalculator} from "../GridPositionCalculator";
+import {GridPositionCalculator} from "../Grid/GridPositionCalculator";
 
 describe('Grid Position Calculator Tests', () => {
     test("Constructor with rows and columns work.", () => {

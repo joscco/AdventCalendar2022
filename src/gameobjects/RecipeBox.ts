@@ -1,5 +1,8 @@
 import {IngredientID} from "./Ingredient";
 
+// Klasse zur Überprüfung der Rezepte, kriegt ein Rezept zur Initialisierung
+// Checked einen Array von Zutaten und gibt einen bool-Array bezüglich Richtigkeit zurück
+
 export const RECIPES: { [key: string]: IngredientID[] } = {
     SANTAMILK: ["milk", "honey"],
     SCHOKOCROSSIES: ["melted_chocolate", "peeled_nuts", "cornflakes"],

@@ -1,0 +1,1 @@
+// Darstellung der Maschine, Drag- und Drop-Verhalten

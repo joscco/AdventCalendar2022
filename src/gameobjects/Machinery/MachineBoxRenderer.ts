@@ -1,0 +1,1 @@
+// Klasse zur Darstellung der Kleinmaschinen, Tweening der Positionen

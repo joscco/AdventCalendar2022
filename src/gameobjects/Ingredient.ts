@@ -1,3 +1,4 @@
+// Klasse als Darstellung eines Zutaten-Zustands (Geschmack, Konsistenz, Farbe, Position)
 export class Ingredient {
 
     ingredientData?: IngredientData;

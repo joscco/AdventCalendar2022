@@ -1,9 +1,10 @@
 import {Application, Sprite} from 'pixi.js';
-import {GAME_HEIGHT, GAME_WIDTH, SceneManager} from "../index";
+import {GAME_HEIGHT, GAME_WIDTH, SCENE_MANAGER} from "../index";
 import Scene from "./Scene";
 import {Assets} from "@pixi/assets";
-import {ScalingButton} from "../ui/ScalingButton";
+import {ScalingButton} from "../ui/Buttons/ScalingButton";
 import {Texture} from "@pixi/core";
+import {Tooltip} from "../gameobjects/Tooltip";
 
 interface StartSceneAssets {
     buttonStart: Texture;
@@ -34,7 +35,7 @@ export class StartScene extends Scene {
             GAME_HEIGHT / 2 + 300,
             assets.buttonTutorial,
             () => {
-                SceneManager.start("startScene")
+                SCENE_MANAGER.start("startScene")
             })
         this.addChild(tutorialButton);
     }
@@ -45,7 +46,7 @@ export class StartScene extends Scene {
             GAME_HEIGHT / 2 + 50,
             assets.buttonStart,
             () => {
-                SceneManager.start("startScene")
+                SCENE_MANAGER.start("startScene")
             })
         this.addChild(startButton);
     }
@@ -56,6 +57,9 @@ export class StartScene extends Scene {
         titleSprite.y = GAME_HEIGHT / 2 - 250;
         titleSprite.anchor.set(0.5)
         this.addChild(titleSprite);
+
+        let tooltip = new Tooltip(titleSprite, () => "blabla")
+        tooltip.init()
     }
 
     private addBackground() {

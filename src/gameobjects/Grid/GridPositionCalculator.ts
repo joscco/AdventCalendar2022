@@ -1,3 +1,4 @@
+// Klasse zur Überführung von Gitter-Indizes in Positionen und Zentrierung von Gittern
 export class GridPositionCalculator {
     position: Vector2D = {x: 0, y: 0};
     numberOfRows: number = 0;

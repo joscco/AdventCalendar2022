@@ -1,0 +1,1 @@
+// Array aller enthaltenen Maschinen, Kleinskalieren dieser, Neupositionierung

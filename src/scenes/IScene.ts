@@ -1,9 +1,9 @@
 import * as PIXI from 'pixi.js';
-import SceneManagerImpl from "../general/SceneManagerImpl";
+import SceneManager from "../general/SceneManager";
 
 export default interface IScene extends PIXI.Container {
     app: PIXI.Application|null;
-    scenes: SceneManagerImpl|null;
+    scenes: SceneManager|null;
     hasRun: boolean;
     init(): void;
     destroy(): void;
