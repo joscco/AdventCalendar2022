@@ -28,15 +28,38 @@ const main = async () => {
 
     // Add all loading bundles
     Assets.add("font", "assets/fonts/FuturaHandwritten.ttf")
+
     Assets.addBundle("tooltipAssets", {
         tooltipRectangle: 'assets/gameScreen/tooltip/tooltipRect.png',
         tooltipSpike: 'assets/gameScreen/tooltip/tooltipTriangle.png'
     })
 
     Assets.addBundle("startSceneAssets", {
-        buttonStart: 'assets/startScreen/buttonStart.png',
-        buttonTutorial: 'assets/startScreen/buttonTutorial.png',
-        title: 'assets/startScreen/title.png'
+        torso: "assets/startScreen/bernd/body_middle.png",
+        head: "assets/startScreen/bernd/head.png",
+        eyes_closed: "assets/startScreen/bernd/closed_eyes.png",
+        eyes_open: "assets/startScreen/bernd/open_eyes.png",
+        left_arm_leaning: "assets/startScreen/bernd/leftArmLeaning.png",
+        left_arm_showing: "assets/startScreen/bernd/leftArmShowing.png",
+        right_arm_leaning: "assets/startScreen/bernd/rightArmLeaning.png",
+        backgroundPattern: "assets/startScreen/backgroundPattern.png",
+        pretitle: "assets/startScreen/pretitle.png",
+        startButton: "assets/startScreen/startButton.png",
+        title_0: "assets/startScreen/titleLetters/title0.png",
+        title_1: "assets/startScreen/titleLetters/title1.png",
+        title_2: "assets/startScreen/titleLetters/title2.png",
+        title_3: "assets/startScreen/titleLetters/title3.png",
+        title_4: "assets/startScreen/titleLetters/title4.png",
+        title_5: "assets/startScreen/titleLetters/title5.png",
+        title_6: "assets/startScreen/titleLetters/title6.png",
+        title_7: "assets/startScreen/titleLetters/title7.png",
+        title_8: "assets/startScreen/titleLetters/title8.png",
+        title_9: "assets/startScreen/titleLetters/title9.png",
+        title_10: "assets/startScreen/titleLetters/title10.png",
+        title_11: "assets/startScreen/titleLetters/title11.png",
+        title_12: "assets/startScreen/titleLetters/title12.png",
+        title_13: "assets/startScreen/titleLetters/title13.png",
+        title_14: "assets/startScreen/titleLetters/title14.png",
     });
     await Assets.loadBundle("textures")
     MAIN_FONT = await Assets.load("font") as FontFace
