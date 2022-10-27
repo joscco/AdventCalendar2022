@@ -3,6 +3,7 @@ import SceneManager from './general/SceneManager';
 import {gsap} from "gsap";
 import {Assets} from "@pixi/assets";
 import {Application} from "pixi.js";
+import {GridEditorScene} from "./scenes/GridEditorScene";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -77,7 +78,9 @@ const main = async () => {
 
     SCENE_MANAGER = new SceneManager(App);
     var startScene = new StartScene(App);
+    var gridEditorScene = new GridEditorScene(App)
     SCENE_MANAGER.add("startScene", startScene)
+    SCENE_MANAGER.add("gridEditorScene", gridEditorScene)
     SCENE_MANAGER.start("startScene")
 };
 

@@ -109,7 +109,7 @@ export class StartScene extends Scene {
             GAME_HEIGHT / 2 + 325,
             startButtonTexture,
             () => {
-                SCENE_MANAGER.start("startScene")
+                SCENE_MANAGER.start("gridEditorScene")
             })
         this.startButton.scale.set(0)
         this.addChild(this.startButton);
