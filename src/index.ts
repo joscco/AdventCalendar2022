@@ -36,6 +36,7 @@ const main = async () => {
 
     Assets.addBundle("startSceneAssets", {
         torso: "assets/startScreen/bernd/body_middle.png",
+        backTorso: "assets/startScreen/bernd/backBody.png",
         head: "assets/startScreen/bernd/head.png",
         eyes_closed: "assets/startScreen/bernd/closed_eyes.png",
         eyes_open: "assets/startScreen/bernd/open_eyes.png",
