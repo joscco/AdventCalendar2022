@@ -1,39 +1,9 @@
 import {Application, Container, Sprite, TilingSprite} from 'pixi.js';
-import {GAME_HEIGHT, GAME_WIDTH, SCENE_MANAGER} from "../index";
+import {GAME_HEIGHT, GAME_WIDTH, SCENE_MANAGER, START_SCENE_ASSETS} from "../index";
 import {Back, gsap, Linear, Quart, Sine} from "gsap";
 import Scene from "./Scene";
-import {Assets} from "@pixi/assets";
 import {ScalingButton} from "../ui/Buttons/ScalingButton";
 import {Texture} from "@pixi/core";
-
-export interface StartSceneAssets {
-    torso: Texture,
-    backTorso: Texture,
-    head: Texture,
-    eyes_closed: Texture,
-    eyes_open: Texture,
-    left_arm_leaning: Texture,
-    left_arm_showing: Texture,
-    right_arm_leaning: Texture,
-    backgroundPattern: Texture,
-    pretitle: Texture,
-    startButton: Texture,
-    title_0: Texture,
-    title_1: Texture,
-    title_2: Texture,
-    title_3: Texture,
-    title_4: Texture,
-    title_5: Texture,
-    title_6: Texture,
-    title_7: Texture,
-    title_8: Texture,
-    title_9: Texture,
-    title_10: Texture,
-    title_11: Texture,
-    title_12: Texture,
-    title_13: Texture,
-    title_14: Texture
-}
 
 export class StartScene extends Scene {
 
@@ -48,17 +18,15 @@ export class StartScene extends Scene {
     }
 
     async start(): Promise<void> {
-        const assets: StartSceneAssets = await Assets.loadBundle("startSceneAssets")
-
-        this.addScrollingBackground(assets.backgroundPattern);
-        this.addBernd(assets.head, assets.torso, assets.backTorso, assets.left_arm_leaning,
-            assets.right_arm_leaning, assets.eyes_open, assets.eyes_closed);
-        this.addPretitle(assets.pretitle)
-        this.addTitle([assets.title_0, assets.title_1, assets.title_2, assets.title_3,
-            assets.title_4, assets.title_5, assets.title_6, assets.title_7,
-            assets.title_7, assets.title_8, assets.title_9, assets.title_10,
-            assets.title_11, assets.title_12, assets.title_13, assets.title_14]);
-        this.addStartButton(assets.startButton);
+        this.addScrollingBackground(START_SCENE_ASSETS.backgroundPattern);
+        this.addBernd(START_SCENE_ASSETS.head, START_SCENE_ASSETS.torso, START_SCENE_ASSETS.backTorso, START_SCENE_ASSETS.left_arm_leaning,
+            START_SCENE_ASSETS.right_arm_leaning, START_SCENE_ASSETS.eyes_open, START_SCENE_ASSETS.eyes_closed);
+        this.addPretitle(START_SCENE_ASSETS.pretitle)
+        this.addTitle([START_SCENE_ASSETS.title_0, START_SCENE_ASSETS.title_1, START_SCENE_ASSETS.title_2, START_SCENE_ASSETS.title_3,
+            START_SCENE_ASSETS.title_4, START_SCENE_ASSETS.title_5, START_SCENE_ASSETS.title_6, START_SCENE_ASSETS.title_7,
+            START_SCENE_ASSETS.title_8, START_SCENE_ASSETS.title_9, START_SCENE_ASSETS.title_10, START_SCENE_ASSETS.title_11,
+            START_SCENE_ASSETS.title_12, START_SCENE_ASSETS.title_13, START_SCENE_ASSETS.title_14]);
+        this.addStartButton(START_SCENE_ASSETS.startButton);
 
         await this.blendInPretitle();
         await this.blendInBernd();

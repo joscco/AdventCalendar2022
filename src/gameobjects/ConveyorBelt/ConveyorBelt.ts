@@ -2,3 +2,7 @@
 // -> Wird mit Indix-Array initialisiert
 // -> Erzeugt Passenden Ingredient-Array
 // -> Hat Referenz zum GridCalculator für Positionsabfrage
+
+export class ConveyorBelt {
+    
+}

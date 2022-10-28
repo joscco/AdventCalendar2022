@@ -24,8 +24,15 @@ describe('Grid Position Calculator Tests', () => {
             .toStrictEqual({x: 100, y: 200})
     })
 
-    test("Setting tile width, height adapts position of tiles.", () => {
-
+    test("Setting tile width, height adapts width, height and position of tiles.", () => {
+        let gridCalculator = new GridPositionCalculator(2,3);
+        gridCalculator.tileHeight = 100
+        gridCalculator.tileWidth = 100
+        expect(gridCalculator.getWidth()).toBe(300)
+        expect(gridCalculator.getHeight()).toBe(200)
+        expect(gridCalculator.getPositionForIndex({row: 0, column: 0})).toStrictEqual({x: 0, y: 0})
+        expect(gridCalculator.getPositionForIndex({row: 1, column: 0})).toStrictEqual({x: 0, y: 100})
+        expect(gridCalculator.getPositionForIndex({row: 0, column: 1})).toStrictEqual({x: 100, y: 0})
     })
 
     test("Setting columnOffsetX, columnOffsetY, rowOffsetX, rowOffsetY", () => {
@@ -41,6 +48,10 @@ describe('Grid Position Calculator Tests', () => {
     })
 
     test("findNearestIndex turns positions into index.", () => {
+
+    })
+
+    test("IsNearGrid gives correct results", () => {
 
     })
 })

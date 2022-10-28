@@ -4,6 +4,7 @@ import {gsap} from "gsap";
 import {Assets} from "@pixi/assets";
 import {Application} from "pixi.js";
 import {GridEditorScene} from "./scenes/GridEditorScene";
+import {Texture} from "@pixi/core";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -12,6 +13,36 @@ export const CANVAS_HEIGHT: number = 540;
 export var MAIN_FONT: FontFace
 export var App: Application;
 export var SCENE_MANAGER: SceneManager;
+
+export var START_SCENE_ASSETS: StartSceneAssets
+export interface StartSceneAssets {
+    torso: Texture,
+    backTorso: Texture,
+    head: Texture,
+    eyes_closed: Texture,
+    eyes_open: Texture,
+    left_arm_leaning: Texture,
+    left_arm_showing: Texture,
+    right_arm_leaning: Texture,
+    backgroundPattern: Texture,
+    pretitle: Texture,
+    startButton: Texture,
+    title_0: Texture,
+    title_1: Texture,
+    title_2: Texture,
+    title_3: Texture,
+    title_4: Texture,
+    title_5: Texture,
+    title_6: Texture,
+    title_7: Texture,
+    title_8: Texture,
+    title_9: Texture,
+    title_10: Texture,
+    title_11: Texture,
+    title_12: Texture,
+    title_13: Texture,
+    title_14: Texture
+}
 
 const main = async () => {
     // Main app
@@ -64,6 +95,7 @@ const main = async () => {
         title_14: "assets/startScreen/titleLetters/title14.png",
     });
     await Assets.loadBundle("textures")
+    START_SCENE_ASSETS = await Assets.loadBundle("startSceneAssets")
     MAIN_FONT = await Assets.load("font") as FontFace
 
     // Display application properly
@@ -81,7 +113,7 @@ const main = async () => {
     var gridEditorScene = new GridEditorScene(App)
     SCENE_MANAGER.add("startScene", startScene)
     SCENE_MANAGER.add("gridEditorScene", gridEditorScene)
-    SCENE_MANAGER.start("startScene")
+    SCENE_MANAGER.start("gridEditorScene")
 };
 
 main();

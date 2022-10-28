@@ -1,5 +1,6 @@
 // Klasse zum Verwalten und Gewährleisten rechteckiger 2-dimensionaler Arrays
 // Benötigt für Darstellung des Maschinengitters
+
 export class Grid<T> {
 
     private items: (T | null)[][] = [];
