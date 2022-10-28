@@ -113,7 +113,7 @@ const main = async () => {
     var gridEditorScene = new GridEditorScene(App)
     SCENE_MANAGER.add("startScene", startScene)
     SCENE_MANAGER.add("gridEditorScene", gridEditorScene)
-    SCENE_MANAGER.start("gridEditorScene")
+    SCENE_MANAGER.start("startScene")
 };
 
 main();
