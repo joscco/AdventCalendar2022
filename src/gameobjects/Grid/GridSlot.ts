@@ -1,12 +1,19 @@
-import {Index2D} from "./GridPositionCalculator";
+import {Index2D} from "./Grid";
+import {GridItem} from "./GridItem";
+
+// SingleGridSlot is what's eventually inserted into the grid
+// Contains:
+// - One or zero display items
+// - a potential offset for x and y
 
 export class GridSlot implements Index2D {
     column: number;
     row: number;
+    gridItem: GridItem
 
-    constructor(row: number, column: number) {
+    constructor(row: number, column: number, gridItem: GridItem) {
         this.row = row;
         this.column = column;
+        this.gridItem = gridItem
     }
-
 }

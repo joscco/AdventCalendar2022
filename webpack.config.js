@@ -29,7 +29,7 @@ module.exports = {
     },
     plugins: [
         // No need to write a index.html
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({title: "Bernd's Bakery"}),
         // Do not accumulate files in ./dist
         new CleanWebpackPlugin(),
         // Copy assets to serve them

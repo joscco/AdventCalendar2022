@@ -1,142 +1,96 @@
 //
-// Contains the movable Element
-// the grid
-// the form of the brick
-// and a potential offset for x and y
-// Anchor is always on top left
+// Contains:
+// - a pool of all movable elements (gridItems) inside the grids
+// - the different grids to connect to
+//
+// Role:
+// Let grid
 
-// A Shape like
-// [
-//  [0, 0, 1],
-//  [1, 1, 1]
-// ] describes a tetris-L-brick
+import {Grid, Vector2D} from "../Grid";
+import {GridItem} from "../GridItem";
+import {GridActionHandler} from "./GridActionHandler";
 
-import {Grid} from "../Grid";
-import {GridSlot} from "../GridSlot";
-import {GridPositionCalculator, Index2D, Vector2D} from "../GridPositionCalculator";
-import {Container} from "pixi.js";
+// Hat eine Referenzliste auf die Grids
+// Hat für jedes Grid einen ActionHandler
+// Berechnet aus mouse und item Position, welches Gitter nun angesprochen wird
+
+// Wird von den GridItems angesprochen
 
 export class GridConnector {
 
-    aim: { x: number, y: number } = {x: 0, y: 0};
-    gridSlots: (GridSlot | null)[][] = [[new GridSlot(0, 0)]]
-    owner: Container
-    moveToFunction: (newPosition: Vector2D) => void
-    quickMoveToFunction: (newPosition: Vector2D) => void
-    grid: Grid<GridSlot>
-    gridCalculator: GridPositionCalculator;
+    defaultGrid: Grid;
+    defaultGridActionHandler: GridActionHandler;
+    otherGridActionsMap: Map<Grid, GridActionHandler>;
+    gridItems: GridItem[];
 
-    constructor(grid: Grid<GridSlot>, gridCalculator: GridPositionCalculator, owner: Container, moveToFunction: (newPosition: Vector2D) => void, quickMoveToFunction: (newPosition: Vector2D) => void, shape?: number[][]) {
-        this.owner = owner;
-        this.grid = grid;
-        this.gridCalculator = gridCalculator;
-        this.moveToFunction = moveToFunction
-        this.quickMoveToFunction = quickMoveToFunction
+    // as little cache
+    nearestGridSoFar?: Grid = undefined
 
-        if (shape) {
-            if (!this.isValid(shape)) {
-                throw Error(`Shape ${shape} has no valid format!`)
-            }
-            this.gridSlots = this.initGridSlots(shape)
+    constructor(defaultGrid: Grid,
+                defaultGridActionHandler: GridActionHandler,
+                otherGrids: Map<Grid, GridActionHandler>,
+                gridItems: GridItem[] = []) {
+
+        // Nicht ganz so bombe...
+        this.defaultGrid = defaultGrid
+        this.defaultGridActionHandler = defaultGridActionHandler
+        this.otherGridActionsMap = otherGrids
+
+        // In case not already set
+        this.otherGridActionsMap.set(defaultGrid, defaultGridActionHandler)
+
+        this.gridItems = gridItems
+    }
+
+    defineDragAndDrop() {
+        for (let item of this.gridItems) {
+            item.defineDragAndDrop(
+                (mousePos, item) => this.onStartDrag(mousePos, item),
+                (mousePos, item) => this.onDragMove(mousePos, item),
+                (mousePos, item) => this.onEndDrag(mousePos, item))
         }
     }
 
-    canSetToIndex(index: Index2D): boolean {
-        return this.andThroughSlots(slot => this.grid.isFreeAt(
-            index.row + slot.row,
-            index.column + slot.column))
-    }
-
-    trySetToIndex(index: Index2D): boolean {
-        if (this.canSetToIndex(index)) {
-            this.setToIndex(index)
-            return true;
+    findNearestGridForPosition(position: Vector2D): Grid {
+        if (this.nearestGridSoFar && this.nearestGridSoFar.attracts(position)) {
+            return this.nearestGridSoFar;
         }
-        return false;
-    }
 
-    private andThroughSlots(func: (slot: GridSlot) => boolean): boolean {
-        let result: boolean = true
-        for (let row = 0; row < this.gridSlots.length; row++) {
-            for (let col = 0; col < this.gridSlots[0].length; col++) {
-                if (this.gridSlots[row][col]) {
-                    result &&= func(this.gridSlots[row][col]!)
-                }
+        // If the grid has changed
+        for (let grid of this.otherGridActionsMap.keys()) {
+            if (grid.attracts(position)) {
+                return grid
             }
         }
-        return result;
+
+        return this.defaultGrid;
     }
 
-    private iterateThroughSlots(func: (slot: GridSlot) => void): void {
-        for (let row = 0; row < this.gridSlots.length; row++) {
-            for (let col = 0; col < this.gridSlots[0].length; col++) {
-                if (this.gridSlots[row][col]) {
-                    func(this.gridSlots[row][col]!)
-                }
+    private onStartDrag(mousePosition: Vector2D, item: GridItem) {
+        let nearestGrid = this.findNearestGridForPosition(mousePosition);
+        this.updateNearestGrid(nearestGrid, mousePosition, item)
+        this.otherGridActionsMap.get(nearestGrid)!.onPickUpInGrid(nearestGrid, mousePosition, item)
+    }
+
+    private onDragMove(mousePosition: Vector2D, item: GridItem) {
+        let nearestGrid = this.findNearestGridForPosition(mousePosition);
+        this.updateNearestGrid(nearestGrid, mousePosition, item)
+        this.otherGridActionsMap.get(nearestGrid)!.onDragToInGrid(nearestGrid, mousePosition, item)
+    }
+
+    private onEndDrag(mousePosition: Vector2D, item: GridItem) {
+        let nearestGrid = this.findNearestGridForPosition(mousePosition);
+        this.updateNearestGrid(nearestGrid, mousePosition, item)
+        this.otherGridActionsMap.get(nearestGrid)!.onLetGoInGrid(nearestGrid, mousePosition, item)
+    }
+
+    private updateNearestGrid(newNearestGrid: Grid, mousePosition: Vector2D, item: GridItem) {
+        if (newNearestGrid != this.nearestGridSoFar) {
+            if (this.nearestGridSoFar) {
+                this.otherGridActionsMap.get(this.nearestGridSoFar)!.onLeaveGrid(this.nearestGridSoFar, mousePosition, item)
             }
+            this.otherGridActionsMap.get(newNearestGrid)!.onEnterGrid(newNearestGrid, mousePosition, item)
+            this.nearestGridSoFar = newNearestGrid
         }
-    }
-
-    quadDistance(position1: Vector2D, position2: Vector2D) {
-        return (position1.x - position2.x) * (position1.x - position2.x) + (position1.y - position2.y) * (position1.y - position2.y)
-    }
-
-    updateAim(position: Vector2D) {
-        let distance = this.quadDistance(position, this.aim)
-        if (distance > 500) {
-            this.aim = position;
-            this.moveToFunction(this.aim)
-        } else if (distance > 1) {
-            this.quickMoveToFunction(position)
-        }
-    }
-
-    private setToIndex(index: Index2D): void {
-        this.iterateThroughSlots((slot: GridSlot) => {
-            this.grid.set(index.row + slot.row, index.column + slot.column, slot);
-        })
-        this.updateAim(this.gridCalculator.getPositionForIndex(index))
-    }
-
-    private isValid(shape: number[][]): boolean {
-        return this.isRectangular(shape) && this.onlyContainsZerosAndOnes(shape)
-    }
-
-    private isRectangular(shape: number[][]): boolean {
-        if (!shape || shape.length === 0 || shape[0].length === 0) {
-            return false
-        }
-
-        let firstRowLength: number = shape[0].length;
-
-        for (let row = 1; row < shape.length; row++) {
-            if (shape[row].length !== firstRowLength) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private onlyContainsZerosAndOnes(shape: number[][]): boolean {
-        for (let row = 0; row < shape.length; row++) {
-            for (let col = 0; col < shape[0].length; col++) {
-                if (shape[row][col] !== 0 && shape[row][col] !== 1) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private initGridSlots(shape: number[][]): (GridSlot | null)[][] {
-        let gridSlots: (GridSlot | null)[][] = [];
-        for (let row = 0; row < shape.length; row++) {
-            let newRow: (GridSlot | null)[] = []
-            this.gridSlots.push(newRow);
-            for (let col = 0; col < shape[0].length; col++) {
-                newRow.push(shape[row][col] === 1 ? new GridSlot(row, col) : null)
-            }
-        }
-        return gridSlots;
     }
 }

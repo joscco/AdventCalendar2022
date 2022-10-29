@@ -1,14 +1,118 @@
-// Klasse zum Verwalten und Gewährleisten rechteckiger 2-dimensionaler Arrays
-// Benötigt für Darstellung des Maschinengitters
+// Klasse zur Überführung von Gitter-Indizes in Positionen und Zentrierung von Gittern
 
-export class Grid<T> {
+import {GridSlot} from "./GridSlot";
+import {Container, Graphics} from "pixi.js";
 
-    private items: (T | null)[][] = [];
+export class Grid extends Container {
 
-    constructor(numberRows: number, numberColumns?: number) {
-        let fallbackNumberColumns = numberColumns ? numberColumns : numberRows
-        this.items = this.setupNullArray(numberRows, fallbackNumberColumns);
+    private items: (GridSlot | null)[][] = [];
+    numberOfRows: number = 0;
+    numberOfColumns: number = 0;
+    tileWidth: number = 0;
+    tileHeight: number = 0;
+    columnOffsetX: number = 0;
+    rowOffsetY: number = 0;
+    private MARGIN_OF_ATTRACTION: number = 50;
+
+    constructor(numberOfRows: number, numberOfColumns: number = numberOfRows) {
+        super()
+        this.numberOfRows = numberOfRows;
+        this.numberOfColumns = numberOfColumns
+        this.items = this.setupNullArray(this.numberOfRows, this.numberOfColumns);
     }
+
+    getGlobalPositionForIndex(index: Index2D): Vector2D {
+        let local = this.getLocalPositionForIndex(index)
+        return {x: this.position.x + local.x, y: this.position.y + local.y}
+    }
+
+    getLocalPositionForIndex(index: Index2D): Vector2D {
+        if (!this.hasIndex(index)) {
+            throw Error(`Index ${index} is out of grid range.`)
+        }
+
+        let x = (this.tileWidth + this.columnOffsetX) * index.column;
+        let y = (this.tileHeight + this.rowOffsetY) * index.row;
+        return {x: x, y: y}
+    }
+
+    getWidth(): number {
+        return (this.numberOfColumns - 1) * (this.tileWidth + this.columnOffsetX);
+    }
+
+    getHeight(): number {
+        return (this.numberOfRows - 1) * (this.tileHeight + this.rowOffsetY);
+    }
+
+    private getCenterX(): number {
+        return this.position.x + this.getWidth() / 2
+    }
+
+    private getCenterY(): number {
+        return this.position.y + this.getHeight() / 2
+    }
+
+    hasIndex(index: Index2D): boolean {
+        let validRowIndex = 0 <= index.row && index.row <= this.getNumberOfRows() - 1;
+        let validColumnIndex = 0 <= index.column && index.column <= this.getNumberOfColumns() - 1;
+        return validRowIndex && validColumnIndex;
+    }
+
+    // TEST THIS!
+    private attractsPosition(position: Vector2D, margin: number): boolean {
+        // This might need to be more complicated for offsets
+        return position.x >= this.position.x - margin
+            && position.x <= this.position.x + this.getWidth() + margin
+            && position.y >= this.position.y - margin
+            && position.y <= this.position.y + this.getHeight() + margin
+    }
+
+    attracts(position: Vector2D) {
+        return this.attractsPosition(position, this.MARGIN_OF_ATTRACTION)
+    }
+
+    // TEST THIS!!!
+    getNearestIndexForPosition(position: Vector2D): Index2D {
+        let pseudoColumnIndex = (position.x - this.position.x) / (this.tileWidth + this.columnOffsetX);
+        let pseudoRowIndex = (position.y - this.position.y) / (this.tileHeight + this.rowOffsetY);
+        return {
+            row: this.clampAndRound(pseudoRowIndex, 0, this.numberOfRows - 1),
+            column: this.clampAndRound(pseudoColumnIndex, 0, this.numberOfColumns - 1)
+        }
+    }
+
+    clampAndRound(value: number, min: number, max: number) {
+        return Math.max(min, Math.min(max, Math.round(value)));
+    }
+
+    centerIn(parent: { x: number, y: number, width: number, height: number }) {
+        let parentCenterX = parent.x + parent.width / 2
+        let parentCenterY = parent.y + parent.height / 2
+        let neededOffsetX = parentCenterX - this.getCenterX()
+        let neededOffsetY = parentCenterY - this.getCenterY()
+        this.position.x += neededOffsetX
+        this.position.y += neededOffsetY
+    }
+
+    private iterateThroughPositions(func: (pos: Index2D) => void): void {
+        for (let row = 0; row < this.numberOfRows; row++) {
+            for (let col = 0; col < this.numberOfColumns; col++) {
+                func({row: row, column: col})
+            }
+        }
+    }
+
+    drawGridPoints() {
+        let graphics = new Graphics()
+        graphics.lineStyle(3, 0xFFFFFF, 0.5);
+        this.iterateThroughPositions((index: Index2D) => {
+            let position = this.getLocalPositionForIndex(index)
+            graphics.drawCircle(position.x, position.y, 10)
+
+        })
+        this.addChild(graphics)
+    }
+
 
     private setupNullArray(numberRows: number, numberColumns: number): null[][] {
         let items: null[][] = []
@@ -19,31 +123,6 @@ export class Grid<T> {
             }
         }
         return items;
-    }
-
-    getRows(): (T | null)[][] {
-        return this.items
-    }
-
-    getRow(index: number): (T | null)[] {
-        return this.items[index];
-    }
-
-    static of<T>(items: (T | null)[][]): Grid<T> {
-        if (Grid.hasGridDimension(items)) {
-            let numberOfRows = items.length;
-            let numberOfCols = items[0].length;
-
-            let grid = new Grid<T>(numberOfRows, numberOfCols);
-            for (let rowIndex = 0; rowIndex < numberOfRows; rowIndex++) {
-                for (let colIndex = 0; colIndex < numberOfCols; colIndex++) {
-                    grid.set(rowIndex, colIndex, items[rowIndex][colIndex] ?? null)
-                }
-            }
-            return grid;
-        }
-        throw Error("Cannot set up Grid with given items: " + items)
-
     }
 
     static hasGridDimension(items: any[][]): boolean {
@@ -69,41 +148,34 @@ export class Grid<T> {
         return this.items[0].length;
     }
 
-    get(rowIndex: number, columnIndex: number): T | null {
-        return this.items[rowIndex][columnIndex];
+    get(index: Index2D): GridSlot | null {
+        return this.items[index.row][index.column];
     }
 
-    set(rowIndex: number, columnIndex: number, item: T | null): void {
-        this.items[rowIndex][columnIndex] = item;
+    set(index: Index2D, item: GridSlot | null): void {
+        this.items[index.row][index.column] = item;
     }
 
-    remove(rowIndex: number, columnIndex: number): T | null {
-        let item = this.items[rowIndex][columnIndex];
-        this.set(rowIndex, columnIndex, null)
+    remove(index: Index2D): GridSlot | null {
+        let item = this.items[index.row][index.column];
+        this.set(index, null)
         return item
     }
 
-    move(fromRowIndex: number, fromColumnIndex: number, toRowIndex: number, toColumnIndex: number): void {
-        if (!this.hasIndex(fromRowIndex, fromColumnIndex) ||
-            !this.hasIndex(toRowIndex, fromColumnIndex) ||
-            !this.isFreeAt(toRowIndex, toColumnIndex)) {
+    move(fromIndex: Index2D, toIndex: Index2D): void {
+        if (!this.hasIndex(fromIndex) ||
+            !this.isFreeAt(toIndex)) {
             throw Error(
-                `Cannot move item from position [${fromRowIndex},${fromColumnIndex}] to position [${toRowIndex},${toColumnIndex}]. Position not existent or destination not free.`)
+                `Cannot move item from position [${fromIndex}] to position [${toIndex}]. Position not existent or destination not free.`)
         }
 
-        let item = this.get(fromRowIndex, fromColumnIndex)
-        this.remove(fromRowIndex, fromColumnIndex)
-        this.set(toRowIndex, toColumnIndex, item)
+        let item = this.get(fromIndex)
+        this.remove(fromIndex)
+        this.set(toIndex, item)
     }
 
-    isFreeAt(rowIndex: number, columnIndex: number): boolean {
-        return this.get(rowIndex, columnIndex) === null;
-    }
-
-    hasIndex(rowIndex: number, columnIndex: number): boolean {
-        let validRowIndex = 0 <= rowIndex && rowIndex <= this.getNumberOfRows() - 1;
-        let validColumnIndex = 0 <= columnIndex && columnIndex <= this.getNumberOfColumns() - 1;
-        return validRowIndex && validColumnIndex;
+    isFreeAt(index: Index2D): boolean {
+        return this.get(index) === null;
     }
 
     toString(): string {
@@ -117,4 +189,15 @@ export class Grid<T> {
         }
         return result
     }
+}
+
+
+export type Vector2D = {
+    x: number,
+    y: number
+}
+
+export type Index2D = {
+    row: number,
+    column: number
 }

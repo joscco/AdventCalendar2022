@@ -10,6 +10,7 @@ export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
 export const CANVAS_WIDTH: number = 960;
 export const CANVAS_HEIGHT: number = 540;
+
 export var MAIN_FONT: FontFace
 export var App: Application;
 export var SCENE_MANAGER: SceneManager;
@@ -113,7 +114,7 @@ const main = async () => {
     var gridEditorScene = new GridEditorScene(App)
     SCENE_MANAGER.add("startScene", startScene)
     SCENE_MANAGER.add("gridEditorScene", gridEditorScene)
-    SCENE_MANAGER.start("startScene")
+    SCENE_MANAGER.start("gridEditorScene")
 };
 
 main();
