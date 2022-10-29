@@ -17,9 +17,11 @@ export class GridEditorScene extends Scene {
     start() {
         let dragSprite = new Sprite(START_SCENE_ASSETS.head)
         dragSprite.anchor.set(0.5)
+        this.addChild(dragSprite)
 
         let dragSprite2 = new Sprite(START_SCENE_ASSETS.head)
         dragSprite2.anchor.set(0.5)
+        this.addChild(dragSprite2)
 
         let machineGrid = new Grid(3, 4)
         machineGrid.tileWidth = 200
@@ -39,17 +41,15 @@ export class GridEditorScene extends Scene {
         this.addChild(outsideGrid)
 
         let firstGridItem = new GridItem(dragSprite, outsideGrid, 0, 0)
-        firstGridItem.addShape(machineGrid, [[1, 1], [1, 0]])
+        firstGridItem.addShape(machineGrid, [[1, 1]])
         let secondGridItem = new GridItem(dragSprite2, outsideGrid, 0, 1)
-        secondGridItem.addShape(machineGrid, [[0, 1], [1, 1]])
+        secondGridItem.addShape(machineGrid, [[1], [1]])
 
         let gridActionMap = new Map<Grid, GridActionHandler>()
         gridActionMap.set(machineGrid, new StickyDragActionHandler())
 
         let gridConnector = new GridConnector(outsideGrid, new AutomaticDragActionHandler(), gridActionMap, [firstGridItem, secondGridItem])
         gridConnector.defineDragAndDrop()
-
-        this.addChild(dragSprite)
     }
 
 }

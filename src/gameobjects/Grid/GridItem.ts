@@ -49,31 +49,38 @@ export class GridItem {
         } else {
             this.defaultSlotArr = this.initSlotsFromShape(shape)
         }
-        this.aim = this.content.position
+        this.aim = {x: this.content.position.x, y: this.content.position.y}
         this.trySetToIndex(startGrid, {row: row, column: column})
     }
 
     canSetToIndex(grid: Grid, item: GridItem, index: Index2D): boolean {
-        return item.andThroughSlots(slot => grid.isFreeAt(
-            {row: index.row + slot.row,
-            column: index.column + slot.column}), grid)
+        return item.andThroughSlots(slot => {
+            return item.hasIndex({row: index.row + slot.row, column: index.column + slot.column}, grid)
+                || (grid.hasIndex({row: index.row + slot.row, column: index.column + slot.column})
+                && grid.isFreeAt({row: index.row + slot.row, column: index.column + slot.column}))
+        }, grid)
     }
 
     private setToIndex(grid: Grid, index: Index2D): void {
+        if (this.currentGrid) {
+            this.iterateThroughSlots((slot: GridSlot) => {
+                this.currentGrid.remove({
+                    row: this.currentIndex.row + slot.row,
+                    column: this.currentIndex.column + slot.column
+                });
+            }, this.currentGrid)
+        }
         this.iterateThroughSlots((slot: GridSlot) => {
             grid.set({row: index.row + slot.row, column: index.column + slot.column}, slot);
         }, grid)
+        this.currentGrid = grid
+        this.currentIndex = index
         this.updateAim(grid.getGlobalPositionForIndex(index))
     }
 
     trySetToIndex(grid: Grid, index: Index2D): boolean {
         if (this.canSetToIndex(grid, this, index)) {
-            if (this.currentGrid) {
-                this.currentGrid.remove(this.currentIndex)
-            }
             this.setToIndex(grid, index)
-            this.currentGrid = grid;
-            this.currentIndex = index
             return true;
         }
         return false;
@@ -82,7 +89,7 @@ export class GridItem {
     updateAim(position: Vector2D) {
         let distance = GridItem.quadDistance(position, this.aim)
         if (distance > 500) {
-            this.aim = position;
+            this.aim = {x: position.x, y: position.y}
             this.moveTo(this.aim)
         } else if (distance > 2) {
             this.setContentTo(position)
@@ -117,8 +124,7 @@ export class GridItem {
     }
 
     private setContentTo(position: Vector2D) {
-        this.content.position.x = position.x
-        this.content.position.y = position.y
+        this.content.position = position
     }
 
     addShape(grid: Grid, shape: number[][]) {
@@ -233,5 +239,9 @@ export class GridItem {
 
     static quadDistance(pos1: Vector2D, pos2: Vector2D) {
         return (pos1.x - pos2.x) * (pos1.x - pos2.x) + (pos1.y - pos2.y) * (pos1.y - pos2.y)
+    }
+
+    private hasIndex(index: Index2D, grid: Grid): boolean {
+        return this.andThroughSlots(slot => !(index.row === slot.row && index.column === slot.column), grid)
     }
 }

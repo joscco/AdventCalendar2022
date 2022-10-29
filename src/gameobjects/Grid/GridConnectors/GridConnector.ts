@@ -82,6 +82,9 @@ export class GridConnector {
         let nearestGrid = this.findNearestGridForPosition(mousePosition);
         this.updateNearestGrid(nearestGrid, mousePosition, item)
         this.otherGridActionsMap.get(nearestGrid)!.onLetGoInGrid(nearestGrid, mousePosition, item)
+        for (let grid of this.otherGridActionsMap.keys()) {
+            console.log(grid.toString())
+        }
     }
 
     private updateNearestGrid(newNearestGrid: Grid, mousePosition: Vector2D, item: GridItem) {

@@ -12,12 +12,16 @@ export class StickyDragActionHandler extends GridActionHandler {
         let nearestGridIndex = grid.getNearestIndexForPosition(mousePosition);
         item.trySetToIndex(grid, nearestGridIndex)
     }
+
     onLetGoInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
         item.scaleDown()
     }
 
     onEnterGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
+        item.scaleUp()
     }
+
     onLeaveGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
+        item.scaleDown()
     }
 }

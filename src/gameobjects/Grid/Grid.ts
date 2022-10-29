@@ -162,18 +162,6 @@ export class Grid extends Container {
         return item
     }
 
-    move(fromIndex: Index2D, toIndex: Index2D): void {
-        if (!this.hasIndex(fromIndex) ||
-            !this.isFreeAt(toIndex)) {
-            throw Error(
-                `Cannot move item from position [${fromIndex}] to position [${toIndex}]. Position not existent or destination not free.`)
-        }
-
-        let item = this.get(fromIndex)
-        this.remove(fromIndex)
-        this.set(toIndex, item)
-    }
-
     isFreeAt(index: Index2D): boolean {
         return this.get(index) === null;
     }
@@ -181,9 +169,9 @@ export class Grid extends Container {
     toString(): string {
         let result = "";
         for (let row of this.items) {
-            result += "[ " + row[0];
+            result += "[ " + (row[0] ?  "x" : " ");
             for (let indexOfRow = 1; indexOfRow < row.length; indexOfRow++) {
-                result += " | " + row[indexOfRow]
+                result += " | " + (row[indexOfRow] ?  "x" : " ")
             }
             result += " ]\n"
         }

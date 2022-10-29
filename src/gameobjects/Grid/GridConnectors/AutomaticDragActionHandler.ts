@@ -11,14 +11,18 @@ export class AutomaticDragActionHandler extends GridActionHandler {
     }
 
     onEnterGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
+        item.updateAim(mousePosition)
     }
 
     onLeaveGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
     }
 
     onLetGoInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
+        let nearestGridIndex = grid.getNearestIndexForPosition(mousePosition)
+        item.trySetToIndex(grid, nearestGridIndex)
     }
 
     onPickUpInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
+        item.updateAim(mousePosition)
     }
 }
