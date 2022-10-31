@@ -1,29 +1,39 @@
-// Klasse zur Überführung von Gitter-Indizes in Positionen und Zentrierung von Gittern
-
 import {GridSlot} from "./GridSlot";
 import {Container, Graphics} from "pixi.js";
+import {GridItem} from "./GridItem";
 
 export class Grid extends Container {
 
-    private items: (GridSlot | null)[][] = [];
-    numberOfRows: number = 0;
-    numberOfColumns: number = 0;
+    id?: string
+    private slots: (GridSlot | null)[][] = [];
+    private numberOfRows: number = 0;
+    private numberOfColumns: number = 0;
     tileWidth: number = 0;
     tileHeight: number = 0;
     columnOffsetX: number = 0;
     rowOffsetY: number = 0;
-    private MARGIN_OF_ATTRACTION: number = 50;
+    private MARGIN_OF_ATTRACTION: number = 100;
 
-    constructor(numberOfRows: number, numberOfColumns: number = numberOfRows) {
+    constructor(numberOfRows: number, numberOfColumns: number = numberOfRows, id?: string) {
         super()
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns
-        this.items = this.setupNullArray(this.numberOfRows, this.numberOfColumns);
+        this.slots = this.setupNullArray(this.numberOfRows, this.numberOfColumns);
+        this.id = id
     }
 
-    getGlobalPositionForIndex(index: Index2D): Vector2D {
-        let local = this.getLocalPositionForIndex(index)
-        return {x: this.position.x + local.x, y: this.position.y + local.y}
+    getWidth(): number {
+        return (this.numberOfColumns - 1) * (this.tileWidth + this.columnOffsetX);
+    }
+
+    getHeight(): number {
+        return (this.numberOfRows - 1) * (this.tileHeight + this.rowOffsetY);
+    }
+
+    hasIndex(index: Index2D): boolean {
+        let validRowIndex = 0 <= index.row && index.row <= this.getNumberOfRows() - 1;
+        let validColumnIndex = 0 <= index.column && index.column <= this.getNumberOfColumns() - 1;
+        return validRowIndex && validColumnIndex;
     }
 
     getLocalPositionForIndex(index: Index2D): Vector2D {
@@ -36,12 +46,70 @@ export class Grid extends Container {
         return {x: x, y: y}
     }
 
-    getWidth(): number {
-        return (this.numberOfColumns - 1) * (this.tileWidth + this.columnOffsetX);
+    getGlobalPositionForIndex(index: Index2D): Vector2D {
+        let local = this.getLocalPositionForIndex(index)
+        return {x: this.position.x + local.x, y: this.position.y + local.y}
     }
 
-    getHeight(): number {
-        return (this.numberOfRows - 1) * (this.tileHeight + this.rowOffsetY);
+    attracts(position: Vector2D) {
+        return this.attractsPosition(position, this.MARGIN_OF_ATTRACTION)
+    }
+
+    getNearestIndexForPosition(position: Vector2D): Index2D {
+        let pseudoColumnIndex = (position.x - this.position.x) / (this.tileWidth + this.columnOffsetX);
+        let pseudoRowIndex = (position.y - this.position.y) / (this.tileHeight + this.rowOffsetY);
+        return {
+            row: clampAndRound(pseudoRowIndex, 0, this.numberOfRows - 1),
+            column: clampAndRound(pseudoColumnIndex, 0, this.numberOfColumns - 1)
+        }
+    }
+
+    getAllIndices(sortingFunction?: (a: Index2D, b: Index2D) => number): Index2D[] {
+        let result = [];
+        for (let row = 0; row < this.numberOfRows; row++) {
+            for (let column = 0; column < this.numberOfColumns; column++) {
+                result.push({row: row, column: column})
+            }
+        }
+        if (sortingFunction) {
+            return result.sort(sortingFunction)
+        }
+        return result
+    }
+
+    // Bisschen Gurke, aber geht
+    getAllItems(): GridItem[] {
+        let items: GridItem[] = []
+        this.getAllIndices()
+            .map(index => this.get(index))
+            .map(slot => {
+                if (slot && slot.gridItem && items.indexOf(slot.gridItem) == -1) {
+                    items.push(slot.gridItem)
+                }
+            })
+        return items
+    }
+
+    tidyUp(): void {
+        let items = this.getAllItems()
+        for (let item of items) {
+            let nearestFreeSpot = this.getNearestFreeIndexForPositionAndItem(this.position, item)
+            if (nearestFreeSpot) {
+                item.trySetToIndex(this, nearestFreeSpot)
+            } else {
+                throw Error("No more space in thid grid!")
+            }
+        }
+    }
+
+    getNearestFreeIndexForPositionAndItem(mousePosition: Vector2D, item: GridItem): Index2D | null {
+        let nearestIndicesForPosition = this.getNearestIndicesForPosition(mousePosition);
+        for (let nearIndex of nearestIndicesForPosition) {
+            if (item.canBeSetToIndexInGrid(this, nearIndex)) {
+                return nearIndex;
+            }
+        }
+        return null
     }
 
     private getCenterX(): number {
@@ -52,37 +120,12 @@ export class Grid extends Container {
         return this.position.y + this.getHeight() / 2
     }
 
-    hasIndex(index: Index2D): boolean {
-        let validRowIndex = 0 <= index.row && index.row <= this.getNumberOfRows() - 1;
-        let validColumnIndex = 0 <= index.column && index.column <= this.getNumberOfColumns() - 1;
-        return validRowIndex && validColumnIndex;
-    }
-
-    // TEST THIS!
     private attractsPosition(position: Vector2D, margin: number): boolean {
         // This might need to be more complicated for offsets
         return position.x >= this.position.x - margin
             && position.x <= this.position.x + this.getWidth() + margin
             && position.y >= this.position.y - margin
             && position.y <= this.position.y + this.getHeight() + margin
-    }
-
-    attracts(position: Vector2D) {
-        return this.attractsPosition(position, this.MARGIN_OF_ATTRACTION)
-    }
-
-    // TEST THIS!!!
-    getNearestIndexForPosition(position: Vector2D): Index2D {
-        let pseudoColumnIndex = (position.x - this.position.x) / (this.tileWidth + this.columnOffsetX);
-        let pseudoRowIndex = (position.y - this.position.y) / (this.tileHeight + this.rowOffsetY);
-        return {
-            row: this.clampAndRound(pseudoRowIndex, 0, this.numberOfRows - 1),
-            column: this.clampAndRound(pseudoColumnIndex, 0, this.numberOfColumns - 1)
-        }
-    }
-
-    clampAndRound(value: number, min: number, max: number) {
-        return Math.max(min, Math.min(max, Math.round(value)));
     }
 
     centerIn(parent: { x: number, y: number, width: number, height: number }) {
@@ -102,18 +145,6 @@ export class Grid extends Container {
         }
     }
 
-    drawGridPoints() {
-        let graphics = new Graphics()
-        graphics.lineStyle(3, 0xFFFFFF, 0.5);
-        this.iterateThroughPositions((index: Index2D) => {
-            let position = this.getLocalPositionForIndex(index)
-            graphics.drawCircle(position.x, position.y, 10)
-
-        })
-        this.addChild(graphics)
-    }
-
-
     private setupNullArray(numberRows: number, numberColumns: number): null[][] {
         let items: null[][] = []
         for (let rowIndex = 0; rowIndex < numberRows; rowIndex++) {
@@ -125,39 +156,35 @@ export class Grid extends Container {
         return items;
     }
 
-    static hasGridDimension(items: any[][]): boolean {
-        if (items.length === 0 || items[0].length === 0) {
-            return false;
-        }
-
-        let firstColumnNumber = items[0].length;
-        for (let rowIndex = 1; rowIndex < items.length; rowIndex++) {
-            if (items[rowIndex].length !== firstColumnNumber) {
-                return false;
-            }
-        }
-
-        return true;
+    drawGrid() {
+        let graphics = new Graphics()
+        graphics.lineStyle(3, 0xFFFFFF, 0.5);
+        this.iterateThroughPositions((index: Index2D) => {
+            let position = this.getLocalPositionForIndex(index)
+            graphics.drawCircle(position.x, position.y, 10)
+            graphics.drawRect(position.x - this.tileWidth/2, position.y - this.tileHeight/2, this.tileWidth, this.tileHeight)
+        })
+        this.addChild(graphics)
     }
 
     getNumberOfRows(): number {
-        return this.items.length;
+        return this.slots.length;
     }
 
     getNumberOfColumns(): number {
-        return this.items[0].length;
+        return this.slots[0].length;
     }
 
     get(index: Index2D): GridSlot | null {
-        return this.items[index.row][index.column];
+        return this.slots[index.row][index.column];
     }
 
     set(index: Index2D, item: GridSlot | null): void {
-        this.items[index.row][index.column] = item;
+        this.slots[index.row][index.column] = item;
     }
 
     remove(index: Index2D): GridSlot | null {
-        let item = this.items[index.row][index.column];
+        let item = this.slots[index.row][index.column];
         this.set(index, null)
         return item
     }
@@ -168,17 +195,48 @@ export class Grid extends Container {
 
     toString(): string {
         let result = "";
-        for (let row of this.items) {
-            result += "[ " + (row[0] ?  "x" : " ");
+        for (let row of this.slots) {
+            result += "[" + (row[0] ? "x" : " ");
             for (let indexOfRow = 1; indexOfRow < row.length; indexOfRow++) {
-                result += " | " + (row[indexOfRow] ?  "x" : " ")
+                result += "|" + (row[indexOfRow] ? "x" : " ")
             }
-            result += " ]\n"
+            result += "]\n"
         }
-        return result
+        return result.trim()
+    }
+
+    private getNearestIndicesForPosition(mousePosition: Vector2D): Index2D[] {
+        let nearestIndex = this.getNearestIndexForPosition(mousePosition);
+        return this.getAllIndices((a, b) => (quadDistance(nearestIndex, a) - quadDistance(nearestIndex, b)))
+    }
+
+    projectPointToGridBorder(mousePosition: Vector2D): Vector2D {
+        let left = this.position.x - this.MARGIN_OF_ATTRACTION
+        let right = this.position.x + this.getWidth() + this.MARGIN_OF_ATTRACTION
+        let top = this.position.y - this.MARGIN_OF_ATTRACTION
+        let bottom = this.position.y + this.getHeight() + this.MARGIN_OF_ATTRACTION
+
+        let x = clampAndRound(mousePosition.x, left, right)
+        let y = clampAndRound(mousePosition.y, top, bottom)
+
+        let dLeft = Math.abs(x - left)
+        let dRight = Math.abs(x - right)
+        let dTop = Math.abs(y - top)
+        let dBottom = Math.abs(y - bottom)
+        let dMin = Math.min(dLeft, dRight, dTop, dBottom)
+
+        if (dMin == dTop) {
+            return {x: x, y: top}
+        }
+        if (dMin == dBottom) {
+            return {x: x, y: bottom}
+        }
+        if (dMin == dLeft) {
+            return {x: left, y: y}
+        }
+        return {x: right, y: y}
     }
 }
-
 
 export type Vector2D = {
     x: number,
@@ -188,4 +246,27 @@ export type Vector2D = {
 export type Index2D = {
     row: number,
     column: number
+}
+
+export function quadDistance(a: Index2D, b: Index2D): number {
+    return (a.row - b.row) * (a.row - b.row) + (a.column - b.column) * (a.column - b.column)
+}
+
+export function clampAndRound(value: number, min: number, max: number): number {
+    return Math.max(min, Math.min(max, Math.round(value)));
+}
+
+export function isRectangularArray(items: any[][]): boolean {
+    if (items.length === 0 || items[0].length === 0) {
+        return false;
+    }
+
+    let firstColumnNumber = items[0].length;
+    for (let rowIndex = 1; rowIndex < items.length; rowIndex++) {
+        if (items[rowIndex].length !== firstColumnNumber) {
+            return false;
+        }
+    }
+
+    return true;
 }

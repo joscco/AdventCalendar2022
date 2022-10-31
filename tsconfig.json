@@ -1,13 +1,16 @@
 {
     "compilerOptions": {
         // DO NOT EDIT
-        "outDir": "./dist",
-        "target": "es6",
-        "module": "CommonJS",
-        "sourceMap": true,
         "allowSyntheticDefaultImports": true,
+        "noImplicitAny": true,
+        "module": "CommonJS",
+        "target": "ES2015",
+        "outDir": "./dist",
+        "sourceMap": true,
         "experimentalDecorators": true,
-        // Set your preferences here for TypeScript
         "strict": true
-    }
+    },
+    "files": [
+        "node_modules/gsap/types/index.d.ts"
+    ]
 }

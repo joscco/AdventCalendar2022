@@ -1,6 +1,5 @@
 import {Application, Container, Sprite, TilingSprite} from 'pixi.js';
-import {GAME_HEIGHT, GAME_WIDTH, SCENE_MANAGER, START_SCENE_ASSETS} from "../index";
-import {Back, gsap, Linear, Quart, Sine} from "gsap";
+import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH, SCENE_MANAGER} from "../index";
 import Scene from "./Scene";
 import {ScalingButton} from "../ui/Buttons/ScalingButton";
 import {Texture} from "@pixi/core";
@@ -18,15 +17,12 @@ export class StartScene extends Scene {
     }
 
     async start(): Promise<void> {
-        this.addScrollingBackground(START_SCENE_ASSETS.backgroundPattern);
-        this.addBernd(START_SCENE_ASSETS.head, START_SCENE_ASSETS.torso, START_SCENE_ASSETS.backTorso, START_SCENE_ASSETS.left_arm_leaning,
-            START_SCENE_ASSETS.right_arm_leaning, START_SCENE_ASSETS.eyes_open, START_SCENE_ASSETS.eyes_closed);
-        this.addPretitle(START_SCENE_ASSETS.pretitle)
-        this.addTitle([START_SCENE_ASSETS.title_0, START_SCENE_ASSETS.title_1, START_SCENE_ASSETS.title_2, START_SCENE_ASSETS.title_3,
-            START_SCENE_ASSETS.title_4, START_SCENE_ASSETS.title_5, START_SCENE_ASSETS.title_6, START_SCENE_ASSETS.title_7,
-            START_SCENE_ASSETS.title_8, START_SCENE_ASSETS.title_9, START_SCENE_ASSETS.title_10, START_SCENE_ASSETS.title_11,
-            START_SCENE_ASSETS.title_12, START_SCENE_ASSETS.title_13, START_SCENE_ASSETS.title_14]);
-        this.addStartButton(START_SCENE_ASSETS.startButton);
+        this.addScrollingBackground(ASSET_STORE.START_SCENE!.backgroundPattern);
+        this.addBernd(ASSET_STORE.START_SCENE!.head, ASSET_STORE.START_SCENE!.torso, ASSET_STORE.START_SCENE!.backTorso, ASSET_STORE.START_SCENE!.left_arm_leaning,
+            ASSET_STORE.START_SCENE!.right_arm_leaning, ASSET_STORE.START_SCENE!.eyes_open, ASSET_STORE.START_SCENE!.eyes_closed);
+        this.addPretitle(ASSET_STORE.START_SCENE!.pretitle)
+        this.addTitle(ASSET_STORE.START_SCENE!.titleLetters);
+        this.addStartButton(ASSET_STORE.START_SCENE!.startButton);
 
         await this.blendInPretitle();
         await this.blendInBernd();

@@ -15,71 +15,84 @@
 //  [1, 1, 1]
 // ] describes a tetris-L-brick
 
-import {DisplayObject} from "pixi.js";
 import {GridSlot} from "./GridSlot";
 import {Grid, Index2D, Vector2D} from "./Grid";
-import {Back, gsap} from "gsap";
+import {DisplayObject} from "pixi.js";
+import gsap from "gsap";
 
 type MultiSlotArr = (GridSlot | null)[][]
+type GridAdaptingDisplayObject = DisplayObject & { setGrid?: (grid: Grid) => void }
 
 export class GridItem {
     // This is realized as a map since a gridItem could have different forms in different grids
     // (e.g. 1x1 in inventory and nxm in a "real" grid
     gridSlotsMap: Map<Grid, MultiSlotArr> = new Map<Grid, MultiSlotArr>()
     defaultSlotArr: MultiSlotArr;
-    content: DisplayObject
+    content: GridAdaptingDisplayObject
     dragging: boolean = false
-    currentGrid: Grid
-    currentIndex: Index2D
+    currentGrid?: Grid
+    currentIndex?: Index2D
     aim: Vector2D
 
-    constructor(content: DisplayObject,
+    constructor(content: GridAdaptingDisplayObject,
                 startGrid: Grid,
                 row: number,
                 column: number,
                 shape: number[][] = [[1]]) {
 
         this.content = content
-        this.currentGrid = startGrid
-        this.currentIndex = {row: row, column: column}
 
-        // Todo: Furchtbar, muss ich ändern
         if (!GridItem.isValidShape(shape)) {
             throw Error(`Shape ${shape} has no valid format!`)
         } else {
             this.defaultSlotArr = this.initSlotsFromShape(shape)
         }
+
         this.aim = {x: this.content.position.x, y: this.content.position.y}
         this.trySetToIndex(startGrid, {row: row, column: column})
     }
 
-    canSetToIndex(grid: Grid, item: GridItem, index: Index2D): boolean {
-        return item.andThroughSlots(slot => {
-            return item.hasIndex({row: index.row + slot.row, column: index.column + slot.column}, grid)
-                || (grid.hasIndex({row: index.row + slot.row, column: index.column + slot.column})
-                && grid.isFreeAt({row: index.row + slot.row, column: index.column + slot.column}))
+    canBeSetToIndexInGrid(grid?: Grid, index?: Index2D): boolean {
+        if (!grid || !index) {
+            return true;
+        }
+
+        return this.andThroughSlots(slot => {
+            let shiftedIndex = {row: index.row + slot.row, column: index.column + slot.column}
+            return grid.hasIndex(shiftedIndex) && (this.hasIndex(shiftedIndex, grid) || grid.isFreeAt(shiftedIndex))
         }, grid)
+    }
+
+    freeFromGrid() {
+        if (this.currentGrid) {
+            this.iterateThroughSlots((slot: GridSlot) => {
+                let shiftedIndex = {
+                    row: this.currentIndex!.row + slot.row,
+                    column: this.currentIndex!.column + slot.column
+                }
+                this.currentGrid!.remove(shiftedIndex);
+            }, this.currentGrid)
+            this.currentIndex = undefined
+            this.currentGrid = undefined
+        }
     }
 
     private setToIndex(grid: Grid, index: Index2D): void {
-        if (this.currentGrid) {
-            this.iterateThroughSlots((slot: GridSlot) => {
-                this.currentGrid.remove({
-                    row: this.currentIndex.row + slot.row,
-                    column: this.currentIndex.column + slot.column
-                });
-            }, this.currentGrid)
-        }
-        this.iterateThroughSlots((slot: GridSlot) => {
-            grid.set({row: index.row + slot.row, column: index.column + slot.column}, slot);
-        }, grid)
-        this.currentGrid = grid
-        this.currentIndex = index
+        this.freeFromGrid()
+        this.updateIndex(grid, index);
+        this.updateGrid(grid)
         this.updateAim(grid.getGlobalPositionForIndex(index))
     }
 
+    private updateIndex(grid: Grid, index: Index2D) {
+        this.iterateThroughSlots((slot: GridSlot) => {
+            grid.set({row: index.row + slot.row, column: index.column + slot.column}, slot);
+        }, grid)
+        this.currentIndex = index
+    }
+
     trySetToIndex(grid: Grid, index: Index2D): boolean {
-        if (this.canSetToIndex(grid, this, index)) {
+        if (this.canBeSetToIndexInGrid(grid, index)) {
             this.setToIndex(grid, index)
             return true;
         }
@@ -93,6 +106,13 @@ export class GridItem {
             this.moveTo(this.aim)
         } else if (distance > 2) {
             this.setContentTo(position)
+        }
+    }
+
+    updateGrid(newGrid: Grid) {
+        this.currentGrid = newGrid
+        if (this.content.setGrid) {
+            this.content.setGrid(newGrid)
         }
     }
 
@@ -118,7 +138,7 @@ export class GridItem {
         gsap.to(this.content.position, {
             x: position.x,
             y: position.y,
-            duration: 0.3,
+            duration: 0.4,
             ease: Back.easeOut
         })
     }
@@ -160,6 +180,23 @@ export class GridItem {
             for (let col = 0; col < currentGridSlots[0].length; col++) {
                 if (currentGridSlots[row][col]) {
                     result &&= func(currentGridSlots[row][col]!)
+                }
+            }
+        }
+        return result;
+    }
+
+    orThroughSlots(func: (slot: GridSlot) => boolean, currentGrid: Grid): boolean {
+        let currentGridSlots: (GridSlot | null)[][] = this.defaultSlotArr
+        if (this.isValidGridId(currentGrid)) {
+            currentGridSlots = this.gridSlotsMap.get(currentGrid)!
+        }
+
+        let result: boolean = false
+        for (let row = 0; row < currentGridSlots.length; row++) {
+            for (let col = 0; col < currentGridSlots[0].length; col++) {
+                if (currentGridSlots[row][col]) {
+                    result ||= func(currentGridSlots[row][col]!)
                 }
             }
         }
@@ -242,6 +279,10 @@ export class GridItem {
     }
 
     private hasIndex(index: Index2D, grid: Grid): boolean {
-        return this.andThroughSlots(slot => !(index.row === slot.row && index.column === slot.column), grid)
+        return this.currentGrid === grid
+            && this.orThroughSlots(slot => {
+                return index.row === this.currentIndex!.row + slot.row
+                    && index.column === this.currentIndex!.column + slot.column
+            }, grid)
     }
 }

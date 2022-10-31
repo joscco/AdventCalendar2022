@@ -4,7 +4,7 @@ export class Ingredient {
     ingredientData?: IngredientData;
 
     constructor(private taste: IngredientTaste = "neutral",
-                private consistency: IngredientConsistency = "sticky",
+                private consistency: IngredientConsistence = "sticky",
                 private color: IngredientColor = "white") {
         this.taste = taste
         this.consistency = consistency
@@ -17,7 +17,7 @@ export class Ingredient {
         this.updateIngredientData()
     }
 
-    setConsistency(newConsistency: IngredientConsistency) : void {
+    setConsistency(newConsistency: IngredientConsistence) : void {
         this.consistency = newConsistency
         this.updateIngredientData()
     }
@@ -31,7 +31,7 @@ export class Ingredient {
         return this.taste
     }
 
-    getConsistency(): IngredientConsistency {
+    getConsistency(): IngredientConsistence {
         return this.consistency
     }
 
@@ -60,7 +60,7 @@ export class Ingredient {
 
 export type IngredientTaste = "neutral" | "sweet" | "sour" | "savoury"
 
-export type IngredientConsistency = "sticky" | "liquid" | "powdery" | "solid"
+export type IngredientConsistence = "sticky" | "liquid" | "powdery" | "solid"
 
 export type IngredientColor = "white" | "red" | "yellow" | "brown"
 
@@ -68,7 +68,7 @@ export type IngredientData = {
     id: IngredientID,
     text: string,
     taste: IngredientTaste,
-    consistency: IngredientConsistency,
+    consistency: IngredientConsistence,
     color: IngredientColor
 }
 

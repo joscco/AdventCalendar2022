@@ -1,52 +1,22 @@
 import {StartScene} from './scenes/StartScene';
 import SceneManager from './general/SceneManager';
 import {gsap} from "gsap";
-import {Assets} from "@pixi/assets";
 import {Application} from "pixi.js";
 import {GridEditorScene} from "./scenes/GridEditorScene";
-import {Texture} from "@pixi/core";
+import {AssetStore} from "./AssetStore";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
 export const CANVAS_WIDTH: number = 960;
 export const CANVAS_HEIGHT: number = 540;
 
-export var MAIN_FONT: FontFace
 export var App: Application;
 export var SCENE_MANAGER: SceneManager;
-
-export var START_SCENE_ASSETS: StartSceneAssets
-export interface StartSceneAssets {
-    torso: Texture,
-    backTorso: Texture,
-    head: Texture,
-    eyes_closed: Texture,
-    eyes_open: Texture,
-    left_arm_leaning: Texture,
-    left_arm_showing: Texture,
-    right_arm_leaning: Texture,
-    backgroundPattern: Texture,
-    pretitle: Texture,
-    startButton: Texture,
-    title_0: Texture,
-    title_1: Texture,
-    title_2: Texture,
-    title_3: Texture,
-    title_4: Texture,
-    title_5: Texture,
-    title_6: Texture,
-    title_7: Texture,
-    title_8: Texture,
-    title_9: Texture,
-    title_10: Texture,
-    title_11: Texture,
-    title_12: Texture,
-    title_13: Texture,
-    title_14: Texture
-}
+export var ASSET_STORE: AssetStore;
+export var Animate : {gsap: any}
 
 const main = async () => {
-    // Main app
+    // Init Main App
     App = new Application(
         {
             width: GAME_WIDTH,
@@ -58,46 +28,12 @@ const main = async () => {
     App.ticker.stop()
     gsap.ticker.add(() => App.ticker.update())
 
+    // Make gsap available globally
+    gsap.install(window)
 
     // Add all loading bundles
-    Assets.add("font", "assets/fonts/FuturaHandwritten.ttf")
-
-    Assets.addBundle("tooltipAssets", {
-        tooltipRectangle: 'assets/gameScreen/tooltip/tooltipRect.png',
-        tooltipSpike: 'assets/gameScreen/tooltip/tooltipTriangle.png'
-    })
-
-    Assets.addBundle("startSceneAssets", {
-        torso: "assets/startScreen/bernd/body_middle.png",
-        backTorso: "assets/startScreen/bernd/backBody.png",
-        head: "assets/startScreen/bernd/head.png",
-        eyes_closed: "assets/startScreen/bernd/closed_eyes.png",
-        eyes_open: "assets/startScreen/bernd/open_eyes.png",
-        left_arm_leaning: "assets/startScreen/bernd/leftArmLeaning.png",
-        left_arm_showing: "assets/startScreen/bernd/leftArmShowing.png",
-        right_arm_leaning: "assets/startScreen/bernd/rightArmLeaning.png",
-        backgroundPattern: "assets/startScreen/backgroundPattern.png",
-        pretitle: "assets/startScreen/pretitle.png",
-        startButton: "assets/startScreen/startButton.png",
-        title_0: "assets/startScreen/titleLetters/title0.png",
-        title_1: "assets/startScreen/titleLetters/title1.png",
-        title_2: "assets/startScreen/titleLetters/title2.png",
-        title_3: "assets/startScreen/titleLetters/title3.png",
-        title_4: "assets/startScreen/titleLetters/title4.png",
-        title_5: "assets/startScreen/titleLetters/title5.png",
-        title_6: "assets/startScreen/titleLetters/title6.png",
-        title_7: "assets/startScreen/titleLetters/title7.png",
-        title_8: "assets/startScreen/titleLetters/title8.png",
-        title_9: "assets/startScreen/titleLetters/title9.png",
-        title_10: "assets/startScreen/titleLetters/title10.png",
-        title_11: "assets/startScreen/titleLetters/title11.png",
-        title_12: "assets/startScreen/titleLetters/title12.png",
-        title_13: "assets/startScreen/titleLetters/title13.png",
-        title_14: "assets/startScreen/titleLetters/title14.png",
-    });
-    await Assets.loadBundle("textures")
-    START_SCENE_ASSETS = await Assets.loadBundle("startSceneAssets")
-    MAIN_FONT = await Assets.load("font") as FontFace
+    ASSET_STORE = new AssetStore()
+    await ASSET_STORE.loadAssets()
 
     // Display application properly
     document.body.style.margin = '0';
@@ -110,10 +46,8 @@ const main = async () => {
     document.body.appendChild(App.view);
 
     SCENE_MANAGER = new SceneManager(App);
-    var startScene = new StartScene(App);
-    var gridEditorScene = new GridEditorScene(App)
-    SCENE_MANAGER.add("startScene", startScene)
-    SCENE_MANAGER.add("gridEditorScene", gridEditorScene)
+    SCENE_MANAGER.add("startScene", new StartScene(App))
+    SCENE_MANAGER.add("gridEditorScene", new GridEditorScene(App))
     SCENE_MANAGER.start("gridEditorScene")
 };
 

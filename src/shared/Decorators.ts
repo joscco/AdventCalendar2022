@@ -1,4 +1,3 @@
-import {gsap, Back} from "gsap";
 
 export function ScaleOnHover(target: any) {
     // save a reference to the original constructor

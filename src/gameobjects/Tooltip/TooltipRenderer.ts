@@ -1,8 +1,7 @@
 import {Container, NineSlicePlane, Sprite, Text} from "pixi.js";
-import {gsap} from "gsap";
 import {Assets} from "@pixi/assets";
 import {Tooltip} from "./Tooltip";
-import {Expo} from "gsap/gsap-core";
+import {ExpoEase, tween} from "../../index";
 
 export class TooltipRenderer extends Container {
 
@@ -53,32 +52,32 @@ export class TooltipRenderer extends Container {
     }
 
     show(): void {
-        gsap.to(this.scale, {
+        tween.to(this.scale, {
             x: 1,
             y: 1,
             duration: 0.3,
-            ease: Expo.easeOut
+            ease: ExpoEase.easeOut
         })
-        gsap.to(this.position, {
+        tween.to(this.position, {
             y: this.initialOffsetY,
             duration: 0.4,
             delay: 0.1,
-            ease: Expo.easeOut
+            ease: ExpoEase.easeOut
         })
     }
 
     hide(): void {
-        gsap.to(this.scale, {
+        tween.to(this.scale, {
             x: 0,
             y: 0,
             duration: 0.4,
             delay: 0.1,
-            ease: Expo.easeOut
+            ease: ExpoEase.easeOut
         })
-        gsap.to(this.position, {
+        tween.to(this.position, {
             y: this.initialOffsetY + this.ADDITIONAL_OFFSET_Y_WHEN_OUT,
             duration: 0.3,
-            ease: Expo.easeOut
+            ease: ExpoEase.easeOut
         })
     }
 
