@@ -20,8 +20,9 @@ export class Machine extends Sprite {
         this.machineShape = machineShape
         this.currentGrid = startGrid
 
-        this.iconSlot = new MachineIconSlot(type)
+        this.iconSlot = new MachineIconSlot(type, this)
         this.iconSlot.position.set(30, 30)
+        this.addChild(this.iconSlot)
         this.updateAppearance()
     }
 
@@ -36,13 +37,14 @@ export class Machine extends Sprite {
     }
 
     private updateAppearance() {
+        this.iconSlot.updateType(this.type)
         if (this.currentGrid.id === "machineGrid") {
+            this.iconSlot.scaleUp()
             this.texture = ASSET_STORE.MACHINES!.big![this.machineShape]
-            this.iconSlot.scaleDown()
             this.pivot.set(75, 75)
         } else {
+            this.iconSlot.scaleDown()
             this.texture = ASSET_STORE.MACHINES!.small![this.machineShape]
-            this.iconSlot.scaleUp()
             this.pivot.set(this.texture.width/2, this.texture.height/2)
         }
     }

@@ -16,7 +16,7 @@
 // ] describes a tetris-L-brick
 
 import {GridSlot} from "./GridSlot";
-import {Grid, Index2D, Vector2D} from "./Grid";
+import {Grid, Index2D, sum, Vector2D} from "./Grid";
 import {DisplayObject} from "pixi.js";
 import gsap from "gsap";
 
@@ -25,14 +25,16 @@ type GridAdaptingDisplayObject = DisplayObject & { setGrid?: (grid: Grid) => voi
 
 export class GridItem {
     // This is realized as a map since a gridItem could have different forms in different grids
-    // (e.g. 1x1 in inventory and nxm in a "real" grid
+    // (e.g. 1x1 in inventory and nxm in a "real" grid)
     gridSlotsMap: Map<Grid, MultiSlotArr> = new Map<Grid, MultiSlotArr>()
     defaultSlotArr: MultiSlotArr;
     content: GridAdaptingDisplayObject
-    dragging: boolean = false
     currentGrid?: Grid
     currentIndex?: Index2D
     aim: Vector2D
+
+    dragging: boolean = false
+    dragOffset: Vector2D = {x: 0, y: 0}
 
     constructor(content: GridAdaptingDisplayObject,
                 startGrid: Grid,
@@ -118,10 +120,10 @@ export class GridItem {
 
     scaleUp() {
         gsap.to(this.content.scale, {
-            x: 1.1,
-            y: 1.1,
+            x: 1.05,
+            y: 1.05,
             duration: 0.3,
-            ease: Back.easeInOut
+            ease: Quart.easeInOut
         })
     }
 
@@ -130,7 +132,7 @@ export class GridItem {
             x: 1,
             y: 1,
             duration: 0.3,
-            ease: Back.easeInOut
+            ease: Quart.easeInOut
         })
     }
 
@@ -138,8 +140,8 @@ export class GridItem {
         gsap.to(this.content.position, {
             x: position.x,
             y: position.y,
-            duration: 0.4,
-            ease: Back.easeOut
+            duration: 0.3,
+            ease: Quart.easeOut
         })
     }
 
@@ -256,20 +258,25 @@ export class GridItem {
         this.content.buttonMode = true;
 
         this.content.on("pointerdown", (event) => {
-            onPointerDown(event.data.global, this);
+            let mousePosition: Vector2D = event.data.global
+            this.dragOffset = {x: this.content.x - mousePosition.x, y: this.content.y - mousePosition.y}
+            onPointerDown(sum(mousePosition, this.dragOffset), this);
             this.dragging = true
         })
         this.content.on("pointermove", (event) => {
             if (this.dragging) {
-                onPointerMove(event.data.global, this);
+                let mousePosition = event.data.global
+                onPointerMove(sum(mousePosition, this.dragOffset), this);
             }
         })
         this.content.on("pointerup", (event) => {
-            onPointerUp(event.data.global, this);
+            let mousePosition = event.data.global
+            onPointerUp(sum(mousePosition, this.dragOffset), this);
             this.dragging = false
         })
         this.content.on("pointerupoutside", (event) => {
-            onPointerUp(event.data.global, this);
+            let mousePosition = event.data.global
+            onPointerUp(sum(mousePosition, this.dragOffset), this);
             this.dragging = false
         })
     }

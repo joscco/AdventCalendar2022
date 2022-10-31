@@ -1,7 +1,6 @@
 import {Container, NineSlicePlane, Sprite, Text} from "pixi.js";
-import {Assets} from "@pixi/assets";
 import {Tooltip} from "./Tooltip";
-import {ExpoEase, tween} from "../../index";
+import {ASSET_STORE} from "../../index";
 
 export class TooltipRenderer extends Container {
 
@@ -21,12 +20,10 @@ export class TooltipRenderer extends Container {
         this.position.x = positionX
         this.position.y = positionY
         this.initialOffsetY = positionY
-    }
 
-    async init(): Promise<void> {
-        let assets = await Assets.loadBundle("tooltipAssets")
+        let assets = ASSET_STORE.TOOLTIP!
         this.textRectangle = new NineSlicePlane(assets.tooltipRectangle, 20, 20, 20, 20)
-        this.textObject = new Text("", {fontFamily: "Futurahandwritten", fontSize: 40, fill: 0xffffff})
+        this.textObject = new Text("", {fontFamily: "Futurahandwritten", fontSize: 20, fill: 0xffffff})
         this.textObject.anchor.set(0.5)
 
         this.spike = new Sprite(assets.tooltipSpike)
@@ -52,32 +49,32 @@ export class TooltipRenderer extends Container {
     }
 
     show(): void {
-        tween.to(this.scale, {
+        gsap.to(this.scale, {
             x: 1,
             y: 1,
             duration: 0.3,
-            ease: ExpoEase.easeOut
-        })
-        tween.to(this.position, {
-            y: this.initialOffsetY,
-            duration: 0.4,
             delay: 0.1,
-            ease: ExpoEase.easeOut
+            ease: Expo.easeOut
+        })
+        gsap.to(this.position, {
+            y: this.initialOffsetY,
+            duration: 0.3,
+            delay: 0.1,
+            ease: Expo.easeOut
         })
     }
 
     hide(): void {
-        tween.to(this.scale, {
+        gsap.to(this.scale, {
             x: 0,
             y: 0,
-            duration: 0.4,
-            delay: 0.1,
-            ease: ExpoEase.easeOut
+            duration: 0.1,
+            ease: Expo.easeOut
         })
-        tween.to(this.position, {
+        gsap.to(this.position, {
             y: this.initialOffsetY + this.ADDITIONAL_OFFSET_Y_WHEN_OUT,
-            duration: 0.3,
-            ease: ExpoEase.easeOut
+            duration: 0.1,
+            ease: Expo.easeOut
         })
     }
 

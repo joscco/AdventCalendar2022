@@ -6,6 +6,7 @@ export class AssetStore {
     START_SCENE?: StartSceneAssets
     MAIN_FONT?: FontFace
     MACHINES?: MachineAssets
+    TOOLTIP?: TooltipAssets
 
     constructor() {
         this.addAssets()
@@ -16,6 +17,7 @@ export class AssetStore {
         this.START_SCENE = this.prepareStartSceneAssets(await Assets.loadBundle("startSceneAssets"))
         this.MAIN_FONT = await Assets.load("font") as FontFace
         this.MACHINES = this.prepareMachineAssets(await Assets.loadBundle("machines"), await Assets.loadBundle("machineIcons"))
+        this.TOOLTIP = this.prepareTooltipAssets(await Assets.loadBundle("tooltipAssets"))
     }
 
     private addAssets() {
@@ -78,6 +80,8 @@ export class AssetStore {
 
         Assets.addBundle("machineIcons", {
             iconSlot: "assets/gameScreen/machines/machineIcons/machineIconHolder.png",
+            menuRect: "assets/gameScreen/machines/machineIcons/menuRect.png",
+            menuSpike: "assets/gameScreen/machines/machineIcons/menuSpike.png",
             color: "assets/gameScreen/machines/machineIcons/color.png",
             taste: "assets/gameScreen/machines/machineIcons/taste.png",
             consistence: "assets/gameScreen/machines/machineIcons/consistence.png",
@@ -94,6 +98,13 @@ export class AssetStore {
             powdery: "assets/gameScreen/machines/machineIcons/powdery.png",
             solid: "assets/gameScreen/machines/machineIcons/solid.png",
         })
+    }
+
+    private prepareTooltipAssets(rawAssets: any): TooltipAssets {
+        return {
+            tooltipRectangle: rawAssets.tooltipRectangle,
+            tooltipSpike: rawAssets.tooltipSpike
+        }
     }
 
     private prepareStartSceneAssets(rawAssets: any): StartSceneAssets {
@@ -153,7 +164,7 @@ export class AssetStore {
                 yellow: rawMachineIconAssets.yellow,
                 brown: rawMachineIconAssets.brown,
                 neutral: rawMachineIconAssets.neutral,
-                sweet:rawMachineIconAssets.sweet,
+                sweet: rawMachineIconAssets.sweet,
                 sour: rawMachineIconAssets.sour,
                 savoury: rawMachineIconAssets.savoury,
                 sticky: rawMachineIconAssets.sticky,
@@ -161,9 +172,16 @@ export class AssetStore {
                 powdery: rawMachineIconAssets.powdery,
                 solid: rawMachineIconAssets.solid
             },
-            typeIconSlot: rawMachineIconAssets.iconSlot
+            typeIconSlot: rawMachineIconAssets.iconSlot,
+            menuRect: rawMachineIconAssets.menuRect,
+            menuSpike: rawMachineIconAssets.menuSpike
         }
     }
+}
+
+export interface TooltipAssets {
+    tooltipRectangle: Texture,
+    tooltipSpike: Texture
 }
 
 export interface MachineAssets {
@@ -181,7 +199,9 @@ export interface MachineAssets {
     typeIcons: {
         [keys in MachineType]: Texture
     },
-    typeIconSlot: Texture
+    typeIconSlot: Texture,
+    menuRect: Texture,
+    menuSpike: Texture
 }
 
 export interface StartSceneAssets {

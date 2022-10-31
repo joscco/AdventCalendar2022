@@ -15,21 +15,20 @@ export class GridEditorScene extends Scene {
     }
 
     start() {
-
-        let machineGrid = new Grid(3, 4, "machineGrid")
+        let machineGrid = new Grid(4, 7, "machineGrid")
         machineGrid.tileWidth = 150
         machineGrid.tileHeight = 150
         machineGrid.columnOffsetX = 15
         machineGrid.rowOffsetY = 15
-        machineGrid.centerIn({x: 0, y: 0, width: 1920, height: 1080})
+        machineGrid.centerIn({x: 0, y: 100, width: 1920, height: 980})
         machineGrid.drawGrid()
         this.addChild(machineGrid)
 
-        let outsideGrid = new Grid(1, 6, "outside")
+        let outsideGrid = new Grid(1, 7, "outside")
         outsideGrid.tileWidth = 100
         outsideGrid.tileHeight = 100
         outsideGrid.columnOffsetX = 25
-        outsideGrid.centerIn({x: 0, y: 50, width: 1920, height: 200})
+        outsideGrid.centerIn({x: 0, y: 0, width: 1920, height: 250})
         outsideGrid.drawGrid()
         this.addChild(outsideGrid)
 

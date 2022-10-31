@@ -16,17 +16,13 @@ export class Tooltip {
         this.renderer = new TooltipRenderer(this, this.offsetX, this.offsetY)
         this.owner = owner
         this.textDeliverer = textDeliverer
-    }
 
-    async init(): Promise<void> {
         this.owner.addChild(this.renderer)
 
         this.owner.interactive = true
         this.owner.buttonMode = true
         this.owner.on("pointerover", () => {if (this.enabled) {this.showTooltip()}})
         this.owner.on("pointerout", () => {if (this.enabled) {this.hideTooltip()}})
-
-        await this.initRenderer()
     }
 
     setEnabled(value: boolean) {
@@ -34,10 +30,6 @@ export class Tooltip {
         if (!this.enabled) {
             this.hideTooltip()
         }
-    }
-
-    private async initRenderer(): Promise<void> {
-        await this.renderer.init()
     }
 
     showTooltip(): void {
