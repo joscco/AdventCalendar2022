@@ -11,6 +11,9 @@ import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../index";
 import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
 
 export class GridEditorScene extends Scene {
+
+    belts: ConveyorBelt[] = []
+
     constructor(App: Application) {
         super();
         this.app = App
@@ -29,20 +32,25 @@ export class GridEditorScene extends Scene {
         this.addChild(beltGrid)
 
         let firstBelt = new ConveyorBelt(beltGrid,
-            {row: 0, column: 2},
+            {row: 0, column: 0},
             {row: 3, column: 0},
             [
-                {row: 1, column: 2},
-                {row: 1, column: 1},
-                {row: 0, column: 1},
-                {row: 0, column: 0},
                 {row: 1, column: 0},
-                {row: 2, column: 0},
-                {row: 2, column: 1},
-                {row: 3, column: 1}
+                {row: 2, column: 0}
             ])
         this.addChild(firstBelt)
-        setInterval(() => firstBelt.step(), 2000)
+        this.belts.push(firstBelt)
+
+        let secondBelt = new ConveyorBelt(beltGrid,
+            {row: 0, column: 2},
+            {row: 3, column: 3},
+            [
+                {row: 0, column: 3},
+                {row: 1, column: 3},
+                {row: 2, column: 3}
+            ])
+        this.addChild(secondBelt)
+        this.belts.push(secondBelt)
 
         let machineGrid = new Grid(4, 7, "machineGrid")
         machineGrid.tileWidth = 150
@@ -52,6 +60,14 @@ export class GridEditorScene extends Scene {
         machineGrid.centerIn({x: 0, y: 150, width: 1920, height: 1080 - 150})
         machineGrid.drawGrid()
         this.addChild(machineGrid)
+
+        setInterval(() => {
+            for (let belt of this.belts) {
+                belt.updateIngredients(machineGrid)
+                belt.step();
+                belt.showLastTileOverlay(true)
+            }
+        }, 2000)
 
 
         let outsideGrid = new Grid(1, 9, "outside")

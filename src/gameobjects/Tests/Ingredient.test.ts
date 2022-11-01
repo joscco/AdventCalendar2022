@@ -18,7 +18,7 @@ describe('Ingredient Tests', () => {
 
         test('Updating consistency updates ingredient data', () => {
             let ingredient = new Ingredient()
-            ingredient.setConsistency("liquid")
+            ingredient.setConsistence("liquid")
             expect(ingredient.getConsistency()).toBe("liquid")
             expect(ingredient.getID()).toBe("milk")
         })

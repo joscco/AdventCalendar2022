@@ -33,6 +33,10 @@ export class Machine extends Sprite{
         this.updateAppearance()
     }
 
+    getType(): MachineType {
+        return this.type
+    }
+
     setGrid(grid: Grid) {
         this.currentGrid = grid
         this.updateAppearance()

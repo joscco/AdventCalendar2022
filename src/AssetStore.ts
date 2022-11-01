@@ -87,7 +87,8 @@ export class AssetStore {
         })
 
         Assets.addBundle("ingredients", {
-            cream: "assets/gameScreen/ingredients/cream.png"
+            cream: "assets/gameScreen/ingredients/cream.png",
+            melted_butter: "assets/gameScreen/ingredients/melted_butter.png"
         })
 
         Assets.addBundle("machines", {
@@ -254,8 +255,8 @@ export class AssetStore {
                 "milk":rawIngredientAssets.cream,
                 "flour":rawIngredientAssets.cream,
                 "cabbage":rawIngredientAssets.cream,
-                "butter":rawIngredientAssets.cream,
-                "melted_butter":rawIngredientAssets.cream,
+                "butter":rawIngredientAssets.melted_butter,
+                "melted_butter":rawIngredientAssets.melted_butter,
                 "cornflour":rawIngredientAssets.cream,
                 "cornflakes":rawIngredientAssets.cream,
                 "beet_pudding":rawIngredientAssets.cream,

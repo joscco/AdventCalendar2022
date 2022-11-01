@@ -22,16 +22,19 @@ export class Ingredient extends Sprite {
     setTaste(newTaste: IngredientTaste) : void {
         this.taste = newTaste
         this.updateIngredientData()
+        this.texture = this.getTexture()
     }
 
-    setConsistency(newConsistency: IngredientConsistence) : void {
+    setConsistence(newConsistency: IngredientConsistence) : void {
         this.consistency = newConsistency
         this.updateIngredientData()
+        this.texture = this.getTexture()
     }
 
     setColor(newColor: IngredientColor) : void {
         this.color = newColor
         this.updateIngredientData()
+        this.texture = this.getTexture()
     }
 
     getTaste(): IngredientTaste {
