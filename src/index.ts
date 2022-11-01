@@ -11,6 +11,8 @@ export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
 export const CANVAS_WIDTH: number = 960;
 export const CANVAS_HEIGHT: number = 540;
+export const NUMBER_OF_LEVELS: number = 24;
+export var AVAILABLE_LEVELS: number = 1;
 
 export var App: Application;
 export var SCENE_MANAGER: SceneManager;
@@ -22,6 +24,7 @@ const main = async () => {
         {
             width: GAME_WIDTH,
             height: GAME_HEIGHT,
+            resolution: window.devicePixelRatio || 1
         }
     );
 

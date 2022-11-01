@@ -21,8 +21,12 @@ export class Tooltip {
 
         this.owner.interactive = true
         this.owner.buttonMode = true
-        this.owner.on("pointerover", () => {if (this.enabled) {this.showTooltip()}})
-        this.owner.on("pointerout", () => {if (this.enabled) {this.hideTooltip()}})
+        this.owner.on("pointerover", () => {
+            this.showTooltip()
+        })
+        this.owner.on("pointerout", () => {
+            this.hideTooltip()
+        })
     }
 
     setEnabled(value: boolean) {

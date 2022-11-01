@@ -27,6 +27,10 @@ export class Machine extends Sprite{
         this.updateAppearance()
     }
 
+    blendOutTypeChooser() {
+        this.iconSlot.blendOutTypeChooserInstantly()
+    }
+
     setType(type: MachineType) {
         this.type = type
         this.updateAppearance()

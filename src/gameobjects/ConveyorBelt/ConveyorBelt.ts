@@ -8,6 +8,7 @@ import {ConveyorBeltMoveTile} from "./ConveyorBeltMoveTile";
 import {Container, Sprite, Texture} from "pixi.js";
 import {ASSET_STORE} from "../../index";
 import {Machine} from "../Machinery/Machine";
+import {Tooltip} from "../Tooltip/Tooltip";
 
 export class ConveyorBelt extends Container {
 
@@ -48,13 +49,15 @@ export class ConveyorBelt extends Container {
 
         this.sortableChildren = true
         for (let i = 0; i < this.tiles.length; i++) {
-            let ingredient = new Ingredient()
-            ingredient.zIndex = 1
-
             let tile = this.tiles[i]
             tile.zIndex = 0
+
+            let ingredient = new Ingredient()
+            ingredient.zIndex = 1
+            new Tooltip(ingredient, () => ingredient.getTooltipText())
             tile.setIngredientRef(ingredient)
             ingredient.position.set(tile.x, tile.y)
+
             this.addChild(ingredient)
             this.addChild(tile)
         }

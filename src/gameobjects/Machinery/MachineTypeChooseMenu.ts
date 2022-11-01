@@ -9,6 +9,7 @@ export class MachineTypeChooseMenu extends Sprite {
     categoryIcons: Sprite[]
     typeButtons: ScalingButton[]
     machine: Machine
+    shown: boolean = false
 
     constructor(machine: Machine) {
         super(ASSET_STORE.MACHINES!.menuRect);
@@ -44,14 +45,17 @@ export class MachineTypeChooseMenu extends Sprite {
             })
     }
 
-    blendOut(): void {
-        console.log("Blend out")
-        gsap.to(this.scale, {x: 0, y: 0, duration: 0.3, ease: Quart.easeInOut})
+    private async blendOut(): Promise<void> {
+        await gsap.to(this.scale, {x: 0, y: 0, duration: 0.3, ease: Quart.easeInOut})
+        this.shown = false
     }
 
-    blendIn(): void {
-        console.log("Blend in")
-        gsap.to(this.scale, {x: 1, y: 1, duration: 0.3, ease: Quart.easeInOut})
+    private async blendIn(): Promise<void> {
+        this.shown = true
+        await gsap.to(this.scale, {x: 1, y: 1, duration: 0.3, ease: Quart.easeInOut})
     }
 
+    toggleBlend() {
+        this.shown ? this.blendOut() : this.blendIn()
+    }
 }

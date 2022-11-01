@@ -1,6 +1,7 @@
 import {GridSlot} from "./GridSlot";
-import {Container, Graphics, Sprite} from "pixi.js";
+import {Container, Sprite} from "pixi.js";
 import {GridItem} from "./GridItem";
+import {Texture} from "@pixi/core";
 
 export class Grid extends Container {
 
@@ -8,6 +9,7 @@ export class Grid extends Container {
     private slots: (GridSlot | null)[][] = [];
     private numberOfRows: number = 0;
     private numberOfColumns: number = 0;
+    private defaultSlotTexture?: Texture;
     tileWidth: number = 0;
     tileHeight: number = 0;
     columnOffsetX: number = 0;
@@ -28,6 +30,10 @@ export class Grid extends Container {
         this.sprite = sprite;
         this.sprite.zIndex = 0
         this.addChild(this.sprite)
+    }
+
+    setDefaultSlotTexture(texture: Texture) {
+        this.defaultSlotTexture = texture
     }
 
     getWidth(): number {
@@ -165,18 +171,15 @@ export class Grid extends Container {
     }
 
     drawGrid() {
-        let graphics = new Graphics()
-        graphics.lineStyle(4, 0xDDDDDD);
         this.iterateThroughPositions((index: Index2D) => {
             let position = this.getLocalPositionForIndex(index)
-            graphics.drawCircle(position.x, position.y, 10)
-            graphics.drawRoundedRect(position.x - this.tileWidth/2,
-                position.y - this.tileHeight/2,
-                this.tileWidth,
-                this.tileHeight,
-                20)
+            let sprite = new Sprite(this.defaultSlotTexture)
+            sprite.position = position
+            sprite.zIndex = 0
+            sprite.anchor.set(0.5)
+            this.addChild(sprite)
         })
-        this.addChild(graphics)
+
     }
 
     getNumberOfRows(): number {

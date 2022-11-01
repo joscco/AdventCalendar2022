@@ -11,6 +11,10 @@ export class LevelButton extends ScalingButton {
         SCENE_MANAGER.start("level_" + this.n)
     }
 
+    isScalingEnabled(): boolean {
+        return this.enabled
+    }
+
     getTexture(): Texture {
         return this.enabled
             ? ASSET_STORE.LEVEL_SCENE!.enabledLevel

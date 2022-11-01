@@ -1,9 +1,7 @@
 import Scene from "./Scene";
 import {Application, Sprite, TilingSprite} from "pixi.js";
 import {LevelButton} from "../ui/Buttons/LevelButton";
-import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../index";
-
-const numberOfLevels = 24
+import {ASSET_STORE, AVAILABLE_LEVELS, GAME_HEIGHT, GAME_WIDTH, NUMBER_OF_LEVELS} from "../index";
 
 export class LevelChooserScene extends Scene {
 
@@ -42,8 +40,8 @@ export class LevelChooserScene extends Scene {
 
     private setUpLevelButtons(): LevelButton[] {
         let buttons = []
-        for (let n = 1; n <= numberOfLevels; n++) {
-            let button = new LevelButton(n, n < 5)
+        for (let n = 1; n <= NUMBER_OF_LEVELS; n++) {
+            let button = new LevelButton(n, n <= AVAILABLE_LEVELS)
             button.x = 250 + ((n - 1) % 8) * 200
             button.y = 300 + Math.floor((n - 1) / 8) * 250
             this.addChild(button)

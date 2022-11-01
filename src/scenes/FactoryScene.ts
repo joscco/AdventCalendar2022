@@ -57,7 +57,7 @@ export class FactoryScene extends Scene {
     }
 
     start() {
-        setInterval(() => this.checkRecipe(), 1500)
+        setInterval(() => this.checkRecipe(), 2000)
     }
 
     private setupBeltGridAndBelts(patternArr: string[][]): Grid {
@@ -138,6 +138,7 @@ export class FactoryScene extends Scene {
         outsideGrid.tileHeight = 100
         outsideGrid.columnOffsetX = 25
         outsideGrid.centerIn({x: 100, y: 50, width: 1820, height: 200})
+        outsideGrid.setDefaultSlotTexture(ASSET_STORE.GAME_SCENE!.emptyField)
         outsideGrid.drawGrid()
         outsideGrid.zIndex = 0
         this.addChild(outsideGrid)
@@ -157,7 +158,9 @@ export class FactoryScene extends Scene {
         machineUsageGrid.columnOffsetX = 15
         machineUsageGrid.rowOffsetY = 15
         machineUsageGrid.centerIn({x: 100, y: 150, width: 1820, height: 1080 - 150})
+        machineUsageGrid.setDefaultSlotTexture(ASSET_STORE.GAME_SCENE!.emptyField)
         machineUsageGrid.drawGrid()
+        machineUsageGrid.zIndex = -1
         this.addChild(machineUsageGrid)
         return machineUsageGrid
     }

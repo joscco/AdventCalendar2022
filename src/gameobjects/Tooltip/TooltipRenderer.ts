@@ -6,7 +6,6 @@ export class TooltipRenderer extends Container {
 
     private VERTICAL_PADDING = 20;
     private HORIZONTAL_PADDING = 20;
-    private ADDITIONAL_OFFSET_Y_WHEN_OUT = 20;
     private initialOffsetY: number
     private parentTooltip?: Tooltip
     private textRectangle?: NineSlicePlane
@@ -23,7 +22,7 @@ export class TooltipRenderer extends Container {
 
         let assets = ASSET_STORE.TOOLTIP!
         this.textRectangle = new NineSlicePlane(assets.tooltipRectangle, 20, 20, 20, 20)
-        this.textObject = new Text("", {fontFamily: "Futurahandwritten", fontSize: 20, fill: 0xffffff})
+        this.textObject = new Text("", {fontFamily: "Futurahandwritten", fontSize: 30, fill: 0xffffff})
         this.textObject.anchor.set(0.5)
 
         this.spike = new Sprite(assets.tooltipSpike)
@@ -52,15 +51,8 @@ export class TooltipRenderer extends Container {
         gsap.to(this.scale, {
             x: 1,
             y: 1,
-            duration: 0.3,
-            delay: 0.1,
-            ease: Expo.easeOut
-        })
-        gsap.to(this.position, {
-            y: this.initialOffsetY,
-            duration: 0.3,
-            delay: 0.1,
-            ease: Expo.easeOut
+            duration: 0.2,
+            ease: Quart.easeOut
         })
     }
 
@@ -68,13 +60,8 @@ export class TooltipRenderer extends Container {
         gsap.to(this.scale, {
             x: 0,
             y: 0,
-            duration: 0.1,
-            ease: Expo.easeOut
-        })
-        gsap.to(this.position, {
-            y: this.initialOffsetY + this.ADDITIONAL_OFFSET_Y_WHEN_OUT,
-            duration: 0.1,
-            ease: Expo.easeOut
+            duration: 0.2,
+            ease: Quart.easeOut
         })
     }
 

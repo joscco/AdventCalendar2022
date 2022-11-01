@@ -3,8 +3,20 @@ import {Button} from "./Button";
 export abstract class ScalingButton extends Button {
     constructor() {
         super();
-        this.on("pointerover", () => this.scaleUp())
-        this.on("pointerout", () => this.scaleDown())
+        this.on("pointerover", () => {
+                if (this.isScalingEnabled()) {
+                    this.scaleUp();
+                }
+            })
+        this.on("pointerout", () => {
+                if (this.isScalingEnabled()) {
+                    this.scaleDown()
+                }
+        })
+    }
+
+    isScalingEnabled(): boolean {
+        return true;
     }
 
     scaleUp() {

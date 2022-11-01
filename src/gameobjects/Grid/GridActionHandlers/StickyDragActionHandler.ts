@@ -2,6 +2,7 @@
 import {Grid, Vector2D} from "../Grid";
 import {GridActionHandler} from "./GridActionHandler";
 import {GridItem} from "../GridItem";
+import {Machine} from "../../Machinery/Machine";
 
 export class StickyDragActionHandler extends GridActionHandler {
 
@@ -10,6 +11,10 @@ export class StickyDragActionHandler extends GridActionHandler {
     }
 
     onDragToInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
+        if (item.content instanceof Machine) {
+            item.content.blendOutTypeChooser()
+        }
+
         let nearestGridIndex = grid.getNearestFreeIndexForPositionAndItem(mousePosition, item);
         if (nearestGridIndex) {
             item.trySetToIndex(grid, nearestGridIndex)

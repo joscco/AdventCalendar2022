@@ -22,7 +22,7 @@ export class MachineTypeButton extends ScalingButton {
 
     onClick(): void {
         this.chooseMenu.machine.setType(this.type)
-        this.chooseMenu.blendOut()
+        this.chooseMenu.toggleBlend()
     }
 
 }

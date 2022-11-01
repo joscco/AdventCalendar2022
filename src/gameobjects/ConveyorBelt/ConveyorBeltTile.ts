@@ -32,7 +32,6 @@ export abstract class ConveyorBeltTile extends AnimatedSprite {
     rotateTowards(position: Vector2D) {
         let towardsVector = {x: position.x - this.position.x, y: position.y - this.position.y}
         let towardsAngle = Math.atan2(towardsVector.y, towardsVector.x)
-        console.log(towardsAngle)
         if (Math.PI / 4 < towardsAngle && towardsAngle < 3 * Math.PI / 4) {
             this.angle = 90
         } else if (3 * Math.PI / 4 < towardsAngle || towardsAngle < - 3 * Math.PI / 4) {

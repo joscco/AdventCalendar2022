@@ -9,6 +9,7 @@ export class MachineIconSlot extends Container {
     private iconTypeImage: Sprite;
     private iconCategoryImage: Sprite;
     private typeChooseMenu: MachineTypeChooseMenu;
+    private clicked: boolean = false
 
     constructor(initialType: MachineType, machine: Machine) {
         super();
@@ -67,6 +68,10 @@ export class MachineIconSlot extends Container {
         }
     }
 
+    public blendOutTypeChooserInstantly() {
+        this.typeChooseMenu.scale.set(0)
+    }
+
     private getIconTextureForType(type: MachineType): Texture {
         return ASSET_STORE.MACHINES!.typeIcons[type];
     }
@@ -75,10 +80,12 @@ export class MachineIconSlot extends Container {
         let sprite = new Sprite(ASSET_STORE.MACHINES!.typeIconSlot)
         sprite.interactive = true
         sprite.buttonMode = true
-        sprite.on("pointertap", () => {
-            this.typeChooseMenu.scale.x > 0.5
-                ? this.typeChooseMenu.blendOut()
-                : this.typeChooseMenu.blendIn()
+        sprite.on("pointertap",() => {
+            if (this.clicked) {
+                this.typeChooseMenu.toggleBlend()
+            }
+            this.clicked = true;
+            setTimeout(() => {this.clicked = false}, 600)
         })
         this.addChild(sprite)
         return sprite
