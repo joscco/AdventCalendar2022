@@ -1,5 +1,5 @@
 import {GridSlot} from "./GridSlot";
-import {Container, Graphics} from "pixi.js";
+import {Container, Graphics, Sprite} from "pixi.js";
 import {GridItem} from "./GridItem";
 
 export class Grid extends Container {
@@ -12,6 +12,7 @@ export class Grid extends Container {
     tileHeight: number = 0;
     columnOffsetX: number = 0;
     rowOffsetY: number = 0;
+    private sprite?: Sprite
     private MARGIN_OF_ATTRACTION: number = 100;
 
     constructor(numberOfRows: number, numberOfColumns: number = numberOfRows, id?: string) {
@@ -20,6 +21,13 @@ export class Grid extends Container {
         this.numberOfColumns = numberOfColumns
         this.slots = this.setupNullArray(this.numberOfRows, this.numberOfColumns);
         this.id = id
+        this.sortableChildren = true
+    }
+
+    setSprite(sprite: Sprite) {
+        this.sprite = sprite;
+        this.sprite.zIndex = 0
+        this.addChild(this.sprite)
     }
 
     getWidth(): number {
@@ -112,11 +120,11 @@ export class Grid extends Container {
         return null
     }
 
-    private getCenterX(): number {
+    getCenterX(): number {
         return this.position.x + this.getWidth() / 2
     }
 
-    private getCenterY(): number {
+    getCenterY(): number {
         return this.position.y + this.getHeight() / 2
     }
 
@@ -158,11 +166,15 @@ export class Grid extends Container {
 
     drawGrid() {
         let graphics = new Graphics()
-        graphics.lineStyle(3, 0xFFFFFF, 0.5);
+        graphics.lineStyle(4, 0xDDDDDD);
         this.iterateThroughPositions((index: Index2D) => {
             let position = this.getLocalPositionForIndex(index)
             graphics.drawCircle(position.x, position.y, 10)
-            graphics.drawRect(position.x - this.tileWidth/2, position.y - this.tileHeight/2, this.tileWidth, this.tileHeight)
+            graphics.drawRoundedRect(position.x - this.tileWidth/2,
+                position.y - this.tileHeight/2,
+                this.tileWidth,
+                this.tileHeight,
+                20)
         })
         this.addChild(graphics)
     }

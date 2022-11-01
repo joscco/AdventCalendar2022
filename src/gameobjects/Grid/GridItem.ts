@@ -51,7 +51,7 @@ export class GridItem {
         }
 
         this.aim = {x: this.content.position.x, y: this.content.position.y}
-        this.trySetToIndex(startGrid, {row: row, column: column})
+        this.trySetToIndexInstantly(startGrid, {row: row, column: column})
     }
 
     canBeSetToIndexInGrid(grid?: Grid, index?: Index2D): boolean {
@@ -79,11 +79,18 @@ export class GridItem {
         }
     }
 
-    private setToIndex(grid: Grid, index: Index2D): void {
+    private moveToIndex(grid: Grid, index: Index2D): void {
         this.freeFromGrid()
         this.updateIndex(grid, index);
         this.updateGrid(grid)
         this.updateAim(grid.getGlobalPositionForIndex(index))
+    }
+
+    private setToIndex(grid: Grid, index: Index2D): void {
+        this.freeFromGrid()
+        this.updateIndex(grid, index);
+        this.updateGrid(grid)
+        this.setContentTo(grid.getGlobalPositionForIndex(index))
     }
 
     private updateIndex(grid: Grid, index: Index2D) {
@@ -95,6 +102,14 @@ export class GridItem {
 
     trySetToIndex(grid: Grid, index: Index2D): boolean {
         if (this.canBeSetToIndexInGrid(grid, index)) {
+            this.moveToIndex(grid, index)
+            return true;
+        }
+        return false;
+    }
+
+    private trySetToIndexInstantly(grid: Grid, index: Index2D) {
+        if (this.canBeSetToIndexInGrid(grid, index)) {
             this.setToIndex(grid, index)
             return true;
         }
@@ -103,8 +118,8 @@ export class GridItem {
 
     updateAim(position: Vector2D) {
         let distance = GridItem.quadDistance(position, this.aim)
+        this.aim = {x: position.x, y: position.y}
         if (distance > 500) {
-            this.aim = {x: position.x, y: position.y}
             this.moveTo(this.aim)
         } else if (distance > 2) {
             this.setContentTo(position)
@@ -291,5 +306,13 @@ export class GridItem {
                 return index.row === this.currentIndex!.row + slot.row
                     && index.column === this.currentIndex!.column + slot.column
             }, grid)
+    }
+
+    bringToTop() {
+        this.content.zIndex = 2
+    }
+
+    bringToBack() {
+        this.content.zIndex = 1
     }
 }

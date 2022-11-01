@@ -1,32 +1,35 @@
 import {Texture} from "@pixi/core";
 import {Assets} from "@pixi/assets";
 import {MachineShape, MachineType} from "./gameobjects/Machinery/Machine";
+import {IngredientID} from "./gameobjects/Ingredient";
 
 export class AssetStore {
     START_SCENE?: StartSceneAssets
+    LEVEL_SCENE?: LevelSceneAssets
+    GAME_SCENE?: GameSceneAssets
     MAIN_FONT?: FontFace
     MACHINES?: MachineAssets
+    BELT_TILES?: BeltTileAssets
     TOOLTIP?: TooltipAssets
+    INGREDIENTS?: IngredientAssets
 
     constructor() {
         this.addAssets()
     }
 
     async loadAssets() {
-        await Assets.loadBundle("textures")
-        this.START_SCENE = this.prepareStartSceneAssets(await Assets.loadBundle("startSceneAssets"))
         this.MAIN_FONT = await Assets.load("font") as FontFace
+        this.START_SCENE = this.prepareStartSceneAssets(await Assets.loadBundle("startSceneAssets"))
+        this.LEVEL_SCENE = this.prepareLevelSceneAssets(await Assets.loadBundle("levelSceneAssets"))
+        this.GAME_SCENE = this.prepareGameSceneAssets(await Assets.loadBundle("gameSceneAssets"))
+        this.BELT_TILES = this.prepareBeltTileAssets(await Assets.loadBundle("beltTileAssets"))
         this.MACHINES = this.prepareMachineAssets(await Assets.loadBundle("machines"), await Assets.loadBundle("machineIcons"))
         this.TOOLTIP = this.prepareTooltipAssets(await Assets.loadBundle("tooltipAssets"))
+        this.INGREDIENTS = this.prepareIngredientAssets(await Assets.loadBundle("ingredients"))
     }
 
     private addAssets() {
         Assets.add("font", "assets/fonts/FuturaHandwritten.ttf")
-
-        Assets.addBundle("tooltipAssets", {
-            tooltipRectangle: 'assets/gameScreen/tooltip/tooltipRect.png',
-            tooltipSpike: 'assets/gameScreen/tooltip/tooltipTriangle.png'
-        })
 
         Assets.addBundle("startSceneAssets", {
             torso: "assets/startScreen/bernd/body_middle.png",
@@ -56,6 +59,36 @@ export class AssetStore {
             title_13: "assets/startScreen/titleLetters/title13.png",
             title_14: "assets/startScreen/titleLetters/title14.png",
         });
+
+        Assets.addBundle("gameSceneAssets", {
+            emptyField: "assets/gameScreen/grids/emptyField.png",
+            machineOuterGrid: "assets/gameScreen/grids/machineOuterGrid.png",
+            recipeBox: "assets/gameScreen/grids/recipeBox.png",
+            backButton: "assets/gameScreen/buttons/backButton.png",
+            muteButton: "assets/gameScreen/buttons/muteButton.png",
+            soundButton: "assets/gameScreen/buttons/soundButton.png",
+            recipeButton: "assets/gameScreen/buttons/recipeButton.png"
+        })
+
+        Assets.addBundle("levelSceneAssets", {
+            levelSceneTitle: "assets/levelScreen/levelSceneTitle.png",
+            enabledLevel: "assets/levelScreen/enabledLevel.png",
+            unenabledLevel: "assets/levelScreen/unenabledLevel.png",
+            levelStar: "assets/levelScreen/levelStar.png",
+        })
+
+        Assets.addBundle("beltTileAssets", {
+            startField: "assets/gameScreen/beltTiles/startField.png",
+            moveField0: "assets/gameScreen/beltTiles/moveField0.png",
+            moveField1: "assets/gameScreen/beltTiles/moveField1.png",
+            endField: "assets/gameScreen/beltTiles/endField.png",
+            goodFieldOverlay: "assets/gameScreen/beltTiles/goodFieldOverlay.png",
+            badFieldOverlay: "assets/gameScreen/beltTiles/badFieldOverlay.png"
+        })
+
+        Assets.addBundle("ingredients", {
+            cream: "assets/gameScreen/ingredients/cream.png"
+        })
 
         Assets.addBundle("machines", {
             small_1x1: "assets/gameScreen/machines/1x1_small.png",
@@ -98,6 +131,11 @@ export class AssetStore {
             powdery: "assets/gameScreen/machines/machineIcons/powdery.png",
             solid: "assets/gameScreen/machines/machineIcons/solid.png",
         })
+
+        Assets.addBundle("tooltipAssets", {
+            tooltipRectangle: 'assets/gameScreen/tooltip/tooltipRect.png',
+            tooltipSpike: 'assets/gameScreen/tooltip/tooltipTriangle.png'
+        })
     }
 
     private prepareTooltipAssets(rawAssets: any): TooltipAssets {
@@ -126,6 +164,28 @@ export class AssetStore {
                 rawAssets.title_8, rawAssets.title_9, rawAssets.title_10, rawAssets.title_11,
                 rawAssets.title_12, rawAssets.title_13, rawAssets.title_14
             ]
+        }
+    }
+
+    private prepareGameSceneAssets(rawAssets: any): GameSceneAssets {
+        return {
+            emptyField: rawAssets.emptyField,
+            machineOuterGrid: rawAssets.machineOuterGrid,
+            recipeBox: rawAssets.recipeBox,
+            backButton: rawAssets.backButton,
+            muteButton: rawAssets.muteButton,
+            soundButton: rawAssets.soundButton,
+            recipeButton: rawAssets.recipeButton
+        }
+    }
+
+    private prepareBeltTileAssets(rawBeltTileAssets: any): BeltTileAssets {
+        return {
+            startField: rawBeltTileAssets.startField,
+            moveFields: [rawBeltTileAssets.moveField0, rawBeltTileAssets.moveField1],
+            endField: rawBeltTileAssets.endField,
+            goodFieldOverlay: rawBeltTileAssets.goodFieldOverlay,
+            badFieldOverlay: rawBeltTileAssets.badFieldOverlay
         }
     }
 
@@ -177,11 +237,105 @@ export class AssetStore {
             menuSpike: rawMachineIconAssets.menuSpike
         }
     }
+
+    private prepareLevelSceneAssets(rawLevelSceneAssets: any): LevelSceneAssets {
+        return {
+            levelSceneTitle: rawLevelSceneAssets.levelSceneTitle,
+            enabledLevel: rawLevelSceneAssets.enabledLevel,
+            unenabledLevel: rawLevelSceneAssets.unenabledLevel,
+            levelStar: rawLevelSceneAssets.levelStar,
+        }
+    }
+
+    private prepareIngredientAssets(rawIngredientAssets: any): IngredientAssets {
+        return {
+            textures: {
+                "cream": rawIngredientAssets.cream,
+                "milk":rawIngredientAssets.cream,
+                "flour":rawIngredientAssets.cream,
+                "cabbage":rawIngredientAssets.cream,
+                "butter":rawIngredientAssets.cream,
+                "melted_butter":rawIngredientAssets.cream,
+                "cornflour":rawIngredientAssets.cream,
+                "cornflakes":rawIngredientAssets.cream,
+                "beet_pudding":rawIngredientAssets.cream,
+                "beet_juice":rawIngredientAssets.cream,
+                "beet_flour":rawIngredientAssets.cream,
+                "beet":rawIngredientAssets.cream,
+                "mud":rawIngredientAssets.cream,
+                "swamp_water":rawIngredientAssets.cream,
+                "dry_dirt":rawIngredientAssets.cream,
+                "dirt":rawIngredientAssets.cream,
+                "sweetened_cream":rawIngredientAssets.cream,
+                "sweetened_milk":rawIngredientAssets.cream,
+                "sugar":rawIngredientAssets.cream,
+                "marzipan":rawIngredientAssets.cream,
+                "honey":rawIngredientAssets.cream,
+                "vanilla_milk":rawIngredientAssets.cream,
+                "vanilla_sugar":rawIngredientAssets.cream,
+                "honey_comb":rawIngredientAssets.cream,
+                "jam":rawIngredientAssets.cream,
+                "cherry_sauce":rawIngredientAssets.cream,
+                "cherry_sugar":rawIngredientAssets.cream,
+                "cherries":rawIngredientAssets.cream,
+                "chocolate_pudding":rawIngredientAssets.cream,
+                "melted_chocolate":rawIngredientAssets.cream,
+                "brown_sugar":rawIngredientAssets.cream,
+                "raisins":rawIngredientAssets.cream,
+                "lemon_cream":rawIngredientAssets.cream,
+                "expired_milk":rawIngredientAssets.cream,
+                "lemon_concentrate":rawIngredientAssets.cream,
+                "old_lemon_candy":rawIngredientAssets.cream,
+                "lemon_pudding":rawIngredientAssets.cream,
+                "lemon_juice":rawIngredientAssets.cream,
+                "lemon_sugar":rawIngredientAssets.cream,
+                "candied_lemon_peel":rawIngredientAssets.cream,
+                "currant_pudding":rawIngredientAssets.cream,
+                "currant_juice":rawIngredientAssets.cream,
+                "currant_sugar":rawIngredientAssets.cream,
+                "currants":rawIngredientAssets.cream,
+                "rotten_fruits":rawIngredientAssets.cream,
+                "rotten_fruit_juice":rawIngredientAssets.cream,
+                "grinded_umeboshi":rawIngredientAssets.cream,
+                "umeboshi":rawIngredientAssets.cream,
+                "nut_cream":rawIngredientAssets.cream,
+                "nut_aroma":rawIngredientAssets.cream,
+                "grinded_nuts":rawIngredientAssets.cream,
+                "peeled_nuts":rawIngredientAssets.cream,
+                "egg_yolk":rawIngredientAssets.cream,
+                "egg":rawIngredientAssets.cream,
+                "egg_powder":rawIngredientAssets.cream,
+                "scrambled_egg":rawIngredientAssets.cream,
+                "wine_cream":rawIngredientAssets.cream,
+                "wine":rawIngredientAssets.cream,
+                "spices":rawIngredientAssets.cream,
+                "steak":rawIngredientAssets.cream,
+                "nut_butter":rawIngredientAssets.cream,
+                "rum":rawIngredientAssets.cream,
+                "cocoa":rawIngredientAssets.cream,
+                "nuts":rawIngredientAssets.cream
+            }
+        };
+    }
+}
+
+export interface IngredientAssets {
+    textures: {
+        [keys in IngredientID]: Texture
+    }
 }
 
 export interface TooltipAssets {
     tooltipRectangle: Texture,
     tooltipSpike: Texture
+}
+
+export interface BeltTileAssets {
+    startField: Texture,
+    moveFields: Texture[],
+    endField: Texture,
+    goodFieldOverlay: Texture,
+    badFieldOverlay: Texture
 }
 
 export interface MachineAssets {
@@ -217,4 +371,21 @@ export interface StartSceneAssets {
     pretitle: Texture,
     startButton: Texture,
     titleLetters: Texture[]
+}
+
+export interface LevelSceneAssets {
+    levelSceneTitle: Texture,
+    enabledLevel: Texture,
+    unenabledLevel: Texture
+    levelStar: Texture,
+}
+
+export interface GameSceneAssets {
+    emptyField: Texture,
+    machineOuterGrid: Texture,
+    recipeBox: Texture,
+    backButton: Texture,
+    muteButton: Texture,
+    soundButton: Texture,
+    recipeButton: Texture
 }

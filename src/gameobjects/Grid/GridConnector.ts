@@ -67,6 +67,7 @@ export class GridConnector {
     }
 
     private onStartDrag(mousePosition: Vector2D, item: GridItem) {
+        item.bringToTop()
         let nearestGrid = this.findNearestGridForPosition(mousePosition);
         this.updateNearestGrid(nearestGrid, mousePosition, item)
         this.otherGridActionsMap.get(nearestGrid)!.onPickUpInGrid(nearestGrid, mousePosition, item)
@@ -79,12 +80,10 @@ export class GridConnector {
     }
 
     private onEndDrag(mousePosition: Vector2D, item: GridItem) {
+        item.bringToBack()
         let nearestGrid = this.findNearestGridForPosition(mousePosition);
         this.updateNearestGrid(nearestGrid, mousePosition, item)
         this.otherGridActionsMap.get(nearestGrid)!.onLetGoInGrid(nearestGrid, mousePosition, item)
-        for (let grid of this.otherGridActionsMap.keys()) {
-            console.log(grid.toString())
-        }
     }
 
     private updateNearestGrid(newNearestGrid: Grid, mousePosition: Vector2D, item: GridItem) {

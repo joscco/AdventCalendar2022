@@ -7,7 +7,8 @@ import {MachineIconSlot} from "./MachineIconSlot";
 export type MachineType = IngredientTaste | IngredientColor | IngredientConsistence
 export type MachineShape = "1x1" | "2x1" | "3x1" | "1x2" | "2x2" | "3x2" | "1x3" | "2x3" | "3x3"
 
-export class Machine extends Sprite {
+
+export class Machine extends Sprite{
 
     private type: MachineType;
     private machineShape: MachineShape;
@@ -19,9 +20,10 @@ export class Machine extends Sprite {
         this.type = type;
         this.machineShape = machineShape
         this.currentGrid = startGrid
+        this.zIndex = 1
 
         this.iconSlot = new MachineIconSlot(type, this)
-        this.iconSlot.position.set(30, 30)
+        this.iconSlot.position.set(18, 20)
         this.addChild(this.iconSlot)
         this.updateAppearance()
     }

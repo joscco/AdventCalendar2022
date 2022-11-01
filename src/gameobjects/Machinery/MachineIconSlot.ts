@@ -13,21 +13,15 @@ export class MachineIconSlot extends Container {
     constructor(initialType: MachineType, machine: Machine) {
         super();
 
-        this.iconSlot = new Sprite(ASSET_STORE.MACHINES!.typeIconSlot)
-        this.iconSlot.interactive = true
-        this.iconSlot.buttonMode = true
-        this.iconSlot.on("pointertap", () => {
-            this.typeChooseMenu.scale.x > 0.5
-                ? this.typeChooseMenu.blendOut()
-                : this.typeChooseMenu.blendIn()
-        })
-        this.addChild(this.iconSlot)
+        this.iconSlot = this.initIconSlot()
 
         this.iconCategoryImage = new Sprite()
-        this.iconCategoryImage.position.set(45, 39)
+        this.iconCategoryImage.position.set(35, 42)
+        this.iconCategoryImage.scale.set(0.85)
         this.iconCategoryImage.anchor.set(0.5)
         this.iconTypeImage = new Sprite()
-        this.iconTypeImage.position.set(105, 39)
+        this.iconTypeImage.position.set(85, 42)
+        this.iconTypeImage.scale.set(0.85)
         this.iconTypeImage.anchor.set(0.5)
 
         this.updateType(initialType)
@@ -36,7 +30,6 @@ export class MachineIconSlot extends Container {
         this.typeChooseMenu = new MachineTypeChooseMenu(machine)
         this.typeChooseMenu.anchor.set(0, 0.5)
         this.typeChooseMenu.position.set(170, 50)
-
 
         this.addChild(this.typeChooseMenu)
     }
@@ -78,4 +71,16 @@ export class MachineIconSlot extends Container {
         return ASSET_STORE.MACHINES!.typeIcons[type];
     }
 
+    private initIconSlot() {
+        let sprite = new Sprite(ASSET_STORE.MACHINES!.typeIconSlot)
+        sprite.interactive = true
+        sprite.buttonMode = true
+        sprite.on("pointertap", () => {
+            this.typeChooseMenu.scale.x > 0.5
+                ? this.typeChooseMenu.blendOut()
+                : this.typeChooseMenu.blendIn()
+        })
+        this.addChild(sprite)
+        return sprite
+    }
 }

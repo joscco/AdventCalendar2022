@@ -1,15 +1,22 @@
 // Klasse als Darstellung eines Zutaten-Zustands (Geschmack, Konsistenz, Farbe, Position)
-export class Ingredient {
+import {Sprite} from "pixi.js";
+import {Texture} from "@pixi/core";
+import {ASSET_STORE} from "../index";
+
+export class Ingredient extends Sprite {
 
     ingredientData?: IngredientData;
 
     constructor(private taste: IngredientTaste = "neutral",
                 private consistency: IngredientConsistence = "sticky",
                 private color: IngredientColor = "white") {
+        super()
         this.taste = taste
         this.consistency = consistency
         this.color = color
         this.updateIngredientData()
+        this.anchor.set(0.5)
+        this.texture = this.getTexture()
     }
 
     setTaste(newTaste: IngredientTaste) : void {
@@ -37,6 +44,10 @@ export class Ingredient {
 
     getColor(): IngredientColor {
         return this.color
+    }
+
+    getTexture(): Texture {
+        return ASSET_STORE.INGREDIENTS!.textures[this.ingredientData!.id]
     }
 
     getID(): IngredientID | null {

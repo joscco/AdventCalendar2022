@@ -13,14 +13,13 @@ export const CANVAS_HEIGHT: number = 540;
 export var App: Application;
 export var SCENE_MANAGER: SceneManager;
 export var ASSET_STORE: AssetStore;
-export var Animate : {gsap: any}
 
 const main = async () => {
     // Init Main App
     App = new Application(
         {
             width: GAME_WIDTH,
-            height: GAME_HEIGHT
+            height: GAME_HEIGHT,
         }
     );
 
