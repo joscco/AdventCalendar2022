@@ -22,13 +22,13 @@ export class Machine extends Sprite{
         this.zIndex = 1
 
         this.iconSlot = new MachineIconSlot(type, this)
-        this.iconSlot.position.set(18, 20)
+        this.iconSlot.position.set(75, 75)
         this.addChild(this.iconSlot)
         this.updateAppearance()
     }
 
     blendOutTypeChooser() {
-        this.iconSlot.blendOutTypeChooserInstantly()
+        this.iconSlot.blendOut()
     }
 
     setType(type: MachineType) {
