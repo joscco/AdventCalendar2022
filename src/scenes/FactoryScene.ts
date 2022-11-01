@@ -4,20 +4,20 @@
 // -> Aufruf der Step()-Function
 // -> Stoppen und Darstellung des Win-Screens, wenn geschafft
 
-import {Recipe, RecipeBox} from "./RecipeBox";
-import {Machine, MachineShape, parseShape} from "./Machinery/Machine";
-import {Grid, Index2D, isRectangularArray} from "./Grid/Grid";
-import {GridConnector} from "./Grid/GridConnector";
-import Scene from "../scenes/Scene";
-import {ConveyorBelt} from "./ConveyorBelt/ConveyorBelt";
+import {Recipe, RecipeBox} from "../gameobjects/RecipeBox";
+import {Machine, MachineShape, parseShape} from "../gameobjects/Machinery/Machine";
+import {Grid, Index2D, isRectangularArray} from "../gameobjects/Grid/Grid";
+import {GridConnector} from "../gameobjects/Grid/GridConnector";
+import Scene from "./Scene";
+import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
 import {Application, Graphics, Sprite} from "pixi.js";
 import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../index";
-import {GridActionHandler} from "./Grid/GridActionHandlers/GridActionHandler";
-import {StickyDragActionHandler} from "./Grid/GridActionHandlers/StickyDragActionHandler";
-import {AutomaticDragActionHandler} from "./Grid/GridActionHandlers/AutomaticDragActionHandler";
-import {GridItem} from "./Grid/GridItem";
+import {GridActionHandler} from "../gameobjects/Grid/GridActionHandlers/GridActionHandler";
+import {StickyDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/StickyDragActionHandler";
+import {AutomaticDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/AutomaticDragActionHandler";
+import {GridItem} from "../gameobjects/Grid/GridItem";
 
-export class Level extends Scene {
+export class FactoryScene extends Scene {
 
     private readonly machineInventoryGrid: Grid;
     private readonly machineUsageGrid: Grid;

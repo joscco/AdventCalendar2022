@@ -2,6 +2,7 @@ import {Sprite} from "pixi.js";
 import {ASSET_STORE} from "../../index";
 import {ScalingButton} from "../../ui/Buttons/ScalingButton";
 import {Machine, MachineType} from "./Machine";
+import {MachineTypeButton} from "./MachineTypeButton";
 
 export class MachineTypeChooseMenu extends Sprite {
     spike: Sprite;
@@ -30,21 +31,14 @@ export class MachineTypeChooseMenu extends Sprite {
                 return icon
             })
 
-        let butt = ASSET_STORE.MACHINES!.typeIcons
-        let self = this
-        this.typeButtons = [butt.white, butt.yellow, butt.red, butt.brown,
-            butt.neutral, butt.sour, butt.sweet, butt.savoury,
-            butt.liquid, butt.sticky, butt.solid, butt.powdery]
-            .map((texture, index) => {
-                let button = new ScalingButton(
-                    135 + (index % 4) * 60,
-                    -63 + Math.floor(index / 4) * 60,
-                    texture,
-                    () => {
-                        self.machine.setType(texture.textureCacheIds[1] as MachineType)
-                        self.blendOut()
-                    })
-                button.anchor.set(0.5)
+        this.typeButtons = [
+            "white", "red", "yellow", "brown",
+            "neutral", "sweet", "sour", "savoury",
+            "sticky", "liquid", "powdery", "solid"
+        ].map((type, index) => {
+                let button = new MachineTypeButton(type as MachineType, this)
+                button.x =  135 + (index % 4) * 60
+                button.y = -63 + Math.floor(index / 4) * 60
                 this.addChild(button)
                 return button
             })

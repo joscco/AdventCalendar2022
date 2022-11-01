@@ -3,8 +3,9 @@ import SceneManager from './general/SceneManager';
 import {gsap} from "gsap";
 import {Application} from "pixi.js";
 import {AssetStore} from "./AssetStore";
-import {Level} from "./gameobjects/Level";
+import {FactoryScene} from "./scenes/FactoryScene";
 import {RECIPES} from "./gameobjects/RecipeBox";
+import {LevelChooserScene} from "./scenes/LevelChooserScene";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -47,15 +48,17 @@ const main = async () => {
 
     SCENE_MANAGER = new SceneManager(App);
     SCENE_MANAGER.add("startScene", new StartScene(App))
-    SCENE_MANAGER.add("firstLevel",
-        new Level(App,
+    SCENE_MANAGER.add("levelChooserScene", new LevelChooserScene(App))
+    SCENE_MANAGER.add("level_1",
+        new FactoryScene(
+            App,
             "A0|  |  |  \n" +
             "A1|A2|A3|A4\n" +
             "  |  |  |A5",
             RECIPES.SANTAMILK,
             ["1x1", "2x1", "1x2"]
         ))
-    SCENE_MANAGER.start("firstLevel")
+    SCENE_MANAGER.start("startScene")
 };
 
 main();

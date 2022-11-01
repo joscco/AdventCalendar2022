@@ -1,31 +1,36 @@
 import {Sprite} from "pixi.js";
 import {Texture} from "@pixi/core";
 
-export class Button extends Sprite {
-
-    private onClick: () => void
+export abstract class Button extends Sprite {
     private clicked: boolean = false;
 
-    constructor(x: number, y: number, texture: Texture, onClick: () => void) {
-        super(texture);
-        this.x = x;
-        this.y = y;
+    constructor() {
+        super();
 
+        this.texture = this.getTexture()
         // Since we might want scaling, setting the anchor in the middle is better
         this.anchor.set(0.5)
 
-        this.onClick = async () => {
-            if (!this.clicked) {
-                this.clicked = true;
-                await onClick();
-                this.clicked = false;
-            }
-        }
-
         this.interactive = true;
         this.buttonMode = true;
-
-        this.on("pointertap", () => this.onClick())
+        this.on("pointertap", () => this.onPointerTap())
     }
+
+    // Needed in case the texture depends on values set in child constructors
+    updateTexture() {
+        this.texture = this.getTexture()
+    }
+
+    async onPointerTap() {
+        if (!this.clicked) {
+            this.clicked = true;
+            await this.onClick();
+            this.clicked = false;
+        }
+    }
+
+    abstract onClick(): void
+
+    abstract getTexture(): Texture
 }
 

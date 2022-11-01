@@ -1,8 +1,8 @@
 import {Application, Container, Sprite, TilingSprite} from 'pixi.js';
-import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH, SCENE_MANAGER} from "../index";
+import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../index";
 import Scene from "./Scene";
-import {ScalingButton} from "../ui/Buttons/ScalingButton";
 import {Texture} from "@pixi/core";
+import {StartButton} from "./StartButton";
 
 export class StartScene extends Scene {
 
@@ -22,7 +22,7 @@ export class StartScene extends Scene {
             ASSET_STORE.START_SCENE!.right_arm_leaning, ASSET_STORE.START_SCENE!.eyes_open, ASSET_STORE.START_SCENE!.eyes_closed);
         this.addPretitle(ASSET_STORE.START_SCENE!.pretitle)
         this.addTitle(ASSET_STORE.START_SCENE!.titleLetters);
-        this.addStartButton(ASSET_STORE.START_SCENE!.startButton);
+        this.addStartButton();
 
         await this.blendInPretitle();
         await this.blendInBernd();
@@ -67,14 +67,10 @@ export class StartScene extends Scene {
         this.addChild(titleContainer);
     }
 
-    private addStartButton(startButtonTexture: Texture) {
-        this.startButton = new ScalingButton(
-            GAME_WIDTH / 2,
-            GAME_HEIGHT / 2 + 325,
-            startButtonTexture,
-            () => {
-                SCENE_MANAGER.start("gridEditorScene")
-            })
+    private addStartButton() {
+        this.startButton = new StartButton()
+        this.startButton.x = GAME_WIDTH / 2
+        this.startButton.y = GAME_HEIGHT / 2 + 325
         this.startButton.scale.set(0)
         this.addChild(this.startButton);
     }
@@ -138,6 +134,4 @@ export class StartScene extends Scene {
     private async scaleInStartButton() {
         await gsap.to(this.startButton!.scale, {duration: 1, x: 1, y: 1, ease: Quart.easeInOut, delay: 1.5})
     }
-
-
 }
