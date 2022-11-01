@@ -1,4 +1,6 @@
 import {IngredientID} from "./Ingredient";
+import {Sprite, Text} from "pixi.js";
+import {ASSET_STORE} from "../index";
 
 // Klasse zur Überprüfung der Rezepte, kriegt ein Rezept zur Initialisierung
 // Checked einen Array von Zutaten und gibt einen bool-Array bezüglich Richtigkeit zurück
@@ -8,12 +10,18 @@ export type Recipe = {
     ingredients: IngredientID[]
 }
 
-export class RecipeBox {
+export class RecipeBox extends Sprite {
 
     recipe: Recipe;
 
     constructor(recipe: Recipe) {
+        super()
         this.recipe = recipe
+        this.texture = ASSET_STORE.GAME_SCENE!.recipeBox
+        this.anchor.set(0.5, 0)
+
+        this.addTitle(this.recipe.name)
+        this.addChecklist(this.recipe.ingredients)
     }
 
     checkIngredients(ingredients: IngredientID[]): boolean[] {
@@ -30,9 +38,51 @@ export class RecipeBox {
         }
         return result
     }
+
+    private addTitle(name: string) {
+        let title = new Text(name, {fontFamily: "Futurahandwritten", fontSize: 40, fill: 0x000000})
+        title.anchor.set(0.5)
+        title.position.set(0, 60)
+        this.addChild(title)
+    }
+
+    private addChecklist(ingredients: IngredientID[]) {
+        ingredients.forEach((id, index) => {
+            let ingredientText = new Text("- " + id, {fontFamily: "Futurahandwritten", fontSize: 40, fill: 0x777777})
+            ingredientText.anchor.set(0, 0.5)
+            ingredientText.position.set(-100, 120 + index * 50)
+            this.addChild(ingredientText)
+        })
+    }
 }
 
-export const RECIPES: { [key: string]: Recipe } = {
+export type RECIPE_NAMES =
+    "SANTAMILK" |
+    "SCHOKOCROSSIES" |
+    "MUERBETEIGKEKSE" |
+    "RUMKUGELN" |
+    "PUNSCH" |
+    "BETHMAENNCHEN" |
+    "ZIMTSTERNE" |
+    "PRINTEN" |
+    "ENGELSAUGEN" |
+    "VANILLEKIPFERL" |
+    "MAKRONEN" |
+    "FLORENTINER" |
+    "SPRITZGEBAECK" |
+    "LEBKUCHEN" |
+    "SPEKULATIUS" |
+    "PFEFFERNUESSE" |
+    "PANETTONE" |
+    "SCHWARZWEISSKEKSE" |
+    "STOLLEN" |
+    "SCHOKOLADENBROT" |
+    "NUSSECKEN" |
+    "CORNFLAKEWALNUSSKEKSE" |
+    "BAERENTATZEN" |
+    "DOMINOSTEINE"
+
+export const RECIPES: { [keys in RECIPE_NAMES]: Recipe } = {
     SANTAMILK: {name: "Santa's Milk", ingredients: ["milk", "honey"]},
     SCHOKOCROSSIES: {name: "Chocolate Cornflake Cakes", ingredients: ["melted_chocolate", "peeled_nuts", "cornflakes"]},
     MUERBETEIGKEKSE: {name: "Butter Cookies", ingredients: ["flour", "butter", "egg", "sugar"]},

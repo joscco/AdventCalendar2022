@@ -72,7 +72,6 @@ export class ConveyorBelt extends Container {
             nextTile.setIngredientRef(currentIngredient)
             currentTile.repositionIngredient(currentIngredient, nextTile.position)
         }
-        console.log(ingredientsCopy.map(ing => ing.getID()))
     }
 
     getEndIngredient(): Ingredient {

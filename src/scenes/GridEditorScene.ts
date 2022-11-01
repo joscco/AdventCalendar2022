@@ -9,6 +9,7 @@ import {GridItem} from "../gameobjects/Grid/GridItem";
 import {Machine} from "../gameobjects/Machinery/Machine";
 import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../index";
 import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
+import {RecipeBox, RECIPES} from "../gameobjects/RecipeBox";
 
 export class GridEditorScene extends Scene {
 
@@ -27,8 +28,7 @@ export class GridEditorScene extends Scene {
         beltGrid.tileHeight = 150
         beltGrid.columnOffsetX = 15
         beltGrid.rowOffsetY = 15
-        beltGrid.centerIn({x: 0, y: 150, width: 1920, height: 1080 - 150})
-        beltGrid.drawGrid()
+        beltGrid.centerIn({x: 100, y: 150, width: 1820, height: 1080 - 150})
         this.addChild(beltGrid)
 
         let firstBelt = new ConveyorBelt(beltGrid,
@@ -57,24 +57,29 @@ export class GridEditorScene extends Scene {
         machineGrid.tileHeight = 150
         machineGrid.columnOffsetX = 15
         machineGrid.rowOffsetY = 15
-        machineGrid.centerIn({x: 0, y: 150, width: 1920, height: 1080 - 150})
+        machineGrid.centerIn({x: 100, y: 150, width: 1820, height: 1080 - 150})
         machineGrid.drawGrid()
         this.addChild(machineGrid)
 
+        let recipeBox = new RecipeBox(RECIPES.SANTAMILK)
+        recipeBox.position.set(225, 250)
+        this.addChild(recipeBox)
+
         setInterval(() => {
-            for (let belt of this.belts) {
+            let correctness = recipeBox.checkIngredients(this.belts.map(belt => belt.getEndIngredient().getID()!))
+            for (let i = 0; i < this.belts.length; i++) {
+                let belt = this.belts[i]
                 belt.updateIngredients(machineGrid)
                 belt.step();
-                belt.showLastTileOverlay(true)
+                belt.showLastTileOverlay(correctness[i])
             }
         }, 2000)
-
 
         let outsideGrid = new Grid(1, 9, "outside")
         outsideGrid.tileWidth = 100
         outsideGrid.tileHeight = 100
         outsideGrid.columnOffsetX = 25
-        outsideGrid.centerIn({x: 0, y: 50, width: 1920, height: 200})
+        outsideGrid.centerIn({x: 100, y: 50, width: 1820, height: 200})
         outsideGrid.drawGrid()
         outsideGrid.zIndex = 0
         this.addChild(outsideGrid)
