@@ -2,9 +2,6 @@ import {IngredientID} from "./Ingredient";
 import {Sprite, Text} from "pixi.js";
 import {ASSET_STORE} from "../index";
 
-// Klasse zur Überprüfung der Rezepte, kriegt ein Rezept zur Initialisierung
-// Checked einen Array von Zutaten und gibt einen bool-Array bezüglich Richtigkeit zurück
-
 export type Recipe = {
     name: string,
     ingredients: IngredientID[]

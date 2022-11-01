@@ -7,7 +7,6 @@ import {MachineIconSlot} from "./MachineIconSlot";
 export type MachineType = IngredientTaste | IngredientColor | IngredientConsistence
 export type MachineShape = "1x1" | "2x1" | "3x1" | "1x2" | "2x2" | "3x2" | "1x3" | "2x3" | "3x3"
 
-
 export class Machine extends Sprite{
 
     private type: MachineType;
@@ -37,6 +36,10 @@ export class Machine extends Sprite{
         return this.type
     }
 
+    getShape(): MachineShape {
+        return this.machineShape
+    }
+
     setGrid(grid: Grid) {
         this.currentGrid = grid
         this.updateAppearance()
@@ -53,5 +56,28 @@ export class Machine extends Sprite{
             this.texture = ASSET_STORE.MACHINES!.small![this.machineShape]
             this.pivot.set(this.texture.width/2, this.texture.height/2)
         }
+    }
+}
+
+export function parseShape(machineShape: MachineShape): number[][] {
+    switch (machineShape) {
+        case "1x1":
+            return [[1]]
+        case "1x2":
+            return [[1, 1]]
+        case "1x3":
+            return [[1, 1, 1]]
+        case "2x1":
+            return [[1], [1]]
+        case "2x2":
+            return [[1, 1], [1, 1]]
+        case "2x3":
+            return [[1, 1, 1], [1, 1, 1]]
+        case "3x1":
+            return [[1], [1], [1]]
+        case "3x2":
+            return [[1, 1], [1, 1], [1, 1]]
+        case "3x3":
+            return [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
     }
 }

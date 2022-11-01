@@ -2,8 +2,9 @@ import {StartScene} from './scenes/StartScene';
 import SceneManager from './general/SceneManager';
 import {gsap} from "gsap";
 import {Application} from "pixi.js";
-import {GridEditorScene} from "./scenes/GridEditorScene";
 import {AssetStore} from "./AssetStore";
+import {Level} from "./gameobjects/Level";
+import {RECIPES} from "./gameobjects/RecipeBox";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -46,8 +47,15 @@ const main = async () => {
 
     SCENE_MANAGER = new SceneManager(App);
     SCENE_MANAGER.add("startScene", new StartScene(App))
-    SCENE_MANAGER.add("gridEditorScene", new GridEditorScene(App))
-    SCENE_MANAGER.start("gridEditorScene")
+    SCENE_MANAGER.add("firstLevel",
+        new Level(App,
+            "A0|  |  |  \n" +
+            "A1|A2|A3|A4\n" +
+            "  |  |  |A5",
+            RECIPES.SANTAMILK,
+            ["1x1", "2x1", "1x2"]
+        ))
+    SCENE_MANAGER.start("firstLevel")
 };
 
 main();

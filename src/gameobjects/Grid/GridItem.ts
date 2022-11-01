@@ -19,9 +19,10 @@ import {GridSlot} from "./GridSlot";
 import {Grid, Index2D, sum, Vector2D} from "./Grid";
 import {DisplayObject} from "pixi.js";
 import gsap from "gsap";
+import {Machine} from "../Machinery/Machine";
 
 type MultiSlotArr = (GridSlot | null)[][]
-type GridAdaptingDisplayObject = DisplayObject & { setGrid?: (grid: Grid) => void }
+type GridAdaptingDisplayObject = DisplayObject
 
 export class GridItem {
     // This is realized as a map since a gridItem could have different forms in different grids
@@ -128,7 +129,7 @@ export class GridItem {
 
     updateGrid(newGrid: Grid) {
         this.currentGrid = newGrid
-        if (this.content.setGrid) {
+        if (this.content instanceof Machine) {
             this.content.setGrid(newGrid)
         }
     }
