@@ -46,18 +46,50 @@ export function getRecipeTextureForDay(day: number): Texture {
         case 1:
             return ASSET_STORE.COOKIES!.SANTAMILK
         case 2:
-            return ASSET_STORE.COOKIES!.PANETTONE
+            return ASSET_STORE.COOKIES!.SCHOKOCROSSIES
         case 3:
-            return ASSET_STORE.COOKIES!.STOLLEN
+            return ASSET_STORE.COOKIES!.MUERBETEIGKEKSE
         case 4:
-            return ASSET_STORE.COOKIES!.PUNSCH
+            return ASSET_STORE.COOKIES!.RUMKUGELN
         case 5:
-            return ASSET_STORE.COOKIES!.PFEFFERNUESSE
+            return ASSET_STORE.COOKIES!.PUNSCH
         case 6:
-            return ASSET_STORE.COOKIES!.VANILLEKIPFERL
+            return ASSET_STORE.COOKIES!.BETHMAENNCHEN
         case 7:
-            return ASSET_STORE.COOKIES!.DOMINOSTEINE
-        default:
+            return ASSET_STORE.COOKIES!.ZIMTSTERNE
+        case 8:
             return ASSET_STORE.COOKIES!.PRINTEN
+        case 9:
+            return ASSET_STORE.COOKIES!.ENGELSAUGEN
+        case 10:
+            return ASSET_STORE.COOKIES!.VANILLEKIPFERL
+        case 11:
+            return ASSET_STORE.COOKIES!.MAKRONEN
+        case 12:
+            return ASSET_STORE.COOKIES!.FLORENTINER
+        case 13:
+            return ASSET_STORE.COOKIES!.SPRITZGEBAECK
+        case 14:
+            return ASSET_STORE.COOKIES!.LEBKUCHEN
+        case 15:
+            return ASSET_STORE.COOKIES!.SPEKULATIUS
+        case 16:
+            return ASSET_STORE.COOKIES!.PFEFFERNUESSE
+        case 17:
+            return ASSET_STORE.COOKIES!.PANETTONE
+        case 18:
+            return ASSET_STORE.COOKIES!.SCHWARZWEISSKEKSE
+        case 19:
+            return ASSET_STORE.COOKIES!.STOLLEN
+        case 20:
+            return ASSET_STORE.COOKIES!.SCHOKOLADENBROT
+        case 21:
+            return ASSET_STORE.COOKIES!.NUSSECKEN
+        case 22:
+            return ASSET_STORE.COOKIES!.CORNFLAKEWALNUSSKEKSE
+        case 23:
+            return ASSET_STORE.COOKIES!.BAERENTATZEN
+        default:
+            return ASSET_STORE.COOKIES!.DOMINOSTEINE
     }
 }
