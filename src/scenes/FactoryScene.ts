@@ -16,6 +16,7 @@ import {GridActionHandler} from "../gameobjects/Grid/GridActionHandlers/GridActi
 import {StickyDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/StickyDragActionHandler";
 import {AutomaticDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/AutomaticDragActionHandler";
 import {GridItem} from "../gameobjects/Grid/GridItem";
+import {WinScreen} from "../general/WinScreen";
 
 export class FactoryScene extends Scene {
 
@@ -25,7 +26,8 @@ export class FactoryScene extends Scene {
     private machineGridConnector: GridConnector;
     private readonly beltGrid: Grid;
     private readonly belts: ConveyorBelt[];
-    private recipeBox;
+    private recipeBox: RecipeBox;
+    private winScreen: WinScreen;
 
     constructor(app: Application, conveyorBeltPattern: string, recipe: Recipe, machines: MachineShape[]) {
         super();
@@ -43,6 +45,9 @@ export class FactoryScene extends Scene {
         this.recipeBox = this.setupRecipeBox(recipe);
         this.beltGrid = this.setupBeltGridAndBelts(patternArr);
         this.belts = this.setupBelts(patternArr, this.beltGrid)
+        this.winScreen = new WinScreen(recipe)
+        this.winScreen.zIndex = 10
+        this.addChild(this.winScreen)
         this.machineInventoryGrid = this.setupInventoryGrid(machines.length)
         this.machineUsageGrid = this.setupMachineUsageGrid(this.beltGrid!.getNumberOfRows(), this.beltGrid!.getNumberOfColumns())
         this.machineGridItems = this.setupMachineGridItems(machines, this.machineInventoryGrid, this.machineUsageGrid)
@@ -57,7 +62,7 @@ export class FactoryScene extends Scene {
     }
 
     start() {
-        setInterval(() => this.checkRecipe(), 2000)
+        this.checkRecipe()
     }
 
     private setupBeltGridAndBelts(patternArr: string[][]): Grid {
@@ -196,12 +201,22 @@ export class FactoryScene extends Scene {
     }
 
     private checkRecipe() {
-        let correctness = this.recipeBox.checkIngredients(this.belts.map(belt => belt.getEndIngredient().getID()!))
+        let beltIngredients = this.belts.map(belt => belt.getEndIngredient().getID()!)
+        let correctnessPerBelt = this.recipeBox.checkIngredientsAreProvided(beltIngredients, this.recipeBox.recipe.ingredients)
         for (let i = 0; i < this.belts.length; i++) {
             let belt = this.belts[i]
             belt.updateIngredients(this.machineUsageGrid)
             belt.step();
-            belt.showLastTileOverlay(correctness[i])
+            belt.showLastTileOverlay(correctnessPerBelt[i])
+        }
+
+        let correctnessPerIngredient = this.recipeBox.checkIngredientsAreProvided(this.recipeBox.recipe.ingredients, beltIngredients)
+        let levelSolved = correctnessPerIngredient.reduce((a, b) => a && b)
+
+        if (levelSolved) {
+            this.winScreen.blendIn()
+        } else {
+            setTimeout(() => this.checkRecipe(), 2000)
         }
     }
 

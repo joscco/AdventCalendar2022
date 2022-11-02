@@ -55,11 +55,11 @@ const main = async () => {
     SCENE_MANAGER.add("level_1",
         new FactoryScene(
             App,
-            "A0|  |  |  \n" +
-            "A1|A2|A3|A4\n" +
-            "  |  |  |A5",
+            "A0|A1|A2|A3|A4\n" +
+            "B0|B1|B2|B3|B4\n" +
+            "C0|C1|C2|C3|C4",
             RECIPES.SANTAMILK,
-            ["1x1", "2x1", "1x2"]
+            ["1x1", "1x1", "1x1", "2x1", "2x1"]
         ))
     SCENE_MANAGER.start("startScene")
 };

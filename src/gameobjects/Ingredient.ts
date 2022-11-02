@@ -92,7 +92,7 @@ export type IngredientID = "cream" | "milk" | "flour" | "cabbage"
     | "mud" | "swamp_water" | "dry_dirt" | "dirt"
     | "sweetened_cream" | "sweetened_milk" | "sugar" | "marzipan"
     | "honey" | "vanilla_milk" | "vanilla_sugar" | "honey_comb"
-    | "jam" | "cherry_sauce" | "cherry_sugar" | "cherries"
+    | "cherry_jam" | "cherry_sauce" | "cherry_sugar" | "cherries"
     | "chocolate_pudding" | "melted_chocolate" | "brown_sugar" | "raisins"
     | "lemon_cream" | "expired_milk" | "lemon_concentrate" | "old_lemon_candy"
     | "lemon_pudding" | "lemon_juice" | "lemon_sugar" | "candied_lemon_peel"
@@ -101,7 +101,7 @@ export type IngredientID = "cream" | "milk" | "flour" | "cabbage"
     | "nut_cream" | "nut_aroma" | "grinded_nuts" | "peeled_nuts"
     | "egg_yolk" | "egg" | "egg_powder" | "scrambled_egg"
     | "wine_cream" | "wine" | "spices" | "steak"
-    | "nut_butter" | "rum" | "cocoa" | "nuts"
+    | "nut_butter" | "rum_aroma" | "cocoa" | "nuts"
 
 export const INGREDIENTS: IngredientData[] = [
     {id: "cream", text: "Cream", taste: "neutral", color: "white", consistency: "sticky"},
@@ -128,7 +128,7 @@ export const INGREDIENTS: IngredientData[] = [
     {id: "vanilla_milk", text: "Vanilla Milk", taste: "sweet", color: "yellow", consistency: "liquid"},
     {id: "vanilla_sugar", text: "Vanilla Sugar", taste: "sweet", color: "yellow", consistency: "powdery"},
     {id: "honey_comb", text: "Honey Comb", taste: "sweet", color: "yellow", consistency: "solid"},
-    {id: "jam", text: "Jam", taste: "sweet", color: "red", consistency: "sticky"},
+    {id: "cherry_jam", text: "Cherry Jam", taste: "sweet", color: "red", consistency: "sticky"},
     {id: "cherry_sauce", text: "Cherry Sauce", taste: "sweet", color: "red", consistency: "liquid"},
     {id: "cherry_sugar", text: "Cherry Sugar", taste: "sweet", color: "red", consistency: "powdery"},
     {id: "cherries", text: "Cherries", taste: "sweet", color: "red", consistency: "solid"},
@@ -165,7 +165,7 @@ export const INGREDIENTS: IngredientData[] = [
     {id: "spices", text: "Spices", taste: "savoury", color: "red", consistency: "powdery"},
     {id: "steak", text: "Steak", taste: "savoury", color: "red", consistency: "solid"},
     {id: "nut_butter", text: "Nut Butter", taste: "savoury", color: "brown", consistency: "sticky"},
-    {id: "rum", text: "Rum", taste: "savoury", color: "brown", consistency: "liquid"},
+    {id: "rum_aroma", text: "Rum Aroma", taste: "savoury", color: "brown", consistency: "liquid"},
     {id: "cocoa", text: "Cocoa", taste: "savoury", color: "brown", consistency: "powdery"},
     {id: "nuts", text: "Nuts", taste: "savoury", color: "brown", consistency: "solid"}
 ]

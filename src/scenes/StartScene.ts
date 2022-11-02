@@ -3,13 +3,14 @@ import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../index";
 import Scene from "./Scene";
 import {Texture} from "@pixi/core";
 import {StartButton} from "./StartButton";
+import {ScalingButton} from "../ui/Buttons/ScalingButton";
 
 export class StartScene extends Scene {
 
     letters: Sprite[] = [];
     pretitle?: Sprite;
     bernd?: Container;
-    startButton?: Sprite;
+    startButton?: ScalingButton;
 
     constructor(app: Application) {
         super();

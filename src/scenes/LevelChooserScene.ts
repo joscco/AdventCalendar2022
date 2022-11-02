@@ -42,7 +42,7 @@ export class LevelChooserScene extends Scene {
         let buttons = []
         for (let n = 1; n <= NUMBER_OF_LEVELS; n++) {
             let button = new LevelButton(n, n <= AVAILABLE_LEVELS)
-            button.x = 250 + ((n - 1) % 8) * 200
+            button.x = 200 + ((n - 1) % 8) * 215
             button.y = 300 + Math.floor((n - 1) / 8) * 250
             this.addChild(button)
             buttons.push(button)

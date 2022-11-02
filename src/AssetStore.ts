@@ -2,6 +2,7 @@ import {Texture} from "@pixi/core";
 import {Assets} from "@pixi/assets";
 import {MachineShape, MachineType} from "./gameobjects/Machinery/Machine";
 import {IngredientID} from "./gameobjects/Ingredient";
+import {RECIPES} from "./gameobjects/RecipeBox";
 
 export class AssetStore {
     START_SCENE?: StartSceneAssets
@@ -12,6 +13,7 @@ export class AssetStore {
     BELT_TILES?: BeltTileAssets
     TOOLTIP?: TooltipAssets
     INGREDIENTS?: IngredientAssets
+    COOKIES?: CookieAssets
 
     constructor() {
         this.addAssets()
@@ -26,6 +28,7 @@ export class AssetStore {
         this.MACHINES = this.prepareMachineAssets(await Assets.loadBundle("machines"), await Assets.loadBundle("machineIcons"))
         this.TOOLTIP = this.prepareTooltipAssets(await Assets.loadBundle("tooltipAssets"))
         this.INGREDIENTS = this.prepareIngredientAssets(await Assets.loadBundle("ingredients"))
+        this.COOKIES = this.prepareCookieAssets(await Assets.loadBundle("cookies"))
     }
 
     private addAssets() {
@@ -67,13 +70,13 @@ export class AssetStore {
             backButton: "assets/gameScreen/buttons/backButton.png",
             muteButton: "assets/gameScreen/buttons/muteButton.png",
             soundButton: "assets/gameScreen/buttons/soundButton.png",
-            recipeButton: "assets/gameScreen/buttons/recipeButton.png"
+            recipeButton: "assets/gameScreen/buttons/recipeButton.png",
+            winScreen:"assets/gameScreen/winScreen/background.png",
+            winScreenBanner: "assets/gameScreen/winScreen/banner.png",
         })
 
         Assets.addBundle("levelSceneAssets", {
             levelSceneTitle: "assets/levelScreen/levelSceneTitle.png",
-            enabledLevel: "assets/levelScreen/enabledLevel.png",
-            unenabledLevel: "assets/levelScreen/unenabledLevel.png",
             levelStar: "assets/levelScreen/levelStar.png",
         })
 
@@ -91,7 +94,7 @@ export class AssetStore {
             yellowIngredient: "assets/gameScreen/ingredients/yellowIngredient.png",
             redIngredient: "assets/gameScreen/ingredients/redIngredient.png",
             brownIngredient: "assets/gameScreen/ingredients/brownIngredient.png",
-            
+
         })
 
         Assets.addBundle("machines", {
@@ -134,6 +137,35 @@ export class AssetStore {
             liquid: "assets/gameScreen/machines/machineIcons/liquid.png",
             powdery: "assets/gameScreen/machines/machineIcons/powdery.png",
             solid: "assets/gameScreen/machines/machineIcons/solid.png",
+        })
+
+        Assets.addBundle("cookies", {
+            SANTAMILK: "assets/gameScreen/cookies/santamilk.png",
+            SCHOKOCROSSIES: "assets/gameScreen/cookies/schokocrossies.png",
+            MUERBETEIGKEKSE: "assets/gameScreen/cookies/muerbeteigkekse.png",
+            RUMKUGELN: "assets/gameScreen/cookies/rumkugeln.png",
+            PUNSCH: "assets/gameScreen/cookies/punsch.png",
+            BETHMAENNCHEN: "assets/gameScreen/cookies/bethmaennchen.png",
+            ZIMTSTERNE: "assets/gameScreen/cookies/zimtsterne.png",
+            PRINTEN: "assets/gameScreen/cookies/printen.png",
+            ENGELSAUGEN: "assets/gameScreen/cookies/engelsaugen.png",
+            VANILLEKIPFERL: "assets/gameScreen/cookies/vanillekipferl.png",
+            MAKRONEN: "assets/gameScreen/cookies/makronen.png",
+            FLORENTINER: "assets/gameScreen/cookies/florentiner.png",
+            SPRITZGEBAECK: "assets/gameScreen/cookies/spritzgebaeck.png",
+            LEBKUCHEN: "assets/gameScreen/cookies/lebkuchen.png",
+            SPEKULATIUS: "assets/gameScreen/cookies/spekulatius.png",
+            PFEFFERNUESSE: "assets/gameScreen/cookies/pfeffernuss.png",
+            PANETTONE: "assets/gameScreen/cookies/panettone.png",
+            SCHWARZWEISSKEKSE: "assets/gameScreen/cookies/schwarzweissgebaeck.png",
+            STOLLEN: "assets/gameScreen/cookies/stollen.png",
+            SCHOKOLADENBROT: "assets/gameScreen/cookies/schokoladenbrot.png",
+            NUSSECKEN: "assets/gameScreen/cookies/nussecken.png",
+            CORNFLAKEWALNUSSKEKSE: "assets/gameScreen/cookies/haferflockenwalnuss.png",
+            BAERENTATZEN: "assets/gameScreen/cookies/baerentatzen.png",
+            DOMINOSTEINE: "assets/gameScreen/cookies/dominosteine.png",
+            open_eyes: "assets/gameScreen/cookies/eyes.png",
+            closed_eyes: "assets/gameScreen/cookies/closed_eyes.png"
         })
 
         Assets.addBundle("tooltipAssets", {
@@ -179,7 +211,9 @@ export class AssetStore {
             backButton: rawAssets.backButton,
             muteButton: rawAssets.muteButton,
             soundButton: rawAssets.soundButton,
-            recipeButton: rawAssets.recipeButton
+            recipeButton: rawAssets.recipeButton,
+            winScreen: rawAssets.winScreen,
+            winScreenBanner: rawAssets.winScreenBanner
         }
     }
 
@@ -245,8 +279,6 @@ export class AssetStore {
     private prepareLevelSceneAssets(rawLevelSceneAssets: any): LevelSceneAssets {
         return {
             levelSceneTitle: rawLevelSceneAssets.levelSceneTitle,
-            enabledLevel: rawLevelSceneAssets.enabledLevel,
-            unenabledLevel: rawLevelSceneAssets.unenabledLevel,
             levelStar: rawLevelSceneAssets.levelStar,
         }
     }
@@ -255,70 +287,101 @@ export class AssetStore {
         return {
             textures: {
                 "cream": rawIngredientAssets.whiteIngredient,
-                "milk":rawIngredientAssets.whiteIngredient,
-                "flour":rawIngredientAssets.whiteIngredient,
-                "cabbage":rawIngredientAssets.whiteIngredient,
+                "milk": rawIngredientAssets.whiteIngredient,
+                "flour": rawIngredientAssets.whiteIngredient,
+                "cabbage": rawIngredientAssets.whiteIngredient,
                 "butter": rawIngredientAssets.yellowIngredient,
-                "melted_butter":rawIngredientAssets.yellowIngredient,
-                "cornflour":rawIngredientAssets.yellowIngredient,
-                "cornflakes":rawIngredientAssets.yellowIngredient,
-                "beet_pudding":rawIngredientAssets.redIngredient,
-                "beet_juice":rawIngredientAssets.redIngredient,
-                "beet_flour":rawIngredientAssets.redIngredient,
-                "beet":rawIngredientAssets.redIngredient,
-                "mud":rawIngredientAssets.brownIngredient,
-                "swamp_water":rawIngredientAssets.brownIngredient,
-                "dry_dirt":rawIngredientAssets.brownIngredient,
-                "dirt":rawIngredientAssets.brownIngredient,
-                "sweetened_cream":rawIngredientAssets.whiteIngredient,
-                "sweetened_milk":rawIngredientAssets.whiteIngredient,
-                "sugar":rawIngredientAssets.whiteIngredient,
-                "marzipan":rawIngredientAssets.whiteIngredient,
-                "honey":rawIngredientAssets.whiteIngredient,
-                "vanilla_milk":rawIngredientAssets.whiteIngredient,
-                "vanilla_sugar":rawIngredientAssets.whiteIngredient,
-                "honey_comb":rawIngredientAssets.whiteIngredient,
-                "jam":rawIngredientAssets.whiteIngredient,
-                "cherry_sauce":rawIngredientAssets.whiteIngredient,
-                "cherry_sugar":rawIngredientAssets.whiteIngredient,
-                "cherries":rawIngredientAssets.whiteIngredient,
-                "chocolate_pudding":rawIngredientAssets.whiteIngredient,
-                "melted_chocolate":rawIngredientAssets.whiteIngredient,
-                "brown_sugar":rawIngredientAssets.whiteIngredient,
-                "raisins":rawIngredientAssets.whiteIngredient,
-                "lemon_cream":rawIngredientAssets.whiteIngredient,
-                "expired_milk":rawIngredientAssets.whiteIngredient,
-                "lemon_concentrate":rawIngredientAssets.whiteIngredient,
-                "old_lemon_candy":rawIngredientAssets.whiteIngredient,
-                "lemon_pudding":rawIngredientAssets.whiteIngredient,
-                "lemon_juice":rawIngredientAssets.whiteIngredient,
-                "lemon_sugar":rawIngredientAssets.whiteIngredient,
-                "candied_lemon_peel":rawIngredientAssets.whiteIngredient,
-                "currant_pudding":rawIngredientAssets.whiteIngredient,
-                "currant_juice":rawIngredientAssets.whiteIngredient,
-                "currant_sugar":rawIngredientAssets.whiteIngredient,
-                "currants":rawIngredientAssets.whiteIngredient,
-                "rotten_fruits":rawIngredientAssets.whiteIngredient,
-                "rotten_fruit_juice":rawIngredientAssets.whiteIngredient,
-                "grinded_umeboshi":rawIngredientAssets.whiteIngredient,
-                "umeboshi":rawIngredientAssets.whiteIngredient,
-                "nut_cream":rawIngredientAssets.whiteIngredient,
-                "nut_aroma":rawIngredientAssets.whiteIngredient,
-                "grinded_nuts":rawIngredientAssets.whiteIngredient,
-                "peeled_nuts":rawIngredientAssets.whiteIngredient,
-                "egg_yolk":rawIngredientAssets.whiteIngredient,
-                "egg":rawIngredientAssets.whiteIngredient,
-                "egg_powder":rawIngredientAssets.whiteIngredient,
-                "scrambled_egg":rawIngredientAssets.whiteIngredient,
-                "wine_cream":rawIngredientAssets.whiteIngredient,
-                "wine":rawIngredientAssets.whiteIngredient,
-                "spices":rawIngredientAssets.whiteIngredient,
-                "steak":rawIngredientAssets.whiteIngredient,
-                "nut_butter":rawIngredientAssets.whiteIngredient,
-                "rum":rawIngredientAssets.whiteIngredient,
-                "cocoa":rawIngredientAssets.whiteIngredient,
-                "nuts":rawIngredientAssets.whiteIngredient
+                "melted_butter": rawIngredientAssets.yellowIngredient,
+                "cornflour": rawIngredientAssets.yellowIngredient,
+                "cornflakes": rawIngredientAssets.yellowIngredient,
+                "beet_pudding": rawIngredientAssets.redIngredient,
+                "beet_juice": rawIngredientAssets.redIngredient,
+                "beet_flour": rawIngredientAssets.redIngredient,
+                "beet": rawIngredientAssets.redIngredient,
+                "mud": rawIngredientAssets.brownIngredient,
+                "swamp_water": rawIngredientAssets.brownIngredient,
+                "dry_dirt": rawIngredientAssets.brownIngredient,
+                "dirt": rawIngredientAssets.brownIngredient,
+                "sweetened_cream": rawIngredientAssets.whiteIngredient,
+                "sweetened_milk": rawIngredientAssets.whiteIngredient,
+                "sugar": rawIngredientAssets.whiteIngredient,
+                "marzipan": rawIngredientAssets.whiteIngredient,
+                "honey": rawIngredientAssets.whiteIngredient,
+                "vanilla_milk": rawIngredientAssets.whiteIngredient,
+                "vanilla_sugar": rawIngredientAssets.whiteIngredient,
+                "honey_comb": rawIngredientAssets.whiteIngredient,
+                "cherry_jam": rawIngredientAssets.whiteIngredient,
+                "cherry_sauce": rawIngredientAssets.whiteIngredient,
+                "cherry_sugar": rawIngredientAssets.whiteIngredient,
+                "cherries": rawIngredientAssets.whiteIngredient,
+                "chocolate_pudding": rawIngredientAssets.whiteIngredient,
+                "melted_chocolate": rawIngredientAssets.whiteIngredient,
+                "brown_sugar": rawIngredientAssets.whiteIngredient,
+                "raisins": rawIngredientAssets.whiteIngredient,
+                "lemon_cream": rawIngredientAssets.whiteIngredient,
+                "expired_milk": rawIngredientAssets.whiteIngredient,
+                "lemon_concentrate": rawIngredientAssets.whiteIngredient,
+                "old_lemon_candy": rawIngredientAssets.whiteIngredient,
+                "lemon_pudding": rawIngredientAssets.whiteIngredient,
+                "lemon_juice": rawIngredientAssets.whiteIngredient,
+                "lemon_sugar": rawIngredientAssets.whiteIngredient,
+                "candied_lemon_peel": rawIngredientAssets.whiteIngredient,
+                "currant_pudding": rawIngredientAssets.whiteIngredient,
+                "currant_juice": rawIngredientAssets.whiteIngredient,
+                "currant_sugar": rawIngredientAssets.whiteIngredient,
+                "currants": rawIngredientAssets.whiteIngredient,
+                "rotten_fruits": rawIngredientAssets.whiteIngredient,
+                "rotten_fruit_juice": rawIngredientAssets.whiteIngredient,
+                "grinded_umeboshi": rawIngredientAssets.whiteIngredient,
+                "umeboshi": rawIngredientAssets.whiteIngredient,
+                "nut_cream": rawIngredientAssets.whiteIngredient,
+                "nut_aroma": rawIngredientAssets.whiteIngredient,
+                "grinded_nuts": rawIngredientAssets.whiteIngredient,
+                "peeled_nuts": rawIngredientAssets.whiteIngredient,
+                "egg_yolk": rawIngredientAssets.whiteIngredient,
+                "egg": rawIngredientAssets.whiteIngredient,
+                "egg_powder": rawIngredientAssets.whiteIngredient,
+                "scrambled_egg": rawIngredientAssets.whiteIngredient,
+                "wine_cream": rawIngredientAssets.whiteIngredient,
+                "wine": rawIngredientAssets.whiteIngredient,
+                "spices": rawIngredientAssets.whiteIngredient,
+                "steak": rawIngredientAssets.whiteIngredient,
+                "nut_butter": rawIngredientAssets.whiteIngredient,
+                "rum_aroma": rawIngredientAssets.whiteIngredient,
+                "cocoa": rawIngredientAssets.whiteIngredient,
+                "nuts": rawIngredientAssets.whiteIngredient
             }
+        };
+    }
+
+    private prepareCookieAssets(rawAssets: any): CookieAssets {
+        return {
+            SANTAMILK: rawAssets.SANTAMILK,
+            SCHOKOCROSSIES: rawAssets.SCHOKOCROSSIES,
+            MUERBETEIGKEKSE: rawAssets.MUERBETEIGKEKSE,
+            RUMKUGELN: rawAssets.RUMKUGELN,
+            PUNSCH: rawAssets.PUNSCH,
+            BETHMAENNCHEN: rawAssets.BETHMAENNCHEN,
+            ZIMTSTERNE: rawAssets.ZIMTSTERNE,
+            PRINTEN: rawAssets.PRINTEN,
+            ENGELSAUGEN: rawAssets.ENGELSAUGEN,
+            VANILLEKIPFERL: rawAssets.VANILLEKIPFERL,
+            MAKRONEN: rawAssets.MAKRONEN,
+            FLORENTINER: rawAssets.FLORENTINER,
+            SPRITZGEBAECK: rawAssets.SPRITZGEBAECK,
+            LEBKUCHEN: rawAssets.LEBKUCHEN,
+            SPEKULATIUS: rawAssets.SPEKULATIUS,
+            PFEFFERNUESSE: rawAssets.PFEFFERNUESSE,
+            PANETTONE: rawAssets.PANETTONE,
+            SCHWARZWEISSKEKSE: rawAssets.SCHWARZWEISSKEKSE,
+            STOLLEN: rawAssets.STOLLEN,
+            SCHOKOLADENBROT: rawAssets.SCHOKOLADENBROT,
+            NUSSECKEN: rawAssets.NUSSECKEN,
+            CORNFLAKEWALNUSSKEKSE: rawAssets.CORNFLAKEWALNUSSKEKSE,
+            BAERENTATZEN: rawAssets.BAERENTATZEN,
+            DOMINOSTEINE: rawAssets.DOMINOSTEINE,
+            open_eyes: rawAssets.eyes_open,
+            closed_eyes : rawAssets.eyes_closed
         };
     }
 }
@@ -379,8 +442,6 @@ export interface StartSceneAssets {
 
 export interface LevelSceneAssets {
     levelSceneTitle: Texture,
-    enabledLevel: Texture,
-    unenabledLevel: Texture
     levelStar: Texture,
 }
 
@@ -391,5 +452,11 @@ export interface GameSceneAssets {
     backButton: Texture,
     muteButton: Texture,
     soundButton: Texture,
-    recipeButton: Texture
+    recipeButton: Texture,
+    winScreen: Texture,
+    winScreenBanner: Texture
+}
+
+export type CookieAssets = {
+    [key in keyof typeof RECIPES | "open_eyes" | "closed_eyes"]: Texture
 }
