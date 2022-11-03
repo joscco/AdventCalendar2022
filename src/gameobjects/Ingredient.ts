@@ -1,11 +1,12 @@
 // Klasse als Darstellung eines Zutaten-Zustands (Geschmack, Konsistenz, Farbe, Position)
-import {Sprite} from "pixi.js";
+import {Container, Sprite} from "pixi.js";
 import {Texture} from "@pixi/core";
 import {ASSET_STORE} from "../index";
 
-export class Ingredient extends Sprite {
+export class Ingredient extends Container {
 
     ingredientData?: IngredientData;
+    sprite: Sprite
 
     constructor(private taste: IngredientTaste = "neutral",
                 private consistency: IngredientConsistence = "sticky",
@@ -15,26 +16,31 @@ export class Ingredient extends Sprite {
         this.consistency = consistency
         this.color = color
         this.updateIngredientData()
-        this.anchor.set(0.5)
-        this.texture = this.getTexture()
+        this.sprite = new Sprite()
+        this.sprite.anchor.set(0.5, 1)
+        this.sprite.texture = this.getTexture()
+        this.sprite.position.set(0, 40)
+        this.addChild(this.sprite)
+
+        gsap.to(this.sprite.scale, {x: 1.1, y:0.9, duration: 0.5, yoyo: true, repeat: -1, ease: Back.easeInOut})
     }
 
     setTaste(newTaste: IngredientTaste) : void {
         this.taste = newTaste
         this.updateIngredientData()
-        this.texture = this.getTexture()
+        this.sprite.texture = this.getTexture()
     }
 
     setConsistence(newConsistency: IngredientConsistence) : void {
         this.consistency = newConsistency
         this.updateIngredientData()
-        this.texture = this.getTexture()
+        this.sprite.texture = this.getTexture()
     }
 
     setColor(newColor: IngredientColor) : void {
         this.color = newColor
         this.updateIngredientData()
-        this.texture = this.getTexture()
+        this.sprite.texture = this.getTexture()
     }
 
     getTaste(): IngredientTaste {

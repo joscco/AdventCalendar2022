@@ -54,7 +54,7 @@ export class ConveyorBelt extends Container {
 
             let ingredient = new Ingredient()
             ingredient.zIndex = 1
-            new Tooltip(ingredient, () => ingredient.getTooltipText())
+            new Tooltip(ingredient.sprite, () => ingredient.getTooltipText())
             tile.setIngredientRef(ingredient)
             ingredient.position.set(tile.x, tile.y)
 

@@ -13,7 +13,9 @@ export abstract class ConveyorBeltTile extends AnimatedSprite {
         super([ASSET_STORE.GAME_SCENE!.emptyField]);
         this.index = index
         this.textures = this.getTextures()
-        this.animationSpeed = 1
+        this.autoUpdate = true
+        this.animationSpeed = 1/60
+        this.play()
         this.anchor.set(0.5)
     }
 
