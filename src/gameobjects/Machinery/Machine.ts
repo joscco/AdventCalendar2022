@@ -7,7 +7,7 @@ import {MachineIconSlot} from "./MachineIconSlot";
 export type MachineType = IngredientTaste | IngredientColor | IngredientConsistence
 export type MachineShape = "1x1" | "2x1" | "3x1" | "1x2" | "2x2" | "3x2" | "1x3" | "2x3" | "3x3"
 
-export class Machine extends Sprite{
+export class Machine extends Sprite {
 
     private type: MachineType;
     private machineShape: MachineShape;
@@ -60,6 +60,35 @@ export class Machine extends Sprite{
             this.texture = ASSET_STORE.MACHINES!.small![this.machineShape]
             this.pivot.set(this.texture.width/2, this.texture.height/2)
         }
+    }
+}
+
+export function getMachineNameForType(type: MachineType): string {
+    switch (type) {
+        case "neutral":
+            return "Taste-Neutralizer";
+        case "sweet":
+            return "Sweetifier";
+        case "sour":
+            return "Sourinator";
+        case "savoury":
+            return "Savouriser";
+        case "white":
+            return "White-o-mat";
+        case "red":
+            return "Redinator";
+        case "yellow":
+            return "Yellowifier";
+        case "brown":
+            return "Brown-o-mat";
+        case "sticky":
+            return "Sticky-fier";
+        case "liquid":
+            return "Liquid-o-mat";
+        case "powdery":
+            return "Powderinator";
+        case "solid":
+            return "Solidifier";
     }
 }
 

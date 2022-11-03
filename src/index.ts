@@ -6,6 +6,7 @@ import {AssetStore} from "./AssetStore";
 import {FactoryScene} from "./scenes/FactoryScene";
 import {RECIPES} from "./gameobjects/RecipeBox";
 import {LevelChooserScene} from "./scenes/LevelChooserScene";
+import {TooltipManager} from "./gameobjects/Tooltip/TooltipManager";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -15,6 +16,7 @@ export const NUMBER_OF_LEVELS: number = 24;
 export var AVAILABLE_LEVELS: number = 1;
 
 export var App: Application;
+export var TOOLTIP_MANAGER: TooltipManager;
 export var SCENE_MANAGER: SceneManager;
 export var ASSET_STORE: AssetStore;
 
@@ -48,6 +50,8 @@ const main = async () => {
 
     // Load assets
     document.body.appendChild(App.view);
+
+    TOOLTIP_MANAGER = new TooltipManager(App.stage)
 
     SCENE_MANAGER = new SceneManager(App);
     SCENE_MANAGER.add("startScene", new StartScene(App))

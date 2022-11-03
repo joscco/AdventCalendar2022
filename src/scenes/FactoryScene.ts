@@ -5,13 +5,13 @@
 // -> Stoppen und Darstellung des Win-Screens, wenn geschafft
 
 import {Recipe, RecipeBox} from "../gameobjects/RecipeBox";
-import {Machine, MachineShape, parseShape} from "../gameobjects/Machinery/Machine";
+import {getMachineNameForType, Machine, MachineShape, parseShape} from "../gameobjects/Machinery/Machine";
 import {Grid, Index2D, isRectangularArray} from "../gameobjects/Grid/Grid";
 import {GridConnector} from "../gameobjects/Grid/GridConnector";
 import Scene from "./Scene";
 import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
 import {Application, Graphics, Sprite} from "pixi.js";
-import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../index";
+import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH, TOOLTIP_MANAGER} from "../index";
 import {GridActionHandler} from "../gameobjects/Grid/GridActionHandlers/GridActionHandler";
 import {StickyDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/StickyDragActionHandler";
 import {AutomaticDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/AutomaticDragActionHandler";
@@ -189,11 +189,13 @@ export class FactoryScene extends Scene {
         for (let machineShape of machineShapes) {
             let machine = new Machine("neutral", machineShape, machineGrid)
             this.addChild(machine)
-
             let gridItem = new GridItem(machine, inventoryGrid, 0, horizontalIndex)
-            gridItem.addShape(machineGrid, parseShape(machine.getShape()))
 
+            gridItem.addShape(machineGrid, parseShape(machine.getShape()))
             gridItems.push(gridItem)
+            TOOLTIP_MANAGER.registerTooltipFor(machine,
+                () => getMachineNameForType(machine.getType()),
+                () => (!gridItem.dragging && gridItem.currentGrid?.id === "machineGrid"))
             horizontalIndex++
         }
 
@@ -216,7 +218,7 @@ export class FactoryScene extends Scene {
         if (levelSolved) {
             this.winScreen.blendIn()
         } else {
-            setTimeout(() => this.checkRecipe(), 2000)
+            setTimeout(() => this.checkRecipe(), 3500)
         }
     }
 

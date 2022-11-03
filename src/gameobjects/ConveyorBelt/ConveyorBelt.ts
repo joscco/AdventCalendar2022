@@ -6,9 +6,8 @@ import {ConveyorBeltEndTile} from "./ConveyorBeltEndTile";
 import {GridItem} from "../Grid/GridItem";
 import {ConveyorBeltMoveTile} from "./ConveyorBeltMoveTile";
 import {Container, Sprite, Texture} from "pixi.js";
-import {ASSET_STORE} from "../../index";
+import {ASSET_STORE, TOOLTIP_MANAGER} from "../../index";
 import {Machine} from "../Machinery/Machine";
-import {Tooltip} from "../Tooltip/Tooltip";
 
 export class ConveyorBelt extends Container {
 
@@ -54,7 +53,7 @@ export class ConveyorBelt extends Container {
 
             let ingredient = new Ingredient()
             ingredient.zIndex = 1
-            new Tooltip(ingredient.sprite, () => ingredient.getTooltipText())
+            TOOLTIP_MANAGER.registerTooltipFor(ingredient, () => ingredient.getTooltipText())
             tile.setIngredientRef(ingredient)
             ingredient.position.set(tile.x, tile.y)
 

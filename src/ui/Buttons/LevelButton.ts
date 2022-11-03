@@ -23,7 +23,7 @@ export class LevelButton extends ScalingButton {
         super();
         this.n = n
         this.enabled = enabled
-        this.sprite.scale.set(0.4)
+        this.sprite.scale.set(0.43)
         if (!this.enabled) {
             this.sprite.tint = 0x000000
         }
@@ -31,8 +31,8 @@ export class LevelButton extends ScalingButton {
             fontFamily: "Futurahandwritten",
             fontSize: 100,
             fill: this.enabled ? 0x000000 : 0xffffff,
-            stroke: 0xffffff,
-            strokeThickness: this.enabled ? 5 : 0,
+            stroke: this.enabled ?  0xffffff: 0x000000,
+            strokeThickness: this.enabled ? 15 : 30,
             lineJoin: "round"
         })
         text.anchor.set(0.5)
