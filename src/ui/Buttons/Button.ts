@@ -1,5 +1,5 @@
-import {Container, Sprite} from "pixi.js";
-import {Texture} from "@pixi/core";
+import {Container, Sprite, Texture} from "pixi.js";
+
 
 export abstract class Button extends Container {
     private clicked: boolean = false;
@@ -14,7 +14,7 @@ export abstract class Button extends Container {
         this.addChild(this.sprite)
 
         this.interactive = true;
-        this.buttonMode = true;
+        this.cursor = "pointer";
         this.on("pointertap", () => this.onPointerTap())
     }
 
@@ -29,9 +29,14 @@ export abstract class Button extends Container {
     async onPointerTap() {
         if (!this.clicked) {
             this.clicked = true;
+            await this.preClick();
             await this.onClick();
             this.clicked = false;
         }
+    }
+
+    preClick(): void {
+        // do nothing per default
     }
 
     abstract onClick(): void

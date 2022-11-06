@@ -78,7 +78,7 @@ export default class SceneManager {
      * * Stops the previous active scene first if defined.
      * @param {string} name
      */
-    public start(name: string): void {
+    public async start(name: string): Promise<void> {
         if (!this.contains(name) || name === this.current) {
             return;
         }
@@ -94,7 +94,7 @@ export default class SceneManager {
                 active.hasRun = true;
             }
             this.app.stage.addChild(active);
-            active.start();
+            await active.start();
         }
     }
 

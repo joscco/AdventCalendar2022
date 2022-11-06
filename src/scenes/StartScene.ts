@@ -11,6 +11,7 @@ export class StartScene extends Scene {
     pretitle?: Sprite;
     bernd?: Container;
     startButton?: ScalingButton;
+    started: boolean = false
 
     constructor(app: Application) {
         super();
@@ -18,17 +19,20 @@ export class StartScene extends Scene {
     }
 
     async start(): Promise<void> {
-        this.addScrollingBackground(ASSET_STORE.START_SCENE!.backgroundPattern);
-        this.addBernd(ASSET_STORE.START_SCENE!.head, ASSET_STORE.START_SCENE!.torso, ASSET_STORE.START_SCENE!.backTorso, ASSET_STORE.START_SCENE!.left_arm_leaning,
-            ASSET_STORE.START_SCENE!.right_arm_leaning, ASSET_STORE.START_SCENE!.eyes_open, ASSET_STORE.START_SCENE!.eyes_closed);
-        this.addPretitle(ASSET_STORE.START_SCENE!.pretitle)
-        this.addTitle(ASSET_STORE.START_SCENE!.titleLetters);
-        this.addStartButton();
+        if (!this.started) {
+            this.addScrollingBackground(ASSET_STORE.START_SCENE!.backgroundPattern);
+            this.addBernd(ASSET_STORE.START_SCENE!.head, ASSET_STORE.START_SCENE!.torso, ASSET_STORE.START_SCENE!.backTorso, ASSET_STORE.START_SCENE!.left_arm_leaning,
+                ASSET_STORE.START_SCENE!.right_arm_leaning, ASSET_STORE.START_SCENE!.eyes_open, ASSET_STORE.START_SCENE!.eyes_closed);
+            this.addPretitle(ASSET_STORE.START_SCENE!.pretitle)
+            this.addTitle(ASSET_STORE.START_SCENE!.titleLetters);
+            this.addStartButton();
 
-        await this.blendInPretitle();
-        await this.blendInBernd();
-        await this.blendInTitle();
-        await this.scaleInStartButton();
+            await this.blendInPretitle();
+            await this.blendInBernd();
+            await this.blendInTitle();
+            await this.scaleInStartButton();
+        }
+        this.started = true
     }
 
     private addScrollingBackground(backgroundPatternTexture: Texture) {
@@ -48,14 +52,14 @@ export class StartScene extends Scene {
     private addPretitle(pretitleTexture: Texture) {
         this.pretitle = new Sprite(pretitleTexture);
         this.pretitle.anchor.set(0.5)
-        this.pretitle.position.set(GAME_WIDTH / 2, GAME_HEIGHT + 100)
+        this.pretitle.position.set(GAME_WIDTH / 2, GAME_HEIGHT + 125)
         this.addChild(this.pretitle)
     }
 
     private addTitle(lettersTextures: Texture[]) {
         let titleContainer = new Container()
         titleContainer.x = GAME_WIDTH / 2;
-        titleContainer.y = GAME_HEIGHT / 2 - 75;
+        titleContainer.y = 450;
 
         this.letters = lettersTextures.map(texture => new Sprite(texture))
         this.letters.map(letter => {
@@ -118,7 +122,7 @@ export class StartScene extends Scene {
     }
 
     private async blendInPretitle() {
-        await gsap.to(this.pretitle!, {duration: 1, y: GAME_HEIGHT / 2 - 400, ease: Back.easeInOut})
+        await gsap.to(this.pretitle!, {duration: 1, y: 125, ease: Back.easeInOut})
     }
 
     private async blendInTitle() {
@@ -129,7 +133,7 @@ export class StartScene extends Scene {
     }
 
     private async blendInBernd() {
-        await gsap.to(this.bernd!, {duration: 1, y: GAME_HEIGHT / 2 - 20, ease: Quart.easeInOut});
+        await gsap.to(this.bernd!, {duration: 1, y: 480, ease: Quart.easeInOut});
     }
 
     private async scaleInStartButton() {

@@ -84,7 +84,8 @@ export class GridItem {
         this.freeFromGrid()
         this.updateIndex(grid, index);
         this.updateGrid(grid)
-        this.updateAim(grid.getGlobalPositionForIndex(index))
+        let newAim = grid.getGlobalPositionForIndex(index)
+        this.updateAim(newAim)
     }
 
     private setToIndex(grid: Grid, index: Index2D): void {
@@ -271,7 +272,6 @@ export class GridItem {
                       onPointerMove: (mousePos: Vector2D, item: GridItem) => void,
                       onPointerUp: (mousePos: Vector2D, item: GridItem) => void) {
         this.content.interactive = true
-        this.content.buttonMode = true;
 
         this.content.on("pointerdown", (event) => {
             let mousePosition: Vector2D = event.data.global
@@ -279,7 +279,9 @@ export class GridItem {
             onPointerDown(sum(mousePosition, this.dragOffset), this);
             this.dragging = true
         })
+
         this.content.on("pointermove", (event) => {
+            console.log("Dragging: ", this.dragging)
             if (this.dragging) {
                 let mousePosition = event.data.global
                 onPointerMove(sum(mousePosition, this.dragOffset), this);

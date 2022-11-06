@@ -11,12 +11,13 @@ import {GridConnector} from "../gameobjects/Grid/GridConnector";
 import Scene from "./Scene";
 import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
 import {Application, Graphics, Sprite} from "pixi.js";
-import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH, TOOLTIP_MANAGER} from "../index";
+import {ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH, TOOLTIP_MANAGER} from "../index";
 import {GridActionHandler} from "../gameobjects/Grid/GridActionHandlers/GridActionHandler";
 import {StickyDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/StickyDragActionHandler";
 import {AutomaticDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/AutomaticDragActionHandler";
 import {GridItem} from "../gameobjects/Grid/GridItem";
 import {WinScreen} from "../general/WinScreen";
+import {UIButtonOverlay} from "../ui/ButtonOverlay";
 
 export class FactoryScene extends Scene {
 
@@ -28,10 +29,13 @@ export class FactoryScene extends Scene {
     private readonly belts: ConveyorBelt[];
     private recipeBox: RecipeBox;
     private winScreen: WinScreen;
+    private uiOverlay: UIButtonOverlay
+    private level: number
 
-    constructor(app: Application, conveyorBeltPattern: string, recipe: Recipe, machines: MachineShape[]) {
+    constructor(app: Application, level: number, conveyorBeltPattern: string, recipe: Recipe, machines: MachineShape[]) {
         super();
         this.app = app;
+        this.level = level
         this.sortableChildren = true
 
         this.initBackground();
@@ -45,9 +49,15 @@ export class FactoryScene extends Scene {
         this.recipeBox = this.setupRecipeBox(recipe);
         this.beltGrid = this.setupBeltGridAndBelts(patternArr);
         this.belts = this.setupBelts(patternArr, this.beltGrid)
+
         this.winScreen = new WinScreen(recipe)
         this.winScreen.zIndex = 10
         this.addChild(this.winScreen)
+
+        this.uiOverlay = new UIButtonOverlay()
+        this.uiOverlay.zIndex = 5
+        this.addChild(this.uiOverlay)
+
         this.machineInventoryGrid = this.setupInventoryGrid(machines.length)
         this.machineUsageGrid = this.setupMachineUsageGrid(this.beltGrid!.getNumberOfRows(), this.beltGrid!.getNumberOfColumns())
         this.machineGridItems = this.setupMachineGridItems(machines, this.machineInventoryGrid, this.machineUsageGrid)
@@ -140,9 +150,8 @@ export class FactoryScene extends Scene {
     private setupInventoryGrid(length: number): Grid {
         let outsideGrid = new Grid(1, length, "outside")
         outsideGrid.tileWidth = 100
-        outsideGrid.tileHeight = 100
         outsideGrid.columnOffsetX = 25
-        outsideGrid.centerIn({x: 100, y: 50, width: 1820, height: 200})
+        outsideGrid.centerIn({x: 100, y: 125, width: 1820, height: 0})
         outsideGrid.setDefaultSlotTexture(ASSET_STORE.GAME_SCENE!.emptyField)
         outsideGrid.drawGrid()
         outsideGrid.zIndex = 0
@@ -217,6 +226,7 @@ export class FactoryScene extends Scene {
 
         if (levelSolved) {
             this.winScreen.blendIn()
+            GAME_DATA.saveGame(Math.max(this.level + 1, GAME_DATA.getUnlockedLevels()))
         } else {
             setTimeout(() => this.checkRecipe(), 3500)
         }

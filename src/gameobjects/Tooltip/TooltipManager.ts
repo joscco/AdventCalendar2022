@@ -3,7 +3,6 @@
 import {Container} from "pixi.js";
 import {Tooltip} from "./Tooltip";
 import {Vector2D} from "../Grid/Grid";
-import {App} from "../../index";
 
 export class TooltipManager {
 
@@ -24,21 +23,17 @@ export class TooltipManager {
 
     registerTooltipFor(bearer: Container, textDeliverer: () => string, enabler: () => boolean = () => true) {
         bearer.interactive = true
-        bearer.buttonMode = true
+        bearer.cursor = "pointer"
         bearer.on("pointerover", () => {
-            if(enabler()) {
+            this.currentBearer = bearer
+            if (enabler()) {
                 setTimeout(() => {
-                    let interactionManager = App.renderer.plugins.interaction
-                    let hitSpot = interactionManager.hitTest(interactionManager.mouse.global, App.stage)
-                    if (hitSpot
-                        && (hitSpot === bearer
-                            || hitSpot.parent === bearer
-                            || hitSpot.parent?.parent === bearer)) {
-                        this.currentBearer = bearer
-                        this.showTooltip(bearer.getGlobalPosition(), textDeliverer())
+                    if (this.currentBearer === bearer) {
+                        this.showTooltip(this.currentBearer.getGlobalPosition(), textDeliverer())
                     }
                 }, 500)
             }
+
 
         })
         bearer.on("pointerout", () => {

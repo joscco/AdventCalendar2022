@@ -44,26 +44,6 @@ export class MachineIconSlot extends Container {
         this.scale.set(0)
     }
 
-    private getCategoryTextureForType(type: MachineType): Texture {
-        switch (type) {
-            case "red":
-            case "brown":
-            case "yellow":
-            case "white":
-                return ASSET_STORE.MACHINES!.categoryIcons.color;
-            case "sour":
-            case "neutral":
-            case "savoury":
-            case "sweet":
-                return ASSET_STORE.MACHINES!.categoryIcons.taste;
-            case "powdery":
-            case "liquid":
-            case "solid":
-            case "sticky":
-                return ASSET_STORE.MACHINES!.categoryIcons.consistence;
-        }
-    }
-
     public blendOut() {
         if (this.typeChooseMenu.shown) {
             this.typeChooseMenu.toggleBlend()
@@ -77,7 +57,7 @@ export class MachineIconSlot extends Container {
     private initIconSlot() {
         let sprite = new Sprite(ASSET_STORE.MACHINES!.typeIconSlot)
         sprite.interactive = true
-        sprite.buttonMode = true
+        sprite.cursor = "pointer"
         sprite.on("pointertap",() => {
             if (this.clicked) {
                 this.typeChooseMenu.toggleBlend()

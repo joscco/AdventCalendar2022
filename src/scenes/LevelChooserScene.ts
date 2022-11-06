@@ -1,11 +1,14 @@
 import Scene from "./Scene";
 import {Application, Sprite, TilingSprite} from "pixi.js";
 import {LevelButton} from "../ui/Buttons/LevelButton";
-import {ASSET_STORE, AVAILABLE_LEVELS, GAME_HEIGHT, GAME_WIDTH, NUMBER_OF_LEVELS} from "../index";
+import {ASSET_STORE, GAME_HEIGHT, GAME_DATA, GAME_WIDTH, NUMBER_OF_LEVELS} from "../index";
+import {ScalingButton} from "../ui/Buttons/ScalingButton";
+import {BackToStartScreenButton} from "../ui/Buttons/BackToStartScreen";
 
 export class LevelChooserScene extends Scene {
 
     levelButtons: LevelButton[]
+    backButton: ScalingButton
 
     constructor(app: Application) {
         super();
@@ -14,6 +17,7 @@ export class LevelChooserScene extends Scene {
         this.setupBackground()
         this.setUpTitle()
         this.levelButtons = this.setUpLevelButtons()
+        this.backButton = this.setUpBackButton()
     }
 
     private setupBackground() {
@@ -34,19 +38,32 @@ export class LevelChooserScene extends Scene {
     private setUpTitle() {
         let title = new Sprite(ASSET_STORE.LEVEL_SCENE!.levelSceneTitle);
         title.anchor.set(0.5)
-        title.position.set(GAME_WIDTH / 2, 100)
+        title.position.set(GAME_WIDTH / 2, 125)
         this.addChild(title)
     }
 
     private setUpLevelButtons(): LevelButton[] {
         let buttons = []
         for (let n = 1; n <= NUMBER_OF_LEVELS; n++) {
-            let button = new LevelButton(n, n <= AVAILABLE_LEVELS)
+            let button = new LevelButton(n, n <= GAME_DATA.getUnlockedLevels())
             button.x = 200 + ((n - 1) % 8) * 215
-            button.y = 300 + Math.floor((n - 1) / 8) * 250
+            button.y = 350 + Math.floor((n - 1) / 8) * 250
             this.addChild(button)
             buttons.push(button)
         }
         return buttons
+    }
+
+    updateLevelButtons() {
+        this.levelButtons.forEach(button => {
+            button.enabled = (button.n <= GAME_DATA.getUnlockedLevels())
+        })
+    }
+
+    private setUpBackButton(): ScalingButton {
+        let backToStartScreenButton = new BackToStartScreenButton()
+        backToStartScreenButton.position.set(125, 125)
+        this.addChild(backToStartScreenButton)
+        return backToStartScreenButton
     }
 }
