@@ -20,6 +20,10 @@ export class AssetStore {
         return this.ASSETS![id as keyof GameAssets]
     }
 
+    getSoundAsset(id: SoundAssetID): any {
+        return this.ASSETS![id as keyof GameAssets]
+    }
+
     private addAssets() {
         Assets.add("font", "assets/fonts/FuturaHandwritten.ttf")
 

@@ -54,8 +54,6 @@ const main = async () => {
     // Make gsap available globally
     gsap.install(window)
 
-    SOUND_MANAGER = new SoundManager()
-
     // Add all loading bundles
     ASSET_STORE = new AssetStore()
     SCENE_MANAGER = new SceneManager(App);
@@ -66,6 +64,9 @@ const main = async () => {
     await SCENE_MANAGER.start("loadingScene")
     await ASSET_STORE.startLoadingOtherAssets()
 
+    SOUND_MANAGER = new SoundManager()
+    SOUND_MANAGER.playMusic()
+
     GAME_DATA = new GameData()
 
     TOOLTIP_MANAGER = new TooltipManager(App.stage)
@@ -75,7 +76,6 @@ const main = async () => {
     soundButton.y = 125
     soundButton.zIndex = 110
     App.stage.addChild(soundButton);
-    SOUND_MANAGER.playMusic()
 
     SCENE_MANAGER.add("startScene", new StartScene(App))
     LEVEL_SCREEN = new LevelChooserScene(App)

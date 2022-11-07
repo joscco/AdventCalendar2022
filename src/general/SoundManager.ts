@@ -6,8 +6,8 @@ export class SoundManager {
     constructor() {
         this.mainMusic = new Howl({
             src: ["assets/sounds/Main.ogg"],
-            html5: true,
-            loop: true
+            loop: true,
+            html5: true
         })
     }
 
