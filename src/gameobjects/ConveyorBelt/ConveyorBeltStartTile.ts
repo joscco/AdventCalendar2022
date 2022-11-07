@@ -6,7 +6,7 @@ import {ASSET_STORE} from "../../index";
 
 export class ConveyorBeltStartTile extends ConveyorBeltTile {
     getTextures(): Texture[] {
-        return [ASSET_STORE.BELT_TILES!.startField];
+        return [ASSET_STORE.getTextureAsset("startField")];
     }
 
     repositionIngredient(ingredient: Ingredient, newPosition: Vector2D): void {

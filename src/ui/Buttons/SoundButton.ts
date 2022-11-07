@@ -6,7 +6,7 @@ export class SoundButton extends ScalingButton {
     isOff: boolean = false
 
     getTexture(): Texture | null {
-        return this.isOff ? ASSET_STORE.GAME_SCENE!.muteButton : ASSET_STORE.GAME_SCENE!.soundButton;
+        return this.isOff ? ASSET_STORE.getTextureAsset("noSoundButton") : ASSET_STORE.getTextureAsset("soundButton");
     }
 
     onClick(): void {

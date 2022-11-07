@@ -10,7 +10,7 @@ export abstract class ConveyorBeltTile extends AnimatedSprite {
     ingredientRef?: Ingredient
 
     constructor(index: Index2D) {
-        super([ASSET_STORE.GAME_SCENE!.emptyField]);
+        super([ASSET_STORE.getTextureAsset("emptyField")]);
         this.index = index
         this.textures = this.getTextures()
         this.autoUpdate = true

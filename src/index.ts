@@ -34,7 +34,7 @@ const main = async () => {
             width: GAME_WIDTH,
             height: GAME_HEIGHT,
             resolution: window.devicePixelRatio || 1,
-            backgroundColor: 0xf3afb1
+            backgroundColor: 0x38191b
         }
     );
     App.stage.sortableChildren = true

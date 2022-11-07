@@ -10,8 +10,8 @@ import {Grid, Index2D, isRectangularArray} from "../gameobjects/Grid/Grid";
 import {GridConnector} from "../gameobjects/Grid/GridConnector";
 import Scene from "./Scene";
 import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
-import {Application, Graphics, Sprite} from "pixi.js";
-import {ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH, TOOLTIP_MANAGER} from "../index";
+import {Application, Sprite} from "pixi.js";
+import {ASSET_STORE, GAME_DATA, TOOLTIP_MANAGER} from "../index";
 import {GridActionHandler} from "../gameobjects/Grid/GridActionHandlers/GridActionHandler";
 import {StickyDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/StickyDragActionHandler";
 import {AutomaticDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/AutomaticDragActionHandler";
@@ -139,10 +139,7 @@ export class FactoryScene extends Scene {
     }
 
     private initBackground() {
-        let background = new Graphics()
-        background.beginFill(0xf18272)
-        background.drawRect(0, 0, GAME_WIDTH, GAME_HEIGHT)
-        background.endFill()
+        let background = new Sprite(ASSET_STORE.getTextureAsset("background"))
         background.zIndex = -1
         this.addChild(background)
     }
@@ -152,12 +149,12 @@ export class FactoryScene extends Scene {
         outsideGrid.tileWidth = 100
         outsideGrid.columnOffsetX = 25
         outsideGrid.centerIn({x: 100, y: 125, width: 1820, height: 0})
-        outsideGrid.setDefaultSlotTexture(ASSET_STORE.GAME_SCENE!.emptyField)
+        outsideGrid.setDefaultSlotTexture(ASSET_STORE.getTextureAsset("emptyField"))
         outsideGrid.drawGrid()
         outsideGrid.zIndex = 0
         this.addChild(outsideGrid)
 
-        let outsideGridSprite = new Sprite(ASSET_STORE.GAME_SCENE!.machineOuterGrid)
+        let outsideGridSprite = new Sprite(ASSET_STORE.getTextureAsset("machineInventory"))
         outsideGridSprite.anchor.set(0.5)
         outsideGridSprite.position.set(outsideGrid.getCenterX(), outsideGrid.getCenterY())
         outsideGridSprite.zIndex = -1
@@ -172,7 +169,7 @@ export class FactoryScene extends Scene {
         machineUsageGrid.columnOffsetX = 15
         machineUsageGrid.rowOffsetY = 15
         machineUsageGrid.centerIn({x: 100, y: 150, width: 1820, height: 1080 - 150})
-        machineUsageGrid.setDefaultSlotTexture(ASSET_STORE.GAME_SCENE!.emptyField)
+        machineUsageGrid.setDefaultSlotTexture(ASSET_STORE.getTextureAsset("emptyField"))
         machineUsageGrid.drawGrid()
         machineUsageGrid.zIndex = -1
         this.addChild(machineUsageGrid)

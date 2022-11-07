@@ -11,7 +11,7 @@ export class SoundManager {
     private mainMusic?: Sound
 
     constructor() {
-        this.mainMusic = sound.add("main", "assets/Sounds/Main.ogg")
+        this.mainMusic = sound.add("main", "assets/sounds/Main.ogg")
     }
 
     isPlayingMusic(): boolean {

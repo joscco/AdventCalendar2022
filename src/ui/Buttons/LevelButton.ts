@@ -44,52 +44,52 @@ export class LevelButton extends ScalingButton {
 export function getRecipeTextureForDay(day: number): Texture {
     switch (day) {
         case 1:
-            return ASSET_STORE.COOKIES!.SANTAMILK
+            return ASSET_STORE.getTextureAsset("SANTAMILK")
         case 2:
-            return ASSET_STORE.COOKIES!.SCHOKOCROSSIES
+            return ASSET_STORE.getTextureAsset("SCHOKOCROSSIES")
         case 3:
-            return ASSET_STORE.COOKIES!.MUERBETEIGKEKSE
+            return ASSET_STORE.getTextureAsset("MUERBETEIGKEKSE")
         case 4:
-            return ASSET_STORE.COOKIES!.RUMKUGELN
+            return ASSET_STORE.getTextureAsset("RUMKUGELN")
         case 5:
-            return ASSET_STORE.COOKIES!.PUNSCH
+            return ASSET_STORE.getTextureAsset("PUNSCH")
         case 6:
-            return ASSET_STORE.COOKIES!.BETHMAENNCHEN
+            return ASSET_STORE.getTextureAsset("BETHMAENNCHEN")
         case 7:
-            return ASSET_STORE.COOKIES!.ZIMTSTERNE
+            return ASSET_STORE.getTextureAsset("ZIMTSTERNE")
         case 8:
-            return ASSET_STORE.COOKIES!.PRINTEN
+            return ASSET_STORE.getTextureAsset("PRINTEN")
         case 9:
-            return ASSET_STORE.COOKIES!.ENGELSAUGEN
+            return ASSET_STORE.getTextureAsset("ENGELSAUGEN")
         case 10:
-            return ASSET_STORE.COOKIES!.VANILLEKIPFERL
+            return ASSET_STORE.getTextureAsset("VANILLEKIPFERL")
         case 11:
-            return ASSET_STORE.COOKIES!.MAKRONEN
+            return ASSET_STORE.getTextureAsset("MAKRONEN")
         case 12:
-            return ASSET_STORE.COOKIES!.FLORENTINER
+            return ASSET_STORE.getTextureAsset("FLORENTINER")
         case 13:
-            return ASSET_STORE.COOKIES!.SPRITZGEBAECK
+            return ASSET_STORE.getTextureAsset("SPRITZGEBAECK")
         case 14:
-            return ASSET_STORE.COOKIES!.LEBKUCHEN
+            return ASSET_STORE.getTextureAsset("LEBKUCHEN")
         case 15:
-            return ASSET_STORE.COOKIES!.SPEKULATIUS
+            return ASSET_STORE.getTextureAsset("SPEKULATIUS")
         case 16:
-            return ASSET_STORE.COOKIES!.PFEFFERNUESSE
+            return ASSET_STORE.getTextureAsset("PFEFFERNUESSE")
         case 17:
-            return ASSET_STORE.COOKIES!.PANETTONE
+            return ASSET_STORE.getTextureAsset("PANETTONE")
         case 18:
-            return ASSET_STORE.COOKIES!.SCHWARZWEISSKEKSE
+            return ASSET_STORE.getTextureAsset("SCHWARZWEISSKEKSE")
         case 19:
-            return ASSET_STORE.COOKIES!.STOLLEN
+            return ASSET_STORE.getTextureAsset("STOLLEN")
         case 20:
-            return ASSET_STORE.COOKIES!.SCHOKOLADENBROT
+            return ASSET_STORE.getTextureAsset("SCHOKOLADENBROT")
         case 21:
-            return ASSET_STORE.COOKIES!.NUSSECKEN
+            return ASSET_STORE.getTextureAsset("NUSSECKEN")
         case 22:
-            return ASSET_STORE.COOKIES!.CORNFLAKEWALNUSSKEKSE
+            return ASSET_STORE.getTextureAsset("CORNFLAKEWALNUSSKEKSE")
         case 23:
-            return ASSET_STORE.COOKIES!.BAERENTATZEN
+            return ASSET_STORE.getTextureAsset("BAERENTATZEN")
         default:
-            return ASSET_STORE.COOKIES!.DOMINOSTEINE
+            return ASSET_STORE.getTextureAsset("DOMINOSTEINE")
     }
 }

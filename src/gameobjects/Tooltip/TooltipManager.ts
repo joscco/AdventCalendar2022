@@ -11,6 +11,7 @@ export class TooltipManager {
     private currentBearer?: Container
     private offsetX: number = 0
     private offsetY: number = -110
+    private lastMousePosition: Vector2D = {x: -100, y: -100}
 
     constructor(owner: Container) {
         this.owner = owner
@@ -21,22 +22,26 @@ export class TooltipManager {
         this.owner.sortableChildren = true
     }
 
-    registerTooltipFor(bearer: Container, textDeliverer: () => string, enabler: () => boolean = () => true) {
+    registerTooltipFor(bearer: Container, textDeliverer: () => string, isEnabled: () => boolean = () => true) {
         bearer.interactive = true
         bearer.cursor = "pointer"
-        bearer.on("pointerover", () => {
+
+        bearer.on("pointerover", async (event) => {
+            this.lastMousePosition = event.global
             this.currentBearer = bearer
-            if (enabler()) {
-                setTimeout(() => {
-                    if (this.currentBearer === bearer) {
-                        this.showTooltip(this.currentBearer.getGlobalPosition(), textDeliverer())
-                    }
-                }, 500)
+            if (isEnabled()) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                // If we still hover the same thing, show the tooltip
+                if (this.currentBearer === bearer) {
+                    let bearer = this.currentBearer
+                    let currentMousePosition = bearer.getGlobalPosition()
+                    this.showTooltip(currentMousePosition, textDeliverer())
+                }
             }
-
-
         })
-        bearer.on("pointerout", () => {
+
+        bearer.on("pointerout", (event) => {
+            this.lastMousePosition = event.global
             this.currentBearer = undefined
             this.hideTooltip()
         })

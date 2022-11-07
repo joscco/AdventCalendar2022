@@ -54,8 +54,8 @@ export class LoadingScene extends Scene {
         })
     }
 
-    setProgress(from: number, to: number, percent: number) {
-        this.loadingBar.setProgress(from, to, percent)
-        this.oven.setProgress(from, to, percent)
+    setProgress(percent: number) {
+        this.loadingBar.setProgress(percent)
+        this.oven.setProgress(percent)
     }
 }

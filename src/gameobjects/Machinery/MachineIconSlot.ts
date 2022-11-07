@@ -51,13 +51,15 @@ export class MachineIconSlot extends Container {
     }
 
     private getIconTextureForType(type: MachineType): Texture {
-        return ASSET_STORE.MACHINES!.typeIcons[type];
+        return ASSET_STORE.getTextureAsset(type);
     }
 
     private initIconSlot() {
-        let sprite = new Sprite(ASSET_STORE.MACHINES!.typeIconSlot)
+        let sprite = new Sprite(ASSET_STORE.getTextureAsset("machineIconSlot"))
         sprite.interactive = true
         sprite.cursor = "pointer"
+
+        // TODO: Doesn't work well in combination with dragging!
         sprite.on("pointertap",() => {
             if (this.clicked) {
                 this.typeChooseMenu.toggleBlend()

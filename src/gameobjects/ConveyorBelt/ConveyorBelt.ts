@@ -40,8 +40,8 @@ export class ConveyorBelt extends Container {
         this.lastTileOverlay.scale.set(0)
         this.lastTileOverlay.zIndex = 2
         this.addChild(this.lastTileOverlay)
-        this.lastTileGoodTexture = ASSET_STORE.BELT_TILES!.goodFieldOverlay
-        this.lastTileBadTexture = ASSET_STORE.BELT_TILES!.badFieldOverlay
+        this.lastTileGoodTexture = ASSET_STORE.getTextureAsset("goodFieldOverlay")
+        this.lastTileBadTexture = ASSET_STORE.getTextureAsset("badFieldOverlay")
         this.lastTileOverlay.position.set(endTile.x, endTile.y)
 
         this.tiles = [startTile, ...betweenTiles, endTile]

@@ -17,7 +17,7 @@ export class MachineTypeButton extends ScalingButton {
     }
 
     getTexture(): Texture {
-        return ASSET_STORE.MACHINES!.typeIcons[this.type]
+        return ASSET_STORE.getTextureAsset(this.type)
     }
 
     onClick(): void {

@@ -1,5 +1,5 @@
 import Scene from "./Scene";
-import {Application, Sprite, TilingSprite} from "pixi.js";
+import {Application, Text, TilingSprite} from "pixi.js";
 import {LevelButton} from "../ui/Buttons/LevelButton";
 import {ASSET_STORE, GAME_HEIGHT, GAME_DATA, GAME_WIDTH, NUMBER_OF_LEVELS} from "../index";
 import {ScalingButton} from "../ui/Buttons/ScalingButton";
@@ -21,7 +21,7 @@ export class LevelChooserScene extends Scene {
     }
 
     private setupBackground() {
-        let texture = ASSET_STORE.START_SCENE!.backgroundPattern
+        let texture = ASSET_STORE.getTextureAsset("startScreenBackgroundPattern")
         let scrollingBackground = new TilingSprite(texture)
         scrollingBackground.width = 2 * GAME_WIDTH
         scrollingBackground.height = 2 * GAME_HEIGHT
@@ -36,7 +36,7 @@ export class LevelChooserScene extends Scene {
     }
 
     private setUpTitle() {
-        let title = new Sprite(ASSET_STORE.LEVEL_SCENE!.levelSceneTitle);
+        let title = new Text("Choose a level", {fontFamily: "Futurahandwritten", fontSize: 60, fill: 0x000000})
         title.anchor.set(0.5)
         title.position.set(GAME_WIDTH / 2, 125)
         this.addChild(title)

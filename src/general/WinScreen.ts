@@ -12,7 +12,7 @@ export class WinScreen extends Sprite {
     private bannerText: Text
 
     constructor(recipe: Recipe) {
-        super(ASSET_STORE.GAME_SCENE!.winScreen);
+        super(ASSET_STORE.getTextureAsset("winScreenBackground"));
         this.position.set(GAME_WIDTH/2, GAME_HEIGHT + 200)
         this.anchor.set(0.5, 0)
 
@@ -31,7 +31,7 @@ export class WinScreen extends Sprite {
         this.cookieIcon.position.set(0, this.height/2 + 30)
         this.addChild(this.cookieIcon)
 
-        this.banner = new Sprite(ASSET_STORE.GAME_SCENE!.winScreenBanner)
+        this.banner = new Sprite(ASSET_STORE.getTextureAsset("winScreenBanner"))
         this.banner.anchor.set(0.5)
         this.banner.position.set(0, 830)
         this.addChild(this.banner)

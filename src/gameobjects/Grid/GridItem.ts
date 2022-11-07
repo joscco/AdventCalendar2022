@@ -273,14 +273,14 @@ export class GridItem {
                       onPointerUp: (mousePos: Vector2D, item: GridItem) => void) {
         let onMove = (event: FederatedPointerEvent) => {
             if (this.dragging) {
-                let mousePosition = event.data.global
+                let mousePosition = event.global
                 onPointerMove(sum(mousePosition, this.dragOffset), this);
             }
         }
 
         this.content.interactive = true
         this.content.on("pointerdown", (event) => {
-            let mousePosition: Vector2D = event.data.global
+            let mousePosition: Vector2D = event.global
             this.dragOffset = {x: this.content.x - mousePosition.x, y: this.content.y - mousePosition.y}
             onPointerDown(sum(mousePosition, this.dragOffset), this);
             this.dragging = true
@@ -289,7 +289,7 @@ export class GridItem {
         })
 
         this.content.on("pointerup", (event) => {
-            let mousePosition = event.data.global
+            let mousePosition = event.global
             onPointerUp(sum(mousePosition, this.dragOffset), this);
             this.dragging = false
             App.stage.interactive = false;
@@ -297,7 +297,7 @@ export class GridItem {
         })
 
         this.content.on("pointerupoutside", (event) => {
-            let mousePosition = event.data.global
+            let mousePosition = event.global
             onPointerUp(sum(mousePosition, this.dragOffset), this);
             this.dragging = false
             App.stage.interactive = false;

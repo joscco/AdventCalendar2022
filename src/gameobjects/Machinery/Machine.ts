@@ -3,6 +3,7 @@ import {Sprite} from "pixi.js";
 import {ASSET_STORE} from "../../index";
 import {Grid} from "../Grid/Grid";
 import {MachineIconSlot} from "./MachineIconSlot";
+import {TextureAssetID} from "../../general/AssetStore";
 
 export type MachineType = IngredientTaste | IngredientColor | IngredientConsistence
 export type MachineShape = "1x1" | "2x1" | "3x1" | "1x2" | "2x2" | "3x2" | "1x3" | "2x3" | "3x3"
@@ -53,11 +54,11 @@ export class Machine extends Sprite {
         this.iconSlot.updateType(this.type)
         if (this.currentGrid.id === "machineGrid") {
             this.iconSlot.scaleUp()
-            this.texture = ASSET_STORE.MACHINES!.big![this.machineShape]
+            this.texture = ASSET_STORE.getTextureAsset(("big_machine_" + this.machineShape) as TextureAssetID)
             this.pivot.set(75, 75)
         } else {
             this.iconSlot.scaleDown()
-            this.texture = ASSET_STORE.MACHINES!.small![this.machineShape]
+            this.texture = ASSET_STORE.getTextureAsset(("small_machine_" + this.machineShape) as TextureAssetID)
             this.pivot.set(this.texture.width/2, this.texture.height/2)
         }
     }

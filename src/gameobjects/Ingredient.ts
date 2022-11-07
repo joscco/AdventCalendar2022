@@ -56,7 +56,7 @@ export class Ingredient extends Container {
     }
 
     getTexture(): Texture {
-        return ASSET_STORE.INGREDIENTS!.textures[this.ingredientData!.id]
+        return ASSET_STORE.getTextureAsset(this.ingredientData!.id)
     }
 
     getID(): IngredientID | null {

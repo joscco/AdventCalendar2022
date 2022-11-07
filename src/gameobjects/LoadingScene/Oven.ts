@@ -14,11 +14,11 @@ export class Oven extends Container{
         this.ovenContainer = new Container()
         this.ovenContainer.sortableChildren = true
 
-        this.ovenTop = new Sprite(ASSET_STORE.LOADING_SCENE!.closedOven)
+        this.ovenTop = new Sprite(ASSET_STORE.LOADING_SCENE_ASSETS!.closedOven)
         this.ovenTop.anchor.set(0.5)
         this.ovenTop.zIndex = 1
 
-        this.redder = new Sprite(ASSET_STORE.LOADING_SCENE!.redder)
+        this.redder = new Sprite(ASSET_STORE.LOADING_SCENE_ASSETS!.redder)
         this.redder.anchor.set(0.5)
         this.redder.position.set(0, 50)
         this.redder.zIndex = 0
@@ -26,16 +26,15 @@ export class Oven extends Container{
 
         this.ovenContainer.addChild(this.redder, this.ovenTop)
 
-        this.steam = new Sprite(ASSET_STORE.LOADING_SCENE!.steam)
+        this.steam = new Sprite(ASSET_STORE.LOADING_SCENE_ASSETS!.steam)
         this.steam.anchor.set(0.5)
         this.steam.scale.set(0)
 
         this.addChild(this.ovenContainer, this.steam)
     }
 
-    async setProgress(from: number, to: number, percent: number) {
-        let totalPercent = from + (to - from)*percent
-        this.redder.tint = this.lerpColor(0x822d28, 0xff9138, totalPercent)
+    async setProgress(percent: number) {
+        this.redder.tint = this.lerpColor(0x822d28, 0xff9138, percent)
     }
 
     lerpColor(a: number, b: number, amount: number): number {
@@ -54,9 +53,9 @@ export class Oven extends Container{
 
     async open() {
         await gsap.to(this.ovenContainer.scale, {x: 1.1, y: 0, duration: 0.2, ease: Back.easeIn})
-        this.ovenTop.texture = ASSET_STORE.LOADING_SCENE!.openOven
+        this.ovenTop.texture = ASSET_STORE.LOADING_SCENE_ASSETS!.openOven
         await gsap.to(this.ovenContainer.scale, {x: 1, y: 1, duration: 0.2, ease: Back.easeOut})
         await gsap.to(this.steam.scale, {x: 1, y: 1, duration: 0.2, ease: Back.easeOut})
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 500));
     }
 }

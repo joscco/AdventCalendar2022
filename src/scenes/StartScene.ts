@@ -2,7 +2,7 @@ import {Application, Container, Sprite, TilingSprite} from 'pixi.js';
 import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../index";
 import Scene from "./Scene";
 import {Texture} from "@pixi/core";
-import {StartButton} from "./StartButton";
+import {StartButton} from "../ui/Buttons/StartButton";
 import {ScalingButton} from "../ui/Buttons/ScalingButton";
 
 export class StartScene extends Scene {
@@ -20,11 +20,18 @@ export class StartScene extends Scene {
 
     async start(): Promise<void> {
         if (!this.started) {
-            this.addScrollingBackground(ASSET_STORE.START_SCENE!.backgroundPattern);
-            this.addBernd(ASSET_STORE.START_SCENE!.head, ASSET_STORE.START_SCENE!.torso, ASSET_STORE.START_SCENE!.backTorso, ASSET_STORE.START_SCENE!.left_arm_leaning,
-                ASSET_STORE.START_SCENE!.right_arm_leaning, ASSET_STORE.START_SCENE!.eyes_open, ASSET_STORE.START_SCENE!.eyes_closed);
-            this.addPretitle(ASSET_STORE.START_SCENE!.pretitle)
-            this.addTitle(ASSET_STORE.START_SCENE!.titleLetters);
+            this.addScrollingBackground(ASSET_STORE.getTextureAsset("startScreenBackgroundPattern"));
+            this.addBernd(
+                ASSET_STORE.getTextureAsset("bernd_head"),
+                ASSET_STORE.getTextureAsset("bernd_torso"),
+                ASSET_STORE.getTextureAsset("bernd_back_torso"),
+                ASSET_STORE.getTextureAsset("bernd_left_arm_leaning"),
+                ASSET_STORE.getTextureAsset("bernd_right_arm_leaning"),
+                ASSET_STORE.getTextureAsset("bernd_eyes_open"),
+                ASSET_STORE.getTextureAsset("bernd_eyes_closed")
+            );
+            this.addPretitle(ASSET_STORE.getTextureAsset("startScreenPretitle"))
+            this.addTitle(ASSET_STORE.getTitleLetterTextures());
             this.addStartButton();
 
             await this.blendInPretitle();

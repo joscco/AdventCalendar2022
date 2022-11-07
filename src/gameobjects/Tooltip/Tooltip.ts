@@ -23,12 +23,11 @@ export class Tooltip extends Container {
         this.offsetY = offsetY
         this.initialOffsetY = offsetY
 
-        let assets = ASSET_STORE.TOOLTIP!
-        this.textRectangle = new NineSlicePlane(assets.tooltipRectangle, 20, 20, 20, 20)
+        this.textRectangle = new NineSlicePlane(ASSET_STORE.getTextureAsset("tooltipRectangle"), 20, 20, 20, 20)
         this.textObject = new Text("", {fontFamily: "Futurahandwritten", fontSize: 30, fill: 0xffffff})
         this.textObject.anchor.set(0.5)
 
-        this.spike = new Sprite(assets.tooltipSpike)
+        this.spike = new Sprite(ASSET_STORE.getTextureAsset("tooltipSpike"))
         this.spike.anchor.set(0.5, 0)
 
         this.addChild(this.textRectangle)

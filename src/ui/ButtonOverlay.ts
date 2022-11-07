@@ -6,7 +6,7 @@ import {BackToLevelScreenButton} from "./Buttons/BackToLevelScreenButton";
 
 class RecipeOverviewButton extends ScalingButton {
     getTexture(): Texture | null {
-        return ASSET_STORE.GAME_SCENE!.recipeButton;
+        return ASSET_STORE.getTextureAsset("recipeButtonClosed");
     }
 
     onClick(): void {

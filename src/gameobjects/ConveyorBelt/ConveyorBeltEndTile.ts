@@ -6,7 +6,7 @@ import {ASSET_STORE} from "../../index";
 
 export class ConveyorBeltEndTile extends ConveyorBeltTile {
     getTextures(): Texture[] {
-        return [ASSET_STORE.BELT_TILES!.endField];
+        return [ASSET_STORE.getTextureAsset("endField")];
     }
 
     async repositionIngredient(ingredient: Ingredient, newPosition: Vector2D): Promise<void> {

@@ -6,31 +6,19 @@ import {MachineTypeButton} from "./MachineTypeButton";
 
 export class MachineTypeChooseMenu extends Sprite {
     spike: Sprite;
-    categoryIcons: Sprite[]
     typeButtons: ScalingButton[]
     machine: Machine
     shown: boolean = false
 
     constructor(machine: Machine) {
-        super(ASSET_STORE.MACHINES!.menuRect);
+        super(ASSET_STORE.getTextureAsset("machineIconMenuRect"));
         this.scale = {x: 0, y: 0}
 
         this.machine = machine
-        this.spike = new Sprite(ASSET_STORE.MACHINES!.menuSpike)
+        this.spike = new Sprite(ASSET_STORE.getTextureAsset("machineIconMenuSpike"))
         this.spike.anchor.set(0, 0.5)
         this.spike.position.set(-20, -5)
         this.addChild(this.spike)
-
-        let cat = ASSET_STORE.MACHINES!.categoryIcons
-        this.categoryIcons = [cat.color, cat.taste, cat.consistence]
-            .map((texture, i) => {
-                let icon = new Sprite(texture)
-                icon.alpha = 0.6
-                icon.anchor.set(0.5)
-                icon.position.set(45, -63 + i * 60)
-                this.addChild(icon)
-                return icon
-            })
 
         this.typeButtons = [
             "white", "red", "yellow", "brown",
