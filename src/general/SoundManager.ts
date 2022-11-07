@@ -1,28 +1,21 @@
-import {sound} from "@pixi/sound";
-
-type Sound = {
-    play: (opts: {loop: boolean, singleInstance: boolean}) => void;
-    stop: () => void;
-    volume: number;
-    loop: boolean
-}
+import {Howl} from "howler";
 
 export class SoundManager {
-    private mainMusic?: Sound
+    private mainMusic: Howl
 
     constructor() {
-        this.mainMusic = sound.add("main", "assets/sounds/Main.ogg")
-    }
-
-    isPlayingMusic(): boolean {
-        return sound.find("main").isPlaying
+        this.mainMusic = new Howl({
+            src: ["assets/sounds/Main.ogg"],
+            html5: true,
+            loop: true
+        })
     }
 
     playMusic() {
-        sound.play("main", {loop: true})
+        this.mainMusic.play()
     }
 
     stopMusic() {
-        sound.stop("main")
+        this.mainMusic.stop()
     }
 }

@@ -32,7 +32,7 @@ export class AssetStore {
             steam: "assets/loadingScreen/steam.png",
         })
 
-        Assets.addBundle("assets", MANIFEST);
+        Assets.addBundle("assets", {...TEXTURE_MANIFEST, ...SOUND_MANIFEST});
     }
 
     async startLoadingScreen() {
@@ -85,7 +85,7 @@ export class AssetStore {
     }
 }
 
-const MANIFEST = {
+const TEXTURE_MANIFEST = {
     // Dialog
     dialog_cross: "assets/dialog/cross.png",
     dialog_box: "assets/dialog/dialogBox.png",
@@ -321,14 +321,26 @@ const MANIFEST = {
     sparkle2: "assets/gameScreen/winScreen/sparkle2.png",
     sparkle3: "assets/gameScreen/winScreen/sparkle3.png",
     sparkle4: "assets/gameScreen/winScreen/sparkle4.png",
-
 }
 
-export type TextureAssetID = keyof typeof MANIFEST
+const SOUND_MANIFEST = {
+    blub1: "assets/sounds/Blub1.ogg",
+    main: "assets/sounds/Main.ogg"
+}
 
-export type GameAssets = {
+export type TextureAssetID = keyof typeof TEXTURE_MANIFEST
+
+export type SoundAssetID = keyof typeof SOUND_MANIFEST
+
+export type GameTextureAssets = {
     [key in TextureAssetID]: Texture
 }
+
+export type GameSoundAssets = {
+    [key in SoundAssetID]: any
+}
+
+export type GameAssets = GameTextureAssets & GameSoundAssets
 
 export interface LoadingSceneAssets {
     closedOven: Texture,
