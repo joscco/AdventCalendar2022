@@ -109,7 +109,7 @@ export class GridItem {
         return false;
     }
 
-    private trySetToIndexInstantly(grid: Grid, index: Index2D) {
+    trySetToIndexInstantly(grid: Grid, index: Index2D) {
         if (this.canBeSetToIndexInGrid(grid, index)) {
             this.setToIndex(grid, index)
             return true;

@@ -11,14 +11,46 @@ import {GridConnector} from "../gameobjects/Grid/GridConnector";
 import Scene from "./Scene";
 import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
 import {Application, Sprite} from "pixi.js";
-import {ASSET_STORE, GAME_DATA, TOOLTIP_MANAGER} from "../index";
+import {ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH, TOOLTIP_MANAGER} from "../index";
 import {GridActionHandler} from "../gameobjects/Grid/GridActionHandlers/GridActionHandler";
 import {StickyDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/StickyDragActionHandler";
 import {AutomaticDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/AutomaticDragActionHandler";
 import {GridItem} from "../gameobjects/Grid/GridItem";
 import {WinScreen} from "../general/WinScreen";
 import {UIButtonOverlay} from "../ui/ButtonOverlay";
-import {IngredientID} from "../gameobjects/Ingredient";
+import {IngredientID} from "../gameobjects/Ingredient"
+import {ScalingButton} from "../ui/Buttons/ScalingButton";
+import {Texture} from "@pixi/core";
+
+export type FactorySceneOptions = {
+    app: Application,
+    level: number,
+    conveyorBeltPattern: string,
+    recipe: Recipe,
+    machines: MachineShape[],
+    startIngredients?: Map<string, IngredientID>,
+    hasStepButton?: boolean
+}
+
+class StepButton extends ScalingButton {
+
+    factoryScene: FactoryScene
+
+    constructor(factoryScene: FactoryScene) {
+        super();
+        this.factoryScene = factoryScene
+    }
+
+    getTexture(): Texture | null {
+        return ASSET_STORE.getTextureAsset("proceedButton");
+    }
+
+    async onClick(): Promise<void> {
+        this.factoryScene.checkRecipe()
+        // Wait one second until all belts have adapted
+        await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+}
 
 export class FactoryScene extends Scene {
 
@@ -32,26 +64,28 @@ export class FactoryScene extends Scene {
     private winScreen: WinScreen;
     private uiOverlay: UIButtonOverlay
     private level: number
+    private stepButton?: StepButton
+    private timeInterval?: NodeJS.Timer
 
-    constructor(app: Application, level: number, conveyorBeltPattern: string, recipe: Recipe, machines: MachineShape[], startIngredients: Map<string, IngredientID> = new Map()) {
+    constructor(opts: FactorySceneOptions) {
         super();
-        this.app = app;
-        this.level = level
+        this.app = opts.app;
+        this.level = opts.level
         this.sortableChildren = true
 
         this.initBackground();
 
-        let patternArr = conveyorBeltPattern.split("\n").map(row => row.split("|"))
+        let patternArr = opts.conveyorBeltPattern.split("\n").map(row => row.split("|"))
 
         if (!isRectangularArray(patternArr)) {
             throw Error("Conveyor Belt Pattern is not rectangular!")
         }
 
-        this.recipeBox = this.setupRecipeBox(recipe);
+        this.recipeBox = this.setupRecipeBox(opts.recipe);
         this.beltGrid = this.setupBeltGridAndBelts(patternArr);
-        this.belts = this.setupBelts(patternArr, startIngredients, this.beltGrid)
+        this.belts = this.setupBelts(patternArr, this.beltGrid, opts.startIngredients)
 
-        this.winScreen = new WinScreen(recipe, this.level)
+        this.winScreen = new WinScreen(opts.recipe, this.level)
         this.winScreen.zIndex = 10
         this.addChild(this.winScreen)
 
@@ -59,10 +93,16 @@ export class FactoryScene extends Scene {
         this.uiOverlay.zIndex = 5
         this.addChild(this.uiOverlay)
 
-        this.machineInventoryGrid = this.setupInventoryGrid(machines.length)
+        this.machineInventoryGrid = this.setupInventoryGrid(opts.machines.length)
         this.machineUsageGrid = this.setupMachineUsageGrid(this.beltGrid!.getNumberOfRows(), this.beltGrid!.getNumberOfColumns())
-        this.machineGridItems = this.setupMachineGridItems(machines, this.machineInventoryGrid, this.machineUsageGrid)
+        this.machineGridItems = this.setupMachineGridItems(opts.machines, this.machineInventoryGrid, this.machineUsageGrid)
         this.machineGridConnector = this.setupGridConnector(this.machineInventoryGrid, this.machineUsageGrid, this.machineGridItems)
+
+        if (opts.hasStepButton) {
+            this.stepButton = new StepButton(this)
+            this.stepButton.position.set(GAME_WIDTH - 180, GAME_HEIGHT / 2)
+            this.addChild(this.stepButton)
+        }
     }
 
     private setupRecipeBox(recipe: Recipe) {
@@ -73,7 +113,20 @@ export class FactoryScene extends Scene {
     }
 
     start() {
-        this.checkRecipe()
+        this.winScreen.blendOut()
+        this.machineGridItems.forEach(item => {
+            // TODO: Ganz schlimm, überarbeiten
+            let nearestFreeIndex = this.machineInventoryGrid.getNearestFreeIndexForPositionAndItem(this.machineInventoryGrid.position, item)!
+            item.trySetToIndexInstantly(this.machineInventoryGrid, nearestFreeIndex)
+        })
+
+        this.belts.forEach( belt => belt.resetIngredients())
+
+        // Urgh, a little nasty
+        if (!this.stepButton) {
+            clearInterval(this.timeInterval)
+            this.timeInterval = setInterval(() => this.checkRecipe(), 3500)
+        }
     }
 
     private setupBeltGridAndBelts(patternArr: string[][]): Grid {
@@ -192,7 +245,7 @@ export class FactoryScene extends Scene {
         let gridItems = []
         let horizontalIndex = 0
         for (let machineShape of machineShapes) {
-            let machine = new Machine("neutral", machineShape, machineGrid)
+            let machine = new Machine("sweet", machineShape, machineGrid)
             this.addChild(machine)
             let gridItem = new GridItem(machine, inventoryGrid, 0, horizontalIndex)
 
@@ -207,7 +260,7 @@ export class FactoryScene extends Scene {
         return gridItems;
     }
 
-    private checkRecipe() {
+    checkRecipe() {
         let beltIngredients = this.belts.map(belt => belt.getEndIngredient().getID()!)
         let correctnessPerBelt = this.recipeBox.checkIngredientsAreProvided(beltIngredients, this.recipeBox.recipe.ingredients)
         for (let i = 0; i < this.belts.length; i++) {
@@ -223,12 +276,11 @@ export class FactoryScene extends Scene {
         if (levelSolved) {
             this.winScreen.blendIn()
             GAME_DATA.saveGame(Math.max(this.level + 1, GAME_DATA.getUnlockedLevels()))
-        } else {
-            setTimeout(() => this.checkRecipe(), 3500)
+            clearInterval(this.timeInterval)
         }
     }
 
-    private setupBelts(patternArr: string[][], startIngredients: Map<string, IngredientID>, beltGrid: Grid): ConveyorBelt[] {
+    private setupBelts(patternArr: string[][], beltGrid: Grid, startIngredients?: Map<string, IngredientID>): ConveyorBelt[] {
         let beltMap = this.parsePatternAsMap(patternArr)
         if (!beltMap) {
             throw Error("Conveyor Belt Pattern could not be parsed!")
@@ -243,7 +295,7 @@ export class FactoryScene extends Scene {
                 beltData[0].index,
                 beltData[beltLength - 1].index,
                 beltData.slice(1, beltLength - 1).map(data => data.index),
-                startIngredients.get(beltKey) ?? "cream")
+                startIngredients?.get(beltKey) ?? "cream")
             this.addChild(belt)
             belts.push(belt)
         }

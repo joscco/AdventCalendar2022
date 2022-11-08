@@ -56,16 +56,16 @@ export class WinScreen extends Sprite {
     constructor(recipe: Recipe, level: number) {
         super(ASSET_STORE.getTextureAsset("winScreenBackground"));
         this.anchor.set(0.5)
-        this.position.set(GAME_WIDTH/2, GAME_HEIGHT + 700)
+        this.position.set(GAME_WIDTH / 2, GAME_HEIGHT + 700)
 
         this.title = new Text("Well done!", {fontFamily: "Futurahandwritten", fontSize: 70, fill: 0x000000})
         this.title.anchor.set(0.5)
-        this.title.position.set(0, - 340)
+        this.title.position.set(0, -340)
         this.addChild(this.title)
 
         this.subTitle = new Text("You made some tasty", {fontFamily: "Futurahandwritten", fontSize: 40, fill: 0xaaaaaa})
         this.subTitle.anchor.set(0.5)
-        this.subTitle.position.set(0, - 280)
+        this.subTitle.position.set(0, -280)
         this.addChild(this.subTitle)
 
         this.cookieIcon = new Sprite(getRecipeTextureForDay(1))
@@ -94,7 +94,11 @@ export class WinScreen extends Sprite {
     }
 
     async blendIn() {
-        await gsap.to(this.position, {y: GAME_HEIGHT/2, duration: 0.5, ease: Back.easeInOut})
+        await gsap.to(this.position, {y: GAME_HEIGHT / 2, duration: 0.5, ease: Back.easeInOut})
+    }
+
+    blendOut() {
+        this.position.set(GAME_WIDTH / 2, GAME_HEIGHT + 700)
     }
 
 }

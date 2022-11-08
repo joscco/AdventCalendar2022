@@ -131,4 +131,8 @@ export class ConveyorBelt extends Container {
             }
         }
     }
+
+    resetIngredients() {
+        this.tiles.forEach(tile => tile.ingredientRef?.set(this.startIngredient))
+    }
 }
