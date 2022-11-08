@@ -30,7 +30,7 @@ export class TooltipManager {
             this.lastMousePosition = event.global
             this.currentBearer = bearer
             if (isEnabled()) {
-                await new Promise(resolve => setTimeout(resolve, 500));
+                await new Promise(resolve => setTimeout(resolve, 800));
                 // If we still hover the same thing, show the tooltip
                 if (this.currentBearer === bearer) {
                     let bearer = this.currentBearer

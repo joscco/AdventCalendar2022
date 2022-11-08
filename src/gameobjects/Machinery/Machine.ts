@@ -4,6 +4,7 @@ import {ASSET_STORE} from "../../index";
 import {Grid} from "../Grid/Grid";
 import {MachineIconSlot} from "./MachineIconSlot";
 import {TextureAssetID} from "../../general/AssetStore";
+import {GridItem} from "../Grid/GridItem";
 
 export type MachineType = IngredientTaste | IngredientColor | IngredientConsistence
 export type MachineShape = "1x1" | "2x1" | "3x1" | "1x2" | "2x2" | "3x2" | "1x3" | "2x3" | "3x3"
@@ -14,6 +15,7 @@ export class Machine extends Sprite {
     private machineShape: MachineShape;
     private iconSlot: MachineIconSlot;
     private currentGrid: Grid;
+    private gridItem?: GridItem;
 
     constructor(type: MachineType, machineShape: MachineShape, startGrid: Grid) {
         super()
@@ -28,8 +30,17 @@ export class Machine extends Sprite {
         this.updateAppearance()
     }
 
+    setGridItem(gridItem: GridItem) {
+        this.gridItem = gridItem
+        this.iconSlot.setGridItem(gridItem)
+    }
+
     blendOutTypeChooser() {
         this.iconSlot.blendOut()
+    }
+
+    toggleBlendTypeChooser() {
+        this.iconSlot.toggleBlend()
     }
 
     setType(type: MachineType) {

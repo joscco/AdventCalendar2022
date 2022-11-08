@@ -1,5 +1,12 @@
 import {Sprite, Text} from "pixi.js";
-import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH, NUMBER_OF_LEVELS, SCENE_TRANSITION_MANAGER} from "../index";
+import {
+    ASSET_STORE,
+    GAME_HEIGHT,
+    GAME_WIDTH,
+    NUMBER_OF_LEVELS,
+    SCENE_TRANSITION_MANAGER,
+    SOUND_MANAGER
+} from "../index";
 import {Recipe} from "../gameobjects/RecipeBox";
 import {getRecipeTextureForDay} from "../ui/Buttons/LevelButton";
 import {ScalingButton} from "../ui/Buttons/ScalingButton";
@@ -94,6 +101,7 @@ export class WinScreen extends Sprite {
     }
 
     async blendIn() {
+        SOUND_MANAGER.playBlub()
         await gsap.to(this.position, {y: GAME_HEIGHT / 2, duration: 0.5, ease: Back.easeInOut})
     }
 

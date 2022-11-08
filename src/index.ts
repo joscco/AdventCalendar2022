@@ -9,8 +9,9 @@ import {LevelChooserScene} from "./scenes/LevelChooserScene";
 import {TooltipManager} from "./gameobjects/Tooltip/TooltipManager";
 import {GameData} from "./general/GameData";
 import {SoundManager} from "./general/SoundManager";
-import {SoundButton} from "./ui/Buttons/SoundButton";
+import {MusicButton} from "./ui/Buttons/MusicButton";
 import {SceneTransitionManager} from "./general/SceneTransitionManager";
+import {SoundButton} from "./ui/Buttons/SoundButton";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -71,8 +72,14 @@ const main = async () => {
 
     TOOLTIP_MANAGER = new TooltipManager(App.stage)
 
+    let musicButton = new MusicButton()
+    musicButton.x = GAME_WIDTH - 270
+    musicButton.y = 125
+    musicButton.zIndex = 110
+    App.stage.addChild(musicButton);
+
     let soundButton = new SoundButton()
-    soundButton.x = GAME_WIDTH - 150
+    soundButton.x = GAME_WIDTH - 110
     soundButton.y = 125
     soundButton.zIndex = 110
     App.stage.addChild(soundButton);

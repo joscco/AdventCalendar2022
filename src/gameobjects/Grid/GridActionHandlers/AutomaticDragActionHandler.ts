@@ -3,6 +3,7 @@
 import {Grid, Vector2D} from "../Grid";
 import {GridActionHandler} from "./GridActionHandler";
 import {GridItem} from "../GridItem";
+import {SOUND_MANAGER} from "../../../index";
 
 export class AutomaticDragActionHandler extends GridActionHandler {
 
@@ -19,11 +20,13 @@ export class AutomaticDragActionHandler extends GridActionHandler {
     }
 
     onLetGoInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
+        SOUND_MANAGER.playBlub()
         let firstFreeIndex = grid.getNearestFreeIndexForPositionAndItem(grid.position, item)
         item.trySetToIndex(grid, firstFreeIndex!)
     }
 
     onPickUpInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
+        SOUND_MANAGER.playBlub()
         item.updateAim(mousePosition)
         item.freeFromGrid()
         grid.tidyUp()

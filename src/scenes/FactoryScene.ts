@@ -118,6 +118,7 @@ export class FactoryScene extends Scene {
             // TODO: Ganz schlimm, überarbeiten
             let nearestFreeIndex = this.machineInventoryGrid.getNearestFreeIndexForPositionAndItem(this.machineInventoryGrid.position, item)!
             item.trySetToIndexInstantly(this.machineInventoryGrid, nearestFreeIndex)
+            item.unlock()
         })
 
         this.belts.forEach( belt => belt.resetIngredients())
@@ -275,6 +276,7 @@ export class FactoryScene extends Scene {
 
         if (levelSolved) {
             this.winScreen.blendIn()
+            this.machineGridItems.forEach(item => item.lock())
             GAME_DATA.saveGame(Math.max(this.level + 1, GAME_DATA.getUnlockedLevels()))
             clearInterval(this.timeInterval)
         }

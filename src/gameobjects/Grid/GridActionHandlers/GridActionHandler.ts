@@ -20,4 +20,8 @@ export abstract class GridActionHandler {
     abstract onEnterGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void;
 
     abstract onLeaveGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void;
+
+    onTapInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
+
+    }
 }

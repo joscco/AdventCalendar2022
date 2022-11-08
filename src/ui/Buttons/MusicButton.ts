@@ -1,7 +1,7 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "pixi.js";
 import {ASSET_STORE, SOUND_MANAGER} from "../../index";
-export class SoundButton extends ScalingButton {
+export class MusicButton extends ScalingButton {
 
     enabled: boolean = true
 
@@ -12,13 +12,13 @@ export class SoundButton extends ScalingButton {
 
     getTexture(): Texture | null {
         return this.enabled
-            ? ASSET_STORE.getTextureAsset("soundButton")
-            : ASSET_STORE.getTextureAsset("noSoundButton");
+            ? ASSET_STORE.getTextureAsset("musicButton")
+            : ASSET_STORE.getTextureAsset("noMusicButton");
     }
 
     onClick(): void {
         this.enabled = !this.enabled
-        SOUND_MANAGER.setSoundEnabled(this.enabled)
+        SOUND_MANAGER.setMusicEnabled(this.enabled)
         this.updateTexture()
     }
 }

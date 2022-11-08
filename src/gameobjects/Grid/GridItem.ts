@@ -32,6 +32,7 @@ export class GridItem {
     currentGrid?: Grid
     currentIndex?: Index2D
     aim: Vector2D
+    locked: boolean = false
 
     dragging: boolean = false
     dragOffset: Vector2D = {x: 0, y: 0}
@@ -267,19 +268,29 @@ export class GridItem {
         return this.gridSlotsMap.has(grid);
     }
 
-    defineDragAndDrop(onPointerDown: (mousePos: Vector2D, item: GridItem) => void,
-                      onPointerMove: (mousePos: Vector2D, item: GridItem) => void,
-                      onPointerUp: (mousePos: Vector2D, item: GridItem) => void) {
+    defineTapDragAndDrop(onPointerDown: (mousePos: Vector2D, item: GridItem) => void,
+                         onPointerMove: (mousePos: Vector2D, item: GridItem) => void,
+                         onPointerUp: (mousePos: Vector2D, item: GridItem) => void,
+                         onPointerTap: (mousePos: Vector2D, item: GridItem) => void) {
 
+        let pointerDown = false
         this.content.interactive = true
+
         this.content.on("pointerdown", (event) => {
+            pointerDown = true
             let mousePosition: Vector2D = event.data.global
             this.dragOffset = {
                 x: this.content.x - mousePosition.x,
                 y: this.content.y - mousePosition.y
             }
-            onPointerDown(sum(mousePosition, this.dragOffset), this);
-            this.dragging = true
+
+            // Give pointerDown a small offset so that double-clicking doesn't interfere
+            setTimeout(() => {
+                if (pointerDown) {
+                    onPointerDown(sum(mousePosition, this.dragOffset), this);
+                    this.dragging = true
+                }
+            }, 300)
         })
 
         this.content.on("pointermove", (event) => {
@@ -290,14 +301,24 @@ export class GridItem {
         })
 
         this.content.on("pointerup", (event) => {
+            pointerDown = false
             let mousePosition = event.data.global
-            onPointerUp(sum(mousePosition, this.dragOffset), this);
+            if (this.dragging) {
+                onPointerUp(sum(mousePosition, this.dragOffset), this);
+            } else {
+                onPointerTap(sum(mousePosition, this.dragOffset), this)
+            }
             this.dragging = false
         })
 
         this.content.on("pointerupoutside", (event) => {
+            pointerDown = false
             let mousePosition = event.data.global
-            onPointerUp(sum(mousePosition, this.dragOffset), this);
+            if (this.dragging) {
+                onPointerUp(sum(mousePosition, this.dragOffset), this);
+            } else {
+                onPointerTap(sum(mousePosition, this.dragOffset), this)
+            }
             this.dragging = false
         })
     }
@@ -320,5 +341,13 @@ export class GridItem {
 
     bringToBack() {
         this.content.zIndex = 1
+    }
+
+    unlock() {
+        this.locked = false
+    }
+
+    lock() {
+        this.locked = true
     }
 }

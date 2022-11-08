@@ -1,4 +1,5 @@
 import {Button} from "./Button";
+import {SOUND_MANAGER} from "../../index";
 
 export abstract class ScalingButton extends Button {
     constructor() {
@@ -16,6 +17,7 @@ export abstract class ScalingButton extends Button {
     }
 
     async preClick() {
+        SOUND_MANAGER.playBlub()
         await this.scaleUpTo(1.3, 0.1)
         await this.scaleUpTo(1.2, 0.1)
         this.scaleDown()

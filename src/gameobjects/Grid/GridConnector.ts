@@ -44,10 +44,11 @@ export class GridConnector {
 
     defineDragAndDrop() {
         for (let item of this.gridItems) {
-            item.defineDragAndDrop(
+            item.defineTapDragAndDrop(
                 (mousePos, item) => this.onStartDrag(mousePos, item),
                 (mousePos, item) => this.onDragMove(mousePos, item),
-                (mousePos, item) => this.onEndDrag(mousePos, item))
+                (mousePos, item) => this.onEndDrag(mousePos, item),
+                (mousePos, item) => this.onTap(mousePos, item))
         }
     }
 
@@ -67,23 +68,37 @@ export class GridConnector {
     }
 
     private onStartDrag(mousePosition: Vector2D, item: GridItem) {
-        item.bringToTop()
-        let nearestGrid = this.findNearestGridForPosition(mousePosition);
-        this.updateNearestGrid(nearestGrid, mousePosition, item)
-        this.otherGridActionsMap.get(nearestGrid)!.onPickUpInGrid(nearestGrid, mousePosition, item)
+        if (!item.locked) {
+            item.bringToTop()
+            let nearestGrid = this.findNearestGridForPosition(mousePosition);
+            this.updateNearestGrid(nearestGrid, mousePosition, item)
+            this.otherGridActionsMap.get(nearestGrid)!.onPickUpInGrid(nearestGrid, mousePosition, item)
+        }
     }
 
     private onDragMove(mousePosition: Vector2D, item: GridItem) {
-        let nearestGrid = this.findNearestGridForPosition(mousePosition);
-        this.updateNearestGrid(nearestGrid, mousePosition, item)
-        this.otherGridActionsMap.get(nearestGrid)!.onDragToInGrid(nearestGrid, mousePosition, item)
+        if (!item.locked) {
+            let nearestGrid = this.findNearestGridForPosition(mousePosition);
+            this.updateNearestGrid(nearestGrid, mousePosition, item)
+            this.otherGridActionsMap.get(nearestGrid)!.onDragToInGrid(nearestGrid, mousePosition, item)
+        }
+    }
+
+    private onTap(mousePosition: Vector2D, item: GridItem) {
+        if (!item.locked) {
+            let nearestGrid = this.findNearestGridForPosition(mousePosition);
+            this.updateNearestGrid(nearestGrid, mousePosition, item)
+            this.otherGridActionsMap.get(nearestGrid)!.onTapInGrid(nearestGrid, mousePosition, item)
+        }
     }
 
     private onEndDrag(mousePosition: Vector2D, item: GridItem) {
-        item.bringToBack()
-        let nearestGrid = this.findNearestGridForPosition(mousePosition);
-        this.updateNearestGrid(nearestGrid, mousePosition, item)
-        this.otherGridActionsMap.get(nearestGrid)!.onLetGoInGrid(nearestGrid, mousePosition, item)
+        if (!item.locked) {
+            item.bringToBack()
+            let nearestGrid = this.findNearestGridForPosition(mousePosition);
+            this.updateNearestGrid(nearestGrid, mousePosition, item)
+            this.otherGridActionsMap.get(nearestGrid)!.onLetGoInGrid(nearestGrid, mousePosition, item)
+        }
     }
 
     private updateNearestGrid(newNearestGrid: Grid, mousePosition: Vector2D, item: GridItem) {

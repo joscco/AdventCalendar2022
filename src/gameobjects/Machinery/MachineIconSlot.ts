@@ -3,12 +3,13 @@ import {Machine, MachineType} from "./Machine";
 import {ASSET_STORE} from "../../index";
 import {Texture} from "@pixi/core";
 import {MachineTypeChooseMenu} from "./MachineTypeChooseMenu";
+import {GridItem} from "../Grid/GridItem";
 
 export class MachineIconSlot extends Container {
     private iconSlot: Sprite;
     private iconTypeImage: Sprite;
     private typeChooseMenu: MachineTypeChooseMenu;
-    private clicked: boolean = false
+    private gridItem?: GridItem;
 
     constructor(initialType: MachineType, machine: Machine) {
         super();
@@ -31,6 +32,10 @@ export class MachineIconSlot extends Container {
         this.addChild(this.typeChooseMenu)
     }
 
+    setGridItem(gridItem: GridItem) {
+        this.gridItem = gridItem
+    }
+
     updateType(type: MachineType) {
         this.iconTypeImage.texture = this.getIconTextureForType(type)
     }
@@ -43,28 +48,21 @@ export class MachineIconSlot extends Container {
         this.scale.set(0)
     }
 
-    public blendOut() {
-        if (this.typeChooseMenu.shown) {
-            this.typeChooseMenu.toggleBlend()
-        }
-    }
-
     private getIconTextureForType(type: MachineType): Texture {
         return ASSET_STORE.getTextureAsset(type);
     }
 
     private initIconSlot() {
-        let sprite = new Sprite(ASSET_STORE.getTextureAsset("machineIconSlot"))
-        sprite.interactive = true
-        sprite.cursor = "pointer"
+        return new Sprite(ASSET_STORE.getTextureAsset("machineIconSlot"))
+    }
 
-        sprite.on("pointertap",() => {
-            if (this.clicked) {
-                this.typeChooseMenu.toggleBlend()
-            }
-            this.clicked = true;
-            setTimeout(() => {this.clicked = false}, 600)
-        })
-        return sprite
+    blendOut() {
+        if (this.typeChooseMenu.shown) {
+            this.typeChooseMenu.toggleBlend()
+        }
+    }
+
+    toggleBlend() {
+        this.typeChooseMenu.toggleBlend()
     }
 }

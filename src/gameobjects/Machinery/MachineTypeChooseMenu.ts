@@ -1,5 +1,5 @@
 import {Sprite} from "pixi.js";
-import {ASSET_STORE} from "../../index";
+import {ASSET_STORE, SOUND_MANAGER} from "../../index";
 import {ScalingButton} from "../../ui/Buttons/ScalingButton";
 import {Machine, MachineType} from "./Machine";
 import {MachineTypeButton} from "./MachineTypeButton";
@@ -44,6 +44,7 @@ export class MachineTypeChooseMenu extends Sprite {
     }
 
     toggleBlend() {
+        SOUND_MANAGER.playBlub()
         this.shown ? this.blendOut() : this.blendIn()
     }
 }
