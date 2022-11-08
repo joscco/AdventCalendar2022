@@ -80,9 +80,9 @@ export class ConveyorBelt extends Container {
         return this.tiles[this.tiles.length - 1].getIngredientRef()!
     }
 
-    async showLastTileOverlay(correct: boolean) {
+    async showLastTileOverlay(correct: boolean, delay: number) {
         this.lastTileOverlay.texture = correct ? this.lastTileGoodTexture : this.lastTileBadTexture
-        await gsap.to(this.lastTileOverlay.scale, {x: 1, y: 1, duration: 0.3, ease: Back.easeOut})
+        await gsap.to(this.lastTileOverlay.scale, {x: 1, y: 1, duration: 0.3, ease: Back.easeOut, delay: delay})
         gsap.to(this.lastTileOverlay.scale, {x: 0, y: 0, duration: 0.3, ease: Back.easeIn})
     }
 

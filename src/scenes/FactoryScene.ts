@@ -213,7 +213,7 @@ export class FactoryScene extends Scene {
             let belt = this.belts[i]
             belt.updateIngredients(this.machineUsageGrid)
             belt.step();
-            belt.showLastTileOverlay(correctnessPerBelt[i])
+            belt.showLastTileOverlay(correctnessPerBelt[i], i * 0.05)
         }
 
         let correctnessPerIngredient = this.recipeBox.checkIngredientsAreProvided(this.recipeBox.recipe.ingredients, beltIngredients)
