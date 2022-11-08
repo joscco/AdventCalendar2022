@@ -1,5 +1,5 @@
 import {getNameForID, IngredientID} from "./Ingredient";
-import {Sprite, Text} from "pixi.js";
+import {Container, Graphics, Sprite, Text} from "pixi.js";
 import {ASSET_STORE} from "../index";
 
 export type Recipe = {
@@ -7,9 +7,48 @@ export type Recipe = {
     ingredients: IngredientID[]
 }
 
+class RecipeBoxIngredient extends Container {
+    text: Text;
+    strikeLine: Sprite;
+    lineMask: Graphics;
+    isFulfilled: boolean = false;
+
+    constructor(name: string) {
+        super();
+
+        this.text = new Text(name, {fontFamily: "Futurahandwritten", fontSize: 30, fill: 0x777777})
+        this.text.anchor.set(0, 0.5)
+
+        this.strikeLine = new Sprite(ASSET_STORE.getTextureAsset("recipeLongStrike"))
+        this.strikeLine.anchor.set(0, 0.5)
+        this.strikeLine.position.set(-10, 0)
+
+        this.lineMask = new Graphics()
+        this.lineMask.beginFill(0x000000)
+        this.lineMask.drawRect(0, 0, this.text.width + 15, this.text.height)
+        this.lineMask.endFill()
+        this.lineMask.scale.set(0, 1)
+        this.strikeLine.addChild(this.lineMask)
+
+        this.strikeLine.mask = this.lineMask
+
+        this.addChild(this.text, this.strikeLine)
+    }
+
+    setFulfilled(value: boolean) {
+        this.isFulfilled = value
+        gsap.to(this.lineMask.scale, {x: this.isFulfilled ? 1 : 0, y: 1, duration: 0.4, ease: Quad.easeInOut})
+    }
+
+    reset() {
+        this.setFulfilled(false)
+    }
+}
+
 export class RecipeBox extends Sprite {
 
     recipe: Recipe;
+    ingredients: RecipeBoxIngredient[] = [];
 
     constructor(recipe: Recipe) {
         super()
@@ -50,11 +89,10 @@ export class RecipeBox extends Sprite {
 
     private addChecklist(ingredients: IngredientID[]) {
         ingredients.forEach((id, index) => {
-            let ingredientText = new Text(getNameForID(id),
-                {fontFamily: "Futurahandwritten", fontSize: 30, fill: 0x777777})
-            ingredientText.anchor.set(0, 0.5)
-            ingredientText.position.set(-120, 175 + index * 50)
-            this.addChild(ingredientText)
+            let ingredientSlot = new RecipeBoxIngredient(getNameForID(id))
+            this.ingredients.push(ingredientSlot)
+            ingredientSlot.position.set(-120, 175 + index * 50)
+            this.addChild(ingredientSlot)
         })
     }
 }

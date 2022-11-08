@@ -129,6 +129,7 @@ export class ConveyorBelt extends Container {
                         ingredient.setColor(machineType)
                         break
                 }
+
                 let ingredientAfter = ingredient.getID()
                 if (ingredientBefore !== ingredientAfter) {
                     ingredient.emitParticles()

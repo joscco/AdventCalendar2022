@@ -123,6 +123,8 @@ export class FactoryScene extends Scene {
 
         this.belts.forEach( belt => belt.resetIngredients())
 
+        this.recipeBox.ingredients.forEach(ingredient => ingredient.reset())
+
         // Urgh, a little nasty
         if (!this.stepButton) {
             clearInterval(this.timeInterval)
@@ -272,6 +274,11 @@ export class FactoryScene extends Scene {
         }
 
         let correctnessPerIngredient = this.recipeBox.checkIngredientsAreProvided(this.recipeBox.recipe.ingredients, beltIngredients)
+        for (let i = 0; i < this.recipeBox.ingredients.length; i++) {
+            let recipeSlot = this.recipeBox.ingredients[i];
+            recipeSlot.setFulfilled(correctnessPerIngredient[i])
+        }
+
         let levelSolved = correctnessPerIngredient.reduce((a, b) => a && b)
 
         if (levelSolved) {
