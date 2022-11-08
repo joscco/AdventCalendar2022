@@ -1,4 +1,4 @@
-import {IngredientID} from "./Ingredient";
+import {getNameForID, IngredientID} from "./Ingredient";
 import {Sprite, Text} from "pixi.js";
 import {ASSET_STORE} from "../index";
 
@@ -50,9 +50,10 @@ export class RecipeBox extends Sprite {
 
     private addChecklist(ingredients: IngredientID[]) {
         ingredients.forEach((id, index) => {
-            let ingredientText = new Text("- " + id, {fontFamily: "Futurahandwritten", fontSize: 40, fill: 0x777777})
+            let ingredientText = new Text(getNameForID(id),
+                {fontFamily: "Futurahandwritten", fontSize: 30, fill: 0x777777})
             ingredientText.anchor.set(0, 0.5)
-            ingredientText.position.set(-100, 150 + index * 50)
+            ingredientText.position.set(-120, 175 + index * 50)
             this.addChild(ingredientText)
         })
     }

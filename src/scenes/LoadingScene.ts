@@ -22,7 +22,8 @@ export class LoadingScene extends Scene {
         this.loadingBar.position.set(GAME_WIDTH / 2, GAME_HEIGHT / 2 + 250)
         this.loadingBar.scale.set(0)
 
-        this.loadingText = new Text("Preheating Oven...", {fontFamily: "Futurahandwritten", fontSize: 60, fill: 0x000000})
+        this.loadingText = new Text("Preheating Oven...",
+            {fontFamily: "Futurahandwritten", fontSize: 60, fill: 0xffffff})
         this.loadingText.anchor.set(0.5)
         this.loadingText.scale.set(0)
         this.loadingText.position.set(GAME_WIDTH / 2, GAME_HEIGHT / 2 + 300)

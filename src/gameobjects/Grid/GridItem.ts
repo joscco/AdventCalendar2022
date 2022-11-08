@@ -16,10 +16,9 @@
 // ] describes a tetris-L-brick
 import {GridSlot} from "./GridSlot";
 import {Grid, Index2D, sum, Vector2D} from "./Grid";
-import {DisplayObject, FederatedPointerEvent} from "pixi.js";
+import {DisplayObject} from "pixi.js";
 import gsap from "gsap";
 import {Machine} from "../Machinery/Machine";
-import {App} from "../../index";
 
 type MultiSlotArr = (GridSlot | null)[][]
 type GridAdaptingDisplayObject = DisplayObject
@@ -271,37 +270,35 @@ export class GridItem {
     defineDragAndDrop(onPointerDown: (mousePos: Vector2D, item: GridItem) => void,
                       onPointerMove: (mousePos: Vector2D, item: GridItem) => void,
                       onPointerUp: (mousePos: Vector2D, item: GridItem) => void) {
-        let onMove = (event: FederatedPointerEvent) => {
-            if (this.dragging) {
-                let mousePosition = event.global
-                onPointerMove(sum(mousePosition, this.dragOffset), this);
-            }
-        }
 
         this.content.interactive = true
         this.content.on("pointerdown", (event) => {
-            let mousePosition: Vector2D = event.global
-            this.dragOffset = {x: this.content.x - mousePosition.x, y: this.content.y - mousePosition.y}
+            let mousePosition: Vector2D = event.data.global
+            this.dragOffset = {
+                x: this.content.x - mousePosition.x,
+                y: this.content.y - mousePosition.y
+            }
             onPointerDown(sum(mousePosition, this.dragOffset), this);
             this.dragging = true
-            App.stage.interactive = true;
-            App.stage.on("pointermove", onMove);
+        })
+
+        this.content.on("pointermove", (event) => {
+            if (this.dragging) {
+                let mousePosition = event.data.global
+                onPointerMove(sum(mousePosition, this.dragOffset), this);
+            }
         })
 
         this.content.on("pointerup", (event) => {
-            let mousePosition = event.global
+            let mousePosition = event.data.global
             onPointerUp(sum(mousePosition, this.dragOffset), this);
             this.dragging = false
-            App.stage.interactive = false;
-            App.stage.off("pointermove", onMove);
         })
 
         this.content.on("pointerupoutside", (event) => {
-            let mousePosition = event.global
+            let mousePosition = event.data.global
             onPointerUp(sum(mousePosition, this.dragOffset), this);
             this.dragging = false
-            App.stage.interactive = false;
-            App.stage.off("pointermove", onMove);
         })
     }
 

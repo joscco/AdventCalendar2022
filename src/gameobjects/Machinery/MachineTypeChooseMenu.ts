@@ -26,8 +26,8 @@ export class MachineTypeChooseMenu extends Sprite {
             "sticky", "liquid", "powdery", "solid"
         ].map((type, index) => {
                 let button = new MachineTypeButton(type as MachineType, this)
-                button.x =  135 + (index % 4) * 60
-                button.y = -63 + Math.floor(index / 4) * 60
+                button.x =  75 + (index % 4) * 100
+                button.y = -90 + Math.floor(index / 4) * 85
                 this.addChild(button)
                 return button
             })

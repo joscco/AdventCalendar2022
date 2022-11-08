@@ -50,7 +50,7 @@ export class FactoryScene extends Scene {
         this.beltGrid = this.setupBeltGridAndBelts(patternArr);
         this.belts = this.setupBelts(patternArr, this.beltGrid)
 
-        this.winScreen = new WinScreen(recipe)
+        this.winScreen = new WinScreen(recipe, this.level)
         this.winScreen.zIndex = 10
         this.addChild(this.winScreen)
 
@@ -149,8 +149,6 @@ export class FactoryScene extends Scene {
         outsideGrid.tileWidth = 100
         outsideGrid.columnOffsetX = 25
         outsideGrid.centerIn({x: 100, y: 125, width: 1820, height: 0})
-        outsideGrid.setDefaultSlotTexture(ASSET_STORE.getTextureAsset("emptyField"))
-        outsideGrid.drawGrid()
         outsideGrid.zIndex = 0
         this.addChild(outsideGrid)
 

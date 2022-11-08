@@ -83,9 +83,11 @@ const main = async () => {
     SCENE_MANAGER.add("level_1",
         new FactoryScene(
             App, 1,
-            "A0|A1|A2|A3|A4\n" +
-            "B0|B1|B2|B3|B4\n" +
-            "C0|C1|C2|C3|C4",
+            "A0|A1|A2|A3|A4|A5|A6\n" +
+            "B0|B1|B2|B3|B4|B5|B6\n" +
+            "D0|D1|D2|D3|D4|D5|D6\n" +
+            "E0|E1|E2|E3|E4|E5|E6\n" +
+            "C0|C1|C2|C3|C4|C5|C6",
             RECIPES.SANTAMILK,
             ["1x1", "1x1", "1x1", "2x1", "2x1"]
         ))

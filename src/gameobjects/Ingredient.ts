@@ -56,7 +56,7 @@ export class Ingredient extends Container {
     }
 
     getTexture(): Texture {
-        return ASSET_STORE.getTextureAsset(this.ingredientData!.id)
+        return ASSET_STORE.getTextureAsset(this.ingredientData!.id as IngredientID)
     }
 
     getID(): IngredientID | null {
@@ -85,31 +85,20 @@ export type IngredientConsistence = "sticky" | "liquid" | "powdery" | "solid"
 export type IngredientColor = "white" | "red" | "yellow" | "brown"
 
 export type IngredientData = {
-    id: IngredientID,
     text: string,
     taste: IngredientTaste,
     consistency: IngredientConsistence,
-    color: IngredientColor
+    color: IngredientColor,
+    [key: string]: any
 }
 
-export type IngredientID = "cream" | "milk" | "flour" | "cabbage"
-    | "butter" | "melted_butter" | "cornflour" | "cornflakes"
-    | "beet_pudding" | "beet_juice" | "beet_flour" | "beet"
-    | "mud" | "swamp_water" | "dry_dirt" | "dirt"
-    | "sweetened_cream" | "sweetened_milk" | "sugar" | "marzipan"
-    | "honey" | "vanilla_milk" | "vanilla_sugar" | "honey_comb"
-    | "cherry_jam" | "cherry_sauce" | "cherry_sugar" | "cherries"
-    | "chocolate_pudding" | "melted_chocolate" | "brown_sugar" | "raisins"
-    | "lemon_cream" | "expired_milk" | "lemon_concentrate" | "old_lemon_candy"
-    | "lemon_pudding" | "lemon_juice" | "lemon_sugar" | "candied_lemon_peel"
-    | "currant_pudding" | "currant_juice" | "currant_sugar" | "currants"
-    | "rotten_fruits" | "rotten_fruit_juice" | "grinded_umeboshi" | "umeboshi"
-    | "nut_cream" | "nut_aroma" | "grinded_nuts" | "peeled_nuts"
-    | "egg_yolk" | "egg" | "egg_powder" | "scrambled_egg"
-    | "wine_cream" | "wine" | "spices" | "steak"
-    | "nut_butter" | "rum_aroma" | "cocoa" | "nuts"
+export function getNameForID(id: IngredientID) {
+    return INGREDIENTS.find(i => i.id === id)!.text
+}
 
-export const INGREDIENTS: IngredientData[] = [
+export type IngredientID = typeof INGREDIENTS[number]["id"]
+
+export const INGREDIENTS = [
     {id: "cream", text: "Cream", taste: "neutral", color: "white", consistency: "sticky"},
     {id: "milk", text: "Milk", taste: "neutral", color: "white", consistency: "liquid"},
     {id: "flour", text: "Flour", taste: "neutral", color: "white", consistency: "powdery"},
@@ -174,4 +163,4 @@ export const INGREDIENTS: IngredientData[] = [
     {id: "rum_aroma", text: "Rum Aroma", taste: "savoury", color: "brown", consistency: "liquid"},
     {id: "cocoa", text: "Cocoa", taste: "savoury", color: "brown", consistency: "powdery"},
     {id: "nuts", text: "Nuts", taste: "savoury", color: "brown", consistency: "solid"}
-]
+] as const

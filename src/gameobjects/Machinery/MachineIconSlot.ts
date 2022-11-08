@@ -18,7 +18,6 @@ export class MachineIconSlot extends Container {
         this.addChild(this.iconSlot)
 
         this.iconTypeImage = new Sprite()
-        this.iconTypeImage.scale.set(1.5)
         this.iconTypeImage.anchor.set(0.5)
 
         this.updateType(initialType)
@@ -59,7 +58,6 @@ export class MachineIconSlot extends Container {
         sprite.interactive = true
         sprite.cursor = "pointer"
 
-        // TODO: Doesn't work well in combination with dragging!
         sprite.on("pointertap",() => {
             if (this.clicked) {
                 this.typeChooseMenu.toggleBlend()
