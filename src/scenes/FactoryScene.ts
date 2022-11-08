@@ -18,6 +18,7 @@ import {AutomaticDragActionHandler} from "../gameobjects/Grid/GridActionHandlers
 import {GridItem} from "../gameobjects/Grid/GridItem";
 import {WinScreen} from "../general/WinScreen";
 import {UIButtonOverlay} from "../ui/ButtonOverlay";
+import {IngredientID} from "../gameobjects/Ingredient";
 
 export class FactoryScene extends Scene {
 
@@ -32,7 +33,7 @@ export class FactoryScene extends Scene {
     private uiOverlay: UIButtonOverlay
     private level: number
 
-    constructor(app: Application, level: number, conveyorBeltPattern: string, recipe: Recipe, machines: MachineShape[]) {
+    constructor(app: Application, level: number, conveyorBeltPattern: string, recipe: Recipe, machines: MachineShape[], startIngredients: Map<string, IngredientID> = new Map()) {
         super();
         this.app = app;
         this.level = level
@@ -48,7 +49,7 @@ export class FactoryScene extends Scene {
 
         this.recipeBox = this.setupRecipeBox(recipe);
         this.beltGrid = this.setupBeltGridAndBelts(patternArr);
-        this.belts = this.setupBelts(patternArr, this.beltGrid)
+        this.belts = this.setupBelts(patternArr, startIngredients, this.beltGrid)
 
         this.winScreen = new WinScreen(recipe, this.level)
         this.winScreen.zIndex = 10
@@ -227,20 +228,22 @@ export class FactoryScene extends Scene {
         }
     }
 
-    private setupBelts(patternArr: string[][], beltGrid: Grid): ConveyorBelt[] {
+    private setupBelts(patternArr: string[][], startIngredients: Map<string, IngredientID>, beltGrid: Grid): ConveyorBelt[] {
         let beltMap = this.parsePatternAsMap(patternArr)
         if (!beltMap) {
             throw Error("Conveyor Belt Pattern could not be parsed!")
         }
 
         let belts = []
-        for (let beltData of beltMap.values()) {
+        for (let beltKey of beltMap.keys()) {
+            let beltData = beltMap.get(beltKey)!
             let beltLength = beltData.length
             let belt = new ConveyorBelt(
                 beltGrid,
                 beltData[0].index,
                 beltData[beltLength - 1].index,
-                beltData.slice(1, beltLength - 1).map(data => data.index))
+                beltData.slice(1, beltLength - 1).map(data => data.index),
+                startIngredients.get(beltKey) ?? "cream")
             this.addChild(belt)
             belts.push(belt)
         }

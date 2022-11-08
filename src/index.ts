@@ -89,8 +89,12 @@ const main = async () => {
             "E0|E1|E2|E3|E4|E5|E6\n" +
             "C0|C1|C2|C3|C4|C5|C6",
             RECIPES.SANTAMILK,
-            ["1x1", "1x1", "1x1", "2x1", "2x1"]
-        ))
+            ["1x1", "1x1", "1x1", "2x1", "2x1"],
+            new Map([
+                ["A", "butter"],
+                ["B", "currant_pudding"]
+            ]))
+        )
     SCENE_MANAGER.add("level_2",
         new FactoryScene(
             App, 2,

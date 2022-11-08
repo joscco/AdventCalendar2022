@@ -1,5 +1,5 @@
 import {Grid, Index2D} from "../Grid/Grid";
-import {Ingredient} from "../Ingredient";
+import {Ingredient, IngredientID} from "../Ingredient";
 import {ConveyorBeltTile} from "./ConveyorBeltTile";
 import {ConveyorBeltStartTile} from "./ConveyorBeltStartTile";
 import {ConveyorBeltEndTile} from "./ConveyorBeltEndTile";
@@ -11,14 +11,17 @@ import {Machine} from "../Machinery/Machine";
 
 export class ConveyorBelt extends Container {
 
+    private startIngredient: IngredientID
     private grid: Grid
     private tiles: ConveyorBeltTile[]
     private lastTileOverlay: Sprite
     private lastTileGoodTexture: Texture
     private lastTileBadTexture: Texture
 
-    constructor(grid: Grid, startIndex: Index2D, endIndex: Index2D, betweenIndices: Index2D[]) {
+    constructor(grid: Grid, startIndex: Index2D, endIndex: Index2D, betweenIndices: Index2D[], startIngredient: IngredientID) {
         super()
+
+        this.startIngredient = startIngredient
         this.grid = grid
 
         this.tiles = []
@@ -51,7 +54,7 @@ export class ConveyorBelt extends Container {
             let tile = this.tiles[i]
             tile.zIndex = 0
 
-            let ingredient = new Ingredient()
+            let ingredient = new Ingredient(this.startIngredient)
             ingredient.zIndex = 1
             TOOLTIP_MANAGER.registerTooltipFor(ingredient, () => ingredient.getTooltipText())
             tile.setIngredientRef(ingredient)
@@ -72,7 +75,12 @@ export class ConveyorBelt extends Container {
             let nextTile = this.tiles[(i + 1) % beltLength]
             let currentIngredient = ingredientsCopy[i]
             nextTile.setIngredientRef(currentIngredient)
+
+            if (i === beltLength - 1) {
+                currentIngredient.set(this.startIngredient)
+            }
             currentTile.repositionIngredient(currentIngredient, nextTile.position)
+
         }
     }
 
