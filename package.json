@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@pixi/assets": "^6.5.8",
+        "@pixi/particle-emitter": "^5.0.7",
         "gsap": "^3.11.3",
         "howler": "^2.2.3",
         "pixi.js": "^6.5.8"

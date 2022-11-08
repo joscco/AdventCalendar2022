@@ -108,6 +108,7 @@ export class ConveyorBelt extends Container {
             if (machineGrid.get(tile.index)) {
                 let machine = machineGrid.get(tile.index)!.gridItem.content! as Machine
                 let machineType = machine.getType()
+                let ingredientBefore = ingredient.getID()
                 switch (machineType) {
                     case "sweet":
                     case "neutral":
@@ -127,6 +128,10 @@ export class ConveyorBelt extends Container {
                     case "brown":
                         ingredient.setColor(machineType)
                         break
+                }
+                let ingredientAfter = ingredient.getID()
+                if (ingredientBefore !== ingredientAfter) {
+                    ingredient.emitParticles()
                 }
             }
         }

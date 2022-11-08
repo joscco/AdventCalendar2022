@@ -2,6 +2,7 @@
 import {Container, Sprite} from "pixi.js";
 import {Texture} from "@pixi/core";
 import {ASSET_STORE} from "../index";
+import {Emitter} from "@pixi/particle-emitter";
 
 export class Ingredient extends Container {
 
@@ -9,7 +10,8 @@ export class Ingredient extends Container {
     private consistency: IngredientConsistence = "sticky"
     private color: IngredientColor = "white"
     private text?: string
-    sprite: Sprite
+    private sprite: Sprite
+    private particleEmitter: Emitter
 
     constructor(private id: IngredientID = "cream") {
         super()
@@ -24,6 +26,7 @@ export class Ingredient extends Container {
 
         // Must be called after sprite was set
         this.set(this.id)
+        this.particleEmitter = this.createParticleEmitter()
 
         gsap.to(this.sprite.scale, {x: 1.1, y: 0.9, duration: 0.5, yoyo: true, repeat: -1, ease: Back.easeInOut})
     }
@@ -49,6 +52,10 @@ export class Ingredient extends Container {
         this.consistency = element.consistency
         this.color = element.color
         this.update()
+    }
+
+    emitParticles() {
+        this.particleEmitter.emitNow()
     }
 
     updateTexture(): void {
@@ -89,7 +96,66 @@ export class Ingredient extends Container {
         this.text = INGREDIENTS[this.id].text
     }
 
-
+    private createParticleEmitter() {
+        return new Emitter(this, {
+            lifetime: {
+                "min": 0.7,
+                "max": 1
+            },
+            frequency: 1,
+            autoUpdate: true,
+            emitterLifetime: 0.1,
+            particlesPerWave: 15,
+            pos: {
+                "x": 0,
+                "y": 0
+            },
+            behaviors: [
+                {
+                    type: "alphaStatic",
+                    config: {
+                        alpha: 1
+                    }
+                },
+                {
+                    type: 'moveSpeedStatic',
+                    config: {
+                        min: 50,
+                        max: 100
+                    }
+                },
+                {
+                    type: "scale",
+                    config: {
+                        "scale": {
+                            "list": [{"time": 0, "value": 0}, {"time": 0.8, "value": 1.0}, {"time": 1, "value": 0}]
+                        },
+                        "minMult": 1
+                    }
+                },
+                {
+                    "type": "rotation",
+                    "config": {
+                        "accel": 0,
+                        "minSpeed": 0,
+                        "maxSpeed": 200,
+                        "minStart": 0,
+                        "maxStart": 360
+                    }
+                },
+                {
+                    type: "textureSingle",
+                    "config": {
+                        "texture": ASSET_STORE.getTextureAsset("particle")
+                    }
+                },
+                {
+                    "type": "spawnPoint",
+                    "config": {}
+                }
+            ]
+        });
+    }
 }
 
 export function getNameForID(id: IngredientID) {
