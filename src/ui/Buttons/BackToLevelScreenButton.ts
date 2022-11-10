@@ -1,6 +1,6 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "pixi.js";
-import {ASSET_STORE, SCENE_TRANSITION_MANAGER} from "../../index";
+import {ASSET_STORE, SCENE_MANAGER} from "../../index";
 
 export class BackToLevelScreenButton extends ScalingButton {
     getTexture(): Texture | null {
@@ -8,6 +8,6 @@ export class BackToLevelScreenButton extends ScalingButton {
     }
 
     onClick(): void {
-        SCENE_TRANSITION_MANAGER.transitionTo("levelChooserScene")
+        SCENE_MANAGER.startWithTransition("levelChooserScene")
     }
 }

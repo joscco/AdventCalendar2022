@@ -2,7 +2,7 @@
 
 import {Container} from "pixi.js";
 import {Tooltip} from "./Tooltip";
-import {Vector2D} from "../Grid/Grid";
+import {Vector2D} from "../../general/Helpers";
 
 export class TooltipManager {
 

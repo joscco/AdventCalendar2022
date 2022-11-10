@@ -1,10 +1,10 @@
-import {LEVEL_SCREEN} from "../index";
+import {INGREDIENT_COOKBOOK, LEVEL_SCREEN} from "../index";
 import {IngredientID} from "../gameobjects/Ingredient";
 
 export class GameData {
     private GAME_STATE_KEY: string = "berndsBakeryGame"
 
-    private initialGameState: GAME_STATE = { unlockedLevel: 1, unlockedIngredients: [] }
+    private initialGameState: GAME_STATE = { unlockedLevel: 1, unlockedIngredients: ["cream"] }
 
     private currentState: GAME_STATE
 
@@ -24,6 +24,7 @@ export class GameData {
         if (this.currentState.unlockedIngredients.indexOf(newIngredient) === -1) {
             this.currentState.unlockedIngredients.push(newIngredient);
             this.saveGame(this.currentState.unlockedLevel, this.currentState.unlockedIngredients)
+            INGREDIENT_COOKBOOK.updateEntries()
         }
     }
 

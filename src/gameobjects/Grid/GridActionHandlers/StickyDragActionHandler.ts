@@ -1,9 +1,10 @@
 // Like Grid Connector but Element Becomes Draggable to positions
-import {Grid, Vector2D} from "../Grid";
+import {Grid} from "../Grid";
 import {GridActionHandler} from "./GridActionHandler";
 import {GridItem} from "../GridItem";
 import {Machine} from "../../Machinery/Machine";
 import {SOUND_MANAGER} from "../../../index";
+import {Vector2D} from "../../../general/Helpers";
 
 export class StickyDragActionHandler extends GridActionHandler {
 

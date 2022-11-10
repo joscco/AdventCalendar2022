@@ -1,9 +1,10 @@
 // Similar to Drag and Drop Grid Connector put sets to next available slot in grid
 
-import {Grid, Vector2D} from "../Grid";
+import {Grid} from "../Grid";
 import {GridActionHandler} from "./GridActionHandler";
 import {GridItem} from "../GridItem";
 import {SOUND_MANAGER} from "../../../index";
+import {Vector2D} from "../../../general/Helpers";
 
 export class AutomaticDragActionHandler extends GridActionHandler {
 

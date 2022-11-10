@@ -1,4 +1,4 @@
-import {Grid, Index2D} from "../Grid/Grid";
+import {Grid} from "../Grid/Grid";
 import {Ingredient, IngredientID} from "../Ingredient";
 import {ConveyorBeltTile} from "./ConveyorBeltTile";
 import {ConveyorBeltStartTile} from "./ConveyorBeltStartTile";
@@ -6,8 +6,9 @@ import {ConveyorBeltEndTile} from "./ConveyorBeltEndTile";
 import {GridItem} from "../Grid/GridItem";
 import {ConveyorBeltMoveTile} from "./ConveyorBeltMoveTile";
 import {Container, Sprite, Texture} from "pixi.js";
-import {ASSET_STORE, TOOLTIP_MANAGER} from "../../index";
+import {ASSET_STORE, GAME_DATA, TOOLTIP_MANAGER} from "../../index";
 import {Machine} from "../Machinery/Machine";
+import {Index2D} from "../../general/Helpers";
 
 export class ConveyorBelt extends Container {
 
@@ -133,6 +134,7 @@ export class ConveyorBelt extends Container {
 
                 let ingredientAfter = ingredient.getID()
                 if (ingredientBefore !== ingredientAfter) {
+                    GAME_DATA.saveNewUnlockedIngredient(ingredientAfter)
                     ingredient.emitParticles()
                 }
             }

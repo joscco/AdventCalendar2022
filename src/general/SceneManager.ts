@@ -1,21 +1,40 @@
 import * as PIXI from 'pixi.js';
 import IScene from "../scenes/IScene";
+import {Container, Graphics} from "pixi.js";
+import {GAME_HEIGHT, GAME_WIDTH} from "../index";
 
 /**
  * Manages numerous Scenes and makes sure they function as they should.
  * @param {PIXI.Application} app The pixi application the scenes will be bound to.
  */
-export default class SceneManager {
+export default class SceneManager extends Container{
 
     private app: PIXI.Application;
     private scenes: {[name: string]: IScene};
     private current: string|null;
+    private overlay: Graphics
 
     constructor(app: PIXI.Application) {
+        super()
         this.app = app;
         this.scenes = {};
         this.current = null;
         app.ticker.add(this.update.bind(this));
+
+        this.overlay = this.initOverlay();
+    }
+
+    private initOverlay(): Graphics {
+        this.zIndex = 100
+        this.alpha = 0
+
+        let overlay = new Graphics()
+        overlay.beginFill(0xF3AFB1)
+        overlay.drawRect(0, 0, GAME_WIDTH, GAME_HEIGHT)
+        overlay.endFill()
+
+        this.addChild(overlay)
+        return overlay
     }
 
     private update(delta: number): void {
@@ -83,7 +102,7 @@ export default class SceneManager {
             return;
         }
 
-        this.stop();
+        await this.stop();
 
         // Start new
         this.current = name;
@@ -98,10 +117,33 @@ export default class SceneManager {
         }
     }
 
+    public async startWithTransition(name: string): Promise<void> {
+        if (!this.contains(name) || name === this.current) {
+            return;
+        }
+
+        await gsap.to(this, {alpha: 1, duration: 0.5, ease: Quad.easeInOut})
+        this.stop();
+
+        // Start new
+        this.current = name;
+        const active = this.active;
+        if (active) {
+            if (!active.hasRun) {
+                active.init();
+                active.hasRun = true;
+            }
+            this.app.stage.addChild(active);
+            active.start();
+        }
+
+        await gsap.to(this, {alpha: 0, duration: 0.5, ease: Quad.easeInOut})
+    }
+
     /**
      * Stops the scene and unsets it as the active scene in this manager.
      */
-    public stop(): void {
+    async stop(): Promise<void> {
         let active: IScene|null = this.active;
         if (active) {
             this.current = null;

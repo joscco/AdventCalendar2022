@@ -10,8 +10,8 @@ import {TooltipManager} from "./gameobjects/Tooltip/TooltipManager";
 import {GameData} from "./general/GameData";
 import {SoundManager} from "./general/SoundManager";
 import {MusicButton} from "./ui/Buttons/MusicButton";
-import {SceneTransitionManager} from "./general/SceneTransitionManager";
 import {SoundButton} from "./ui/Buttons/SoundButton";
+import {IngredientCookBook} from "./gameobjects/IngredientCookBook";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -22,11 +22,11 @@ export const NUMBER_OF_LEVELS: number = 24;
 export var App: Application;
 export var TOOLTIP_MANAGER: TooltipManager;
 export var SCENE_MANAGER: SceneManager;
-export var SCENE_TRANSITION_MANAGER: SceneTransitionManager;
 export var ASSET_STORE: AssetStore;
 export var GAME_DATA: GameData;
 export var LEVEL_SCREEN: LevelChooserScene;
 export var SOUND_MANAGER: SoundManager;
+export var INGREDIENT_COOKBOOK: IngredientCookBook
 
 const main = async () => {
     // Init Main App
@@ -58,8 +58,7 @@ const main = async () => {
     // Add all loading bundles
     ASSET_STORE = new AssetStore()
     SCENE_MANAGER = new SceneManager(App);
-    SCENE_TRANSITION_MANAGER = new SceneTransitionManager()
-    App.stage.addChild(SCENE_TRANSITION_MANAGER)
+    App.stage.addChild(SCENE_MANAGER)
 
     await ASSET_STORE.startLoadingScreen()
     await SCENE_MANAGER.start("loadingScene")
@@ -83,6 +82,10 @@ const main = async () => {
     soundButton.y = 125
     soundButton.zIndex = 110
     App.stage.addChild(soundButton);
+
+    INGREDIENT_COOKBOOK = new IngredientCookBook()
+    INGREDIENT_COOKBOOK.zIndex = 6
+    App.stage.addChild(INGREDIENT_COOKBOOK)
 
     SCENE_MANAGER.add("startScene", new StartScene(App))
     LEVEL_SCREEN = new LevelChooserScene(App)
@@ -116,7 +119,7 @@ const main = async () => {
             recipe: RECIPES.SANTAMILK,
             machines: ["1x1", "1x1", "1x1", "2x1", "2x1"]
         }))
-    SCENE_TRANSITION_MANAGER.transitionTo("startScene")
+    SCENE_MANAGER.startWithTransition("startScene")
 };
 
 main();

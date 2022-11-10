@@ -1,7 +1,7 @@
 import {TooltipManager} from "./TooltipManager";
 import {ASSET_STORE} from "../../index";
-import {Vector2D} from "../Grid/Grid";
 import {Container, NineSlicePlane, Sprite, Text} from "pixi.js";
+import {Vector2D} from "../../general/Helpers";
 
 export class Tooltip extends Container {
 

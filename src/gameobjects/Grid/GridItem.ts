@@ -15,10 +15,11 @@
 //  [1, 1, 1]
 // ] describes a tetris-L-brick
 import {GridSlot} from "./GridSlot";
-import {Grid, Index2D, sum, Vector2D} from "./Grid";
+import {Grid} from "./Grid";
 import {DisplayObject} from "pixi.js";
 import gsap from "gsap";
 import {Machine} from "../Machinery/Machine";
+import {Index2D, sum, Vector2D} from "../../general/Helpers";
 
 type MultiSlotArr = (GridSlot | null)[][]
 type GridAdaptingDisplayObject = DisplayObject

@@ -6,9 +6,10 @@
 // Role:
 // Let grid
 
-import {Grid, Vector2D} from "./Grid";
+import {Grid} from "./Grid";
 import {GridItem} from "./GridItem";
 import {GridActionHandler} from "./GridActionHandlers/GridActionHandler";
+import {Vector2D} from "../../general/Helpers";
 
 // Hat eine Referenzliste auf die Grids
 // Hat für jedes Grid einen ActionHandler

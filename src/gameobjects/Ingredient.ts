@@ -194,9 +194,27 @@ export type IngredientConsistence = "sticky" | "liquid" | "powdery" | "solid"
 
 export type IngredientColor = "white" | "red" | "yellow" | "brown"
 
-export type IngredientID = keyof typeof INGREDIENTS
+export const IngredientIDs = [
+    "cream", "milk", "flour", "cabbage",
+    "butter", "melted_butter", "cornflour", "cornflakes",
+    "beet_pudding", "beet_juice", "beet_flour", "beet",
+    "mud", "swamp_water", "dry_dirt", "dirt",
+    "sweetened_cream", "sweetened_milk", "sugar", "marzipan",
+    "honey", "vanilla_milk", "vanilla_sugar", "honey_comb",
+    "cherry_jam", "cherry_sauce", "cherry_sugar", "cherries",
+    "chocolate_pudding", "melted_chocolate", "brown_sugar", "raisins",
+    "lemon_cream", "expired_milk", "lemon_concentrate", "old_lemon_candy",
+    "lemon_pudding", "lemon_juice", "lemon_sugar", "candied_lemon_peel",
+    "currant_pudding", "currant_juice", "currant_sugar", "currants",
+    "rotten_fruits", "rotten_fruit_juice", "grinded_umeboshi", "umeboshi",
+    "nut_cream", "nut_aroma", "grinded_nuts", "peeled_nuts",
+    "egg_yolk", "egg", "egg_powder", "scrambled_egg",
+    "wine_cream", "wine", "spices", "steak",
+    "nut_butter", "rum_aroma", "cocoa", "nuts"] as const
 
-export const INGREDIENTS = {
+export type IngredientID = typeof IngredientIDs[number]
+
+export const INGREDIENTS: {[id in IngredientID]: IngredientData} = {
     "cream": {text: "Cream", taste: "neutral", color: "white", consistence: "sticky"},
     "milk": {text: "Milk", taste: "neutral", color: "white", consistence: "liquid"},
     "flour": {text: "Flour", taste: "neutral", color: "white", consistence: "powdery"},

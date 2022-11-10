@@ -1,5 +1,5 @@
 import {ScalingButton} from "./ScalingButton";
-import {ASSET_STORE, SCENE_TRANSITION_MANAGER} from "../../index";
+import {ASSET_STORE, SCENE_MANAGER} from "../../index";
 import {Text, Texture} from "pixi.js";
 
 export class LevelButton extends ScalingButton {
@@ -8,7 +8,7 @@ export class LevelButton extends ScalingButton {
     enabled: boolean
 
     onClick(): void {
-        SCENE_TRANSITION_MANAGER.transitionTo("level_" + this.n)
+        SCENE_MANAGER.startWithTransition("level_" + this.n)
     }
 
     isScalingEnabled(): boolean {

@@ -1,8 +1,8 @@
 import {AnimatedSprite} from "pixi.js";
 import {Texture} from "@pixi/core";
 import {Ingredient} from "../Ingredient";
-import {Index2D, Vector2D} from "../Grid/Grid";
 import {ASSET_STORE} from "../../index";
+import {Index2D, Vector2D} from "../../general/Helpers";
 
 
 export abstract class ConveyorBeltTile extends AnimatedSprite {

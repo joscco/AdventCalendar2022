@@ -3,8 +3,7 @@ import {
     ASSET_STORE,
     GAME_HEIGHT,
     GAME_WIDTH,
-    NUMBER_OF_LEVELS,
-    SCENE_TRANSITION_MANAGER,
+    NUMBER_OF_LEVELS, SCENE_MANAGER,
     SOUND_MANAGER
 } from "../index";
 import {Recipe} from "../gameobjects/RecipeBox";
@@ -27,7 +26,7 @@ class LevelScreenButton extends ScalingButton {
     }
 
     onClick(): void {
-        SCENE_TRANSITION_MANAGER.transitionTo("levelChooserScene")
+        SCENE_MANAGER.startWithTransition("levelChooserScene")
     }
 }
 
@@ -42,7 +41,7 @@ class NextLevelButton extends ScalingButton {
     }
 
     onClick(): void {
-        SCENE_TRANSITION_MANAGER.transitionTo("level_" + this.level)
+        SCENE_MANAGER.startWithTransition("level_" + this.level)
     }
 
 }

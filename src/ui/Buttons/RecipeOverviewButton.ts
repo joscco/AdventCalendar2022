@@ -1,7 +1,7 @@
 import {ScalingButton} from "./ScalingButton";
-import {IngredientCookBook} from "../../scenes/FactoryScene";
 import {Texture} from "pixi.js";
 import {ASSET_STORE} from "../../index";
+import {IngredientCookBook} from "../../gameobjects/IngredientCookBook";
 
 export class RecipeOverviewButton extends ScalingButton {
     showingRecipes: boolean = false
@@ -25,6 +25,12 @@ export class RecipeOverviewButton extends ScalingButton {
             this.cookbook.blendIn();
         }
         this.showingRecipes = !this.showingRecipes
+        this.updateTexture()
+    }
+
+    async close() {
+        await this.cookbook.blendOut()
+        this.showingRecipes = false
         this.updateTexture()
     }
 }
