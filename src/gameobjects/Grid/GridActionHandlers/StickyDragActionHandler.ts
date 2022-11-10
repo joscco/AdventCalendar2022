@@ -9,9 +9,7 @@ import {Vector2D} from "../../../general/Helpers";
 export class StickyDragActionHandler extends GridActionHandler {
 
     onPickUpInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
-        SOUND_MANAGER.playBlub()
         item.scaleUp()
-
     }
 
     onDragToInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
@@ -32,12 +30,12 @@ export class StickyDragActionHandler extends GridActionHandler {
 
     onTapInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
         if (item.content instanceof Machine) {
+            SOUND_MANAGER.playBlub()
             item.content.toggleBlendTypeChooser()
         }
     }
 
     onLetGoInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
-        SOUND_MANAGER.playBlub()
         item.scaleDown()
         if (!grid.getNearestFreeIndexForPositionAndItem(mousePosition, item)) {
             let firstFreeIndex = this.defaultGrid.getNearestFreeIndexForPositionAndItem(grid.position, item)

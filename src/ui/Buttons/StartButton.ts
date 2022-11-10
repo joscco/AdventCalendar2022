@@ -1,5 +1,5 @@
 import {ScalingButton} from "./ScalingButton";
-import {ASSET_STORE, SCENE_MANAGER} from "../../index";
+import {ASSET_STORE, SCENE_MANAGER, SOUND_MANAGER} from "../../index";
 import {Texture} from "pixi.js";
 
 export class StartButton extends ScalingButton {
@@ -8,6 +8,7 @@ export class StartButton extends ScalingButton {
     }
 
     onClick(): void {
+        SOUND_MANAGER.playBlub()
         SCENE_MANAGER.startWithTransition("levelChooserScene")
     }
 

@@ -1,6 +1,6 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "pixi.js";
-import {ASSET_STORE, SCENE_MANAGER} from "../../index";
+import {ASSET_STORE, SCENE_MANAGER, SOUND_MANAGER} from "../../index";
 
 export class BackToStartScreenButton extends ScalingButton {
     getTexture(): Texture | null {
@@ -8,6 +8,7 @@ export class BackToStartScreenButton extends ScalingButton {
     }
 
     onClick(): void {
+        SOUND_MANAGER.playBlub()
         SCENE_MANAGER.startWithTransition("startScene")
     }
 }

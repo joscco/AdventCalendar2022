@@ -9,6 +9,7 @@ export class TooltipManager {
     private tooltip: Tooltip
     private owner: Container
     private currentBearer?: Container
+    private pointerDown: boolean = false
     private offsetX: number = 0
     private offsetY: number = -110
     private lastMousePosition: Vector2D = {x: -100, y: -100}
@@ -24,7 +25,12 @@ export class TooltipManager {
 
     registerTooltipFor(bearer: Container, textDeliverer: () => string, isEnabled: () => boolean = () => true) {
         bearer.interactive = true
-        bearer.cursor = "pointer"
+
+        bearer.on("pointerdown", () => this.pointerDown = true)
+
+        bearer.on("pointerup", () => this.pointerDown = false)
+
+        bearer.on("pointerupoutside", () => this.pointerDown = false)
 
         bearer.on("pointerover", async (event) => {
             this.lastMousePosition = event.global
@@ -32,7 +38,7 @@ export class TooltipManager {
             if (isEnabled()) {
                 await new Promise(resolve => setTimeout(resolve, 800));
                 // If we still hover the same thing, show the tooltip
-                if (this.currentBearer === bearer) {
+                if (this.currentBearer === bearer && !this.pointerDown) {
                     let bearer = this.currentBearer
                     let currentMousePosition = bearer.getGlobalPosition()
                     this.showTooltip(currentMousePosition, textDeliverer())

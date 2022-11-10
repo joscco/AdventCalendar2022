@@ -1,6 +1,6 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "pixi.js";
-import {ASSET_STORE} from "../../index";
+import {ASSET_STORE, SOUND_MANAGER} from "../../index";
 import {IngredientCookBook} from "../../gameobjects/IngredientCookBook";
 
 export class RecipeOverviewButton extends ScalingButton {
@@ -19,6 +19,7 @@ export class RecipeOverviewButton extends ScalingButton {
     }
 
     onClick(): void {
+        SOUND_MANAGER.playBlub()
         if (this.showingRecipes) {
             this.cookbook.blendOut()
         } else {

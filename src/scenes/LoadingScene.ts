@@ -1,4 +1,4 @@
-import Scene from "./Scene";
+import Scene from "./general/Scene";
 import {Application, Text} from "pixi.js";
 import {GAME_HEIGHT, GAME_WIDTH} from "../index";
 import {Oven} from "../gameobjects/LoadingScene/Oven";

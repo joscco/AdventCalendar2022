@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import IScene from "../scenes/IScene";
+import IScene from "../scenes/general/IScene";
 import {Container, Graphics} from "pixi.js";
 import {GAME_HEIGHT, GAME_WIDTH} from "../index";
 
@@ -102,7 +102,7 @@ export default class SceneManager extends Container{
             return;
         }
 
-        await this.stop();
+        this.stop();
 
         // Start new
         this.current = name;
@@ -122,7 +122,7 @@ export default class SceneManager extends Container{
             return;
         }
 
-        await gsap.to(this, {alpha: 1, duration: 0.5, ease: Quad.easeInOut})
+        await gsap.to(this, {alpha: 1, duration: 1, ease: Quad.easeInOut})
         this.stop();
 
         // Start new
@@ -137,7 +137,7 @@ export default class SceneManager extends Container{
             active.start();
         }
 
-        await gsap.to(this, {alpha: 0, duration: 0.5, ease: Quad.easeInOut})
+        await gsap.to(this, {alpha: 0, duration: 1, ease: Quad.easeInOut})
     }
 
     /**

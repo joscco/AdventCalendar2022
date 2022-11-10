@@ -3,8 +3,6 @@ import SceneManager from './general/SceneManager';
 import {gsap} from "gsap";
 import {Application} from "pixi.js";
 import {AssetStore} from "./general/AssetStore";
-import {FactoryScene} from "./scenes/FactoryScene";
-import {RECIPES} from "./gameobjects/RecipeBox";
 import {LevelChooserScene} from "./scenes/LevelChooserScene";
 import {TooltipManager} from "./gameobjects/Tooltip/TooltipManager";
 import {GameData} from "./general/GameData";
@@ -12,6 +10,7 @@ import {SoundManager} from "./general/SoundManager";
 import {MusicButton} from "./ui/Buttons/MusicButton";
 import {SoundButton} from "./ui/Buttons/SoundButton";
 import {IngredientCookBook} from "./gameobjects/IngredientCookBook";
+import {LevelInitiator} from "./scenes/general/LevelInitiator";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -90,35 +89,7 @@ const main = async () => {
     SCENE_MANAGER.add("startScene", new StartScene(App))
     LEVEL_SCREEN = new LevelChooserScene(App)
     SCENE_MANAGER.add("levelChooserScene", LEVEL_SCREEN)
-    SCENE_MANAGER.add("level_1",
-        new FactoryScene({
-            app: App,
-            level: 1,
-            conveyorBeltPattern:
-                "A0|A1|A2|A3|A4|A5|A6\n" +
-                "B0|B1|B2|B3|B4|B5|B6\n" +
-                "D0|D1|D2|D3|D4|D5|D6\n" +
-                "E0|E1|E2|E3|E4|E5|E6\n" +
-                "C0|C1|C2|C3|C4|C5|C6",
-            recipe: RECIPES.SANTAMILK,
-            machines: ["1x1", "1x1", "1x1", "2x1", "2x1"],
-            startIngredients: new Map([
-                ["A", "butter"],
-                ["B", "currant_pudding"]
-            ]),
-            hasStepButton: true
-        }))
-    SCENE_MANAGER.add("level_2",
-        new FactoryScene({
-            app: App,
-            level: 2,
-            conveyorBeltPattern:
-                "A0|B0|C0|C1|C2\n" +
-                "A1|B1|B2|B3|B4\n" +
-                "A2|A3|A4|A5|  ",
-            recipe: RECIPES.SANTAMILK,
-            machines: ["1x1", "1x1", "1x1", "2x1", "2x1"]
-        }))
+    LevelInitiator.addLevels(SCENE_MANAGER)
     SCENE_MANAGER.startWithTransition("startScene")
 };
 

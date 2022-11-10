@@ -1,4 +1,4 @@
-import Scene from "./Scene";
+import Scene from "./general/Scene";
 import {Application, Text, TilingSprite} from "pixi.js";
 import {LevelButton} from "../ui/Buttons/LevelButton";
 import {ASSET_STORE, GAME_HEIGHT, GAME_DATA, GAME_WIDTH, NUMBER_OF_LEVELS} from "../index";

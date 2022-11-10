@@ -27,17 +27,17 @@ export class ConveyorBelt extends Container {
 
         this.tiles = []
         let startTile = new ConveyorBeltStartTile(startIndex)
-        new GridItem(startTile, this.grid, startIndex.row, startIndex.column)
+        new GridItem(startTile, this.grid, startIndex)
 
         let betweenTiles: ConveyorBeltMoveTile[] = []
         for (let index of betweenIndices) {
             let betweenTile = new ConveyorBeltMoveTile(index)
-            new GridItem(betweenTile, this.grid, index.row, index.column)
+            new GridItem(betweenTile, this.grid, index)
             betweenTiles.push(betweenTile)
         }
 
         let endTile = new ConveyorBeltEndTile(endIndex)
-        new GridItem(endTile, this.grid, endIndex.row, endIndex.column)
+        new GridItem(endTile, this.grid, endIndex)
 
         this.lastTileOverlay = new Sprite()
         this.lastTileOverlay.anchor.set(0.5)

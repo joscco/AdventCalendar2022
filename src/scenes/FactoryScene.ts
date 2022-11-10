@@ -1,13 +1,11 @@
-import {Recipe, RecipeBox} from "../gameobjects/RecipeBox";
-import {getMachineNameForType, Machine, MachineShape, parseShape} from "../gameobjects/Machinery/Machine";
+import {Recipe, RecipeBox, RecipeID, RECIPES} from "../gameobjects/RecipeBox";
+import {getMachineNameForType, Machine, MachineLayout, parseShape} from "../gameobjects/Machinery/Machine";
 import {GridConnector} from "../gameobjects/Grid/GridConnector";
-import Scene from "./Scene";
+import Scene from "./general/Scene";
 import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
 import {Application, Sprite} from "pixi.js";
 import {ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH, INGREDIENT_COOKBOOK, TOOLTIP_MANAGER} from "../index";
-import {GridActionHandler} from "../gameobjects/Grid/GridActionHandlers/GridActionHandler";
 import {StickyDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/StickyDragActionHandler";
-import {AutomaticDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/AutomaticDragActionHandler";
 import {GridItem} from "../gameobjects/Grid/GridItem";
 import {WinScreen} from "../general/WinScreen";
 import {UIButtonOverlay} from "../ui/ButtonOverlay";
@@ -22,18 +20,19 @@ export type FactorySceneOptions = {
     app: Application,
     level: number,
     conveyorBeltPattern: string,
-    recipe: Recipe,
-    machines: MachineShape[],
+    recipe: RecipeID,
+    machineLayout: MachineLayout,
     startIngredients?: Map<string, IngredientID>,
     hasStepButton?: boolean
 }
 
 export class FactoryScene extends Scene {
 
-    private readonly machineInventoryGrid: Grid;
-    private readonly machineUsageGrid: Grid;
+    private readonly machineLayout: MachineLayout;
+    private readonly machineGrid: Grid;
     private readonly machineGridItems: GridItem[];
     private machineGridConnector: GridConnector;
+
     private startIngredients: IngredientID[]
     private readonly beltGrid: Grid;
     private readonly belts: ConveyorBelt[];
@@ -68,7 +67,7 @@ export class FactoryScene extends Scene {
         this.recipeButton.position.set(300, 125)
         this.addChild(this.recipeButton)
 
-        this.recipeBox = this.setupRecipeBox(opts.recipe);
+        this.recipeBox = this.setupRecipeBox(RECIPES[opts.recipe]);
         this.beltGrid = this.setupBeltGridAndBelts(patternArr);
         this.startIngredients = opts.startIngredients ? [...opts.startIngredients.values()] : []
         this.belts = this.setupBelts(patternArr, this.beltGrid, opts.startIngredients)
@@ -81,10 +80,10 @@ export class FactoryScene extends Scene {
         this.uiOverlay.zIndex = 5
         this.addChild(this.uiOverlay)
 
-        this.machineInventoryGrid = this.setupInventoryGrid(opts.machines.length)
-        this.machineUsageGrid = this.setupMachineUsageGrid(this.beltGrid!.getNumberOfRows(), this.beltGrid!.getNumberOfColumns())
-        this.machineGridItems = this.setupMachineGridItems(opts.machines, this.machineInventoryGrid, this.machineUsageGrid)
-        this.machineGridConnector = this.setupGridConnector(this.machineInventoryGrid, this.machineUsageGrid, this.machineGridItems)
+        this.machineLayout = opts.machineLayout
+        this.machineGrid = this.setupMachineUsageGrid(this.beltGrid!.getNumberOfRows(), this.beltGrid!.getNumberOfColumns())
+        this.machineGridItems = this.setupMachineGridItems(this.machineLayout, this.machineGrid)
+        this.machineGridConnector = this.setupGridConnector(this.machineGrid, this.machineGridItems)
 
         if (opts.hasStepButton) {
             this.stepButton = new StepButton(this)
@@ -102,10 +101,13 @@ export class FactoryScene extends Scene {
 
     start() {
         this.winScreen.blendOut()
-        this.machineGridItems.forEach(item => {
-            // TODO: Ganz schlimm, überarbeiten
-            let nearestFreeIndex = this.machineInventoryGrid.getNearestFreeIndexForPositionAndItem(this.machineInventoryGrid.position, item)!
-            item.trySetToIndexInstantly(this.machineInventoryGrid, nearestFreeIndex)
+
+        // Reset all types and positions
+        this.machineGridItems.forEach(item => item.freeFromGrid())
+        this.machineGridItems.forEach((item, index) => {
+            let layoutEntry = this.machineLayout[index];
+            (item.content as Machine).setType(layoutEntry.type ?? "sweet")
+            item.trySetToIndexInstantly(this.machineGrid, layoutEntry.index)
             item.unlock()
         })
 
@@ -135,7 +137,7 @@ export class FactoryScene extends Scene {
         beltGrid.tileHeight = 150
         beltGrid.columnOffsetX = 15
         beltGrid.rowOffsetY = 15
-        beltGrid.centerIn({x: 100, y: 150, width: 1820, height: 1080 - 150})
+        beltGrid.centerIn({x: 0, y: 0, width: GAME_WIDTH, height: GAME_HEIGHT})
         this.addChild(beltGrid)
 
         return beltGrid;
@@ -195,29 +197,13 @@ export class FactoryScene extends Scene {
         this.addChild(background)
     }
 
-    private setupInventoryGrid(length: number): Grid {
-        let outsideGrid = new Grid(1, length, "outside")
-        outsideGrid.tileWidth = 100
-        outsideGrid.columnOffsetX = 25
-        outsideGrid.centerIn({x: 100, y: 125, width: 1820, height: 0})
-        outsideGrid.zIndex = 0
-        this.addChild(outsideGrid)
-
-        let outsideGridSprite = new Sprite(ASSET_STORE.getTextureAsset("machineInventory"))
-        outsideGridSprite.anchor.set(0.5)
-        outsideGridSprite.position.set(outsideGrid.getCenterX(), outsideGrid.getCenterY())
-        outsideGridSprite.zIndex = -1
-        this.addChild(outsideGridSprite)
-        return outsideGrid
-    }
-
     private setupMachineUsageGrid(numberOfRows: number, numberOfColumns: number): Grid {
         let machineUsageGrid = new Grid(numberOfRows, numberOfColumns, "machineGrid")
         machineUsageGrid.tileWidth = 150
         machineUsageGrid.tileHeight = 150
         machineUsageGrid.columnOffsetX = 15
         machineUsageGrid.rowOffsetY = 15
-        machineUsageGrid.centerIn({x: 100, y: 150, width: 1820, height: 1080 - 150})
+        machineUsageGrid.centerIn({x: 0, y: 0, width: GAME_WIDTH, height: GAME_HEIGHT})
         machineUsageGrid.setDefaultSlotTexture(ASSET_STORE.getTextureAsset("emptyField"))
         machineUsageGrid.drawGrid()
         machineUsageGrid.zIndex = -1
@@ -225,33 +211,34 @@ export class FactoryScene extends Scene {
         return machineUsageGrid
     }
 
-    private setupGridConnector(machineInventoryGrid: Grid, machineUsageGrid: Grid, machineGridItems: GridItem[]): GridConnector {
-        let gridActionMap = new Map<Grid, GridActionHandler>()
-        gridActionMap.set(machineUsageGrid, new StickyDragActionHandler(machineInventoryGrid))
-
+    private setupGridConnector(machineGrid: Grid, machineGridItems: GridItem[]): GridConnector {
         let gridConnector = new GridConnector(
-            machineInventoryGrid,
-            new AutomaticDragActionHandler(machineInventoryGrid),
-            gridActionMap,
+            machineGrid,
+            new StickyDragActionHandler(machineGrid),
+            new Map(),
             machineGridItems)
         gridConnector.defineDragAndDrop()
         return gridConnector
     }
 
-    private setupMachineGridItems(machineShapes: MachineShape[], inventoryGrid: Grid, machineGrid: Grid): GridItem[] {
+    private setupMachineGridItems(machineLayout: MachineLayout, machineGrid: Grid): GridItem[] {
         let gridItems = []
         let horizontalIndex = 0
-        for (let machineShape of machineShapes) {
-            let machine = new Machine("sweet", machineShape, machineGrid)
+        for (let machineLayoutEntry of machineLayout) {
+            let shape = machineLayoutEntry.shape
+            let type = machineLayoutEntry.type ?? "sweet"
+            let machine = new Machine(type, shape, machineGrid)
             this.addChild(machine)
-            let gridItem = new GridItem(machine, inventoryGrid, 0, horizontalIndex)
 
-            gridItem.addShape(machineGrid, parseShape(machine.getShape()))
+            let index = machineLayoutEntry.index
+            let gridItem = new GridItem(machine, machineGrid, index)
+
+            gridItem.addShape(machineGrid, parseShape(shape))
             gridItems.push(gridItem)
+
             TOOLTIP_MANAGER.registerTooltipFor(machine,
                 () => getMachineNameForType(machine.getType()),
                 () => (!gridItem.dragging
-                    && gridItem.currentGrid?.id === "machineGrid"
                     && !(gridItem.content as Machine).isShowingTypeChoosingMenu()))
             horizontalIndex++
         }
@@ -264,7 +251,7 @@ export class FactoryScene extends Scene {
         let correctnessPerBelt = this.recipeBox.checkIngredientsAreProvided(beltIngredients, this.recipeBox.recipe.ingredients)
         for (let i = 0; i < this.belts.length; i++) {
             let belt = this.belts[i]
-            belt.updateIngredients(this.machineUsageGrid)
+            belt.updateIngredients(this.machineGrid)
             belt.step();
             belt.showLastTileOverlay(correctnessPerBelt[i], i * 0.05)
         }

@@ -1,15 +1,9 @@
-import {Sprite, Text} from "pixi.js";
-import {
-    ASSET_STORE,
-    GAME_HEIGHT,
-    GAME_WIDTH,
-    NUMBER_OF_LEVELS, SCENE_MANAGER,
-    SOUND_MANAGER
-} from "../index";
-import {Recipe} from "../gameobjects/RecipeBox";
-import {getRecipeTextureForDay} from "../ui/Buttons/LevelButton";
+import {Container, Sprite, Text} from "pixi.js";
+import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH, NUMBER_OF_LEVELS, SCENE_MANAGER, SOUND_MANAGER} from "../index";
+import {RecipeID, RECIPES} from "../gameobjects/RecipeBox";
 import {ScalingButton} from "../ui/Buttons/ScalingButton";
 import {Texture} from "@pixi/core";
+import {LevelInitiator} from "../scenes/general/LevelInitiator";
 
 export class LeftAngel {
 }
@@ -46,7 +40,7 @@ class NextLevelButton extends ScalingButton {
 
 }
 
-export class WinScreen extends Sprite {
+export class WinScreen extends Container {
 
     private title: Text
     private subTitle: Text
@@ -59,12 +53,11 @@ export class WinScreen extends Sprite {
     private banner: Sprite
     private bannerText: Text
 
-    constructor(recipe: Recipe, level: number) {
-        super(ASSET_STORE.getTextureAsset("winScreenBackground"));
-        this.anchor.set(0.5)
+    constructor(recipe: RecipeID, level: number) {
+        super();
         this.position.set(GAME_WIDTH / 2, GAME_HEIGHT + 700)
 
-        this.title = new Text("Well done!", {fontFamily: "Futurahandwritten", fontSize: 70, fill: 0x000000})
+        this.title = new Text("Well done!", {fontFamily: "Futurahandwritten", fontSize: 90, fontWeight: "bold", fill: 0xffffff})
         this.title.anchor.set(0.5)
         this.title.position.set(0, -340)
         this.addChild(this.title)
@@ -74,7 +67,7 @@ export class WinScreen extends Sprite {
         this.subTitle.position.set(0, -280)
         this.addChild(this.subTitle)
 
-        this.cookieIcon = new Sprite(getRecipeTextureForDay(1))
+        this.cookieIcon = new Sprite(ASSET_STORE.getTextureAsset(LevelInitiator.getRecipeForDay(level)))
         this.cookieIcon.anchor.set(0.5)
         this.cookieIcon.position.set(0, 0)
         this.addChild(this.cookieIcon)
@@ -84,7 +77,7 @@ export class WinScreen extends Sprite {
         this.banner.position.set(0, 380)
         this.addChild(this.banner)
 
-        this.bannerText = new Text(recipe.name, {fontFamily: "Futurahandwritten", fontSize: 70, fill: 0xffffff})
+        this.bannerText = new Text(RECIPES[recipe].name, {fontFamily: "Futurahandwritten", fontSize: 70, fill: 0xffffff})
         this.bannerText.anchor.set(0.5)
         this.banner.addChild(this.bannerText)
 
@@ -101,7 +94,7 @@ export class WinScreen extends Sprite {
 
     async blendIn() {
         SOUND_MANAGER.playBlub()
-        await gsap.to(this.position, {y: GAME_HEIGHT / 2, duration: 0.5, ease: Back.easeInOut})
+        await gsap.to(this.position, {y: GAME_HEIGHT / 2 - 50, duration: 0.5, ease: Back.easeInOut})
     }
 
     blendOut() {

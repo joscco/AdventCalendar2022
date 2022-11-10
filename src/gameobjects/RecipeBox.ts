@@ -97,33 +97,36 @@ export class RecipeBox extends Sprite {
     }
 }
 
-export type RECIPE_NAMES =
-    "SANTAMILK" |
-    "SCHOKOCROSSIES" |
-    "MUERBETEIGKEKSE" |
-    "RUMKUGELN" |
-    "PUNSCH" |
-    "BETHMAENNCHEN" |
-    "ZIMTSTERNE" |
-    "PRINTEN" |
-    "ENGELSAUGEN" |
-    "VANILLEKIPFERL" |
-    "MAKRONEN" |
-    "FLORENTINER" |
-    "SPRITZGEBAECK" |
-    "LEBKUCHEN" |
-    "SPEKULATIUS" |
-    "PFEFFERNUESSE" |
-    "PANETTONE" |
-    "SCHWARZWEISSKEKSE" |
-    "STOLLEN" |
-    "SCHOKOLADENBROT" |
-    "NUSSECKEN" |
-    "CORNFLAKEWALNUSSKEKSE" |
-    "BAERENTATZEN" |
+export const RecipeIDs = [
+    "SANTAMILK",
+    "SCHOKOCROSSIES",
+    "MUERBETEIGKEKSE",
+    "RUMKUGELN",
+    "PUNSCH",
+    "BETHMAENNCHEN",
+    "ZIMTSTERNE",
+    "PRINTEN",
+    "ENGELSAUGEN",
+    "VANILLEKIPFERL",
+    "MAKRONEN",
+    "FLORENTINER",
+    "SPRITZGEBAECK",
+    "LEBKUCHEN",
+    "SPEKULATIUS",
+    "PFEFFERNUESSE",
+    "PANETTONE",
+    "SCHWARZWEISSKEKSE",
+    "STOLLEN",
+    "SCHOKOLADENBROT",
+    "NUSSECKEN",
+    "CORNFLAKEWALNUSSKEKSE",
+    "BAERENTATZEN",
     "DOMINOSTEINE"
+    ] as const
 
-export const RECIPES: { [keys in RECIPE_NAMES]: Recipe } = {
+export type RecipeID = typeof RecipeIDs[number]
+
+export const RECIPES: { [keys in RecipeID]: Recipe } = {
     SANTAMILK: {name: "Santa's Milk", ingredients: ["milk", "honey"]},
     SCHOKOCROSSIES: {name: "Chocolate Cornflake Cakes", ingredients: ["melted_chocolate", "peeled_nuts", "cornflakes"]},
     MUERBETEIGKEKSE: {name: "Butter Cookies", ingredients: ["flour", "butter", "egg", "sugar"]},

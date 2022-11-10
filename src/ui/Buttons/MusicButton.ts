@@ -17,6 +17,7 @@ export class MusicButton extends ScalingButton {
     }
 
     onClick(): void {
+        SOUND_MANAGER.playBlub()
         this.enabled = !this.enabled
         SOUND_MANAGER.setMusicEnabled(this.enabled)
         this.updateTexture()

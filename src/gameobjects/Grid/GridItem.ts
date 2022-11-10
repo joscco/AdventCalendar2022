@@ -40,8 +40,7 @@ export class GridItem {
 
     constructor(content: GridAdaptingDisplayObject,
                 startGrid: Grid,
-                row: number,
-                column: number,
+                index: Index2D,
                 shape: number[][] = [[1]]) {
 
         this.content = content
@@ -53,7 +52,7 @@ export class GridItem {
         }
 
         this.aim = {x: this.content.position.x, y: this.content.position.y}
-        this.trySetToIndexInstantly(startGrid, {row: row, column: column})
+        this.trySetToIndexInstantly(startGrid, index)
     }
 
     canBeSetToIndexInGrid(grid?: Grid, index?: Index2D): boolean {
@@ -158,8 +157,8 @@ export class GridItem {
         gsap.to(this.content.position, {
             x: position.x,
             y: position.y,
-            duration: 0.3,
-            ease: Quart.easeOut
+            duration: 0.2,
+            ease: Quart.easeInOut
         })
     }
 
@@ -276,6 +275,7 @@ export class GridItem {
 
         let pointerDown = false
         this.content.interactive = true
+        this.content.cursor = "pointer"
 
         this.content.on("pointerdown", (event) => {
             pointerDown = true

@@ -1,6 +1,6 @@
 import {Application, Container, Sprite, TilingSprite} from 'pixi.js';
 import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../index";
-import Scene from "./Scene";
+import Scene from "./general/Scene";
 import {Texture} from "@pixi/core";
 import {StartButton} from "../ui/Buttons/StartButton";
 import {ScalingButton} from "../ui/Buttons/ScalingButton";

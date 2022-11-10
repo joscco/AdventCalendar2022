@@ -21,7 +21,6 @@ export class AutomaticDragActionHandler extends GridActionHandler {
     }
 
     onLetGoInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
-        SOUND_MANAGER.playBlub()
         let firstFreeIndex = grid.getNearestFreeIndexForPositionAndItem(grid.position, item)
         item.trySetToIndex(grid, firstFreeIndex!)
     }
