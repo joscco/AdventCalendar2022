@@ -277,6 +277,15 @@ export class GridItem {
         this.content.interactive = true
         this.content.cursor = "pointer"
 
+        this.content.on("pointerover", () => {
+            this.scaleUp()
+        })
+
+        this.content.on("pointerout", () => {
+            this.scaleDown()
+        })
+
+
         this.content.on("pointerdown", (event) => {
             pointerDown = true
             let mousePosition: Vector2D = event.data.global

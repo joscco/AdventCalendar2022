@@ -19,9 +19,7 @@ export abstract class ScalingButton extends Button {
         return true;
     }
 
-    scaleUp() {
-        this.scaleUpTo(1.2, 0.3)
-    }
+
 
     async scaleUpTo(value: number, duration: number) {
         await gsap.to(this.scale, {
@@ -30,6 +28,10 @@ export abstract class ScalingButton extends Button {
             duration: duration,
             ease: Back.easeOut
         })
+    }
+
+    scaleUp() {
+        this.scaleUpTo(1.2, 0.3)
     }
 
     scaleDown() {

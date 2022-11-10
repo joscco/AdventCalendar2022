@@ -4,11 +4,10 @@ import {CookbookEntry} from "./CookbookEntry";
 import {clamp, sum, Vector2D} from "../general/Helpers";
 import {MousewheelListener} from "../general/MouseWheelPlugin";
 import {IngredientID, IngredientIDs} from "./Ingredient";
+import {CookbookOverlay} from "./IngredientBook/CookbookOverlay";
 
-export class IngredientCookBook extends Container {
-
+export class IngredientCookbook extends Container {
     backgroundSprite: Sprite;
-    blendedIn: boolean = false
 
     content: Container;
     items: CookbookEntry[] = []
@@ -25,11 +24,12 @@ export class IngredientCookBook extends Container {
     CONTENT_MIN_Y: number = 0
     CONTENT_MAX_Y: number = 0
 
-    constructor() {
+    constructor(private overlay: CookbookOverlay) {
         super()
 
+        this.angle = 5
         this.sortableChildren = true
-        this.position.set(GAME_WIDTH/2, GAME_HEIGHT + 200)
+        this.position.set(GAME_WIDTH/2 + 160, GAME_HEIGHT + 200)
 
         this.backgroundSprite = new Sprite(ASSET_STORE.getTextureAsset("ingredientOverviewBook"))
         this.backgroundSprite.anchor.set(0.5, 0)
@@ -49,7 +49,7 @@ export class IngredientCookBook extends Container {
         this.content.mask = this.contentMask
 
         this.items = this.initEntries()
-        this.updateEntries()
+        this.updateEntries(GAME_DATA.getUnlockedIngredients())
 
         this.scrollBar = new Sprite(ASSET_STORE.getTextureAsset("ingredientOverviewScrollBar"))
         this.scrollBar.anchor.set(0.5, 0)
@@ -88,11 +88,11 @@ export class IngredientCookBook extends Container {
             }
         })
 
-        this.scrollBarHandle.on("pointerup", (event) => {
+        this.scrollBarHandle.on("pointerup", () => {
             this.scrollBarDragging = false
         })
 
-        this.scrollBarHandle.on("pointerupoutside", (event) => {
+        this.scrollBarHandle.on("pointerupoutside", () => {
             this.scrollBarDragging = false
         })
     }
@@ -119,11 +119,11 @@ export class IngredientCookBook extends Container {
             }
         })
 
-        this.contentMask.on("pointerup", (event) => {
+        this.contentMask.on("pointerup", () => {
             this.contentDragging = false
         })
 
-        this.contentMask.on("pointerupoutside", (event) => {
+        this.contentMask.on("pointerupoutside", () => {
             this.contentDragging = false
         })
 
@@ -131,8 +131,8 @@ export class IngredientCookBook extends Container {
         mouseWheelListener.setAction((delta, mousePos) => this.handleWheel(delta, mousePos))
     }
 
-    updateEntries() {
-        this.repositionEntries(GAME_DATA.getUnlockedIngredients())
+    updateEntries(unlockedIngredients: IngredientID[]) {
+        this.repositionEntries(unlockedIngredients)
     }
 
     private updateScrollbarHandlePosition(mousePosition: Vector2D) {
@@ -162,8 +162,8 @@ export class IngredientCookBook extends Container {
         this.scrollBarHandle.position.y = this.SCROLL_BAR_MAX_Y - relativeY * (this.SCROLL_BAR_MAX_Y - this.SCROLL_BAR_MIN_Y)
     }
 
-    public handleWheel(delta: number, mousePos: Vector2D): void {
-        if (!this.blendedIn) {
+    private handleWheel(delta: number, mousePos: Vector2D): void {
+        if (!this.overlay.showingCookBook) {
             return
         }
 
@@ -218,17 +218,18 @@ export class IngredientCookBook extends Container {
     }
 
     async blendIn() {
-        await gsap.to(this.position, { y: 150, duration: 0.5, ease: Back.easeInOut})
-        this.blendedIn = true
+        await gsap.to(this.position, { y: 120, duration: 0.5, ease: Back.easeInOut})
     }
 
     async blendOut() {
-        this.blendedIn = false
         await gsap.to(this.position, {y: GAME_HEIGHT + 200, duration: 0.5, ease: Back.easeInOut})
     }
 
     hide() {
-        this.blendedIn = false
         this.position.y = GAME_HEIGHT + 200
+    }
+
+    show() {
+        this.position.y = 120
     }
 }

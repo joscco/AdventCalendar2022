@@ -22,4 +22,12 @@ export class MusicButton extends ScalingButton {
         SOUND_MANAGER.setMusicEnabled(this.enabled)
         this.updateTexture()
     }
+
+    scaleUp() {
+        this.scaleUpTo(0.6, 0.3)
+    }
+
+    scaleDown() {
+        this.scaleUpTo(0.5, 0.3)
+    }
 }

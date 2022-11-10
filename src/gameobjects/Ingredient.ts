@@ -3,6 +3,7 @@ import {Container, Sprite} from "pixi.js";
 import {Texture} from "@pixi/core";
 import {ASSET_STORE} from "../index";
 import {Emitter} from "@pixi/particle-emitter";
+import {TextureAssetID} from "../general/AssetStore";
 
 export class Ingredient extends Container {
 
@@ -21,15 +22,14 @@ export class Ingredient extends Container {
         this.sprite = new Sprite()
         this.sprite.anchor.set(0.5, 1)
         this.sprite.texture = this.getTexture()
-        this.sprite.position.set(0, 45)
+        this.sprite.position.set(0, 55)
         this.addChild(this.sprite)
 
         // Must be called after sprite was set
         this.set(this.id)
         this.particleEmitter = this.createParticleEmitter()
 
-        this.sprite.scale.set(0.2)
-        gsap.to(this.sprite.scale, {x: 0.21, y: 0.19, duration: 0.5, yoyo: true, repeat: -1, ease: Back.easeInOut})
+        gsap.to(this.sprite.scale, {x: 1.05, y: 0.95, duration: 0.5, yoyo: true, repeat: -1, ease: Back.easeInOut})
     }
 
     setTaste(newTaste: IngredientTaste): void {
@@ -84,7 +84,7 @@ export class Ingredient extends Container {
     }
 
     getTexture(): Texture {
-        return ASSET_STORE.getTextureAsset(this.id)
+        return ASSET_STORE.getTextureAsset(("small_" + this.id) as TextureAssetID)
     }
 
     getID(): IngredientID {

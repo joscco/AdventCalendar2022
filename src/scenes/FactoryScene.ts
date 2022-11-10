@@ -11,8 +11,6 @@ import {WinScreen} from "../general/WinScreen";
 import {UIButtonOverlay} from "../ui/ButtonOverlay";
 import {IngredientID} from "../gameobjects/Ingredient"
 import {StepButton} from "../ui/Buttons/StepButton";
-import {RecipeOverviewButton} from "../ui/Buttons/RecipeOverviewButton";
-import {UnlockedIngredientAlarm} from "../gameobjects/UnlockedIngredientAlarm";
 import {Grid} from "../gameobjects/Grid/Grid";
 import {Index2D, isRectangularArray} from "../general/Helpers";
 
@@ -41,10 +39,7 @@ export class FactoryScene extends Scene {
 
     // UI
     private recipeBox: RecipeBox;
-    private unlockedIngredientAlarm?: UnlockedIngredientAlarm;
-
     private winScreen: WinScreen;
-    private recipeButton: RecipeOverviewButton;
     private uiOverlay: UIButtonOverlay
 
     private timeInterval?: NodeJS.Timer
@@ -62,10 +57,6 @@ export class FactoryScene extends Scene {
         if (!isRectangularArray(patternArr)) {
             throw Error("Conveyor Belt Pattern is not rectangular!")
         }
-
-        this.recipeButton = new RecipeOverviewButton(INGREDIENT_COOKBOOK)
-        this.recipeButton.position.set(300, 125)
-        this.addChild(this.recipeButton)
 
         this.recipeBox = this.setupRecipeBox(RECIPES[opts.recipe]);
         this.beltGrid = this.setupBeltGridAndBelts(patternArr);
@@ -101,6 +92,7 @@ export class FactoryScene extends Scene {
 
     start() {
         this.winScreen.blendOut()
+        INGREDIENT_COOKBOOK.showButton()
 
         // Reset all types and positions
         this.machineGridItems.forEach(item => item.freeFromGrid())
@@ -125,7 +117,9 @@ export class FactoryScene extends Scene {
     }
 
     async stop() {
-        await this.recipeButton.close()
+        INGREDIENT_COOKBOOK.hideButton()
+        INGREDIENT_COOKBOOK.hideCookbook()
+
     }
 
     private setupBeltGridAndBelts(patternArr: string[][]): Grid {
@@ -137,7 +131,7 @@ export class FactoryScene extends Scene {
         beltGrid.tileHeight = 150
         beltGrid.columnOffsetX = 15
         beltGrid.rowOffsetY = 15
-        beltGrid.centerIn({x: 0, y: 0, width: GAME_WIDTH, height: GAME_HEIGHT})
+        beltGrid.centerIn({x: 400, y: 0, width: GAME_WIDTH - 400, height: GAME_HEIGHT})
         this.addChild(beltGrid)
 
         return beltGrid;
@@ -203,7 +197,7 @@ export class FactoryScene extends Scene {
         machineUsageGrid.tileHeight = 150
         machineUsageGrid.columnOffsetX = 15
         machineUsageGrid.rowOffsetY = 15
-        machineUsageGrid.centerIn({x: 0, y: 0, width: GAME_WIDTH, height: GAME_HEIGHT})
+        machineUsageGrid.centerIn({x: 400, y: 0, width: GAME_WIDTH - 400, height: GAME_HEIGHT})
         machineUsageGrid.setDefaultSlotTexture(ASSET_STORE.getTextureAsset("emptyField"))
         machineUsageGrid.drawGrid()
         machineUsageGrid.zIndex = -1

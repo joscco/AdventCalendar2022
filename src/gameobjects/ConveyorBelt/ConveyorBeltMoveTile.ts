@@ -14,6 +14,6 @@ export class ConveyorBeltMoveTile extends ConveyorBeltTile {
     }
 
     repositionIngredient(ingredient: Ingredient, newPosition: Vector2D): void {
-        gsap.to(ingredient.position, {x: newPosition.x, y: newPosition.y, duration: 0.6, ease: Quart.easeInOut})
+        gsap.to(ingredient.position, {x: newPosition.x, y: newPosition.y, duration: 0.6, ease: Back.easeInOut})
     }
 }

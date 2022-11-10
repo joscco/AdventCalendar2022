@@ -9,8 +9,9 @@ import {GameData} from "./general/GameData";
 import {SoundManager} from "./general/SoundManager";
 import {MusicButton} from "./ui/Buttons/MusicButton";
 import {SoundButton} from "./ui/Buttons/SoundButton";
-import {IngredientCookBook} from "./gameobjects/IngredientCookBook";
 import {LevelInitiator} from "./scenes/general/LevelInitiator";
+import {UnlockedIngredientAlarm} from "./gameobjects/UnlockedIngredientAlarm";
+import {CookbookOverlay} from "./gameobjects/IngredientBook/CookbookOverlay";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -25,7 +26,8 @@ export var ASSET_STORE: AssetStore;
 export var GAME_DATA: GameData;
 export var LEVEL_SCREEN: LevelChooserScene;
 export var SOUND_MANAGER: SoundManager;
-export var INGREDIENT_COOKBOOK: IngredientCookBook
+export var INGREDIENT_COOKBOOK: CookbookOverlay
+export var INGREDIENT_ALARM: UnlockedIngredientAlarm
 
 const main = async () => {
     // Init Main App
@@ -71,20 +73,26 @@ const main = async () => {
     TOOLTIP_MANAGER = new TooltipManager(App.stage)
 
     let musicButton = new MusicButton()
-    musicButton.x = GAME_WIDTH - 270
-    musicButton.y = 125
+    musicButton.x = 110
+    musicButton.y = GAME_HEIGHT - 75
     musicButton.zIndex = 110
+    musicButton.scale.set(0.5)
     App.stage.addChild(musicButton);
 
     let soundButton = new SoundButton()
-    soundButton.x = GAME_WIDTH - 110
-    soundButton.y = 125
+    soundButton.x = 210
+    soundButton.y = GAME_HEIGHT - 75
+    soundButton.scale.set(0.5)
     soundButton.zIndex = 110
     App.stage.addChild(soundButton);
 
-    INGREDIENT_COOKBOOK = new IngredientCookBook()
+    INGREDIENT_COOKBOOK = new CookbookOverlay()
     INGREDIENT_COOKBOOK.zIndex = 6
     App.stage.addChild(INGREDIENT_COOKBOOK)
+
+    INGREDIENT_ALARM = new UnlockedIngredientAlarm()
+    INGREDIENT_ALARM.zIndex = 6
+    App.stage.addChild(INGREDIENT_ALARM)
 
     SCENE_MANAGER.add("startScene", new StartScene(App))
     LEVEL_SCREEN = new LevelChooserScene(App)

@@ -1,4 +1,4 @@
-import {INGREDIENT_COOKBOOK, LEVEL_SCREEN} from "../index";
+import {INGREDIENT_ALARM, INGREDIENT_COOKBOOK, LEVEL_SCREEN} from "../index";
 import {IngredientID} from "../gameobjects/Ingredient";
 
 export class GameData {
@@ -23,7 +23,9 @@ export class GameData {
         if (this.currentState.unlockedIngredients.indexOf(newIngredient) === -1) {
             this.currentState.unlockedIngredients.push(newIngredient);
             this.saveGame(this.currentState.unlockedLevel, this.currentState.unlockedIngredients)
-            INGREDIENT_COOKBOOK.updateEntries()
+
+            INGREDIENT_COOKBOOK.updateEntries(this.currentState.unlockedIngredients)
+            INGREDIENT_ALARM.blendIn(newIngredient)
         }
     }
 

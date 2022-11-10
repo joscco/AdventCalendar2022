@@ -91,7 +91,6 @@ export class StartScene extends Scene {
                      leftArmTexture: Texture, rightArmTexture: Texture,
                      openEyesTexture: Texture, closedEyesTexture: Texture) {
         this.bernd = new Container()
-        this.bernd.sortableChildren = true
 
         let head = new Sprite(headTexture);
         head.position.set(182, -220)
@@ -104,7 +103,6 @@ export class StartScene extends Scene {
 
         backBody.zIndex = -2
         let leftArm = new Sprite(leftArmTexture)
-        leftArm.zIndex = -1
         leftArm.position.set(190, 140)
 
         leftArm.pivot.set(240, 60)
