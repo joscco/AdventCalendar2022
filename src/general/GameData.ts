@@ -14,7 +14,6 @@ export class GameData {
 
     saveUnlockedLevel(unlockedLevel: number): void {
         this.saveGame(unlockedLevel, this.currentState.unlockedIngredients)
-
         // Update everything
         LEVEL_SCREEN.updateLevelButtons()
     }
@@ -35,6 +34,7 @@ export class GameData {
         }
 
         localStorage.setItem(this.GAME_STATE_KEY, JSON.stringify(gameState))
+        this.currentState = gameState
     }
 
     getUnlockedLevels(): number {

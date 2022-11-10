@@ -36,7 +36,7 @@ export class LevelChooserScene extends Scene {
     }
 
     private setUpTitle() {
-        let title = new Text("Choose a level", {fontFamily: "Futurahandwritten", fontSize: 60, fill: 0x000000})
+        let title = new Text("Choose a level", {fontFamily: "Futurahandwritten", fontWeight: "bold", fontSize: 60, fill: 0x000000})
         title.anchor.set(0.5)
         title.position.set(GAME_WIDTH / 2, 125)
         this.addChild(title)
@@ -56,7 +56,8 @@ export class LevelChooserScene extends Scene {
 
     updateLevelButtons() {
         this.levelButtons.forEach(button => {
-            button.enabled = (button.n <= GAME_DATA.getUnlockedLevels())
+            button.setEnabled(button.n <= GAME_DATA.getUnlockedLevels())
+            button.updateTexture()
         })
     }
 

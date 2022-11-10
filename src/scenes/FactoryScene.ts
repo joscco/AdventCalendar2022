@@ -250,7 +250,9 @@ export class FactoryScene extends Scene {
             gridItems.push(gridItem)
             TOOLTIP_MANAGER.registerTooltipFor(machine,
                 () => getMachineNameForType(machine.getType()),
-                () => (!gridItem.dragging && gridItem.currentGrid?.id === "machineGrid"))
+                () => (!gridItem.dragging
+                    && gridItem.currentGrid?.id === "machineGrid"
+                    && !(gridItem.content as Machine).isShowingTypeChoosingMenu()))
             horizontalIndex++
         }
 
@@ -278,6 +280,7 @@ export class FactoryScene extends Scene {
         if (levelSolved) {
             this.winScreen.blendIn()
             this.machineGridItems.forEach(item => item.lock())
+
             GAME_DATA.saveUnlockedLevel(Math.max(this.level + 1, GAME_DATA.getUnlockedLevels()))
             clearInterval(this.timeInterval)
         }

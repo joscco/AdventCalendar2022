@@ -28,8 +28,8 @@ export class RecipeOverviewButton extends ScalingButton {
         this.updateTexture()
     }
 
-    async close() {
-        await this.cookbook.blendOut()
+    close() {
+        this.cookbook.hide()
         this.showingRecipes = false
         this.updateTexture()
     }

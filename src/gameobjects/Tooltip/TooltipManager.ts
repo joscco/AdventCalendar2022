@@ -53,7 +53,7 @@ export class TooltipManager {
         this.tooltip.show()
     }
 
-    private hideTooltip(): void {
+    hideTooltip(): void {
         this.tooltip.hide()
     }
 }

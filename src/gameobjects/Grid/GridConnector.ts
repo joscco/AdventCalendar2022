@@ -10,6 +10,7 @@ import {Grid} from "./Grid";
 import {GridItem} from "./GridItem";
 import {GridActionHandler} from "./GridActionHandlers/GridActionHandler";
 import {Vector2D} from "../../general/Helpers";
+import {TOOLTIP_MANAGER} from "../../index";
 
 // Hat eine Referenzliste auf die Grids
 // Hat für jedes Grid einen ActionHandler
@@ -87,6 +88,12 @@ export class GridConnector {
 
     private onTap(mousePosition: Vector2D, item: GridItem) {
         if (!item.locked) {
+            this.gridItems.forEach(item => {
+                item.bringToBack()
+                item.detap()
+            })
+            TOOLTIP_MANAGER.hideTooltip()
+            item.bringToTop()
             let nearestGrid = this.findNearestGridForPosition(mousePosition);
             this.updateNearestGrid(nearestGrid, mousePosition, item)
             this.otherGridActionsMap.get(nearestGrid)!.onTapInGrid(nearestGrid, mousePosition, item)

@@ -135,16 +135,6 @@ export class IngredientCookBook extends Container {
         this.repositionEntries(GAME_DATA.getUnlockedIngredients())
     }
 
-    async blendIn() {
-        await gsap.to(this.position, { y: 175, duration: 0.5, ease: Back.easeInOut})
-        this.blendedIn = true
-    }
-
-    async blendOut() {
-        this.blendedIn = false
-        await gsap.to(this.position, {y: GAME_HEIGHT + 200, duration: 0.5, ease: Back.easeInOut})
-    }
-
     private updateScrollbarHandlePosition(mousePosition: Vector2D) {
         let newY = clamp(mousePosition.y, this.SCROLL_BAR_MIN_Y, this.SCROLL_BAR_MAX_Y)
         this.scrollBarHandle.position.y = newY
@@ -225,5 +215,20 @@ export class IngredientCookBook extends Container {
             item.hide()
             item.position.set(0, 90)
         }
+    }
+
+    async blendIn() {
+        await gsap.to(this.position, { y: 150, duration: 0.5, ease: Back.easeInOut})
+        this.blendedIn = true
+    }
+
+    async blendOut() {
+        this.blendedIn = false
+        await gsap.to(this.position, {y: GAME_HEIGHT + 200, duration: 0.5, ease: Back.easeInOut})
+    }
+
+    hide() {
+        this.blendedIn = false
+        this.position.y = GAME_HEIGHT + 200
     }
 }

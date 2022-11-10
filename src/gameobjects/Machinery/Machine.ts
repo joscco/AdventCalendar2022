@@ -73,6 +73,10 @@ export class Machine extends Sprite {
             this.pivot.set(this.texture.width/2, this.texture.height/2)
         }
     }
+
+    isShowingTypeChoosingMenu() {
+        return this.iconSlot.isShowingTypeChoosingMenu();
+    }
 }
 
 export function getMachineNameForType(type: MachineType): string {

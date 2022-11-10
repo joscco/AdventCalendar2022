@@ -5,7 +5,8 @@ import {Text, Texture} from "pixi.js";
 export class LevelButton extends ScalingButton {
 
     n: number
-    enabled: boolean
+    private text: Text
+    private enabled: boolean = false
 
     onClick(): void {
         SCENE_MANAGER.startWithTransition("level_" + this.n)
@@ -22,22 +23,34 @@ export class LevelButton extends ScalingButton {
     constructor(n: number, enabled: boolean) {
         super();
         this.n = n
-        this.enabled = enabled
         this.sprite.scale.set(0.43)
-        if (!this.enabled) {
-            this.sprite.tint = 0x000000
-        }
-        let text = new Text(this.n, {
+
+
+
+        this.text = new Text(this.n, {
             fontFamily: "Futurahandwritten",
             fontSize: 100,
-            fill: this.enabled ? 0x000000 : 0xffffff,
-            stroke: this.enabled ?  0xffffff: 0x000000,
-            strokeThickness: this.enabled ? 15 : 30,
+            strokeThickness: 15,
             lineJoin: "round"
         })
-        text.anchor.set(0.5)
-        this.addChild(text)
+        this.text.anchor.set(0.5)
+        this.addChild(this.text)
         this.updateTexture()
+
+        this.setEnabled(enabled)
+    }
+
+    setEnabled(value: boolean) {
+        this.enabled = value
+        if (!this.enabled) {
+            this.text.style.fill = 0xffffff;
+            this.text.style.stroke = 0x000000;
+            this.sprite.tint = 0x000000
+        } else {
+            this.text.style.fill = 0x000000;
+            this.text.style.stroke = 0xffffff;
+            this.sprite.tint = 0xFFFFFF
+        }
     }
 }
 

@@ -351,4 +351,10 @@ export class GridItem {
     lock() {
         this.locked = true
     }
+
+    detap() {
+        if (this.content instanceof Machine) {
+            this.content.blendOutTypeChooser()
+        }
+    }
 }

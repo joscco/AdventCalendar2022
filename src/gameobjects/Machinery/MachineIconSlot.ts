@@ -65,4 +65,8 @@ export class MachineIconSlot extends Container {
     toggleBlend() {
         this.typeChooseMenu.toggleBlend()
     }
+
+    isShowingTypeChoosingMenu(): boolean {
+        return this.typeChooseMenu.shown
+    }
 }
