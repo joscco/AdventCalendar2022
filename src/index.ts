@@ -25,8 +25,8 @@ export var SCENE_MANAGER: SceneManager;
 export var SCENE_TRANSITION_MANAGER: SceneTransitionManager;
 export var ASSET_STORE: AssetStore;
 export var GAME_DATA: GameData;
-export var LEVEL_SCREEN: LevelChooserScene
-export var SOUND_MANAGER: SoundManager
+export var LEVEL_SCREEN: LevelChooserScene;
+export var SOUND_MANAGER: SoundManager;
 
 const main = async () => {
     // Init Main App

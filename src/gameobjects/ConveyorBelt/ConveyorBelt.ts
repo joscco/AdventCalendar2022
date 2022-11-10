@@ -67,7 +67,7 @@ export class ConveyorBelt extends Container {
         this.rotateTilesToPath()
     }
 
-    step(): void {
+    async step(): Promise<void> {
         let ingredientsCopy = this.tiles.map(tile => tile.getIngredientRef()!)
         let beltLength = this.tiles.length
         for (let i = 0; i < beltLength; i++) {
@@ -76,10 +76,11 @@ export class ConveyorBelt extends Container {
             let currentIngredient = ingredientsCopy[i]
             nextTile.setIngredientRef(currentIngredient)
 
+
+            await currentTile.repositionIngredient(currentIngredient, nextTile.position)
             if (i === beltLength - 1) {
                 currentIngredient.set(this.startIngredient)
             }
-            currentTile.repositionIngredient(currentIngredient, nextTile.position)
 
         }
     }

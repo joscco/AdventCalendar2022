@@ -10,8 +10,8 @@ export class ConveyorBeltEndTile extends ConveyorBeltTile {
     }
 
     async repositionIngredient(ingredient: Ingredient, newPosition: Vector2D): Promise<void> {
-        await gsap.to(ingredient.scale, {x: 0, y: 0, duration: 0.3, ease: Quart.easeInOut})
+        await ingredient.scaleDown()
         ingredient.position = newPosition
-        gsap.to(ingredient.scale, {x: 1, y: 1, duration: 0.3, ease: Quart.easeInOut})
+        ingredient.scaleUp()
     }
 }

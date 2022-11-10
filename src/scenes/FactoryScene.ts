@@ -1,16 +1,10 @@
-// Klasse zur Levelverwaltung, d.h.
-// -> Einbinden des UI-Overlays
-// -> Einbinden des Win-Screens
-// -> Aufruf der Step()-Function
-// -> Stoppen und Darstellung des Win-Screens, wenn geschafft
-
 import {Recipe, RecipeBox} from "../gameobjects/RecipeBox";
 import {getMachineNameForType, Machine, MachineShape, parseShape} from "../gameobjects/Machinery/Machine";
-import {Grid, Index2D, isRectangularArray} from "../gameobjects/Grid/Grid";
+import {Grid, Index2D, isRectangularArray, Vector2D} from "../gameobjects/Grid/Grid";
 import {GridConnector} from "../gameobjects/Grid/GridConnector";
 import Scene from "./Scene";
 import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
-import {Application, Sprite} from "pixi.js";
+import {Application, Container, ITextStyle, Sprite, Text} from "pixi.js";
 import {ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH, TOOLTIP_MANAGER} from "../index";
 import {GridActionHandler} from "../gameobjects/Grid/GridActionHandlers/GridActionHandler";
 import {StickyDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/StickyDragActionHandler";
@@ -18,9 +12,11 @@ import {AutomaticDragActionHandler} from "../gameobjects/Grid/GridActionHandlers
 import {GridItem} from "../gameobjects/Grid/GridItem";
 import {WinScreen} from "../general/WinScreen";
 import {UIButtonOverlay} from "../ui/ButtonOverlay";
-import {IngredientID} from "../gameobjects/Ingredient"
-import {ScalingButton} from "../ui/Buttons/ScalingButton";
-import {Texture} from "@pixi/core";
+import {IngredientID, INGREDIENTS} from "../gameobjects/Ingredient"
+import {StepButton} from "../ui/Buttons/StepButton";
+import {Button} from "../ui/Buttons/Button";
+import {RecipeOverviewButton} from "../ui/Buttons/RecipeOverviewButton";
+import {CenteredSprite} from "../general/CenteredSprite";
 
 export type FactorySceneOptions = {
     app: Application,
@@ -32,23 +28,178 @@ export type FactorySceneOptions = {
     hasStepButton?: boolean
 }
 
-class StepButton extends ScalingButton {
+export class UnlockedIngredientAlarm {
 
-    factoryScene: FactoryScene
 
-    constructor(factoryScene: FactoryScene) {
+    blendIn() {
+
+    }
+
+    blendOut() {
+
+    }
+
+}
+
+export class CookbookEntry extends Container {
+
+    // Left Side
+    ingredientIcon: Sprite
+    ingredientName: Text
+
+    // Right Side
+    tasteIcon: Sprite
+    tasteText: Text
+
+    plusSign1: Sprite
+
+    consistenceIcon: Sprite
+    consistenceText: Text
+
+    plusSign2: Sprite
+
+    colorIcon: Sprite
+    colorText: Text
+
+    constructor(id: IngredientID) {
         super();
-        this.factoryScene = factoryScene
+
+        let textStyle: Partial<ITextStyle> = {fontFamily: "Futurahandwritten", fontSize: 35, fill: 0x000000}
+
+        let ingredientData = INGREDIENTS[id]
+
+        this.ingredientIcon = new CenteredSprite(ASSET_STORE.getTextureAsset(id))
+        this.ingredientIcon.position.set(-470, 0)
+
+        this.ingredientName = new Text(ingredientData.text, textStyle)
+        this.ingredientName.anchor.set(0, 0.5)
+        this.ingredientName.position.set(-390, 0)
+
+        this.tasteIcon = new CenteredSprite(ASSET_STORE.getTextureAsset(ingredientData.taste))
+        this.tasteIcon.position.set(100, -20)
+        this.tasteText = new Text(capitalizeFirstLetter(ingredientData.taste), textStyle)
+        this.tasteText.position.set(100, 40)
+        this.tasteText.anchor.set(0.5)
+
+        this.consistenceIcon = new CenteredSprite(ASSET_STORE.getTextureAsset(ingredientData.consistence))
+        this.consistenceIcon.position.set(265, -20)
+        this.consistenceText = new Text(capitalizeFirstLetter(ingredientData.consistence), textStyle)
+        this.consistenceText.position.set(265, 40)
+        this.consistenceText.anchor.set(0.5)
+
+        this.colorIcon = new CenteredSprite(ASSET_STORE.getTextureAsset(ingredientData.color))
+        this.colorIcon.position.set(430, -20)
+        this.colorText = new Text(capitalizeFirstLetter(ingredientData.color), textStyle)
+        this.colorText.position.set(430, 40)
+        this.colorText.anchor.set(0.5)
+
+        this.plusSign1 = new CenteredSprite(ASSET_STORE.getTextureAsset("ingredientOverviewPlus"))
+        this.plusSign1.position.set(180, -10)
+        this.plusSign2 = new CenteredSprite(ASSET_STORE.getTextureAsset("ingredientOverviewPlus"))
+        this.plusSign2.position.set(345, -10)
+
+        this.addChild(this.ingredientIcon, this.ingredientName,
+            this.tasteIcon, this.tasteText,
+            this.consistenceIcon, this.consistenceText,
+            this.colorIcon, this.colorText,
+            this.plusSign1, this.plusSign2)
+    }
+}
+
+function capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export class IngredientCookBook extends Container{
+
+    backgroundSprite: Sprite;
+    viewPort: Container;
+    scrollBar: Sprite;
+    scrollBarHandle: Sprite;
+
+    constructor() {
+        super()
+
+        this.sortableChildren = true
+
+        this.backgroundSprite = new Sprite(ASSET_STORE.getTextureAsset("ingredientOverviewBook"))
+        this.backgroundSprite.anchor.set(0.5, 0)
+        this.backgroundSprite.zIndex = 0
+
+        this.viewPort = new Container()
+
+        let first = new CookbookEntry("cream")
+        first.position.set(0, 90)
+        let divider = new CenteredSprite(ASSET_STORE.getTextureAsset("ingredientOverviewSeparator"))
+        divider.position.set(0, 170)
+        let second = new CookbookEntry("butter")
+        second.position.set(0, 250)
+
+        this.viewPort.addChild(first, divider, second)
+
+        this.scrollBar = new Sprite(ASSET_STORE.getTextureAsset("ingredientOverviewScrollBar"))
+        this.scrollBar.anchor.set(0.5, 0)
+        this.scrollBar.position.set(600, 40)
+
+        this.scrollBarHandle = new Sprite(ASSET_STORE.getTextureAsset("ingredientOverviewScrollFlag"))
+        this.scrollBarHandle.anchor.set(0, 0.5)
+        this.scrollBarHandle.position.set(-10, 50)
+        this.scrollBar.addChild(this.scrollBarHandle)
+
+        this.scrollBarHandle.interactive = true
+        this.scrollBarHandle.cursor = "pointer"
+
+        let scrollBarDragging = false
+        let dragOffset: Vector2D
+
+        // this.scrollBarHandle.on("pointerdown", (event) => {
+        //     let mousePosition: Vector2D = event.data.global
+        //     dragOffset = {
+        //         x: this.content.x - mousePosition.x,
+        //         y: this.content.y - mousePosition.y
+        //     }
+        //     scrollBarDragging
+        // })
+        //
+        // this.content.on("pointermove", (event) => {
+        //     if (this.dragging) {
+        //         let mousePosition = event.data.global
+        //         onPointerMove(sum(mousePosition, this.dragOffset), this);
+        //     }
+        // })
+        //
+        // this.content.on("pointerup", (event) => {
+        //     pointerDown = false
+        //     let mousePosition = event.data.global
+        //     if (this.dragging) {
+        //         onPointerUp(sum(mousePosition, this.dragOffset), this);
+        //     } else {
+        //         onPointerTap(sum(mousePosition, this.dragOffset), this)
+        //     }
+        //     this.dragging = false
+        // })
+        //
+        // this.content.on("pointerupoutside", (event) => {
+        //     pointerDown = false
+        //     let mousePosition = event.data.global
+        //     if (this.dragging) {
+        //         onPointerUp(sum(mousePosition, this.dragOffset), this);
+        //     } else {
+        //         onPointerTap(sum(mousePosition, this.dragOffset), this)
+        //     }
+        //     this.dragging = false
+        // })
+
+        this.addChild(this.backgroundSprite, this.viewPort, this.scrollBar)
+        this.scale.set(0, 1)
     }
 
-    getTexture(): Texture | null {
-        return ASSET_STORE.getTextureAsset("proceedButton");
+    blendIn() {
+        gsap.to(this.scale, {x: 1, y: 1, duration: 0.3, ease: Back.easeOut})
     }
 
-    async onClick(): Promise<void> {
-        this.factoryScene.checkRecipe()
-        // Wait one second until all belts have adapted
-        await new Promise(resolve => setTimeout(resolve, 1000));
+    blendOut() {
+        gsap.to(this.scale, {x: 0, y: 1, duration: 0.3, ease: Back.easeIn})
     }
 }
 
@@ -60,11 +211,18 @@ export class FactoryScene extends Scene {
     private machineGridConnector: GridConnector;
     private readonly beltGrid: Grid;
     private readonly belts: ConveyorBelt[];
-    private recipeBox: RecipeBox;
-    private winScreen: WinScreen;
-    private uiOverlay: UIButtonOverlay
-    private level: number
     private stepButton?: StepButton
+    private level: number
+
+    // UI
+    private recipeBox: RecipeBox;
+    private ingredientWiki: IngredientCookBook;
+    private unlockedIngredientAlarm?: UnlockedIngredientAlarm;
+
+    private winScreen: WinScreen;
+    private recipeButton: Button;
+    private uiOverlay: UIButtonOverlay
+
     private timeInterval?: NodeJS.Timer
 
     constructor(opts: FactorySceneOptions) {
@@ -80,6 +238,15 @@ export class FactoryScene extends Scene {
         if (!isRectangularArray(patternArr)) {
             throw Error("Conveyor Belt Pattern is not rectangular!")
         }
+
+        this.ingredientWiki = new IngredientCookBook()
+        this.ingredientWiki.position.set(GAME_WIDTH/2, 125)
+        this.ingredientWiki.zIndex = 6
+        this.addChild(this.ingredientWiki)
+
+        this.recipeButton = new RecipeOverviewButton(this.ingredientWiki)
+        this.recipeButton.position.set(300, 125)
+        this.addChild(this.recipeButton)
 
         this.recipeBox = this.setupRecipeBox(opts.recipe);
         this.beltGrid = this.setupBeltGridAndBelts(patternArr);
@@ -121,7 +288,7 @@ export class FactoryScene extends Scene {
             item.unlock()
         })
 
-        this.belts.forEach( belt => belt.resetIngredients())
+        this.belts.forEach(belt => belt.resetIngredients())
 
         this.recipeBox.ingredients.forEach(ingredient => ingredient.reset())
 
@@ -284,7 +451,7 @@ export class FactoryScene extends Scene {
         if (levelSolved) {
             this.winScreen.blendIn()
             this.machineGridItems.forEach(item => item.lock())
-            GAME_DATA.saveGame(Math.max(this.level + 1, GAME_DATA.getUnlockedLevels()))
+            GAME_DATA.saveUnlockedLevel(Math.max(this.level + 1, GAME_DATA.getUnlockedLevels()))
             clearInterval(this.timeInterval)
         }
     }
