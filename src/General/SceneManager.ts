@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import IScene from "../scenes/general/IScene";
+import IScene from "../Scenes/Basics/IScene";
 import {Container, Graphics} from "pixi.js";
 import {GAME_HEIGHT, GAME_WIDTH} from "../index";
 

@@ -2,7 +2,7 @@ import {GridSlot} from "./GridSlot";
 import {Container, Sprite} from "pixi.js";
 import {GridItem} from "./GridItem";
 import {Texture} from "@pixi/core";
-import {clampAndRound, Index2D, quadDistance, Vector2D} from "../../general/Helpers";
+import {clampAndRound, Index2D, quadDistance, Vector2D} from "../../General/Helpers";
 
 export class Grid extends Container {
 

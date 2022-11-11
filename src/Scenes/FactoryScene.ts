@@ -1,18 +1,18 @@
 import {Recipe, RecipeBox, RecipeID, RECIPES} from "../gameobjects/RecipeBox";
 import {getMachineNameForType, Machine, MachineLayout, parseShape} from "../gameobjects/Machinery/Machine";
 import {GridConnector} from "../gameobjects/Grid/GridConnector";
-import Scene from "./general/Scene";
+import Scene from "./Basics/Scene";
 import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
 import {Application, Sprite} from "pixi.js";
 import {ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH, INGREDIENT_COOKBOOK, TOOLTIP_MANAGER} from "../index";
 import {StickyDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/StickyDragActionHandler";
 import {GridItem} from "../gameobjects/Grid/GridItem";
-import {WinScreen} from "../general/WinScreen";
-import {UIButtonOverlay} from "../ui/ButtonOverlay";
+import {WinScreen} from "../General/WinScreen";
+import {UIButtonOverlay} from "../UI/ButtonOverlay";
 import {IngredientID} from "../gameobjects/Ingredient"
-import {StepButton} from "../ui/Buttons/StepButton";
+import {StepButton} from "../UI/Buttons/StepButton";
 import {Grid} from "../gameobjects/Grid/Grid";
-import {Index2D, isRectangularArray} from "../general/Helpers";
+import {Index2D, isRectangularArray} from "../General/Helpers";
 
 export type FactorySceneOptions = {
     app: Application,

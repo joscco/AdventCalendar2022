@@ -2,7 +2,7 @@ import {ConveyorBeltTile} from "./ConveyorBeltTile";
 import {Texture} from "@pixi/core";
 import {Ingredient} from "../Ingredient";
 import {ASSET_STORE} from "../../index";
-import {Vector2D} from "../../general/Helpers";
+import {Vector2D} from "../../General/Helpers";
 
 export class ConveyorBeltMoveTile extends ConveyorBeltTile {
     getTextures(): Texture[] {

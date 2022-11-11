@@ -8,7 +8,7 @@ import {ConveyorBeltMoveTile} from "./ConveyorBeltMoveTile";
 import {Container, Sprite, Texture} from "pixi.js";
 import {ASSET_STORE, GAME_DATA, TOOLTIP_MANAGER} from "../../index";
 import {Machine} from "../Machinery/Machine";
-import {Index2D} from "../../general/Helpers";
+import {Index2D} from "../../General/Helpers";
 
 export class ConveyorBelt extends Container {
 

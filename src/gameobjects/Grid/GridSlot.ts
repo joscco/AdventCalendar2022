@@ -1,6 +1,6 @@
 
 import {GridItem} from "./GridItem";
-import {Index2D} from "../../general/Helpers";
+import {Index2D} from "../../General/Helpers";
 
 // SingleGridSlot is what's eventually inserted into the grid
 // Contains:

@@ -1,17 +1,17 @@
 import {ScalingButton} from "./ScalingButton";
 import {ASSET_STORE, SCENE_MANAGER, SOUND_MANAGER} from "../../index";
 import {Text, Texture} from "pixi.js";
-import {LevelInitiator} from "../../scenes/general/LevelInitiator";
+import {LevelInitiator} from "../../Scenes/Basics/LevelInitiator";
 
 export class LevelButton extends ScalingButton {
 
-    n: number
+    level: number
     private text: Text
     private enabled: boolean = false
 
     onClick(): void {
         SOUND_MANAGER.playBlub()
-        SCENE_MANAGER.startWithTransition("level_" + this.n)
+        SCENE_MANAGER.startWithTransition("level_" + this.level)
     }
 
     isScalingEnabled(): boolean {
@@ -19,15 +19,15 @@ export class LevelButton extends ScalingButton {
     }
 
     getTexture(): Texture | null {
-        return ASSET_STORE.getTextureAsset(LevelInitiator.getRecipeForDay(this.n))
+        return ASSET_STORE.getTextureAsset(LevelInitiator.getRecipeForDay(this.level))
     }
 
     constructor(n: number, enabled: boolean) {
         super();
-        this.n = n
+        this.level = n
         this.sprite.scale.set(0.43)
 
-        this.text = new Text(this.n, {
+        this.text = new Text(this.level, {
             fontFamily: "Futurahandwritten",
             fontSize: 100,
             strokeThickness: 15,

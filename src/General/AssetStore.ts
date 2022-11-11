@@ -1,7 +1,7 @@
 import {Texture} from "@pixi/core";
 import {Assets} from "@pixi/assets";
 import {App, SCENE_MANAGER} from "../index";
-import {LoadingScene} from "../scenes/LoadingScene";
+import {LoadingScene} from "../Scenes/LoadingScene";
 import {Oven} from "../gameobjects/LoadingScene/Oven";
 
 export class AssetStore {

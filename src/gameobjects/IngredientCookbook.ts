@@ -1,8 +1,8 @@
 import {Container, Graphics, Sprite} from "pixi.js";
 import {App, ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH} from "../index";
 import {CookbookEntry} from "./CookbookEntry";
-import {clamp, sum, Vector2D} from "../general/Helpers";
-import {MousewheelListener} from "../general/MouseWheelPlugin";
+import {clamp, sum, Vector2D} from "../General/Helpers";
+import {MousewheelListener} from "../General/MouseWheelPlugin";
 import {IngredientID, IngredientIDs} from "./Ingredient";
 import {CookbookOverlay} from "./IngredientBook/CookbookOverlay";
 

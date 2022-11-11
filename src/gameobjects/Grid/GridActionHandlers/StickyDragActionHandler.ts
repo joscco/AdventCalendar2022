@@ -4,7 +4,7 @@ import {GridActionHandler} from "./GridActionHandler";
 import {GridItem} from "../GridItem";
 import {Machine} from "../../Machinery/Machine";
 import {SOUND_MANAGER} from "../../../index";
-import {Vector2D} from "../../../general/Helpers";
+import {Vector2D} from "../../../General/Helpers";
 
 export class StickyDragActionHandler extends GridActionHandler {
 

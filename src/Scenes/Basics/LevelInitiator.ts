@@ -3,7 +3,7 @@ import {RecipeID} from "../../gameobjects/RecipeBox";
 import {App} from "../../index";
 import {MachineDefinition} from "../../gameobjects/Machinery/Machine";
 import {IngredientID} from "../../gameobjects/Ingredient";
-import SceneManager from "../../general/SceneManager";
+import SceneManager from "../../General/SceneManager";
 
 type LevelConfig = {
     level: number;

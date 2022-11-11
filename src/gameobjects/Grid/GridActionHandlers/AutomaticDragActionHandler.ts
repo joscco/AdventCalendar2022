@@ -4,7 +4,7 @@ import {Grid} from "../Grid";
 import {GridActionHandler} from "./GridActionHandler";
 import {GridItem} from "../GridItem";
 import {SOUND_MANAGER} from "../../../index";
-import {Vector2D} from "../../../general/Helpers";
+import {Vector2D} from "../../../General/Helpers";
 
 export class AutomaticDragActionHandler extends GridActionHandler {
 

@@ -1,6 +1,6 @@
 import {Sprite} from "pixi.js";
 import {ASSET_STORE} from "../../index";
-import {ScalingButton} from "../../ui/Buttons/ScalingButton";
+import {ScalingButton} from "../../UI/Buttons/ScalingButton";
 import {Machine, MachineType} from "./Machine";
 import {MachineTypeButton} from "./MachineTypeButton";
 

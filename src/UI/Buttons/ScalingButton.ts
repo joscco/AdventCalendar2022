@@ -1,4 +1,6 @@
 import {Button} from "./Button";
+import {Texture} from "@pixi/core";
+import gsap from "gsap";
 
 export abstract class ScalingButton extends Button {
     constructor() {
@@ -19,8 +21,6 @@ export abstract class ScalingButton extends Button {
         return true;
     }
 
-
-
     async scaleUpTo(value: number, duration: number) {
         await gsap.to(this.scale, {
             x: value,
@@ -36,5 +36,41 @@ export abstract class ScalingButton extends Button {
 
     scaleDown() {
         this.scaleUpTo(1, 0.3)
+    }
+}
+
+export class ScalingButtonImpl extends ScalingButton{
+    active: boolean = true
+
+    constructor(private texture: Texture, private onClickAction: () => void) {
+        super()
+    }
+
+    getTexture(): Texture | null {
+        return this.texture;
+    }
+
+    onClick(): void {
+        if (this.active) {
+            this.onClickAction()
+        }
+    }
+
+    blendOut(): void {
+        this.active = false
+        gsap.to(this.scale, {x: 0, y: 0, duration: 0.3, ease: Back.easeIn})
+    }
+
+    async blendIn(): Promise<void> {
+        await gsap.to(this.scale, {x: 0, y: 0, duration: 0.3, ease: Back.easeIn})
+        this.active = true
+    }
+
+    hide() {
+        this.scale.set(0)
+    }
+
+    show() {
+        this.scale.set(1)
     }
 }

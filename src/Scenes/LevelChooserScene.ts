@@ -1,9 +1,9 @@
-import Scene from "./general/Scene";
+import Scene from "./Basics/Scene";
 import {Application, Text, TilingSprite} from "pixi.js";
-import {LevelButton} from "../ui/Buttons/LevelButton";
+import {LevelButton} from "../UI/Buttons/LevelButton";
 import {ASSET_STORE, GAME_HEIGHT, GAME_DATA, GAME_WIDTH, NUMBER_OF_LEVELS} from "../index";
-import {ScalingButton} from "../ui/Buttons/ScalingButton";
-import {BackToStartScreenButton} from "../ui/Buttons/BackToStartScreen";
+import {ScalingButton} from "../UI/Buttons/ScalingButton";
+import {BackToStartScreenButton} from "../UI/Buttons/BackToStartScreen";
 
 export class LevelChooserScene extends Scene {
 
@@ -64,7 +64,7 @@ export class LevelChooserScene extends Scene {
 
     updateLevelButtons() {
         this.levelButtons.forEach(button => {
-            button.setEnabled(button.n <= GAME_DATA.getUnlockedLevels())
+            button.setEnabled(button.level <= GAME_DATA.getUnlockedLevels())
             button.updateTexture()
         })
     }

@@ -1,4 +1,4 @@
-import {ScalingButton} from "../../ui/Buttons/ScalingButton";
+import {ScalingButton} from "../../UI/Buttons/ScalingButton";
 import {Texture} from "pixi.js";
 import {MachineType} from "./Machine";
 import {MachineTypeChooseMenu} from "./MachineTypeChooseMenu";

@@ -1,9 +1,9 @@
 import {Container, Sprite, Text} from "pixi.js";
 import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH, NUMBER_OF_LEVELS, SCENE_MANAGER, SOUND_MANAGER} from "../index";
 import {RecipeID, RECIPES} from "../gameobjects/RecipeBox";
-import {ScalingButton} from "../ui/Buttons/ScalingButton";
+import {ScalingButton} from "../UI/Buttons/ScalingButton";
 import {Texture} from "@pixi/core";
-import {LevelInitiator} from "../scenes/general/LevelInitiator";
+import {LevelInitiator} from "../Scenes/Basics/LevelInitiator";
 
 export class LeftAngel {
 }

@@ -2,7 +2,7 @@
 
 import {GridItem} from "../GridItem";
 import {Grid} from "../Grid";
-import {Vector2D} from "../../../general/Helpers";
+import {Vector2D} from "../../../General/Helpers";
 
 export abstract class GridActionHandler {
 

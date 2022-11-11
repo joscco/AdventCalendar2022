@@ -1,7 +1,7 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "@pixi/core";
 import {ASSET_STORE, SOUND_MANAGER} from "../../index";
-import {FactoryScene} from "../../scenes/FactoryScene";
+import {FactoryScene} from "../../Scenes/FactoryScene";
 
 export class StepButton extends ScalingButton {
 

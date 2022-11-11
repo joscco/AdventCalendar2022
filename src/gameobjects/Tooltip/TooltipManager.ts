@@ -2,25 +2,22 @@
 
 import {Container} from "pixi.js";
 import {Tooltip} from "./Tooltip";
-import {Vector2D} from "../../general/Helpers";
+import {Vector2D} from "../../General/Helpers";
 
-export class TooltipManager {
+export class TooltipManager extends Container{
 
     private tooltip: Tooltip
-    private owner: Container
     private currentBearer?: Container
     private pointerDown: boolean = false
     private offsetX: number = 0
     private offsetY: number = -110
     private lastMousePosition: Vector2D = {x: -100, y: -100}
 
-    constructor(owner: Container) {
-        this.owner = owner
-
+    constructor() {
+        super()
         this.tooltip = new Tooltip(this, this.offsetX, this.offsetY)
-        this.tooltip.zIndex = 100
-        this.owner.addChild(this.tooltip)
-        this.owner.sortableChildren = true
+        this.zIndex = 100
+        this.addChild(this.tooltip)
     }
 
     registerTooltipFor(bearer: Container, textDeliverer: () => string, isEnabled: () => boolean = () => true) {

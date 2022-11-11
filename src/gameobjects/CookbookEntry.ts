@@ -1,9 +1,9 @@
 import {Container, ITextStyle, Sprite, Text} from "pixi.js";
 import {IngredientID, INGREDIENTS} from "./Ingredient";
-import {CenteredSprite} from "../general/CenteredSprite";
+import {CenteredSprite} from "../General/CenteredSprite";
 import {ASSET_STORE} from "../index";
-import {capitalizeFirstLetter} from "../general/Helpers";
-import {TextureAssetID} from "../general/AssetStore";
+import {capitalizeFirstLetter} from "../General/Helpers";
+import {TextureAssetID} from "../General/AssetStore";
 
 export class CookbookEntry extends Container {
 

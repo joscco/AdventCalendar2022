@@ -3,9 +3,9 @@ import {Sprite} from "pixi.js";
 import {ASSET_STORE} from "../../index";
 import {Grid} from "../Grid/Grid";
 import {MachineIconSlot} from "./MachineIconSlot";
-import {TextureAssetID} from "../../general/AssetStore";
+import {TextureAssetID} from "../../General/AssetStore";
 import {GridItem} from "../Grid/GridItem";
-import {Index2D} from "../../general/Helpers";
+import {Index2D} from "../../General/Helpers";
 
 export type MachineType = IngredientTaste | IngredientColor | IngredientConsistence
 export type MachineShape = "1x1" | "2x1" | "3x1" | "1x2" | "2x2" | "3x2" | "1x3" | "2x3" | "3x3"

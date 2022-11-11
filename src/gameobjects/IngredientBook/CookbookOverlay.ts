@@ -1,6 +1,6 @@
 import {Container} from "pixi.js";
-import {IngredientCookbookButton} from "../../ui/Buttons/IngredientCookbookButton";
-import {IngredientCookbookCloseButton} from "../../ui/Buttons/IngredientCookbookCloseButton";
+import {IngredientCookbookButton} from "../../UI/Buttons/IngredientCookbookButton";
+import {IngredientCookbookCloseButton} from "../../UI/Buttons/IngredientCookbookCloseButton";
 import {IngredientCookbook} from "../IngredientCookbook";
 import {IngredientID} from "../Ingredient";
 

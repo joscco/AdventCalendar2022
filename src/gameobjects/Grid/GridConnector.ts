@@ -9,7 +9,7 @@
 import {Grid} from "./Grid";
 import {GridItem} from "./GridItem";
 import {GridActionHandler} from "./GridActionHandlers/GridActionHandler";
-import {Vector2D} from "../../general/Helpers";
+import {Vector2D} from "../../General/Helpers";
 import {TOOLTIP_MANAGER} from "../../index";
 
 // Hat eine Referenzliste auf die Grids
