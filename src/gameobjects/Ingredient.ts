@@ -195,7 +195,7 @@ export type IngredientConsistence = "sticky" | "liquid" | "powdery" | "solid"
 export type IngredientColor = "white" | "red" | "yellow" | "brown"
 
 export const IngredientIDs = [
-    "cream", "milk", "flour", "cabbage",
+    "cream", "milk", "flour", "egg",
     "butter", "melted_butter", "cornflour", "cornflakes",
     "beet_pudding", "beet_juice", "beet_flour", "beet",
     "mud", "swamp_water", "dry_dirt", "dirt",
@@ -208,7 +208,7 @@ export const IngredientIDs = [
     "currant_pudding", "currant_juice", "currant_sugar", "currants",
     "rotten_fruits", "rotten_fruit_juice", "grinded_umeboshi", "umeboshi",
     "nut_cream", "nut_aroma", "grinded_nuts", "peeled_nuts",
-    "egg_yolk", "egg", "egg_powder", "scrambled_egg",
+    "egg_yolk", "eggnog", "egg_powder", "scrambled_egg",
     "wine_cream", "wine", "spices", "steak",
     "nut_butter", "rum_aroma", "cocoa", "nuts"] as const
 
@@ -218,7 +218,7 @@ export const INGREDIENTS: {[id in IngredientID]: IngredientData} = {
     "cream": {text: "Cream", taste: "neutral", color: "white", consistence: "sticky"},
     "milk": {text: "Milk", taste: "neutral", color: "white", consistence: "liquid"},
     "flour": {text: "Flour", taste: "neutral", color: "white", consistence: "powdery"},
-    "cabbage": {text: "White Cabbage", taste: "neutral", color: "white", consistence: "solid"},
+    "egg": {text: "Egg", taste: "neutral", color: "white", consistence: "solid"},
     "butter": {text: "Butter", taste: "neutral", color: "yellow", consistence: "sticky"},
     "melted_butter": {text: "Melted Butter", taste: "neutral", color: "yellow", consistence: "liquid"},
     "cornflour": {text: "Cornflour", taste: "neutral", color: "yellow", consistence: "powdery"},
@@ -268,7 +268,7 @@ export const INGREDIENTS: {[id in IngredientID]: IngredientData} = {
     "grinded_nuts": {text: "Grinded Nuts", taste: "savoury", color: "white", consistence: "powdery"},
     "peeled_nuts": {text: "Peeled Nuts", taste: "savoury", color: "white", consistence: "solid"},
     "egg_yolk": {text: "Egg Yolk", taste: "savoury", color: "yellow", consistence: "sticky"},
-    "egg": {text: "Egg", taste: "savoury", color: "yellow", consistence: "liquid"},
+    "eggnog": {text: "Egg Nog", taste: "savoury", color: "yellow", consistence: "liquid"},
     "egg_powder": {text: "Egg Powder", taste: "savoury", color: "yellow", consistence: "powdery"},
     "scrambled_egg": {text: "Scrambled Egg", taste: "savoury", color: "yellow", consistence: "solid"},
     "wine_cream": {text: "Wine Cream", taste: "savoury", color: "red", consistence: "sticky"},

@@ -61,7 +61,7 @@ const LEVEL_MANIFEST: LevelConfigManifest = [
         startIngredients: new Map([
             ["A", "brown_sugar"],
             ["B", "nuts"],
-            ["C", "beet"]
+            ["C", "cornflour"]
         ]),
         blocks: [
             {shape: "1x1", index: {row: 2, column: 2}}
@@ -69,7 +69,7 @@ const LEVEL_MANIFEST: LevelConfigManifest = [
         machines: [
             {shape: "1x1", index: {row: 1, column: 1}, type: "liquid"},
             {shape: "1x1", index: {row: 1, column: 2}, type: "white"},
-            {shape: "1x1", index: {row: 2, column: 1}, type: "yellow"}
+            {shape: "1x1", index: {row: 2, column: 1}, type: "solid"}
         ]
     }, {
         level: 3,
@@ -83,7 +83,7 @@ const LEVEL_MANIFEST: LevelConfigManifest = [
             ["A", "brown_sugar"],
             ["B", "dry_dirt"],
             ["C", "cream"],
-            ["D", "nut_aroma"]
+            ["D", "nut_cream"]
         ]),
         machines: [
             // Types should be fixed!
