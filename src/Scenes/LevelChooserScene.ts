@@ -4,6 +4,7 @@ import {LevelButton} from "../UI/Buttons/LevelButton";
 import {ASSET_STORE, GAME_HEIGHT, GAME_DATA, GAME_WIDTH, NUMBER_OF_LEVELS} from "../index";
 import {ScalingButton} from "../UI/Buttons/ScalingButton";
 import {BackToStartScreenButton} from "../UI/Buttons/BackToStartScreen";
+import {LEVEL_MANIFEST} from "./Basics/LevelInitiator";
 
 export class LevelChooserScene extends Scene {
 
@@ -45,14 +46,8 @@ export class LevelChooserScene extends Scene {
     private setUpLevelButtons(): LevelButton[] {
         let buttons = []
 
-        //Only for testing
-        let button0 = new LevelButton(0, true)
-        button0.x = GAME_WIDTH - 200
-        button0.y = 150
-        this.addChild(button0)
-        buttons.push(button0)
-
-        for (let n = 1; n <= NUMBER_OF_LEVELS; n++) {
+        for (let element of LEVEL_MANIFEST) {
+            let n = element.level
             let button = new LevelButton(n, n <= GAME_DATA.getUnlockedLevels())
             button.x = 200 + ((n - 1) % 8) * 215
             button.y = 350 + Math.floor((n - 1) / 8) * 250

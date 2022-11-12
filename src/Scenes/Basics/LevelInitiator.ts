@@ -17,27 +17,7 @@ type LevelConfig = {
 
 type LevelConfigManifest = LevelConfig[]
 
-const LEVEL_MANIFEST: LevelConfigManifest = [
-    {
-        level: 0,
-        conveyorBeltPattern:
-        // At most 6 rows, 9 columns
-            "  |  |  |  |  |  |  |  |  \n" +
-            "  |  |  |  |  |  |  |  |  \n" +
-            "  |  |  |  |  |  |  |  |  \n" +
-            "  |  |  |  |  |  |  |  |  \n" +
-            "  |  |  |  |  |  |  |  |  \n" +
-            "  |  |  |  |  |  |  |  |  ",
-        recipe: "SANTAMILK",
-        machines: [{shape: "1x1", index: {row: 1, column: 1}, type: "liquid"},
-            {shape: "1x2", index: {row: 1, column: 2}, type: "liquid"},
-            {shape: "1x3", index: {row: 1, column: 4}, type: "liquid"},
-            {shape: "2x1", index: {row: 1, column: 7}, type: "liquid"}],
-        startIngredients: new Map([
-            ["A", "honey"],
-            ["B", "cream"]
-        ])
-    },
+export const LEVEL_MANIFEST: LevelConfigManifest = [
     {
         level: 1,
         conveyorBeltPattern:
