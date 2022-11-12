@@ -137,7 +137,7 @@ export const RECIPES: { [keys in RecipeID]: Recipe } = {
     PRINTEN: {name: "Printen", ingredients: ["flour", "egg", "honey", "candied_lemon_peel", "spices"]},
     ENGELSAUGEN: {name: "Angel Eyes", ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "lemon_juice", "cherry_jam"]},
     VANILLEKIPFERL: {name: "Vanilla Crescents", ingredients: ["flour", "butter", "sugar", "vanilla_sugar", "grinded_nuts"]},
-    MAKRONEN: {name: "Macarons", ingredients: ["egg", "sugar", "vanilla_sugar", "grinded_nuts", "nut_aroma", "cherries"]},
+    MAKRONEN: {name: "Macarons", ingredients: ["egg", "sugar", "vanilla_sugar", "grinded_nuts", "nut_aroma", "cherry_sauce"]},
     FLORENTINER: {name: "Florentines", ingredients: ["butter", "sugar", "melted_chocolate", "honey", "peeled_nuts"]},
     SPRITZGEBAECK: {name: "Spritz Biscuits", ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "lemon_juice"]},
     LEBKUCHEN: {name: "Gingerbread", ingredients: ["flour", "butter", "egg", "lemon_juice", "honey", "spices", "brown_sugar", "cocoa"]},

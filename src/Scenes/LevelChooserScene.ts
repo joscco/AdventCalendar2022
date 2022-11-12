@@ -46,11 +46,11 @@ export class LevelChooserScene extends Scene {
         let buttons = []
 
         //Only for testing
-        // let button0 = new LevelButton(0, true)
-        // button0.x = GAME_WIDTH - 200
-        // button0.y = 150
-        // this.addChild(button0)
-        // buttons.push(button0)
+        let button0 = new LevelButton(0, true)
+        button0.x = GAME_WIDTH - 200
+        button0.y = 150
+        this.addChild(button0)
+        buttons.push(button0)
 
         for (let n = 1; n <= NUMBER_OF_LEVELS; n++) {
             let button = new LevelButton(n, n <= GAME_DATA.getUnlockedLevels())

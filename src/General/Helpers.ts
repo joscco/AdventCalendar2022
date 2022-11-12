@@ -44,6 +44,10 @@ export function isRectangularArray(items: any[][]): boolean {
     return true;
 }
 
-export function sum(a: Vector2D, b: Vector2D): Vector2D {
+export function vectorAdd(a: Vector2D, b: Vector2D): Vector2D {
     return {x: a.x + b.x, y: a.y + b.y}
+}
+
+export function indexAdd(a: Index2D, b: Index2D): Index2D {
+    return {row: a.row + b.row, column: a.column + b.column}
 }

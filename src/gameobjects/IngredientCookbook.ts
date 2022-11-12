@@ -1,7 +1,7 @@
 import {Container, Graphics, Sprite} from "pixi.js";
 import {App, ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH} from "../index";
 import {CookbookEntry} from "./CookbookEntry";
-import {clamp, sum, Vector2D} from "../General/Helpers";
+import {clamp, vectorAdd, Vector2D} from "../General/Helpers";
 import {MousewheelListener} from "../General/MouseWheelPlugin";
 import {IngredientID, IngredientIDs} from "./Ingredient";
 import {CookbookOverlay} from "./IngredientBook/CookbookOverlay";
@@ -84,7 +84,7 @@ export class IngredientCookbook extends Container {
         this.scrollBarHandle.on("pointermove", (event) => {
             if (this.scrollBarDragging) {
                 let mousePosition = event.data.global
-                this.updateScrollbarHandlePosition(sum(mousePosition, dragOffset));
+                this.updateScrollbarHandlePosition(vectorAdd(mousePosition, dragOffset));
             }
         })
 
@@ -115,7 +115,7 @@ export class IngredientCookbook extends Container {
         this.contentMask.on("pointermove", (event) => {
             if (this.contentDragging) {
                 let mousePosition = event.data.global
-                this.updateContentPositionByMouse(sum(mousePosition, dragOffset));
+                this.updateContentPositionByMouse(vectorAdd(mousePosition, dragOffset));
             }
         })
 

@@ -19,7 +19,7 @@ import {Grid} from "./Grid";
 import {DisplayObject} from "pixi.js";
 import gsap from "gsap";
 import {Machine} from "../Machinery/Machine";
-import {Index2D, sum, Vector2D} from "../../General/Helpers";
+import {Index2D, vectorAdd, Vector2D, indexAdd} from "../../General/Helpers";
 
 type MultiSlotArr = (GridSlot | null)[][]
 type GridAdaptingDisplayObject = DisplayObject
@@ -80,12 +80,12 @@ export class GridItem {
         }
     }
 
-    private moveToIndex(grid: Grid, index: Index2D): void {
+    private async moveToIndex(grid: Grid, index: Index2D): Promise<void> {
         this.freeFromGrid()
         this.updateIndex(grid, index);
         this.updateGrid(grid)
         let newAim = grid.getGlobalPositionForIndex(index)
-        this.updateAim(newAim)
+        await this.updateAim(newAim)
     }
 
     private setToIndex(grid: Grid, index: Index2D): void {
@@ -102,9 +102,14 @@ export class GridItem {
         this.currentIndex = index
     }
 
-    trySetToIndex(grid: Grid, index: Index2D): boolean {
+    async trySlideToIndex(grid: Grid, index: Index2D) {
+        let nextAdjacent = this.findAdjacentForIndex(index)
+        return await this.trySetToIndex(grid, nextAdjacent)
+    }
+
+    async trySetToIndex(grid: Grid, index: Index2D): Promise<boolean> {
         if (this.canBeSetToIndexInGrid(grid, index)) {
-            this.moveToIndex(grid, index)
+            await this.moveToIndex(grid, index)
             return true;
         }
         return false;
@@ -118,11 +123,11 @@ export class GridItem {
         return false;
     }
 
-    updateAim(position: Vector2D) {
+    async updateAim(position: Vector2D) {
         let distance = GridItem.quadDistance(position, this.aim)
         this.aim = {x: position.x, y: position.y}
         if (distance > 500) {
-            this.moveTo(this.aim)
+            await this.moveTo(this.aim)
         } else if (distance > 2) {
             this.setContentTo(position)
         }
@@ -153,12 +158,12 @@ export class GridItem {
         })
     }
 
-    private moveTo(position: Vector2D) {
-        gsap.to(this.content.position, {
+    private async moveTo(position: Vector2D) {
+        await gsap.to(this.content.position, {
             x: position.x,
             y: position.y,
-            duration: 0.2,
-            ease: Quart.easeInOut
+            duration: 0.1,
+            ease: Sine.easeInOut
         })
     }
 
@@ -297,27 +302,27 @@ export class GridItem {
             // Give pointerDown a small offset so that double-clicking doesn't interfere
             setTimeout(() => {
                 if (pointerDown) {
-                    onPointerDown(sum(mousePosition, this.dragOffset), this);
+                    onPointerDown(vectorAdd(mousePosition, this.dragOffset), this);
                     this.dragging = true
                 }
             }, 300)
         })
 
-        this.content.on("pointermove", (event) => {
+        this.content.on("pointermove", async (event) => {
             if (this.dragging) {
                 let mousePosition = event.data.global
-                onPointerMove(sum(mousePosition, this.dragOffset), this);
+                await onPointerMove(vectorAdd(mousePosition, this.dragOffset), this);
             }
         })
 
         this.content.on("pointerup", (event) => {
-            pointerDown = false
             let mousePosition = event.data.global
             if (this.dragging) {
-                onPointerUp(sum(mousePosition, this.dragOffset), this);
-            } else {
-                onPointerTap(sum(mousePosition, this.dragOffset), this)
+                onPointerUp(vectorAdd(mousePosition, this.dragOffset), this);
+            } else if (pointerDown) {
+                onPointerTap(vectorAdd(mousePosition, this.dragOffset), this)
             }
+            pointerDown = false
             this.dragging = false
         })
 
@@ -325,9 +330,9 @@ export class GridItem {
             pointerDown = false
             let mousePosition = event.data.global
             if (this.dragging) {
-                onPointerUp(sum(mousePosition, this.dragOffset), this);
+                onPointerUp(vectorAdd(mousePosition, this.dragOffset), this);
             } else {
-                onPointerTap(sum(mousePosition, this.dragOffset), this)
+                onPointerTap(vectorAdd(mousePosition, this.dragOffset), this)
             }
             this.dragging = false
         })
@@ -366,4 +371,15 @@ export class GridItem {
             this.content.blendOutTypeChooser()
         }
     }
+
+    private findAdjacentForIndex(index: Index2D) {
+        let currentIndex = this.currentIndex!
+        let distX = index.row - currentIndex.row
+        let distY = index.column - currentIndex.column
+        if (Math.abs(distX) > Math.abs(distY)) {
+            return indexAdd(currentIndex, {row: Math.sign(distX), column: 0})
+        }
+        return indexAdd(currentIndex, {row: 0, column: Math.sign(distY)})
+    }
+
 }

@@ -1,10 +1,9 @@
 import {Application, Container, Sprite, TilingSprite} from 'pixi.js';
-import {ASSET_STORE, DIALOG_MANAGER, GAME_HEIGHT, GAME_WIDTH} from "../index";
+import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../index";
 import Scene from "./Basics/Scene";
 import {Texture} from "@pixi/core";
 import {StartButton} from "../UI/Buttons/StartButton";
 import {ScalingButton} from "../UI/Buttons/ScalingButton";
-import {Dialog, START_DIALOG} from "../General/Dialog/Dialogs/DialogConfig";
 
 export class StartScene extends Scene {
 
@@ -39,7 +38,6 @@ export class StartScene extends Scene {
             await this.blendInBernd();
             await this.blendInTitle();
             await this.scaleInStartButton();
-            DIALOG_MANAGER.startDialog(new Dialog(START_DIALOG))
         }
         this.started = true
     }

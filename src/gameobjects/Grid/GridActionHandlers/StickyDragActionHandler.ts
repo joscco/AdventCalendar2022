@@ -8,23 +8,28 @@ import {Vector2D} from "../../../General/Helpers";
 
 export class StickyDragActionHandler extends GridActionHandler {
 
+    moving: boolean = false
+
     onPickUpInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
         item.scaleUp()
     }
 
-    onDragToInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
+    async onDragToInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): Promise<void> {
         if (item.content instanceof Machine) {
             item.content.blendOutTypeChooser()
         }
 
         let nearestGridIndex = grid.getNearestFreeIndexForPositionAndItem(mousePosition, item);
-        if (nearestGridIndex) {
+        if (nearestGridIndex && !this.moving) {
             if (!(item.currentIndex?.row === nearestGridIndex.row && item.currentIndex.column === nearestGridIndex.column)) {
-                SOUND_MANAGER.playBlub()
-                item.trySetToIndex(grid, nearestGridIndex)
+                // Meh...
+                this.moving = true
+                let couldSlide = await item.trySlideToIndex(grid, nearestGridIndex)
+                this.moving = false
+                if (couldSlide) {
+                    SOUND_MANAGER.playBlub()
+                }
             }
-        } else {
-            item.updateAim(grid.projectPointToGridBorder(mousePosition))
         }
     }
 
@@ -37,22 +42,20 @@ export class StickyDragActionHandler extends GridActionHandler {
 
     onLetGoInGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
         item.scaleDown()
-        if (!grid.getNearestFreeIndexForPositionAndItem(mousePosition, item)) {
-            let firstFreeIndex = this.defaultGrid.getNearestFreeIndexForPositionAndItem(grid.position, item)
-            item.trySetToIndex(this.defaultGrid, firstFreeIndex!)
-        }
+        let firstFreeIndex = grid.getNearestFreeIndexForPositionAndItem(mousePosition, item)
+        item.trySlideToIndex(this.defaultGrid, firstFreeIndex!)
     }
 
     onEnterGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
-        let nearestGridIndex = grid.getNearestFreeIndexForPositionAndItem(mousePosition, item);
-        if (nearestGridIndex) {
-            item.scaleUp()
-            item.trySetToIndex(grid, nearestGridIndex)
-        }
+        // let nearestGridIndex = grid.getNearestFreeIndexForPositionAndItem(mousePosition, item);
+        // if (nearestGridIndex) {
+        //     item.scaleUp()
+        //     item.trySetToIndex(grid, nearestGridIndex)
+        // }
     }
 
     onLeaveGrid(grid: Grid, mousePosition: Vector2D, item: GridItem): void {
-        item.scaleDown()
-        item.freeFromGrid()
+        // item.scaleDown()
+        // item.freeFromGrid()
     }
 }

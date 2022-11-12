@@ -52,11 +52,21 @@ const LEVEL_MANIFEST: LevelConfigManifest = [
     }, {
         level: 2,
         conveyorBeltPattern:
-            "A0|B0|C0|C1|C2\n" +
-            "A1|B1|B2|B3|B4\n" +
-            "A2|A3|A4|A5|  ",
-        recipe: "NUSSECKEN",
-        machines: [{shape: "1x1", index: {row: 0, column: 0}}]
+            "A2|A1|A0|B0\n" +
+            "A3|  |  |B1\n" +
+            "C3|  |  |B2\n" +
+            "C2|C1|C0|B3",
+        recipe: "SCHOKOCROSSIES",
+        startIngredients: new Map([
+            ["A", "brown_sugar"],
+            ["B", "nuts"],
+            ["C", "beet"]
+        ]),
+        machines: [
+            {shape: "1x1", index: {row: 1, column: 1}, type: "liquid"},
+            {shape: "1x1", index: {row: 1, column: 2}, type: "white"},
+            {shape: "1x1", index: {row: 2, column: 1}, type: "yellow"}
+        ]
     }
 ]
 
@@ -78,7 +88,7 @@ export class LevelInitiator {
         })
     }
 
-    static getRecipeForDay(day: number): RecipeID{
+    static getRecipeForDay(day: number): RecipeID {
         let config = LEVEL_MANIFEST.find(config => config.level == day)
         if (!config) {
             //throw Error("No level config found for day " + day)
