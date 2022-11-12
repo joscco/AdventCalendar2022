@@ -1,5 +1,12 @@
 import {Recipe, RecipeBox, RecipeID, RECIPES} from "../gameobjects/RecipeBox";
-import {getMachineNameForType, Machine, MachineLayout, parseShape} from "../gameobjects/Machinery/Machine";
+import {
+    Block,
+    BlockLayout,
+    getMachineNameForType,
+    Machine,
+    MachineLayout,
+    parseShape
+} from "../gameobjects/Machinery/Machine";
 import {GridConnector} from "../gameobjects/Grid/GridConnector";
 import Scene from "./Basics/Scene";
 import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
@@ -20,6 +27,7 @@ export type FactorySceneOptions = {
     conveyorBeltPattern: string,
     recipe: RecipeID,
     machineLayout: MachineLayout,
+    blockLayout?: BlockLayout,
     startIngredients?: Map<string, IngredientID>,
     hasStepButton?: boolean
 }
@@ -27,8 +35,10 @@ export type FactorySceneOptions = {
 export class FactoryScene extends Scene {
 
     private readonly machineLayout: MachineLayout;
+    private readonly blockLayout: BlockLayout;
     private readonly machineGrid: Grid;
     private readonly machineGridItems: GridItem[];
+    private readonly blockGridItems: GridItem[];
     private machineGridConnector: GridConnector;
 
     private startIngredients: IngredientID[]
@@ -74,6 +84,9 @@ export class FactoryScene extends Scene {
         this.machineLayout = opts.machineLayout
         this.machineGrid = this.setupMachineUsageGrid(this.beltGrid!.getNumberOfRows(), this.beltGrid!.getNumberOfColumns())
         this.machineGridItems = this.setupMachineGridItems(this.machineLayout, this.machineGrid)
+
+        this.blockLayout = opts.blockLayout ?? []
+        this.blockGridItems = this.setupBlocks(this.blockLayout, this.machineGrid)
         this.machineGridConnector = this.setupGridConnector(this.machineGrid, this.machineGridItems)
 
         if (opts.hasStepButton) {
@@ -217,7 +230,6 @@ export class FactoryScene extends Scene {
 
     private setupMachineGridItems(machineLayout: MachineLayout, machineGrid: Grid): GridItem[] {
         let gridItems = []
-        let horizontalIndex = 0
         for (let machineLayoutEntry of machineLayout) {
             let shape = machineLayoutEntry.shape
             let type = machineLayoutEntry.type ?? "sweet"
@@ -234,7 +246,6 @@ export class FactoryScene extends Scene {
                 () => getMachineNameForType(machine.getType()),
                 () => (!gridItem.dragging
                     && !(gridItem.content as Machine).isShowingTypeChoosingMenu()))
-            horizontalIndex++
         }
 
         return gridItems;
@@ -288,5 +299,22 @@ export class FactoryScene extends Scene {
         }
 
         return belts
+    }
+
+    private setupBlocks(blockLayout: BlockLayout, machineGrid: Grid): GridItem[] {
+        let gridItems = []
+        for (let blockLayoutEntry of blockLayout) {
+            let shape = blockLayoutEntry.shape
+            let block = new Block(shape, machineGrid)
+            this.addChild(block)
+
+            let index = blockLayoutEntry.index
+            let gridItem = new GridItem(block, machineGrid, index)
+
+            gridItem.addShape(machineGrid, parseShape(shape))
+            gridItems.push(gridItem)
+        }
+
+        return gridItems;
     }
 }

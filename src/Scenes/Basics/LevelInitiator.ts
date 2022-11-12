@@ -1,7 +1,7 @@
 import {FactoryScene} from "../FactoryScene";
 import {RecipeID} from "../../gameobjects/RecipeBox";
 import {App} from "../../index";
-import {MachineDefinition} from "../../gameobjects/Machinery/Machine";
+import {BlockDefinition, MachineDefinition} from "../../gameobjects/Machinery/Machine";
 import {IngredientID} from "../../gameobjects/Ingredient";
 import SceneManager from "../../General/SceneManager";
 
@@ -10,6 +10,7 @@ type LevelConfig = {
     recipe: RecipeID;
     conveyorBeltPattern: string;
     machines: MachineDefinition[];
+    blocks?: BlockDefinition[];
     startIngredients?: Map<string, IngredientID>;
     hasStepButton?: boolean
 }
@@ -62,10 +63,32 @@ const LEVEL_MANIFEST: LevelConfigManifest = [
             ["B", "nuts"],
             ["C", "beet"]
         ]),
+        blocks: [
+            {shape: "1x1", index: {row: 2, column: 2}}
+        ],
         machines: [
             {shape: "1x1", index: {row: 1, column: 1}, type: "liquid"},
             {shape: "1x1", index: {row: 1, column: 2}, type: "white"},
             {shape: "1x1", index: {row: 2, column: 1}, type: "yellow"}
+        ]
+    }, {
+        level: 3,
+        conveyorBeltPattern:
+            "A0|B3|C0|D3\n" +
+            "A1|B2|C1|D2\n" +
+            "A2|B1|C2|D1\n" +
+            "A3|B0|C3|D0",
+        recipe: "MUERBETEIGKEKSE",
+        startIngredients: new Map([
+            ["A", "brown_sugar"],
+            ["B", "dry_dirt"],
+            ["C", "cream"],
+            ["D", "nut_aroma"]
+        ]),
+        machines: [
+            // Types should be fixed!
+            {shape: "1x2", index: {row: 1, column: 0}, type: "yellow"},
+            {shape: "1x2", index: {row: 2, column: 2}, type: "white"},
         ]
     }
 ]
@@ -81,6 +104,7 @@ export class LevelInitiator {
                         conveyorBeltPattern: config.conveyorBeltPattern,
                         recipe: config.recipe,
                         machineLayout: config.machines,
+                        blockLayout: config.blocks,
                         startIngredients: config.startIngredients,
                         hasStepButton: config.hasStepButton
                     }

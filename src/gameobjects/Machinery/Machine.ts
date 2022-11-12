@@ -10,31 +10,62 @@ import {Index2D} from "../../General/Helpers";
 export type MachineType = IngredientTaste | IngredientColor | IngredientConsistence
 export type MachineShape = "1x1" | "2x1" | "3x1" | "1x2" | "2x2" | "3x2" | "1x3" | "2x3" | "3x3"
 export type MachineDefinition = {shape: MachineShape, index: Index2D, type?: MachineType}
+export type BlockDefinition = {shape: MachineShape, index: Index2D}
+
 export type MachineLayout = MachineDefinition[]
+export type BlockLayout = BlockDefinition[]
 
-export class Machine extends Sprite {
-
-    private type: MachineType;
+export class Block extends Sprite {
     private machineShape: MachineShape;
-    private iconSlot: MachineIconSlot;
     private currentGrid: Grid;
     private gridItem?: GridItem;
 
-    constructor(type: MachineType, machineShape: MachineShape, startGrid: Grid) {
-        super()
-        this.type = type;
+    constructor(machineShape: MachineShape, startGrid: Grid) {
+        super();
         this.machineShape = machineShape
         this.currentGrid = startGrid
         this.zIndex = 1
+        this.pivot.set(75, 75)
 
-        this.iconSlot = new MachineIconSlot(type, this)
-        this.iconSlot.position.set(75, 75)
-        this.addChild(this.iconSlot)
         this.updateAppearance()
     }
 
     setGridItem(gridItem: GridItem) {
         this.gridItem = gridItem
+    }
+
+    getShape(): MachineShape {
+        return this.machineShape
+    }
+
+    setGrid(grid: Grid) {
+        this.currentGrid = grid
+        this.updateAppearance()
+    }
+
+    protected updateAppearance() {
+        this.texture = ASSET_STORE.getTextureAsset(("big_machine_" + this.machineShape) as TextureAssetID)
+    }
+}
+
+export class Machine extends Block {
+
+    private type: MachineType;
+    private iconSlot: MachineIconSlot;
+
+    constructor(type: MachineType, machineShape: MachineShape, startGrid: Grid) {
+        super(machineShape, startGrid)
+        this.type = type;
+
+        this.iconSlot = new MachineIconSlot(type, this)
+        this.iconSlot.position.set(75, 75)
+        this.addChild(this.iconSlot)
+
+        this.updateAppearance()
+    }
+
+    setGridItem(gridItem: GridItem) {
+        super.setGridItem(gridItem)
         this.iconSlot.setGridItem(gridItem)
     }
 
@@ -55,30 +86,16 @@ export class Machine extends Sprite {
         return this.type
     }
 
-    getShape(): MachineShape {
-        return this.machineShape
-    }
-
-    setGrid(grid: Grid) {
-        this.currentGrid = grid
-        this.updateAppearance()
-    }
-
-    private updateAppearance() {
-        this.iconSlot.updateType(this.type)
-        if (this.currentGrid.id === "machineGrid") {
-            this.iconSlot.scaleUp()
-            this.texture = ASSET_STORE.getTextureAsset(("big_machine_" + this.machineShape) as TextureAssetID)
-            this.pivot.set(75, 75)
-        } else {
-            this.iconSlot.scaleDown()
-            this.texture = ASSET_STORE.getTextureAsset(("small_machine_" + this.machineShape) as TextureAssetID)
-            this.pivot.set(this.texture.width/2, this.texture.height/2)
-        }
-    }
-
     isShowingTypeChoosingMenu() {
         return this.iconSlot.isShowingTypeChoosingMenu();
+    }
+
+    protected updateAppearance() {
+        if (this.type) {
+            this.iconSlot.updateType(this.type)
+            this.iconSlot.scaleUp()
+            super.updateAppearance();
+        }
     }
 }
 
