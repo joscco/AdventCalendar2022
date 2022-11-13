@@ -1,14 +1,14 @@
-import {Container, Sprite, Text} from "pixi.js";
+import {Container, Sprite} from "pixi.js";
 import {ASSET_STORE, DIALOG_MANAGER, GAME_HEIGHT, GAME_WIDTH} from "../../index";
 import {ScalingButtonImpl} from "../../UI/Buttons/ScalingButton";
 import {DialogNode, Speech} from "./Dialogs/DialogConfig";
+import {TextBox} from "./Dialogs/TextBox";
 
 export class DialogBox extends Container {
 
     background: Sprite
     spike: Sprite
-    textObject: Text
-    TEXT_PADDING: number = 20
+    textObject: TextBox
 
     previousButton: ScalingButtonImpl
     nextButton: ScalingButtonImpl
@@ -21,12 +21,8 @@ export class DialogBox extends Container {
         super();
         this.background = new Sprite(ASSET_STORE.getTextureAsset("dialog_box"))
         this.spike = new Sprite(ASSET_STORE.getTextureAsset("dialog_spike"))
-        this.textObject = new Text("", {
-            fontFamily: "Futurahandwritten",
-            fontSize: 50,
-            fill: 0xFFFFFF,
-            wordWrapWidth: this.background.width - 2 * this.TEXT_PADDING
-        })
+
+        this.textObject = new TextBox(this.background.width, this.background.height)
 
         this.previousButton = new ScalingButtonImpl(ASSET_STORE.getTextureAsset("dialog_previous_button"), () => this.previousSpeech())
         this.nextButton = new ScalingButtonImpl(ASSET_STORE.getTextureAsset("dialog_next_button"), () => this.nextSpeech())
@@ -34,16 +30,16 @@ export class DialogBox extends Container {
         this.hide()
 
         this.background.anchor.set(0.5)
-        this.textObject.anchor.set(0.5)
+
         this.spike.anchor.set(0.5, 1)
         this.spike.position.set(520, -75)
 
         this.previousButton.position.set(-this.background.width / 2 + 20, 0)
-        this.nextButton.position.set(this.background.width / 2 + 20, 0)
-        this.cancelButton.position.set(-this.background.width / 2, -this.height / 2)
+        this.nextButton.position.set(this.background.width / 2 - 20, 0)
+        this.cancelButton.position.set(this.background.width / 2, - this.background.height / 2)
 
         this.background.addChild(this.spike, this.textObject)
-        this.addChild(this.background)
+        this.addChild(this.background, this.previousButton, this.nextButton, this.cancelButton)
     }
 
     async blendIn() {
@@ -68,7 +64,7 @@ export class DialogBox extends Container {
     setSpeeches(node: DialogNode) {
         this.currentSpeeches = node.speeches
         this.currentSpeechIndex = 0
-        this.textObject.text = this.currentSpeeches[this.currentSpeechIndex].text
+        this.textObject.setFullText(this.currentSpeeches[this.currentSpeechIndex].text)
 
         if (this.currentSpeeches.length > 1) {
             this.nextButton.blendIn()
@@ -80,27 +76,31 @@ export class DialogBox extends Container {
 
     private async nextSpeech() {
         let index = ++this.currentSpeechIndex!
-        this.textObject.text = this.currentSpeeches![index].text
+        await this.detype()
+        this.textObject.setFullText(this.currentSpeeches![index].text)
         if (index === this.currentSpeeches!.length - 1) {
             this.nextButton.blendOut()
         }
         this.previousButton.blendIn()
+        this.type()
     }
 
     private async previousSpeech() {
         let index = --this.currentSpeechIndex!
-        this.textObject.text = this.currentSpeeches![index].text
+        await this.detype()
+        this.textObject.setFullText(this.currentSpeeches![index].text)
         if (index === 0) {
             this.previousButton.blendOut()
         }
-        this.nextButton.blendOut()
+        this.nextButton.blendIn()
+        this.type()
     }
 
     async type() {
-        gsap.to(this.textObject.scale, {x: 1, y: 1, duration: 0.5, ease: Back.easeInOut})
+        await this.textObject.type()
     }
 
     async detype() {
-        gsap.to(this.textObject.scale, {x: 0, y: 0, duration: 0.5, ease: Back.easeInOut})
+        await this.textObject.detype()
     }
 }

@@ -11,12 +11,10 @@ export class EventEmitter {
     private subscribers: Map<EmittableEvent, EventSubscriberFunction[]> = new Map()
 
     emit(event: EmittableEvent) {
-        console.log("Emitted:",event)
         this.subscribers.get(event)?.forEach(action => action())
     }
 
     subscribe(event: EmittableEvent, action: EventSubscriberFunction) {
-        console.log("Subscribed:", event)
         let actions = this.subscribers.get(event)
 
         if (actions) {

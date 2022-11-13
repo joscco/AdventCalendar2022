@@ -41,9 +41,12 @@ export abstract class ScalingButton extends Button {
 
 export class ScalingButtonImpl extends ScalingButton{
     active: boolean = true
+    private texture: Texture
 
-    constructor(private texture: Texture, private onClickAction: () => void) {
+    constructor(texture: Texture, private onClickAction: () => void) {
         super()
+        this.texture = texture
+        this.updateTexture()
     }
 
     getTexture(): Texture | null {
@@ -57,13 +60,15 @@ export class ScalingButtonImpl extends ScalingButton{
     }
 
     blendOut(): void {
+        this.interactive = false
         this.active = false
         gsap.to(this.scale, {x: 0, y: 0, duration: 0.3, ease: Back.easeIn})
     }
 
     async blendIn(): Promise<void> {
-        await gsap.to(this.scale, {x: 0, y: 0, duration: 0.3, ease: Back.easeIn})
+        await gsap.to(this.scale, {x: 1, y: 1, duration: 0.3, ease: Back.easeIn})
         this.active = true
+        this.interactive = true
     }
 
     hide() {

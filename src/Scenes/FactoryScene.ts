@@ -11,7 +11,15 @@ import {GridConnector} from "../gameobjects/Grid/GridConnector";
 import Scene from "./Basics/Scene";
 import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
 import {Application, Sprite} from "pixi.js";
-import {ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH, INGREDIENT_COOKBOOK, TOOLTIP_MANAGER} from "../index";
+import {
+    ASSET_STORE,
+    DIALOG_MANAGER,
+    GAME_DATA,
+    GAME_HEIGHT,
+    GAME_WIDTH,
+    INGREDIENT_COOKBOOK,
+    TOOLTIP_MANAGER
+} from "../index";
 import {StickyDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/StickyDragActionHandler";
 import {GridItem} from "../gameobjects/Grid/GridItem";
 import {WinScreen} from "../General/WinScreen";
@@ -20,6 +28,7 @@ import {IngredientID} from "../gameobjects/Ingredient"
 import {StepButton} from "../UI/Buttons/StepButton";
 import {Grid} from "../gameobjects/Grid/Grid";
 import {Index2D, isRectangularArray} from "../General/Helpers";
+import {Dialog, START_DIALOG} from "../General/Dialog/Dialogs/DialogConfig";
 
 export type FactorySceneOptions = {
     app: Application,
@@ -128,12 +137,13 @@ export class FactoryScene extends Scene {
         }
 
         this.startIngredients.forEach(ingredient => GAME_DATA.saveNewUnlockedIngredient(ingredient))
+
+        DIALOG_MANAGER.startDialog(new Dialog(START_DIALOG))
     }
 
     async stop() {
         INGREDIENT_COOKBOOK.hideButton()
         INGREDIENT_COOKBOOK.hideCookbook()
-
     }
 
     private setupBeltGridAndBelts(patternArr: string[][]): Grid {

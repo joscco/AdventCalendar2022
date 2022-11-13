@@ -20,7 +20,7 @@ export const START_DIALOG: DialogConfig = {
     nodes: [
         {
             id: "start",
-            speeches: [{text: "Hello you!"}, {text: "How are you doing?"}],
+            speeches: [{text: "Hello! This is a starting dialog!"}, {text: "Click on with the buttons"}, {text: "Not click the music button to stop."}],
             successors: [{on: "clicked_music_button", nextID: null}]
         }
     ],
