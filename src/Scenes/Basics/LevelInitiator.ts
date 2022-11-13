@@ -70,7 +70,71 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x2", index: {row: 1, column: 0}, type: "yellow"},
             {shape: "1x2", index: {row: 2, column: 2}, type: "white"},
         ]
-    }
+    },
+    // {
+    //     level: 4,
+    //     recipe: "RUMKUGELN"
+    // },{
+    //     level: 5,
+    //     recipe: "PUNSCH"
+    // },{
+    //     level: 6,
+    //     recipe: "BETHMAENNCHEN"
+    // },{
+    //     level: 7,
+    //     recipe: "ZIMTSTERNE"
+    // },{
+    //     level: 8,
+    //     recipe: "PRINTEN"
+    // },{
+    //     level: 9,
+    //     recipe: "VANILLEKIPFERL"
+    // },{
+    //     level: 10,
+    //     recipe: "FLORENTINER"
+    // },{
+    //     level: 11,
+    //     recipe: "MAKRONEN"
+    // },{
+    //     level: 12,
+    //     recipe: "SPRITZGEBAECK"
+    // },{
+    //     level: 13,
+    //     recipe: "SPEKULATIUS"
+    // },{
+    //     level: 14,
+    //     recipe: "SCHOKOLADENBROT"
+    // },{
+    //     level: 15,
+    //     recipe: "ENGELSAUGEN"
+    // },{
+    //     level: 16,
+    //     recipe: "SCHWARZWEISSKEKSE"
+    // },{
+    //     level: 17,
+    //     recipe: "LEBKUCHEN"
+    // },{
+    //     level: 18,
+    //     recipe: "PFEFFERNUESSE"
+    // },{
+    //     level: 19,
+    //     recipe: "PANETTONE"
+    // },{
+    //     level: 20,
+    //     recipe: "BAERENTATZEN"
+    // },{
+    //     level: 21,
+    //     recipe: "NUSSECKEN"
+    // },{
+    //     level: 22,
+    //     recipe: "CORNFLAKEWALNUSSKEKSE"
+    // },{
+    //     level: 23,
+    //     recipe: "DOMINOSTEINE"
+    // },{
+    //     level: 24,
+    //     recipe: "STOLLEN"
+    // }
 ]
 
 export class LevelInitiator {

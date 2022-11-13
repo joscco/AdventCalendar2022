@@ -7,42 +7,46 @@ import {GridItem} from "../Grid/GridItem";
 import {ConveyorBeltMoveTile} from "./ConveyorBeltMoveTile";
 import {Container, Sprite, Texture} from "pixi.js";
 import {ASSET_STORE, GAME_DATA, TOOLTIP_MANAGER} from "../../index";
-import {Machine} from "../Machinery/Machine";
+import {Cage, Machine} from "../Machinery/Machine";
 import {Index2D} from "../../General/Helpers";
 
 export class ConveyorBelt extends Container {
 
     private startIngredient: IngredientID
-    private grid: Grid
+    private beltGrid: Grid
+    private machineGrid: Grid
     private tiles: ConveyorBeltTile[]
+    private firstTileCage?: Cage
+    private lastTileCage?: Cage
     private lastTileOverlay: Sprite
     private lastTileGoodTexture: Texture
     private lastTileBadTexture: Texture
 
-    constructor(grid: Grid, startIndex: Index2D, endIndex: Index2D, betweenIndices: Index2D[], startIngredient: IngredientID) {
+    constructor(beltGrid: Grid, machineGrid: Grid, startIndex: Index2D, endIndex: Index2D, betweenIndices: Index2D[], startIngredient: IngredientID) {
         super()
 
         this.startIngredient = startIngredient
-        this.grid = grid
+        this.beltGrid = beltGrid
+        this.machineGrid = machineGrid
 
         this.tiles = []
         let startTile = new ConveyorBeltStartTile(startIndex)
-        new GridItem(startTile, this.grid, startIndex)
+        new GridItem(startTile, this.beltGrid, startIndex)
 
         let betweenTiles: ConveyorBeltMoveTile[] = []
         for (let index of betweenIndices) {
             let betweenTile = new ConveyorBeltMoveTile(index)
-            new GridItem(betweenTile, this.grid, index)
+            new GridItem(betweenTile, this.beltGrid, index)
             betweenTiles.push(betweenTile)
         }
 
         let endTile = new ConveyorBeltEndTile(endIndex)
-        new GridItem(endTile, this.grid, endIndex)
+        new GridItem(endTile, this.beltGrid, endIndex)
 
         this.lastTileOverlay = new Sprite()
         this.lastTileOverlay.anchor.set(0.5)
         this.lastTileOverlay.scale.set(0)
-        this.lastTileOverlay.zIndex = 2
+        this.lastTileOverlay.zIndex = 3
         this.addChild(this.lastTileOverlay)
         this.lastTileGoodTexture = ASSET_STORE.getTextureAsset("goodFieldOverlay")
         this.lastTileBadTexture = ASSET_STORE.getTextureAsset("badFieldOverlay")
@@ -56,7 +60,7 @@ export class ConveyorBelt extends Container {
             tile.zIndex = 0
 
             let ingredient = new Ingredient(this.startIngredient)
-            ingredient.zIndex = 1
+            ingredient.zIndex = 2
             TOOLTIP_MANAGER.registerTooltipFor(ingredient, () => ingredient.getTooltipText())
             tile.setIngredientRef(ingredient)
             ingredient.position.set(tile.x, tile.y)
@@ -64,6 +68,8 @@ export class ConveyorBelt extends Container {
             this.addChild(ingredient)
             this.addChild(tile)
         }
+
+        this.setupCages()
 
         this.rotateTilesToPath()
     }
@@ -97,17 +103,23 @@ export class ConveyorBelt extends Container {
     }
 
     private rotateTilesToPath() {
+        let lastIndex = this.tiles.length - 1
         // Start and End tile do not need to be rotated
-        for (let index = 1; index < this.tiles.length - 1; index++) {
+        for (let index = 0; index < lastIndex; index++) {
             let nextPosition = this.tiles[index + 1].position
             this.tiles[index].rotateTowards(nextPosition)
         }
+
+        this.tiles[lastIndex].rotateTowards(this.tiles[lastIndex - 1].position)
+
+        this.firstTileCage!.rotateTowards(this.tiles[1].position)
+        this.lastTileCage!.rotateTowards(this.tiles[lastIndex - 1].position)
     }
 
     updateIngredients(machineGrid: Grid) {
         for (let tile of this.tiles) {
             let ingredient = tile.getIngredientRef()!
-            if (machineGrid.get(tile.index)) {
+            if (machineGrid.get(tile.index) && machineGrid.get(tile.index)!.gridItem.content instanceof Machine) {
                 let machine = machineGrid.get(tile.index)!.gridItem.content! as Machine
                 let machineType = machine.getType()
                 let ingredientBefore = ingredient.getID()
@@ -143,5 +155,21 @@ export class ConveyorBelt extends Container {
 
     resetIngredients() {
         this.tiles.forEach(tile => tile.ingredientRef?.set(this.startIngredient))
+    }
+
+    private setupCages() {
+        this.firstTileCage = new Cage("1x1", this.machineGrid)
+        this.firstTileCage.zIndex = 1
+        this.lastTileCage = new Cage("1x1", this.machineGrid)
+        this.lastTileCage.zIndex = 1
+
+        let firstTile = this.tiles[0]
+        let lastTile = this.tiles[this.tiles.length - 1]
+
+        this.addChild(this.firstTileCage)
+        this.addChild(this.lastTileCage)
+
+        new GridItem(this.firstTileCage, this.machineGrid, firstTile.index)
+        new GridItem(this.lastTileCage, this.machineGrid, lastTile.index)
     }
 }

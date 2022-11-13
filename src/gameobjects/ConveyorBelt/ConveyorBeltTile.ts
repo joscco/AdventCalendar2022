@@ -16,7 +16,7 @@ export abstract class ConveyorBeltTile extends AnimatedSprite {
         this.autoUpdate = true
         this.animationSpeed = 1/60
         this.play()
-        this.anchor.set(0.5)
+        this.pivot.set(60, this.height/2)
     }
 
     setIngredientRef(ingredientRef: Ingredient) {

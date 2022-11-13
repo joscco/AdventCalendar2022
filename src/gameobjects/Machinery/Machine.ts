@@ -5,7 +5,7 @@ import {Grid} from "../Grid/Grid";
 import {MachineIconSlot} from "./MachineIconSlot";
 import {TextureAssetID} from "../../General/AssetStore";
 import {GridItem} from "../Grid/GridItem";
-import {Index2D} from "../../General/Helpers";
+import {Index2D, Vector2D} from "../../General/Helpers";
 
 export type MachineType = IngredientTaste | IngredientColor | IngredientConsistence
 export type MachineShape = "1x1" | "2x1" | "3x1" | "1x2" | "2x2" | "3x2" | "1x3" | "2x3" | "3x3"
@@ -16,9 +16,9 @@ export type MachineLayout = MachineDefinition[]
 export type BlockLayout = BlockDefinition[]
 
 export class Block extends Sprite {
-    private machineShape: MachineShape;
-    private currentGrid: Grid;
-    private gridItem?: GridItem;
+    protected machineShape: MachineShape;
+    protected currentGrid: Grid;
+    protected gridItem?: GridItem;
 
     constructor(machineShape: MachineShape, startGrid: Grid) {
         super();
@@ -44,7 +44,7 @@ export class Block extends Sprite {
     }
 
     protected updateAppearance() {
-        this.texture = ASSET_STORE.getTextureAsset(("big_machine_" + this.machineShape) as TextureAssetID)
+        this.texture = ASSET_STORE.getTextureAsset(("block_" + this.machineShape) as TextureAssetID)
     }
 }
 
@@ -94,8 +94,27 @@ export class Machine extends Block {
         if (this.type) {
             this.iconSlot.updateType(this.type)
             this.iconSlot.scaleUp()
-            super.updateAppearance();
+            this.texture = ASSET_STORE.getTextureAsset(("machine_" + this.machineShape) as TextureAssetID)
         }
+    }
+}
+
+export class Cage extends Block {
+
+    rotateTowards(position: Vector2D) {
+        let towardsVector = {x: position.x - this.position.x, y: position.y - this.position.y}
+        let towardsAngle = Math.atan2(towardsVector.y, towardsVector.x)
+        if (Math.PI / 4 < towardsAngle && towardsAngle < 3 * Math.PI / 4) {
+            this.angle = 90
+        } else if (3 * Math.PI / 4 < towardsAngle || towardsAngle < - 3 * Math.PI / 4) {
+            this.angle = 180
+        } else if (- 3 * Math.PI / 4 < towardsAngle && towardsAngle < - Math.PI / 4) {
+            this.angle = 270
+        }
+    }
+
+    protected updateAppearance() {
+        this.texture = ASSET_STORE.getTextureAsset("cage")
     }
 }
 

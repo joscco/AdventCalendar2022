@@ -116,10 +116,13 @@ export class GridItem {
     }
 
     trySetToIndexInstantly(grid: Grid, index: Index2D) {
+        console.log("Try pushing grid item to", grid, index)
         if (this.canBeSetToIndexInGrid(grid, index)) {
+            console.log("Was successful")
             this.setToIndex(grid, index)
             return true;
         }
+        console.log("Not possible")
         return false;
     }
 

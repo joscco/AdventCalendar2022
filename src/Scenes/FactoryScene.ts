@@ -70,8 +70,10 @@ export class FactoryScene extends Scene {
 
         this.recipeBox = this.setupRecipeBox(RECIPES[opts.recipe]);
         this.beltGrid = this.setupBeltGridAndBelts(patternArr);
+        this.machineGrid = this.setupMachineUsageGrid(this.beltGrid.getNumberOfRows(), this.beltGrid.getNumberOfColumns())
+
         this.startIngredients = opts.startIngredients ? [...opts.startIngredients.values()] : []
-        this.belts = this.setupBelts(patternArr, this.beltGrid, opts.startIngredients)
+        this.belts = this.setupBelts(patternArr, this.beltGrid, this.machineGrid, opts.startIngredients)
 
         this.winScreen = new WinScreen(opts.recipe, this.level)
         this.winScreen.zIndex = 10
@@ -82,7 +84,6 @@ export class FactoryScene extends Scene {
         this.addChild(this.uiOverlay)
 
         this.machineLayout = opts.machineLayout
-        this.machineGrid = this.setupMachineUsageGrid(this.beltGrid!.getNumberOfRows(), this.beltGrid!.getNumberOfColumns())
         this.machineGridItems = this.setupMachineGridItems(this.machineLayout, this.machineGrid)
 
         this.blockLayout = opts.blockLayout ?? []
@@ -278,7 +279,7 @@ export class FactoryScene extends Scene {
         }
     }
 
-    private setupBelts(patternArr: string[][], beltGrid: Grid, startIngredients?: Map<string, IngredientID>): ConveyorBelt[] {
+    private setupBelts(patternArr: string[][], beltGrid: Grid, machineGrid: Grid, startIngredients?: Map<string, IngredientID>): ConveyorBelt[] {
         let beltMap = this.parsePatternAsMap(patternArr)
         if (!beltMap) {
             throw Error("Conveyor Belt Pattern could not be parsed!")
@@ -290,6 +291,7 @@ export class FactoryScene extends Scene {
             let beltLength = beltData.length
             let belt = new ConveyorBelt(
                 beltGrid,
+                machineGrid,
                 beltData[0].index,
                 beltData[beltLength - 1].index,
                 beltData.slice(1, beltLength - 1).map(data => data.index),

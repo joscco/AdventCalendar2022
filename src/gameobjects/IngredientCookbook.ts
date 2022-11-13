@@ -192,6 +192,17 @@ export class IngredientCookbook extends Container {
         return result
     }
 
+    private download_container_as_png(sprite: Container, fileName: string) {
+        App.renderer.plugins.extract.canvas(sprite).toBlob( (b: Blob) => {
+            let a = document.createElement('a');
+            document.body.append(a);
+            a.download = fileName;
+            a.href = URL.createObjectURL(b);
+            a.click();
+            a.remove();
+        }, 'image/png');
+    }
+
     private repositionEntries(unlockedIDs: IngredientID[]) {
         this.hideAllEntries()
 

@@ -5,6 +5,7 @@ import {ASSET_STORE} from "../../index";
 import {Vector2D} from "../../General/Helpers";
 
 export class ConveyorBeltMoveTile extends ConveyorBeltTile {
+
     getTextures(): Texture[] {
         return [
             ASSET_STORE.getTextureAsset("moveField2"),
