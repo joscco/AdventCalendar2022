@@ -114,6 +114,7 @@ export class FactoryScene extends Scene {
     }
 
     start() {
+        TOOLTIP_MANAGER.enableTooltips()
         this.winScreen.blendOut()
         INGREDIENT_COOKBOOK.showButton()
 
@@ -141,7 +142,12 @@ export class FactoryScene extends Scene {
         DIALOG_MANAGER.startDialog(new Dialog(START_DIALOG))
     }
 
-    async stop() {
+    async beforeFadeOut() {
+        await DIALOG_MANAGER.endDialog()
+        await TOOLTIP_MANAGER.disableTooltips()
+    }
+
+    async afterFadeOut() {
         INGREDIENT_COOKBOOK.hideButton()
         INGREDIENT_COOKBOOK.hideCookbook()
     }
@@ -250,6 +256,14 @@ export class FactoryScene extends Scene {
             let index = machineLayoutEntry.index
             let gridItem = new GridItem(machine, machineGrid, index)
 
+            if (machineLayoutEntry.positionFixed) {
+                gridItem.positionLock()
+            }
+
+            if (machineLayoutEntry.typeFixed) {
+                gridItem.typeLock()
+            }
+
             gridItem.addShape(machineGrid, parseShape(shape))
             gridItems.push(gridItem)
 
@@ -282,7 +296,7 @@ export class FactoryScene extends Scene {
 
         if (levelSolved) {
             this.winScreen.blendIn()
-            this.machineGridItems.forEach(item => item.lock())
+            this.machineGridItems.forEach(item => item.tempLock())
 
             GAME_DATA.saveUnlockedLevel(Math.max(this.level + 1, GAME_DATA.getUnlockedLevels()))
             clearInterval(this.timeInterval)

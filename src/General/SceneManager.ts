@@ -122,7 +122,9 @@ export default class SceneManager extends Container{
             return;
         }
 
+        await this.beforeFadeOut()
         await gsap.to(this, {alpha: 1, duration: 1, ease: Quad.easeInOut})
+        await this.afterFadeOut()
         this.stop();
 
         // Start new
@@ -152,6 +154,34 @@ export default class SceneManager extends Container{
         }
     }
 
+    private async beforeFadeOut() {
+        let active: IScene|null = this.active;
+        if (active) {
+            await active.beforeFadeOut();
+        }
+    }
+
+    private async afterFadeOut() {
+        let active: IScene|null = this.active;
+        if (active) {
+            await active.afterFadeOut()
+        }
+    }
+
+    private async beforeFadeIn() {
+        let active: IScene|null = this.active;
+        if (active) {
+            await active.beforeFadeIn();
+        }
+    }
+
+    private async afterFadeIn() {
+        let active: IScene|null = this.active;
+        if (active) {
+            await active.afterFadeIn()
+        }
+    }
+
     /**
      * Getting the active scene in this manager.
      * @returns {Scene|null}
@@ -175,4 +205,5 @@ export default class SceneManager extends Container{
     public get sceneNames(): string[] {
         return Object.keys(this.scenes);
     }
+
 }

@@ -100,8 +100,36 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 2, column: 3}, type: "sweet"},
             {shape: "1x1", index: {row: 3, column: 2}, type: "liquid"},
         ]
-    },
-    {
+    }, {
+        level: 5,
+        recipe: "BETHMAENNCHEN",
+        conveyorBeltPattern:
+            "A0|B3|B0|  |D0|D3\n" +
+            "A1|B2|B1|  |D1|D2\n" +
+            "A2|  |  |  |  |  \n" +
+            "A3|C2|C1|  |E1|E2\n" +
+            "A4|C3|C0|  |E0|E3",
+        startIngredients: new Map([
+            ["A", "brown_sugar"],
+            ["B", "honey_comb"],
+            ["C", "umeboshi"],
+            ["D", "dry_dirt"],
+            ["D", "egg_powder"]
+        ]),
+        blocks: [
+            {shape: "1x1", index: {row: 0, column: 3}},
+            {shape: "1x1", index: {row: 2, column: 1}},
+            {shape: "1x1", index: {row: 2, column: 5}},
+            {shape: "1x1", index: {row: 4, column: 3}}
+        ],
+        machines: [
+            // Types should be fixed!
+            {shape: "1x1", index: {row: 1, column: 3}, type: "savoury", typeFixed: true},
+            {shape: "1x1", index: {row: 2, column: 2}, type: "sticky", typeFixed: true},
+            {shape: "1x2", index: {row: 2, column: 3}, type: "white", typeFixed: true},
+            {shape: "1x1", index: {row: 3, column: 3}, type: "sweet"}
+        ]
+    }, {
         level: 6,
         recipe: "PUNSCH",
         conveyorBeltPattern:
@@ -138,39 +166,30 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 4, column: 3}, type: "liquid"}
         ]
     }, {
-        level: 5,
-        recipe: "BETHMAENNCHEN",
+        level: 7,
+        recipe: "ZIMTSTERNE",
         conveyorBeltPattern:
-            "A0|B3|B0|  |D0|D3\n" +
-            "A1|B2|B1|  |D1|D2\n" +
-            "A2|  |  |  |  |  \n" +
-            "A3|C2|C1|  |E1|E2\n" +
-            "A4|C3|C0|  |E0|E3",
+            "A0|A1|A2|A3\n" +
+            "B0|B1|B2|B3\n" +
+            "C0|C1|C2|C3\n" +
+            "D0|D1|D2|D3\n" +
+            "E0|E1|E2|E3",
         startIngredients: new Map([
-            ["A", "brown_sugar"],
-            ["B", "honey_comb"],
-            ["C", "umeboshi"],
-            ["D", "dry_dirt"],
-            ["D", "egg_powder"]
+            ["A", "steak"],
+            ["B", "sweetened_cream"],
+            ["C", "scrambled_egg"],
+            ["D", "rum_aroma"],
+            ["E", "nuts"]
         ]),
-        blocks: [
-            {shape: "1x1", index: {row: 0, column: 3}},
-            {shape: "1x1", index: {row: 2, column: 1}},
-            {shape: "1x1", index: {row: 2, column: 5}},
-            {shape: "1x1", index: {row: 4, column: 3}}
-        ],
         machines: [
             // Types should be fixed!
-            {shape: "1x1", index: {row: 1, column: 3}, type: "savoury", typeFixed: true},
-            {shape: "1x1", index: {row: 2, column: 2}, type: "sticky", typeFixed: true},
-            {shape: "1x2", index: {row: 2, column: 3}, type: "white", typeFixed: true},
-            {shape: "1x1", index: {row: 3, column: 3}, type: "sweet"}
+            {shape: "1x1", index: {row: 4, column: 1}, type: "sticky", typeFixed: true},
+            {shape: "1x1", index: {row: 4, column: 2}, type: "solid", positionFixed: true},
+            {shape: "2x1", index: {row: 2, column: 1}, type: "red"},
+            {shape: "2x1", index: {row: 0, column: 2}, type: "solid", positionFixed: true}
         ]
-    },
-    // {
-    //     level: 7,
-    //     recipe: "ZIMTSTERNE"
-    // },{
+    }
+    // ,{
     //     level: 8,
     //     recipe: "PRINTEN"
     // },{

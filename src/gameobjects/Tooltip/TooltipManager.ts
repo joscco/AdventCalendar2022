@@ -7,6 +7,7 @@ import {Vector2D} from "../../General/Helpers";
 export class TooltipManager extends Container{
 
     private tooltip: Tooltip
+    private enabled: boolean = true
     private currentBearer?: Container
     private pointerDown: boolean = false
     private offsetX: number = 0
@@ -32,10 +33,10 @@ export class TooltipManager extends Container{
         bearer.on("pointerover", async (event) => {
             this.lastMousePosition = event.global
             this.currentBearer = bearer
-            if (isEnabled()) {
+            if (this.enabled && isEnabled()) {
                 await new Promise(resolve => setTimeout(resolve, 800));
                 // If we still hover the same thing, show the tooltip
-                if (this.currentBearer === bearer && !this.pointerDown) {
+                if (this.enabled && this.currentBearer === bearer && !this.pointerDown) {
                     let bearer = this.currentBearer
                     let currentMousePosition = bearer.getGlobalPosition()
                     this.showTooltip(currentMousePosition, textDeliverer())
@@ -59,4 +60,15 @@ export class TooltipManager extends Container{
     hideTooltip(): void {
         this.tooltip.hide()
     }
+
+    disableTooltips() {
+        this.tooltip.hide()
+        this.enabled = false
+    }
+
+    enableTooltips() {
+        this.enabled = true
+    }
+
+
 }

@@ -9,5 +9,9 @@ export default interface IScene extends PIXI.Container {
     destroy(): void;
     start(): void;
     stop(): void;
+    beforeFadeIn(): void;
+    afterFadeIn(): void;
+    beforeFadeOut(): void;
+    afterFadeOut(): void;
     update(delta: number): void;
 }

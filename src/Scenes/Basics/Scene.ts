@@ -32,6 +32,11 @@ export default class Scene extends PIXI.Container implements IScene {
         this.hasRun = false;
     }
 
+    beforeFadeIn(): void {}
+    afterFadeIn(): void {}
+    beforeFadeOut(): void {}
+    afterFadeOut(): void {}
+
     /**
      * Called before starting the scene for the first time in this SceneManager.
      * You should create all of your elements for this scene here.

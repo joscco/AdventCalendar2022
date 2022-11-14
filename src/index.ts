@@ -41,8 +41,9 @@ const main = async () => {
             width: GAME_WIDTH,
             height: GAME_HEIGHT,
             resolution: window.devicePixelRatio || 1,
-            antialias: true,
+            antialias: false,
             sharedTicker: false,
+            powerPreference: "high-performance",
             autoStart: false,
             backgroundColor: 0x38191B
         }

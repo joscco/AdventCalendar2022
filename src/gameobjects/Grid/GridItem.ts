@@ -35,6 +35,10 @@ export class GridItem {
     currentGrid?: Grid
     currentIndex?: Index2D
     aim: Vector2D
+
+    positionLocked: boolean = false
+    typeLocked: boolean = false
+
     locked: boolean = false
     moving: boolean = false
 
@@ -106,7 +110,7 @@ export class GridItem {
     }
 
     async trySetToIndex(grid: Grid, index: Index2D): Promise<boolean> {
-        if (this.canBeSetToIndexInGrid(grid, index) && !this.moving) {
+        if (this.canBeSetToIndexInGrid(grid, index) && !this.moving && !this.positionLocked) {
             this.moving = true
             SOUND_MANAGER.playBlub()
             await this.moveToIndex(grid, index)
@@ -359,12 +363,12 @@ export class GridItem {
         this.locked = false
     }
 
-    lock() {
+    tempLock() {
         this.locked = true
     }
 
     tap() {
-        if (this.content instanceof Machine) {
+        if (this.content instanceof Machine && !this.typeLocked) {
             this.content.toggleBlendTypeChooser()
         }
     }
@@ -383,5 +387,13 @@ export class GridItem {
             return indexAdd(currentIndex, {row: Math.sign(distX), column: 0})
         }
         return indexAdd(currentIndex, {row: 0, column: Math.sign(distY)})
+    }
+
+    typeLock() {
+        this.typeLocked = true
+    }
+
+    positionLock() {
+        this.positionLocked = true;
     }
 }
