@@ -37,6 +37,7 @@ export class IngredientCookbook extends Container {
 
         this.content = new Container()
         this.content.position.y = this.CONTENT_MAX_Y
+        this.content.interactiveChildren = false
 
         this.contentMask = new Graphics()
         this.contentMask.beginFill(0x000000)

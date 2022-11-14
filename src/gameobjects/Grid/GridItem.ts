@@ -103,7 +103,7 @@ export class GridItem {
     }
 
     async trySlideToIndex(grid: Grid, index: Index2D) {
-        let nextAdjacent = this.findAdjacentForIndex(index)
+        let nextAdjacent = this.findNextAdjacentFor(index)
         return await this.trySetToIndex(grid, nextAdjacent)
     }
 
@@ -372,7 +372,7 @@ export class GridItem {
         }
     }
 
-    private findAdjacentForIndex(index: Index2D) {
+    private findNextAdjacentFor(index: Index2D) {
         let currentIndex = this.currentIndex!
         let distX = index.row - currentIndex.row
         let distY = index.column - currentIndex.column

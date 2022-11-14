@@ -1,4 +1,4 @@
-import {Container, Text, TextMetrics, TextStyle} from "pixi.js";
+import {BitmapFont, BitmapText, Container, TextMetrics, Text, TextStyle} from "pixi.js";
 
 export class TextBox extends Container {
 
@@ -10,7 +10,7 @@ export class TextBox extends Container {
     LETTER_DETYPE_DURATION = 0.2
     LETTER_DETYPE_OFFSET = 0.005
 
-    private style: any
+    private style: TextStyle
     private boxWidth: number
     private boxHeight: number
     private fullText: string
@@ -23,11 +23,11 @@ export class TextBox extends Container {
 
         this.style = new TextStyle({
             fontFamily: "Futurahandwritten",
+            fill: "#000000",
             fontSize: 60,
-            fill: 0x000000,
-            align: "left",
-            wordWrapWidth: this.boxWidth - 2 * this.TEXT_PADDING
+            wordWrapWidth: this.boxWidth - 2*this.TEXT_PADDING
         })
+
         this.letters = this.initLetters()
         this.fullText = ""
 
@@ -56,7 +56,12 @@ export class TextBox extends Container {
     private initLetters() {
         let result = []
         for (let i = 0; i < this.MAX_LETTERS; i++) {
-            let letter = new Text("", this.style)
+            let letter = new Text("", new TextStyle({
+                fontFamily: "Futurahandwritten",
+                fontSize: 60,
+                fill: 0x000000,
+                align: "left",
+                wordWrapWidth: this.boxWidth - 2 * this.TEXT_PADDING}))
             letter.anchor.set(0.5)
             letter.scale.set(0)
             result.push(letter)

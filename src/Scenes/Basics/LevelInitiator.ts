@@ -71,13 +71,74 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x2", index: {row: 2, column: 2}, type: "white"},
         ]
     },
-    // {
-    //     level: 4,
-    //     recipe: "RUMKUGELN"
-    // },{
-    //     level: 5,
-    //     recipe: "PUNSCH"
-    // },{
+    {
+        level: 4,
+        recipe: "RUMKUGELN",
+        conveyorBeltPattern:
+            "A3|B0|B1|B2|B3\n" +
+            "A2|  |  |  |C0\n" +
+            "A1|  |  |  |C1\n" +
+            "A0|  |  |  |C2\n" +
+            "D3|D2|D1|D0|C3",
+        startIngredients: new Map([
+            ["A", "cream"],
+            ["B", "flour"],
+            ["C", "cocoa"],
+            ["D", "rotten_fruit_juice"]
+        ]),
+        blocks: [
+            {shape: "1x1", index: {row: 1, column: 1}},
+            {shape: "1x1", index: {row: 3, column: 1}},
+            {shape: "1x1", index: {row: 1, column: 3}},
+            {shape: "1x1", index: {row: 3, column: 3}}
+        ],
+        machines: [
+            // Types should be fixed!
+            {shape: "1x1", index: {row: 1, column: 2}, type: "sweet"},
+            {shape: "1x1", index: {row: 2, column: 1}, type: "yellow"},
+            {shape: "1x1", index: {row: 2, column: 2}, type: "savoury"},
+            {shape: "1x1", index: {row: 2, column: 3}, type: "sweet"},
+            {shape: "1x1", index: {row: 3, column: 2}, type: "liquid"},
+        ]
+    },
+    {
+        level: 5,
+        recipe: "PUNSCH",
+        conveyorBeltPattern:
+            "A6|A5|A4|A3|A2|A1|A0|  \n" +
+            "B0|B1|  |  |  |  |D3|D4\n" +
+            "  |B2|  |  |  |  |D2|  \n" +
+            "B4|B3|  |  |  |  |D1|D0\n" +
+            "C0|C1|C2|C3|C4|C5|C6|C7",
+        startIngredients: new Map([
+            ["A", "wine_cream"],
+            ["B", "sugar"],
+            ["C", "grinded_nuts"],
+            ["D", "lemon_aroma"]
+        ]),
+        blocks: [
+            {shape: "1x1", index: {row: 0, column: 7}},
+            {shape: "1x1", index: {row: 1, column: 2}},
+            {shape: "1x1", index: {row: 1, column: 4}},
+            {shape: "1x1", index: {row: 1, column: 5}},
+            {shape: "1x1", index: {row: 2, column: 0}},
+            {shape: "1x1", index: {row: 2, column: 2}},
+            {shape: "1x1", index: {row: 2, column: 5}},
+            {shape: "1x1", index: {row: 2, column: 7}},
+            {shape: "1x1", index: {row: 3, column: 2}},
+            {shape: "1x1", index: {row: 3, column: 3}},
+            {shape: "1x1", index: {row: 3, column: 4}},
+            {shape: "1x1", index: {row: 3, column: 5}},
+        ],
+        machines: [
+            // Types should be fixed!
+            {shape: "1x1", index: {row: 1, column: 3}, type: "red"},
+            {shape: "1x1", index: {row: 2, column: 3}, type: "yellow"},
+            {shape: "1x1", index: {row: 2, column: 4}, type: "brown"},
+            {shape: "1x1", index: {row: 4, column: 3}, type: "liquid"}
+        ]
+    },
+    // ,{
     //     level: 6,
     //     recipe: "BETHMAENNCHEN"
     // },{

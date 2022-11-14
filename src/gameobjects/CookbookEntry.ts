@@ -73,8 +73,6 @@ export class CookbookEntry extends Container {
             this.consistenceIcon, this.consistenceText,
             this.colorIcon, this.colorText,
             this.plusSign1, this.plusSign2, this.divider)
-
-        this.cacheAsBitmap = true
     }
 
    hide() {
@@ -83,5 +81,6 @@ export class CookbookEntry extends Container {
 
    show() {
         this.scale.y = 1
+       this.cacheAsBitmap = true
    }
 }

@@ -100,12 +100,12 @@ export class GridConnector {
         }
     }
 
-    private onEndDrag(mousePosition: Vector2D, item: GridItem) {
+    private async onEndDrag(mousePosition: Vector2D, item: GridItem) {
         if (!item.locked) {
             item.bringToBack()
             let nearestGrid = this.findNearestGridForPosition(mousePosition);
             this.updateNearestGrid(nearestGrid, mousePosition, item)
-            this.otherGridActionsMap.get(nearestGrid)!.onLetGoInGrid(nearestGrid, mousePosition, item)
+            await this.otherGridActionsMap.get(nearestGrid)!.onLetGoInGrid(nearestGrid, mousePosition, item)
         }
     }
 

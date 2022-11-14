@@ -15,6 +15,10 @@ export type Index2D = {
     column: number
 }
 
+export function indexEquals(index1: Index2D, index2: Index2D) {
+    return index1.row === index2.row && index1.column === index2.column
+}
+
 export function quadDistance(a: Index2D, b: Index2D): number {
     return (a.row - b.row) * (a.row - b.row) + (a.column - b.column) * (a.column - b.column)
 }
