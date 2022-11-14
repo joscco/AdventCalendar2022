@@ -4,7 +4,6 @@ export function capitalizeFirstLetter(string: string) {
 }
 
 // Math stuff
-
 export type Vector2D = {
     x: number,
     y: number
@@ -19,8 +18,12 @@ export function indexEquals(index1: Index2D, index2: Index2D) {
     return index1.row === index2.row && index1.column === index2.column
 }
 
-export function quadDistance(a: Index2D, b: Index2D): number {
+export function quadIndexDistance(a: Index2D, b: Index2D): number {
     return (a.row - b.row) * (a.row - b.row) + (a.column - b.column) * (a.column - b.column)
+}
+
+export function quadVectorDistance(a: Vector2D, b: Vector2D): number {
+    return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)
 }
 
 export function clampAndRound(value: number, min: number, max: number): number {

@@ -10,30 +10,30 @@ export class StartScene extends Scene {
     letters: Sprite[] = [];
     pretitle?: Sprite;
     bernd?: Container;
-    startButton?: ScalingButton;
+    startButton: ScalingButton;
     started: boolean = false
 
     constructor(app: Application) {
         super();
         this.app = app
+
+        this.addScrollingBackground(ASSET_STORE.getTextureAsset("startScreenBackgroundPattern"));
+        this.addBernd(
+            ASSET_STORE.getTextureAsset("bernd_head"),
+            ASSET_STORE.getTextureAsset("bernd_torso"),
+            ASSET_STORE.getTextureAsset("bernd_back_torso"),
+            ASSET_STORE.getTextureAsset("bernd_left_arm_leaning"),
+            ASSET_STORE.getTextureAsset("bernd_right_arm_leaning"),
+            ASSET_STORE.getTextureAsset("bernd_eyes_open"),
+            ASSET_STORE.getTextureAsset("bernd_eyes_closed")
+        );
+        this.addPretitle(ASSET_STORE.getTextureAsset("startScreenPretitle"))
+        this.addTitle(ASSET_STORE.getTitleLetterTextures());
+        this.startButton = this.initStartButton();
     }
 
     async start(): Promise<void> {
         if (!this.started) {
-            this.addScrollingBackground(ASSET_STORE.getTextureAsset("startScreenBackgroundPattern"));
-            this.addBernd(
-                ASSET_STORE.getTextureAsset("bernd_head"),
-                ASSET_STORE.getTextureAsset("bernd_torso"),
-                ASSET_STORE.getTextureAsset("bernd_back_torso"),
-                ASSET_STORE.getTextureAsset("bernd_left_arm_leaning"),
-                ASSET_STORE.getTextureAsset("bernd_right_arm_leaning"),
-                ASSET_STORE.getTextureAsset("bernd_eyes_open"),
-                ASSET_STORE.getTextureAsset("bernd_eyes_closed")
-            );
-            this.addPretitle(ASSET_STORE.getTextureAsset("startScreenPretitle"))
-            this.addTitle(ASSET_STORE.getTitleLetterTextures());
-            this.addStartButton();
-
             await this.blendInPretitle();
             await this.blendInBernd();
             await this.blendInTitle();
@@ -80,12 +80,13 @@ export class StartScene extends Scene {
         this.addChild(titleContainer);
     }
 
-    private addStartButton() {
-        this.startButton = new StartButton()
-        this.startButton.x = GAME_WIDTH / 2
-        this.startButton.y = GAME_HEIGHT / 2 + 325
-        this.startButton.scale.set(0)
-        this.addChild(this.startButton);
+    private initStartButton(): StartButton {
+        let startButton = new StartButton()
+        startButton.x = GAME_WIDTH / 2
+        startButton.y = GAME_HEIGHT / 2 + 325
+        startButton.scale.set(0)
+        this.addChild(startButton);
+        return startButton
     }
 
     private addBernd(headTexture: Texture, bodyTexture: Texture, backBodyTexture: Texture,
@@ -143,6 +144,8 @@ export class StartScene extends Scene {
     }
 
     private async scaleInStartButton() {
+        this.startButton.interactive = false
         await gsap.to(this.startButton!.scale, {duration: 1, x: 1, y: 1, ease: Quart.easeInOut, delay: 1.5})
+        this.startButton.interactive = true
     }
 }

@@ -2,7 +2,7 @@ import {GridSlot} from "./GridSlot";
 import {Container, Sprite} from "pixi.js";
 import {GridItem} from "./GridItem";
 import {Texture} from "@pixi/core";
-import {clampAndRound, Index2D, quadDistance, Vector2D} from "../../General/Helpers";
+import {clampAndRound, Index2D, quadIndexDistance, Vector2D} from "../../General/Helpers";
 
 export class Grid extends Container {
 
@@ -223,7 +223,7 @@ export class Grid extends Container {
 
     private getNearestIndicesForPosition(mousePosition: Vector2D): Index2D[] {
         let nearestIndex = this.getNearestIndexForPosition(mousePosition);
-        return this.getAllIndices((a, b) => (quadDistance(nearestIndex, a) - quadDistance(nearestIndex, b)))
+        return this.getAllIndices((a, b) => (quadIndexDistance(nearestIndex, a) - quadIndexDistance(nearestIndex, b)))
     }
 
     projectPointToGridBorder(mousePosition: Vector2D): Vector2D {

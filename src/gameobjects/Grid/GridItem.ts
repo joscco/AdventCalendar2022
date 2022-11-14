@@ -14,12 +14,14 @@
 //  [0, 0, 1],
 //  [1, 1, 1]
 // ] describes a tetris-L-brick
+
 import {GridSlot} from "./GridSlot";
 import {Grid} from "./Grid";
 import {DisplayObject} from "pixi.js";
 import gsap from "gsap";
 import {Machine} from "../Machinery/Machine";
-import {Index2D, vectorAdd, Vector2D, indexAdd} from "../../General/Helpers";
+import {Index2D, indexAdd, quadVectorDistance, Vector2D, vectorAdd} from "../../General/Helpers";
+import {SOUND_MANAGER} from "../../index";
 
 type MultiSlotArr = (GridSlot | null)[][]
 type GridAdaptingDisplayObject = DisplayObject
@@ -34,6 +36,7 @@ export class GridItem {
     currentIndex?: Index2D
     aim: Vector2D
     locked: boolean = false
+    moving: boolean = false
 
     dragging: boolean = false
     dragOffset: Vector2D = {x: 0, y: 0}
@@ -102,14 +105,12 @@ export class GridItem {
         this.currentIndex = index
     }
 
-    async trySlideToIndex(grid: Grid, index: Index2D) {
-        let nextAdjacent = this.findNextAdjacentFor(index)
-        return await this.trySetToIndex(grid, nextAdjacent)
-    }
-
     async trySetToIndex(grid: Grid, index: Index2D): Promise<boolean> {
-        if (this.canBeSetToIndexInGrid(grid, index)) {
+        if (this.canBeSetToIndexInGrid(grid, index) && !this.moving) {
+            this.moving = true
+            SOUND_MANAGER.playBlub()
             await this.moveToIndex(grid, index)
+            this.moving = false
             return true;
         }
         return false;
@@ -124,7 +125,7 @@ export class GridItem {
     }
 
     async updateAim(position: Vector2D) {
-        let distance = GridItem.quadDistance(position, this.aim)
+        let distance = quadVectorDistance(position, this.aim)
         this.aim = {x: position.x, y: position.y}
         if (distance > 500) {
             await this.moveTo(this.aim)
@@ -162,8 +163,8 @@ export class GridItem {
         await gsap.to(this.content.position, {
             x: position.x,
             y: position.y,
-            duration: 0.1,
-            ease: Sine.easeInOut
+            duration: 0.15,
+            ease: Quad.easeInOut
         })
     }
 
@@ -338,10 +339,6 @@ export class GridItem {
         })
     }
 
-    static quadDistance(pos1: Vector2D, pos2: Vector2D) {
-        return (pos1.x - pos2.x) * (pos1.x - pos2.x) + (pos1.y - pos2.y) * (pos1.y - pos2.y)
-    }
-
     private hasIndex(index: Index2D, grid: Grid): boolean {
         return this.currentGrid === grid
             && this.orThroughSlots(slot => {
@@ -366,13 +363,19 @@ export class GridItem {
         this.locked = true
     }
 
+    tap() {
+        if (this.content instanceof Machine) {
+            this.content.toggleBlendTypeChooser()
+        }
+    }
+
     detap() {
         if (this.content instanceof Machine) {
             this.content.blendOutTypeChooser()
         }
     }
 
-    private findNextAdjacentFor(index: Index2D) {
+    findNextAdjacentFor(index: Index2D) {
         let currentIndex = this.currentIndex!
         let distX = index.row - currentIndex.row
         let distY = index.column - currentIndex.column
@@ -381,5 +384,4 @@ export class GridItem {
         }
         return indexAdd(currentIndex, {row: 0, column: Math.sign(distY)})
     }
-
 }

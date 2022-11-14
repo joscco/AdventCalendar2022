@@ -8,7 +8,7 @@ import {Index2D, Vector2D} from "../../General/Helpers";
 
 export type MachineType = IngredientTaste | IngredientColor | IngredientConsistence
 export type MachineShape = "1x1" | "2x1" | "3x1" | "1x2" | "2x2" | "3x2" | "1x3" | "2x3" | "3x3"
-export type MachineDefinition = {shape: MachineShape, index: Index2D, type?: MachineType}
+export type MachineDefinition = {shape: MachineShape, index: Index2D, type?: MachineType, typeFixed?: boolean, positionFixed?: boolean}
 export type BlockDefinition = {shape: MachineShape, index: Index2D}
 
 export type MachineLayout = MachineDefinition[]
