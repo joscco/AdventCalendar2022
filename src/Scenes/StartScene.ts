@@ -7,6 +7,7 @@ import {ScalingButton} from "../UI/Buttons/ScalingButton";
 
 export class StartScene extends Scene {
 
+    lettersContainer: Container
     letters: Sprite[] = [];
     pretitle?: Sprite;
     bernd?: Container;
@@ -28,7 +29,7 @@ export class StartScene extends Scene {
             ASSET_STORE.getTextureAsset("bernd_eyes_closed")
         );
         this.addPretitle(ASSET_STORE.getTextureAsset("startScreenPretitle"))
-        this.addTitle(ASSET_STORE.getTitleLetterTextures());
+        this.lettersContainer = this.addTitle(ASSET_STORE.getTitleLetterTextures());
         this.startButton = this.initStartButton();
     }
 
@@ -38,6 +39,8 @@ export class StartScene extends Scene {
             await this.blendInBernd();
             await this.blendInTitle();
             await this.scaleInStartButton();
+
+            this.lettersContainer.cacheAsBitmap = true
         }
         this.started = true
     }
@@ -63,10 +66,10 @@ export class StartScene extends Scene {
         this.addChild(this.pretitle)
     }
 
-    private addTitle(lettersTextures: Texture[]) {
+    private addTitle(lettersTextures: Texture[]): Container {
         let titleContainer = new Container()
-        titleContainer.x = GAME_WIDTH / 2;
-        titleContainer.y = 450;
+         titleContainer.x = GAME_WIDTH / 2;
+         titleContainer.y = 450;
 
         this.letters = lettersTextures.map(texture => new Sprite(texture))
         this.letters.map(letter => {
@@ -78,6 +81,7 @@ export class StartScene extends Scene {
         titleContainer.pivot.set(titleContainer.width / 2, titleContainer.height / 2)
 
         this.addChild(titleContainer);
+        return titleContainer
     }
 
     private initStartButton(): StartButton {
