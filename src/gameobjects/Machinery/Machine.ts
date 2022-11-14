@@ -3,7 +3,6 @@ import {Sprite} from "pixi.js";
 import {ASSET_STORE} from "../../index";
 import {Grid} from "../Grid/Grid";
 import {MachineIconSlot} from "./MachineIconSlot";
-import {TextureAssetID} from "../../General/AssetStore";
 import {GridItem} from "../Grid/GridItem";
 import {Index2D, Vector2D} from "../../General/Helpers";
 
@@ -44,7 +43,7 @@ export class Block extends Sprite {
     }
 
     protected updateAppearance() {
-        this.texture = ASSET_STORE.getTextureAsset(("block_" + this.machineShape) as TextureAssetID)
+        this.texture = ASSET_STORE.getTextureAsset(("block_" + this.machineShape))
     }
 }
 
@@ -94,7 +93,7 @@ export class Machine extends Block {
         if (this.type) {
             this.iconSlot.updateType(this.type)
             this.iconSlot.scaleUp()
-            this.texture = ASSET_STORE.getTextureAsset(("machine_" + this.machineShape) as TextureAssetID)
+            this.texture = ASSET_STORE.getTextureAsset(("machine_" + this.machineShape))
         }
     }
 }

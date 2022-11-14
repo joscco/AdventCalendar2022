@@ -42,6 +42,7 @@ export class LevelButton extends ScalingButton {
 
     setEnabled(value: boolean) {
         this.enabled = value
+        this.interactive = value
         if (!this.enabled) {
             this.text.style.fill = 0xffffff;
             this.text.style.stroke = 0x000000;

@@ -3,7 +3,6 @@ import {IngredientID, INGREDIENTS} from "./Ingredient";
 import {CenteredSprite} from "../General/CenteredSprite";
 import {ASSET_STORE} from "../index";
 import {capitalizeFirstLetter} from "../General/Helpers";
-import {TextureAssetID} from "../General/AssetStore";
 
 export class CookbookEntry extends Container {
 
@@ -36,7 +35,7 @@ export class CookbookEntry extends Container {
         this.id = id
         let ingredientData = INGREDIENTS[id]
 
-        this.ingredientIcon = new CenteredSprite(ASSET_STORE.getTextureAsset(("small_" + id) as TextureAssetID))
+        this.ingredientIcon = new CenteredSprite(ASSET_STORE.getTextureAsset(("small_" + id)))
         this.ingredientIcon.position.set(-450, 0)
 
         this.ingredientName = new Text(ingredientData.text, textStyle)
@@ -74,6 +73,8 @@ export class CookbookEntry extends Container {
             this.consistenceIcon, this.consistenceText,
             this.colorIcon, this.colorText,
             this.plusSign1, this.plusSign2, this.divider)
+
+        this.cacheAsBitmap = true
     }
 
    hide() {

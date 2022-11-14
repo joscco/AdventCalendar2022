@@ -3,7 +3,6 @@ import {Container, Sprite} from "pixi.js";
 import {Texture} from "@pixi/core";
 import {ASSET_STORE} from "../index";
 import {Emitter} from "@pixi/particle-emitter";
-import {TextureAssetID} from "../General/AssetStore";
 
 export class Ingredient extends Container {
 
@@ -84,7 +83,7 @@ export class Ingredient extends Container {
     }
 
     getTexture(): Texture {
-        return ASSET_STORE.getTextureAsset(("small_" + this.id) as TextureAssetID)
+        return ASSET_STORE.getTextureAsset(("small_" + this.id))
     }
 
     getID(): IngredientID {

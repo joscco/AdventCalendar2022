@@ -43,7 +43,7 @@ export class TextBox extends Container {
         for (let i = 0; i < this.fullText.length - 1; i++) {
             gsap.to(this.letters[i].scale, {x: 1, y: 1, duration: this.LETTER_TYPE_DURATION, delay: i * this.LETTER_TYPE_OFFSET, ease: Back.easeOut})
         }
-        await gsap.to(this.letters[this.fullText.length - 1].scale, {x: 1, y: 1, duration: (this.fullText.length - 1) * this.LETTER_TYPE_DURATION, delay: this.LETTER_TYPE_OFFSET, ease: Back.easeIn})
+        await gsap.to(this.letters[this.fullText.length - 1].scale, {x: 1, y: 1, duration: this.LETTER_TYPE_DURATION, delay: (this.fullText.length - 1) * this.LETTER_TYPE_OFFSET, ease: Back.easeIn})
     }
 
     async detype() {

@@ -1,7 +1,7 @@
 import {StartScene} from './Scenes/StartScene';
 import SceneManager from './General/SceneManager';
 import {gsap} from "gsap";
-import {Application} from "pixi.js";
+import {Application} from "pixi.js"
 import {AssetStore} from "./General/AssetStore";
 import {LevelChooserScene} from "./Scenes/LevelChooserScene";
 import {TooltipManager} from "./gameobjects/Tooltip/TooltipManager";
@@ -41,6 +41,9 @@ const main = async () => {
             width: GAME_WIDTH,
             height: GAME_HEIGHT,
             resolution: window.devicePixelRatio || 1,
+            antialias: true,
+            sharedTicker: false,
+            autoStart: false,
             backgroundColor: 0x38191B
         }
     );
@@ -56,6 +59,9 @@ const main = async () => {
     // Synchronize tickers by using the gsap one
     App.ticker.stop()
     gsap.ticker.add(() => App.ticker.update())
+
+    // Nobody needs 60 fps for a browser game
+    gsap.ticker.fps(30)
 
     // Make gsap available globally
     gsap.install(window)

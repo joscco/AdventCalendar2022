@@ -232,4 +232,17 @@ export class IngredientCookbook extends Container {
     show() {
         this.position.y = 120
     }
+
+    private downloadContentAsPNG() {
+        App.renderer.plugins.extract.canvas(this.content).toBlob(function(b: Blob){
+
+            let a = document.createElement('a');
+            document.body.append(a);
+            a.download = "content";
+            a.href = URL.createObjectURL(b);
+            a.click();
+            a.remove();
+
+        }, 'image/png');
+    }
 }

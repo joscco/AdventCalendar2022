@@ -70,6 +70,7 @@ export class StartScene extends Scene {
 
         this.letters = lettersTextures.map(texture => new Sprite(texture))
         this.letters.map(letter => {
+            letter.cacheAsBitmap = true
             letter.position.y = 1000;
             titleContainer.addChild(letter);
         })
