@@ -332,6 +332,7 @@ export class FactoryScene extends Scene {
         for (let blockLayoutEntry of blockLayout) {
             let shape = blockLayoutEntry.shape
             let block = new Block(shape, machineGrid)
+            block.updateAppearance()
             this.addChild(block)
 
             let index = blockLayoutEntry.index

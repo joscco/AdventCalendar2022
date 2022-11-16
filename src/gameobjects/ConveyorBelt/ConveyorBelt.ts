@@ -159,8 +159,10 @@ export class ConveyorBelt extends Container {
 
     private setupCages() {
         this.firstTileCage = new Cage("1x1", this.machineGrid)
+        this.firstTileCage.updateAppearance()
         this.firstTileCage.zIndex = 1
         this.lastTileCage = new Cage("1x1", this.machineGrid)
+        this.lastTileCage.updateAppearance()
         this.lastTileCage.zIndex = 1
 
         let firstTile = this.tiles[0]

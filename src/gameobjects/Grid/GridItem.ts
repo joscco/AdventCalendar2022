@@ -288,11 +288,18 @@ export class GridItem {
         this.content.cursor = "pointer"
 
         this.content.on("pointerover", () => {
-            this.scaleUp()
+            // In Handler auslagern!
+            if (!this.positionLocked) {
+                this.scaleUp()
+            }
+
         })
 
         this.content.on("pointerout", () => {
-            this.scaleDown()
+            // In Handler auslagern!
+            if (!this.positionLocked) {
+                this.scaleDown()
+            }
         })
 
 
@@ -391,9 +398,15 @@ export class GridItem {
 
     typeLock() {
         this.typeLocked = true
+        if (this.content instanceof Machine) {
+            this.content.renderAsTypeLocked()
+        }
     }
 
     positionLock() {
         this.positionLocked = true;
+        if (this.content instanceof Machine) {
+            this.content.renderAsPositionLocked()
+        }
     }
 }

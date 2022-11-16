@@ -10,6 +10,7 @@ export class MachineIconSlot extends Container {
     private iconTypeImage: Sprite;
     private typeChooseMenu: MachineTypeChooseMenu;
     private gridItem?: GridItem;
+    private typeLockOverlay: Sprite;
 
     constructor(initialType: MachineType, machine: Machine) {
         super();
@@ -29,6 +30,12 @@ export class MachineIconSlot extends Container {
         this.typeChooseMenu.anchor.set(0, 0.5)
         this.typeChooseMenu.position.set(80, 0)
 
+        this.typeLockOverlay = new Sprite(ASSET_STORE.getTextureAsset("lockSymbol"))
+        this.typeLockOverlay.anchor.set(0.5)
+        this.typeLockOverlay.position.set(25, -20)
+        this.typeLockOverlay.visible = false
+
+        this.addChild(this.typeLockOverlay)
         this.addChild(this.typeChooseMenu)
     }
 
@@ -68,5 +75,18 @@ export class MachineIconSlot extends Container {
 
     isShowingTypeChoosingMenu(): boolean {
         return this.typeChooseMenu.shown
+    }
+
+    showAsTypeLocked() {
+        this.typeLockOverlay.visible = true
+        this.iconTypeImage.tint = 0xcccccc
+        this.iconSlot.visible = false
+    }
+
+    showAsTypeVariable() {
+        this.typeLockOverlay.visible = false
+        this.iconTypeImage.tint = 0xffffff
+        this.iconSlot.visible = true
+
     }
 }
