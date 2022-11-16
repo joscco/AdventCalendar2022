@@ -79,7 +79,7 @@ export class MachineIconSlot extends Container {
 
     showAsTypeLocked() {
         this.typeLockOverlay.visible = true
-        this.iconTypeImage.tint = 0xcccccc
+        this.iconTypeImage.tint = 0xeeeeee
         this.iconSlot.visible = false
     }
 

@@ -182,26 +182,101 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             ["E", "nuts"]
         ]),
         machines: [
-            // Types should be fixed!
             {shape: "1x1", index: {row: 4, column: 1}, type: "sticky", typeFixed: true},
             {shape: "1x1", index: {row: 4, column: 2}, type: "solid", positionFixed: true},
             {shape: "2x1", index: {row: 2, column: 1}, type: "red"},
             {shape: "2x1", index: {row: 0, column: 2}, type: "solid", positionFixed: true}
         ]
-    }
-    // ,{
-    //     level: 8,
-    //     recipe: "PRINTEN"
-    // },{
-    //     level: 9,
-    //     recipe: "VANILLEKIPFERL"
-    // },{
+    }, {
+        level: 8,
+        recipe: "PRINTEN",
+        conveyorBeltPattern:
+            "A10|A11|A0|  |D0|D11|D10\n" +
+            "A9 |B0 |A1|C0|D1|E0 |D9\n" +
+            "A8 |B1 |A2|C1|D2|E1 |D8\n" +
+            "A7 |B2 |A3|C2|D3|E2 |D7\n" +
+            "A6 |A5 |A4|  |D4|D5 |D6",
+        startIngredients: new Map([
+            ["A", "honey"],
+            ["B", "cream"],
+            ["C", "egg_powder"],
+            ["D", "sugar"],
+            ["E", "currant_sugar"]
+        ]),
+        blocks: [
+            {shape: "1x1", index: {row: 0, column: 3}},
+            {shape: "1x1", index: {row: 4, column: 3}}
+        ],
+        machines: [
+            {shape: "1x2", index: {row: 2, column: 0}, type: "liquid"},
+            {shape: "1x1", index: {row: 2, column: 2}, type: "yellow", typeFixed: true},
+            {shape: "1x1", index: {row: 2, column: 3}, type: "sweet"},
+            {shape: "1x1", index: {row: 2, column: 4}, type: "liquid"},
+            {shape: "1x1", index: {row: 2, column: 5}, type: "liquid", positionFixed: true},
+            {shape: "1x1", index: {row: 2, column: 6}, type: "sour", typeFixed: true}
+        ]
+    }, {
+        level: 9,
+        recipe: "VANILLEKIPFERL",
+        conveyorBeltPattern:
+            "A3|A2|A1|A0|D3|D2|D1\n" +
+            "A4|E0|E1|  |D4|  |D0\n" +
+            "A5|E5|E2|  |D5|  |C5\n" +
+            "B0|E4|E3|  |  |  |C4\n" +
+            "B1|B2|B3|C0|C1|C2|C3",
+        startIngredients: new Map([
+            ["A", "mud"],
+            ["B", "milk"],
+            ["C", "cherry_sugar"],
+            ["D", "peeled_nuts"],
+            ["E", "cherries"]
+        ]),
+        blocks: [
+            {shape: "1x1", index: {row: 2, column: 3}},
+            {shape: "1x1", index: {row: 1, column: 5}},
+            {shape: "1x1", index: {row:2, column: 5}},
+            {shape: "1x1", index: {row: 3, column: 5}},
+        ],
+        machines: [
+            // Types should be fixed!
+            {shape: "2x1", index: {row: 0, column: 2}, type: "brown", positionFixed: true},
+            {shape: "1x1", index: {row: 1, column: 3}, type: "liquid"},
+            {shape: "1x1", index: {row: 3, column: 3}, type: "brown"},
+            {shape: "1x1", index: {row: 3, column: 4}, type: "liquid"},
+            {shape: "1x1", index: {row: 3, column: 6}, type: "powdery", typeFixed: true},
+        ]
+    },
+    //{
     //     level: 10,
     //     recipe: "FLORENTINER"
-    // },{
-    //     level: 11,
-    //     recipe: "MAKRONEN"
-    // },{
+    // },
+    {
+        level: 11,
+        recipe: "MAKRONEN",
+        conveyorBeltPattern:
+            "A0|B4|C0|  |  |D0|E4|F0\n" +
+            "A1|B3|C1|  |  |D1|E3|F1\n" +
+            "A2|B2|C2|  |  |D2|E2|F2\n" +
+            "A3|B1|C3|  |  |D3|E1|F3\n" +
+            "A4|B0|C4|  |  |D4|E0|F4",
+        startIngredients: new Map([
+            ["A", "raisins"],
+            ["B", "mud"],
+            ["C", "lemon_pudding"],
+            ["D", "grinded_nuts"],
+            ["E", "beet_pudding"],
+            ["F", "lemon_powder"]
+        ]),
+        machines: [
+            // Types should be fixed!
+            {shape: "1x2", index: {row: 0, column: 3}, type: "powdery", typeFixed: true},
+            {shape: "1x2", index: {row: 1, column: 3}, type: "sour"},
+            {shape: "1x2", index: {row: 2, column: 3}, type: "sweet", typeFixed: true},
+            {shape: "1x2", index: {row: 3, column: 3}, type: "sticky"},
+            {shape: "1x2", index: {row: 4, column: 3}, type: "white", typeFixed: true},
+        ]
+    },
+    // {
     //     level: 12,
     //     recipe: "SPRITZGEBAECK"
     // },{

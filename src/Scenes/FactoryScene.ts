@@ -71,7 +71,7 @@ export class FactoryScene extends Scene {
 
         this.initBackground();
 
-        let patternArr = opts.conveyorBeltPattern.split("\n").map(row => row.split("|"))
+        let patternArr = opts.conveyorBeltPattern.split("\n").map(row => row.split("|").map(el => el.trim()))
 
         if (!isRectangularArray(patternArr)) {
             throw Error("Conveyor Belt Pattern is not rectangular!")
@@ -134,7 +134,7 @@ export class FactoryScene extends Scene {
         // Urgh, a little nasty
         if (!this.stepButton) {
             clearInterval(this.timeInterval)
-            this.timeInterval = setInterval(() => this.checkRecipe(), 3500)
+            this.timeInterval = setInterval(() => this.checkRecipe(), 2500)
         }
 
         this.startIngredients.forEach(ingredient => GAME_DATA.saveNewUnlockedIngredient(ingredient))
@@ -174,12 +174,12 @@ export class FactoryScene extends Scene {
             for (let column = 0; column < conveyorBeltPattern[0].length; column++) {
                 if (conveyorBeltPattern[row][column].trim() !== "") {
                     let entry = conveyorBeltPattern[row][column]!.trim();
-                    if (entry.length !== 2 || !this.isUpperLetter(entry.charAt(0)) || !this.isNumber(entry.charAt(1))) {
+                    if (entry.length >= 4 || !this.isUpperLetter(entry.charAt(0)) || !this.isNumber(entry.charAt(1))) {
                         console.log(`${entry} is not a correct belt pattern entry!`)
                         return null;
                     }
                     let letter = entry.charAt(0)
-                    let number = Number.parseInt(entry.charAt(1))
+                    let number = Number.parseInt(entry.substring(1))
                     let index = {row: row, column: column}
 
                     if (!letterMap.has(letter)) {
