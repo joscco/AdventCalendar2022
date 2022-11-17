@@ -123,7 +123,7 @@ export default class SceneManager extends Container{
         }
 
         await this.beforeFadeOut()
-        await gsap.to(this, {alpha: 1, duration: 1, ease: Quad.easeInOut})
+        await gsap.to(this, {alpha: 1, duration: 1, ease: Quad.easeOut})
         await this.afterFadeOut()
         this.stop();
 

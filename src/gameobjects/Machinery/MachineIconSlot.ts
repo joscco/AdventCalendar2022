@@ -27,8 +27,8 @@ export class MachineIconSlot extends Container {
         this.addChild(this.iconTypeImage)
 
         this.typeChooseMenu = new MachineTypeChooseMenu(machine)
-        this.typeChooseMenu.anchor.set(0, 0.5)
-        this.typeChooseMenu.position.set(80, 0)
+
+
 
         this.typeLockOverlay = new Sprite(ASSET_STORE.getTextureAsset("lockSymbol"))
         this.typeLockOverlay.anchor.set(0.5)

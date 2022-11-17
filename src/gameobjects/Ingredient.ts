@@ -280,7 +280,7 @@ export const INGREDIENTS: {[id in IngredientID]: IngredientData} = {
     "peeled_nuts": {text: "Peeled Nuts", taste: "savoury", color: "white", consistence: "solid"},
 
     "egg": {text: "Egg", taste: "savoury", color: "yellow", consistence: "sticky"},
-    "eggnog": {text: "Egg Nog", taste: "savoury", color: "yellow", consistence: "liquid"},
+    "eggnog": {text: "Eggnog", taste: "savoury", color: "yellow", consistence: "liquid"},
     "egg_powder": {text: "Egg Powder", taste: "savoury", color: "yellow", consistence: "powdery"},
     "scrambled_egg": {text: "Scrambled Egg", taste: "savoury", color: "yellow", consistence: "solid"},
 
