@@ -143,6 +143,7 @@ const TEXTURE_MANIFEST: { [key: string]: string } = {
 
     // Start Screen
     startScreenBackgroundPattern: "startScreen/backgroundPattern",
+    startScreenBackgroundPatternBrown: "startScreen/backgroundPatternBrown",
     startScreenPretitle: "startScreen/pretitle",
     startScreenStartButton: "startScreen/startButton",
 
@@ -201,6 +202,7 @@ const TEXTURE_MANIFEST: { [key: string]: string } = {
     // Ingredient Overview
     ingredientOverviewBook: "gameScreen/ingredientOverview/book",
     ingredientOverviewPlus: "gameScreen/ingredientOverview/plus",
+    ingredientOverviewArrow: "gameScreen/ingredientOverview/arrow",
     ingredientOverviewScrollFlag: "gameScreen/ingredientOverview/scrollFahne",
     ingredientOverviewScrollBar: "gameScreen/ingredientOverview/scrollLine",
     ingredientOverviewSeparator: "gameScreen/ingredientOverview/separator",

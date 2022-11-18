@@ -25,10 +25,10 @@ import {GridItem} from "../gameobjects/Grid/GridItem";
 import {WinScreen} from "../General/WinScreen";
 import {UIButtonOverlay} from "../UI/ButtonOverlay";
 import {IngredientID} from "../gameobjects/Ingredient"
-import {StepButton} from "../UI/Buttons/StepButton";
 import {Grid} from "../gameobjects/Grid/Grid";
 import {Index2D, isRectangularArray} from "../General/Helpers";
-import {Dialog, START_DIALOG} from "../General/Dialog/Dialogs/DialogConfig";
+import {Dialog} from "../General/Dialog/Dialogs/DialogConfig";
+import {BerndButton} from "../UI/Buttons/BerndButton";
 
 export type FactorySceneOptions = {
     app: Application,
@@ -38,7 +38,9 @@ export type FactorySceneOptions = {
     machineLayout: MachineLayout,
     blockLayout?: BlockLayout,
     startIngredients?: Map<string, IngredientID>,
-    hasStepButton?: boolean
+    hasStepButton?: boolean,
+    dialog?: Dialog,
+    hints?: Dialog[]
 }
 
 export class FactoryScene extends Scene {
@@ -53,10 +55,13 @@ export class FactoryScene extends Scene {
     private startIngredients: IngredientID[]
     private readonly beltGrid: Grid;
     private readonly belts: ConveyorBelt[];
-    private stepButton?: StepButton
     private level: number
 
+    private dialog?: Dialog
+    private hints: Dialog[]
+
     // UI
+    private berndButton: BerndButton
     private recipeBox: RecipeBox;
     private winScreen: WinScreen;
     private uiOverlay: UIButtonOverlay
@@ -68,6 +73,9 @@ export class FactoryScene extends Scene {
         this.app = opts.app;
         this.level = opts.level
         this.sortableChildren = true
+
+        this.dialog = opts.dialog
+        this.hints = opts.hints ?? []
 
         this.initBackground();
 
@@ -92,18 +100,17 @@ export class FactoryScene extends Scene {
         this.uiOverlay.zIndex = 5
         this.addChild(this.uiOverlay)
 
+        this.berndButton = new BerndButton(this)
+        this.berndButton.zIndex = 5
+        this.berndButton.position.set(475, 125)
+        this.addChild(this.berndButton)
+
         this.machineLayout = opts.machineLayout
         this.machineGridItems = this.setupMachineGridItems(this.machineLayout, this.machineGrid)
 
         this.blockLayout = opts.blockLayout ?? []
         this.blockGridItems = this.setupBlocks(this.blockLayout, this.machineGrid)
         this.machineGridConnector = this.setupGridConnector(this.machineGrid, this.machineGridItems)
-
-        if (opts.hasStepButton) {
-            this.stepButton = new StepButton(this)
-            this.stepButton.position.set(GAME_WIDTH - 180, GAME_HEIGHT / 2)
-            this.addChild(this.stepButton)
-        }
     }
 
     private setupRecipeBox(recipe: Recipe) {
@@ -132,14 +139,14 @@ export class FactoryScene extends Scene {
         this.recipeBox.ingredients.forEach(ingredient => ingredient.reset())
 
         // Urgh, a little nasty
-        if (!this.stepButton) {
-            clearInterval(this.timeInterval)
-            this.timeInterval = setInterval(() => this.checkRecipe(), 2500)
-        }
+        clearInterval(this.timeInterval)
+        this.timeInterval = setInterval(() => this.checkRecipe(), 2500)
 
         this.startIngredients.forEach(ingredient => GAME_DATA.saveNewUnlockedIngredient(ingredient))
 
-        DIALOG_MANAGER.startDialog(new Dialog(START_DIALOG))
+        if (this.dialog && GAME_DATA.getUnlockedLevels() <= this.level) {
+            DIALOG_MANAGER.startDialog(this.dialog);
+        }
     }
 
     async beforeFadeOut() {
@@ -343,5 +350,12 @@ export class FactoryScene extends Scene {
         }
 
         return gridItems;
+    }
+
+    showHint() {
+        if (this.hints.length > 0) {
+            let randIndex = Math.floor(Math.random() * this.hints.length)
+            DIALOG_MANAGER.startDialog(this.hints[randIndex])
+        }
     }
 }

@@ -21,6 +21,8 @@ export class DialogBox extends Container {
         super();
         this.background = new Sprite(ASSET_STORE.getTextureAsset("dialog_box"))
         this.spike = new Sprite(ASSET_STORE.getTextureAsset("dialog_spike"))
+        this.background.tint = 0x000000
+        this.spike.tint = 0x000000
 
         this.textObject = new TextBox(this.background.width, this.background.height)
 
@@ -32,7 +34,8 @@ export class DialogBox extends Container {
         this.background.anchor.set(0.5)
 
         this.spike.anchor.set(0.5, 1)
-        this.spike.position.set(520, -75)
+        this.spike.position.set(575, -75)
+        this.spike.angle = 20
 
         this.previousButton.position.set(-this.background.width / 2 + 20, 0)
         this.nextButton.position.set(this.background.width / 2 - 20, 0)
@@ -65,6 +68,9 @@ export class DialogBox extends Container {
         this.currentSpeeches = node.speeches
         this.currentSpeechIndex = 0
         this.textObject.setFullText(this.currentSpeeches[this.currentSpeechIndex].text)
+
+        this.previousButton.hide()
+        this.nextButton.hide()
 
         if (this.currentSpeeches.length > 1) {
             this.nextButton.blendIn()

@@ -14,6 +14,7 @@ import {UnlockedIngredientAlarm} from "./gameobjects/UnlockedIngredientAlarm";
 import {CookbookOverlay} from "./gameobjects/IngredientBook/CookbookOverlay";
 import {EventEmitter} from "./General/EventEmitter";
 import {DialogManager} from "./General/Dialog/DialogManager";
+import {Bernd} from "./gameobjects/Characters/Bernd";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -33,6 +34,7 @@ export var TOOLTIP_MANAGER: TooltipManager;
 export var DIALOG_MANAGER: DialogManager;
 export var INGREDIENT_COOKBOOK: CookbookOverlay
 export var INGREDIENT_ALARM: UnlockedIngredientAlarm
+export var BERND: Bernd
 
 const main = async () => {
     // Init Main App
@@ -45,7 +47,7 @@ const main = async () => {
             sharedTicker: false,
             powerPreference: "high-performance",
             autoStart: false,
-            backgroundColor: 0x38191B
+            backgroundColor: 0x381A1C
         }
     );
 
@@ -105,6 +107,10 @@ const main = async () => {
     INGREDIENT_ALARM = new UnlockedIngredientAlarm()
     INGREDIENT_ALARM.zIndex = 6
     App.stage.addChild(INGREDIENT_ALARM)
+
+    BERND = new Bernd()
+    BERND.zIndex = 5
+    App.stage.addChild(BERND)
 
     // Finally adding Scenes:
     SCENE_MANAGER.add("startScene", new StartScene(App))

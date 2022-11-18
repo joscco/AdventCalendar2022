@@ -1099,6 +1099,21 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">assets/gameScreen/ingredientOverview/arrow.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>24,56,48,112</rect>
+                <key>scale9Paddings</key>
+                <rect>24,56,48,112</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">assets/gameScreen/ingredientOverview/book.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -3705,6 +3720,21 @@
                 <rect>175,175,350,350</rect>
                 <key>scale9Paddings</key>
                 <rect>175,175,350,350</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/startScreen/backgroundPatternBrown.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>127,127,253,253</rect>
+                <key>scale9Paddings</key>
+                <rect>127,127,253,253</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

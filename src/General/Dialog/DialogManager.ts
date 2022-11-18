@@ -1,6 +1,7 @@
 import {Container} from "pixi.js";
 import {DialogBox} from "./DialogBox";
 import {Dialog, DialogNode} from "./Dialogs/DialogConfig";
+import {BERND} from "../../index";
 
 export class DialogManager extends Container {
 
@@ -15,6 +16,7 @@ export class DialogManager extends Container {
     async startDialog(dialog: Dialog) {
         let startNode = dialog.getStartDialog()
         startNode.start()
+        await BERND.blendIn()
         this.dialogBox.setSpeeches(startNode)
         await this.dialogBox.blendIn()
         await this.dialogBox.type()
@@ -30,6 +32,7 @@ export class DialogManager extends Container {
     async endDialog() {
         await this.dialogBox.detype()
         await this.dialogBox.blendOut()
+        BERND.blendOut()
     }
 
     hideDialog() {

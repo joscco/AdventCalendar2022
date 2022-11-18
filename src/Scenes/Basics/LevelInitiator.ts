@@ -4,6 +4,7 @@ import {App} from "../../index";
 import {BlockDefinition, MachineDefinition} from "../../gameobjects/Machinery/Machine";
 import {IngredientID} from "../../gameobjects/Ingredient";
 import SceneManager from "../../General/SceneManager";
+import {Dialog} from "../../General/Dialog/Dialogs/DialogConfig";
 
 type LevelConfig = {
     level: number;
@@ -13,6 +14,8 @@ type LevelConfig = {
     blocks?: BlockDefinition[];
     startIngredients?: Map<string, IngredientID>;
     hasStepButton?: boolean,
+    dialog?: Dialog,
+    hints?: Dialog[]
 }
 
 type LevelConfigManifest = LevelConfig[]
@@ -29,7 +32,31 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
         startIngredients: new Map([
             ["A", "honey"],
             ["B", "cream"]
-        ])
+        ]),
+        dialog: new Dialog({
+            nodes: [
+                {
+                    id: "start",
+                    speeches: [
+                        {text: "Oh hello! A new face, how nice!"},
+                        {text: "I am Bernd, but you can also call me Bernie, B-Man, ..., whatever you like."},
+                        {text: "I own this cute little cookie factory here."}],
+                    successors: [{on: "clicked_music_button", nextID: null}]
+                }
+            ],
+            startNodeID: "start"
+        }),
+        hints: [new Dialog({
+            nodes: [
+                {
+                    id: "start",
+                    speeches: [
+                        {text: "God, I really love food so much"}],
+                    successors: []
+                }
+            ],
+            startNodeID: "start"
+        })]
     }, {
         level: 2,
         conveyorBeltPattern:
@@ -532,7 +559,9 @@ export class LevelInitiator {
                         machineLayout: config.machines,
                         blockLayout: config.blocks,
                         startIngredients: config.startIngredients,
-                        hasStepButton: config.hasStepButton
+                        hasStepButton: config.hasStepButton,
+                        dialog: config.dialog,
+                        hints: config.hints
                     }
                 ))
         })

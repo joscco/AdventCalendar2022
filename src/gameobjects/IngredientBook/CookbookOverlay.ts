@@ -66,11 +66,13 @@ export class CookbookOverlay extends Container {
 
     showButton() {
         this.cookbookButton.show()
+        this.cookbookButton.interactive = true
         this.showingButton = true
     }
 
     hideButton() {
         this.cookbookButton.hide()
+        this.cookbookButton.interactive = false
         this.showingButton = false
     }
 
