@@ -1,6 +1,7 @@
-import {Grid, isRectangularArray} from "../Grid/Grid";
-import {GridItem} from "../Grid/GridItem";
+import {Grid} from "../GameScreen/Grid/Grid";
+import {GridItem} from "../GameScreen/Grid/GridItem";
 import {Container} from "pixi.js";
+import {isRectangularArray} from "../../General/Helpers";
 
 describe('Grid Tests', () => {
     test('Setting up a grid with two dimensions work', () => {
@@ -87,7 +88,7 @@ describe('Grid Tests', () => {
             "[ | | | ]\n" +
             "[ | | | ]")
 
-        let gridItem = new GridItem(new Container(), grid, 0, 0)
+        let gridItem = new GridItem(new Container(), grid, {row: 0, column: 0})
         expect(grid.toString()).toEqual(
             "[x| | | ]\n" +
             "[ | | | ]\n" +
@@ -97,12 +98,6 @@ describe('Grid Tests', () => {
         expect(grid.toString()).toEqual(
             "[ | | | ]\n" +
             "[ | |x| ]\n" +
-            "[ | | | ]")
-
-        let secondGridItem = new GridItem(new Container(), grid, 0, 0, [[1, 1], [1, 0]])
-        expect(grid.toString()).toEqual(
-            "[x|x| | ]\n" +
-            "[x| |x| ]\n" +
             "[ | | | ]")
     })
 })

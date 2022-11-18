@@ -373,6 +373,23 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">assets/gameScreen/berndButton/eyes_closed.png</key>
+            <key type="filename">assets/gameScreen/berndButton/eyes_open.png</key>
+            <key type="filename">assets/gameScreen/berndButton/small_head.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>40,42,79,83</rect>
+                <key>scale9Paddings</key>
+                <rect>40,42,79,83</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">assets/gameScreen/blocks/1x1_block.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>

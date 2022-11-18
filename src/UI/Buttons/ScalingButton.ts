@@ -1,6 +1,7 @@
 import {Button} from "./Button";
 import {Texture} from "@pixi/core";
 import gsap from "gsap";
+import {SOUND_MANAGER} from "../../index";
 
 export abstract class ScalingButton extends Button {
     constructor() {
@@ -55,6 +56,7 @@ export class ScalingButtonImpl extends ScalingButton{
 
     onClick(): void {
         if (this.active) {
+            SOUND_MANAGER.playBlub()
             this.onClickAction()
         }
     }

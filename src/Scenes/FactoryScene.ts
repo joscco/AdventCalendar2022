@@ -1,4 +1,4 @@
-import {Recipe, RecipeBox, RecipeID, RECIPES} from "../gameobjects/RecipeBox";
+import {Recipe, RecipeBox, RecipeID, RECIPES} from "../gameobjects/GameScreen/RecipeBox";
 import {
     Block,
     BlockLayout,
@@ -6,13 +6,14 @@ import {
     Machine,
     MachineLayout,
     parseShape
-} from "../gameobjects/Machinery/Machine";
-import {GridConnector} from "../gameobjects/Grid/GridConnector";
+} from "../gameobjects/GameScreen/Machinery/Machine";
+import {GridConnector} from "../gameobjects/GameScreen/Grid/GridConnector";
 import Scene from "./Basics/Scene";
-import {ConveyorBelt} from "../gameobjects/ConveyorBelt/ConveyorBelt";
+import {ConveyorBelt} from "../gameobjects/GameScreen/ConveyorBelt/ConveyorBelt";
 import {Application, Sprite} from "pixi.js";
 import {
     ASSET_STORE,
+    BERND_BUTTON,
     DIALOG_MANAGER,
     GAME_DATA,
     GAME_HEIGHT,
@@ -20,15 +21,14 @@ import {
     INGREDIENT_COOKBOOK,
     TOOLTIP_MANAGER
 } from "../index";
-import {StickyDragActionHandler} from "../gameobjects/Grid/GridActionHandlers/StickyDragActionHandler";
-import {GridItem} from "../gameobjects/Grid/GridItem";
-import {WinScreen} from "../General/WinScreen";
+import {StickyDragActionHandler} from "../gameobjects/GameScreen/Grid/GridActionHandlers/StickyDragActionHandler";
+import {GridItem} from "../gameobjects/GameScreen/Grid/GridItem";
+import {WinScreen} from "../gameobjects/GameScreen/WinScreen/WinScreen";
 import {UIButtonOverlay} from "../UI/ButtonOverlay";
-import {IngredientID} from "../gameobjects/Ingredient"
-import {Grid} from "../gameobjects/Grid/Grid";
+import {IngredientID} from "../gameobjects/GameScreen/ConveyorBelt/Ingredient"
+import {Grid} from "../gameobjects/GameScreen/Grid/Grid";
 import {Index2D, isRectangularArray} from "../General/Helpers";
-import {Dialog} from "../General/Dialog/Dialogs/DialogConfig";
-import {BerndButton} from "../UI/Buttons/BerndButton";
+import {Dialog} from "../gameobjects/Dialog/Dialogs/DialogConfig";
 
 export type FactorySceneOptions = {
     app: Application,
@@ -61,7 +61,6 @@ export class FactoryScene extends Scene {
     private hints: Dialog[]
 
     // UI
-    private berndButton: BerndButton
     private recipeBox: RecipeBox;
     private winScreen: WinScreen;
     private uiOverlay: UIButtonOverlay
@@ -100,11 +99,6 @@ export class FactoryScene extends Scene {
         this.uiOverlay.zIndex = 5
         this.addChild(this.uiOverlay)
 
-        this.berndButton = new BerndButton(this)
-        this.berndButton.zIndex = 5
-        this.berndButton.position.set(475, 125)
-        this.addChild(this.berndButton)
-
         this.machineLayout = opts.machineLayout
         this.machineGridItems = this.setupMachineGridItems(this.machineLayout, this.machineGrid)
 
@@ -125,6 +119,12 @@ export class FactoryScene extends Scene {
         this.winScreen.blendOut()
         INGREDIENT_COOKBOOK.showButton()
 
+        DIALOG_MANAGER.setLevel(this)
+
+        if (!this.dialog) {
+            BERND_BUTTON.blendIn()
+        }
+
         // Reset all types and positions
         this.machineGridItems.forEach(item => item.freeFromGrid())
         this.machineGridItems.forEach((item, index) => {
@@ -144,7 +144,7 @@ export class FactoryScene extends Scene {
 
         this.startIngredients.forEach(ingredient => GAME_DATA.saveNewUnlockedIngredient(ingredient))
 
-        if (this.dialog && GAME_DATA.getUnlockedLevels() <= this.level) {
+        if (this.dialog) {
             DIALOG_MANAGER.startDialog(this.dialog);
         }
     }
@@ -157,6 +157,13 @@ export class FactoryScene extends Scene {
     async afterFadeOut() {
         INGREDIENT_COOKBOOK.hideButton()
         INGREDIENT_COOKBOOK.hideCookbook()
+        BERND_BUTTON.hide()
+        DIALOG_MANAGER.removeLevel()
+        this.belts.forEach(belt => belt.pauseIngredientAnimations())
+    }
+
+    beforeFadeIn() {
+        this.belts.forEach(belt => belt.resumeIngredientAnimations())
     }
 
     private setupBeltGridAndBelts(patternArr: string[][]): Grid {
@@ -352,10 +359,11 @@ export class FactoryScene extends Scene {
         return gridItems;
     }
 
-    showHint() {
+    getHint(): Dialog | null {
         if (this.hints.length > 0) {
             let randIndex = Math.floor(Math.random() * this.hints.length)
-            DIALOG_MANAGER.startDialog(this.hints[randIndex])
+            return this.hints[randIndex]
         }
+        return null
     }
 }

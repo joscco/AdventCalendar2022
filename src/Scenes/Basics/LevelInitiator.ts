@@ -1,10 +1,10 @@
 import {FactoryScene} from "../FactoryScene";
-import {RecipeID} from "../../gameobjects/RecipeBox";
+import {RecipeID} from "../../gameobjects/GameScreen/RecipeBox";
 import {App} from "../../index";
-import {BlockDefinition, MachineDefinition} from "../../gameobjects/Machinery/Machine";
-import {IngredientID} from "../../gameobjects/Ingredient";
+import {BlockDefinition, MachineDefinition} from "../../gameobjects/GameScreen/Machinery/Machine";
+import {IngredientID} from "../../gameobjects/GameScreen/ConveyorBelt/Ingredient";
 import SceneManager from "../../General/SceneManager";
-import {Dialog} from "../../General/Dialog/Dialogs/DialogConfig";
+import {Dialog} from "../../gameobjects/Dialog/Dialogs/DialogConfig";
 
 type LevelConfig = {
     level: number;

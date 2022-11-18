@@ -131,6 +131,11 @@ const TEXTURE_MANIFEST: { [key: string]: string } = {
     recipeButtonOpen: "gameScreen/buttons/recipeButtonOpen",
     recipeButtonClosed: "gameScreen/buttons/recipeButton",
 
+    // BerndButton
+    bernd_button_head: "gameScreen/berndButton/small_head",
+    bernd_button_eyes_closed: "gameScreen/berndButton/eyes_closed",
+    bernd_button_eyes_open: "gameScreen/berndButton/eyes_open",
+
     // Bernd
     bernd_torso: "startScreen/bernd/body_middle",
     bernd_back_torso: "startScreen/bernd/backBody",

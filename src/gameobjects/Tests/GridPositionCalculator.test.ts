@@ -1,4 +1,4 @@
-import {Grid} from "../Grid/Grid";
+import {Grid} from "../GameScreen/Grid/Grid";
 
 describe('Grid Position Calculator Tests', () => {
     test("Constructor with rows and columns work.", () => {

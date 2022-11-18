@@ -1,4 +1,4 @@
-import {Ingredient} from "../Ingredient";
+import {Ingredient} from "../GameScreen/ConveyorBelt/Ingredient";
 
 describe('Ingredient Tests', () => {
         test('Ingredient is set up as cream per default', () => {

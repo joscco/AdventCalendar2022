@@ -8,6 +8,22 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":1437,"h":245},
 	"sourceSize": {"w":1437,"h":245}
 },
+"gameScreen/berndButton/eyes_closed":
+{
+	"frame": {"x":1539,"y":572,"w":68,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":46,"y":55,"w":68,"h":23},
+	"sourceSize": {"w":159,"h":167}
+},
+"gameScreen/berndButton/eyes_open":
+{
+	"frame": {"x":1475,"y":572,"w":60,"h":27},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":50,"y":54,"w":60,"h":27},
+	"sourceSize": {"w":159,"h":167}
+},
 "gameScreen/blocks/1x2_block":
 {
 	"frame": {"x":1889,"y":1694,"w":316,"h":152},
@@ -42,7 +58,7 @@
 },
 "gameScreen/cookies/eyes/open_eyes":
 {
-	"frame": {"x":1475,"y":572,"w":91,"h":22},
+	"frame": {"x":1611,"y":572,"w":91,"h":22},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":23,"y":20,"w":91,"h":22},
@@ -202,7 +218,7 @@
 },
 "gameScreen/recipeBox/longstrike":
 {
-	"frame": {"x":1570,"y":572,"w":268,"h":14},
+	"frame": {"x":1706,"y":572,"w":268,"h":14},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":268,"h":14},
@@ -248,6 +264,6 @@
 	"size": {"w":2045,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "sheet-0.json", "sheet-2.json", "sheet-3.json", "sheet-4.json", "sheet-5.json", "sheet-6.json", "sheet-7.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:62d7fc46971f25c07234f79c1597dd24:64ed3245eb55fdaf10ee87ab7bd95114:58306aed35fbd641194f30afbd1d96db$"
+	"smartupdate": "$TexturePacker:SmartUpdate:15bdab2fbf9ad654e4577e011c4d9689:1f289f1097f4f617402de6034a6d9196:58306aed35fbd641194f30afbd1d96db$"
 }
 }

@@ -1,4 +1,4 @@
-import {Application, Container, MIPMAP_MODES, SCALE_MODES, Sprite, TilingSprite} from 'pixi.js';
+import {Application, Container, MIPMAP_MODES, Sprite, TilingSprite} from 'pixi.js';
 import {ASSET_STORE, BERND, GAME_HEIGHT, GAME_WIDTH} from "../index";
 import Scene from "./Basics/Scene";
 import {Texture} from "@pixi/core";
@@ -11,6 +11,7 @@ export class StartScene extends Scene {
     pretitle?: Sprite;
     startButton: StartButton;
     started: boolean = false
+    private backgroundMoveTween?: gsap.core.Tween;
 
     constructor(app: Application) {
         super();
@@ -36,12 +37,14 @@ export class StartScene extends Scene {
     }
 
     beforeFadeIn() {
+        this.backgroundMoveTween?.resume()
         if (this.started) {
             BERND.show()
         }
     }
 
     afterFadeOut() {
+        this.backgroundMoveTween?.pause()
         BERND.hide()
     }
 
@@ -53,7 +56,7 @@ export class StartScene extends Scene {
         scrollingBackground.clampMargin = 0.5
         scrollingBackground.texture.baseTexture.mipmap = MIPMAP_MODES.OFF
 
-        gsap.to(scrollingBackground.tilePosition, {
+        this.backgroundMoveTween = gsap.to(scrollingBackground.tilePosition, {
             x: backgroundPatternTexture.width,
             y: -backgroundPatternTexture.height,
             duration: 15,

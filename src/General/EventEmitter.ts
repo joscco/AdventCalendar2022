@@ -1,4 +1,4 @@
-import {MachineType} from "../gameobjects/Machinery/Machine";
+import {MachineType} from "../gameobjects/GameScreen/Machinery/Machine";
 
 export type EmittableEvent =
     `moved_${string}_to_index_row_${number}_and_column_${number}`

@@ -1,7 +1,7 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "pixi.js";
 import {ASSET_STORE, SOUND_MANAGER} from "../../index";
-import {CookbookOverlay} from "../../gameobjects/IngredientBook/CookbookOverlay";
+import {CookbookOverlay} from "../../gameobjects/GameScreen/IngredientBook/CookbookOverlay";
 
 export class IngredientCookbookCloseButton extends ScalingButton {
     constructor(private overlay: CookbookOverlay) {

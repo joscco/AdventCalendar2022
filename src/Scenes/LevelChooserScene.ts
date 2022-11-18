@@ -10,8 +10,9 @@ export class LevelChooserScene extends Scene {
 
     levelButtons: LevelButton[]
     backButton: ScalingButton
+    backgroundMoveTween?: gsap.core.Tween
 
-    constructor(app: Application) {
+        constructor(app: Application) {
         super();
         this.app = app
 
@@ -29,7 +30,7 @@ export class LevelChooserScene extends Scene {
         scrollingBackground.texture.baseTexture.mipmap = MIPMAP_MODES.OFF
         scrollingBackground.clampMargin = 0.5
 
-        gsap.to(scrollingBackground.tilePosition, {
+        this.backgroundMoveTween = gsap.to(scrollingBackground.tilePosition, {
             x: -texture.width,
             y: -texture.height,
             duration: 15,
@@ -44,6 +45,14 @@ export class LevelChooserScene extends Scene {
         title.anchor.set(0.5)
         title.position.set(GAME_WIDTH / 2, 125)
         this.addChild(title)
+    }
+
+    beforeFadeIn() {
+        this.backgroundMoveTween?.resume()
+    }
+
+    afterFadeOut() {
+        this.backgroundMoveTween?.pause()
     }
 
     private setUpLevelButtons(): LevelButton[] {

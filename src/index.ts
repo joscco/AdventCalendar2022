@@ -1,7 +1,7 @@
 import {StartScene} from './Scenes/StartScene';
 import SceneManager from './General/SceneManager';
 import {gsap} from "gsap";
-import {Application, settings} from "pixi.js"
+import {Application} from "pixi.js"
 import {AssetStore} from "./General/AssetStore";
 import {LevelChooserScene} from "./Scenes/LevelChooserScene";
 import {TooltipManager} from "./gameobjects/Tooltip/TooltipManager";
@@ -10,11 +10,12 @@ import {SoundManager} from "./General/SoundManager";
 import {MusicButton} from "./UI/Buttons/MusicButton";
 import {SoundButton} from "./UI/Buttons/SoundButton";
 import {LevelInitiator} from "./Scenes/Basics/LevelInitiator";
-import {UnlockedIngredientAlarm} from "./gameobjects/UnlockedIngredientAlarm";
-import {CookbookOverlay} from "./gameobjects/IngredientBook/CookbookOverlay";
+import {UnlockedIngredientAlarm} from "./gameobjects/GameScreen/IngredientBook/UnlockedIngredientAlarm";
+import {CookbookOverlay} from "./gameobjects/GameScreen/IngredientBook/CookbookOverlay";
 import {EventEmitter} from "./General/EventEmitter";
-import {DialogManager} from "./General/Dialog/DialogManager";
+import {DialogManager} from "./gameobjects/Dialog/DialogManager";
 import {Bernd} from "./gameobjects/Characters/Bernd";
+import {BerndButton} from "./UI/Buttons/BerndButton";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -35,6 +36,7 @@ export var DIALOG_MANAGER: DialogManager;
 export var INGREDIENT_COOKBOOK: CookbookOverlay
 export var INGREDIENT_ALARM: UnlockedIngredientAlarm
 export var BERND: Bernd
+export var BERND_BUTTON: BerndButton
 
 const main = async () => {
     // Init Main App
@@ -110,6 +112,11 @@ const main = async () => {
     BERND = new Bernd()
     BERND.zIndex = 5
     App.stage.addChild(BERND)
+
+    BERND_BUTTON = new BerndButton()
+    BERND_BUTTON.zIndex = 5
+    BERND_BUTTON.position.set(500, 125)
+    App.stage.addChild(BERND_BUTTON)
 
     // Finally adding Scenes:
     SCENE_MANAGER.add("startScene", new StartScene(App))

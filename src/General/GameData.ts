@@ -1,5 +1,5 @@
 import {INGREDIENT_ALARM, INGREDIENT_COOKBOOK, LEVEL_SCREEN} from "../index";
-import {IngredientID} from "../gameobjects/Ingredient";
+import {IngredientID} from "../gameobjects/GameScreen/ConveyorBelt/Ingredient";
 
 export class GameData {
     private GAME_STATE_KEY: string = "berndsBakeryGame"

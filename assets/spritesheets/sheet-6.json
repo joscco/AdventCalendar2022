@@ -8,13 +8,13 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":177},
 	"sourceSize": {"w":100,"h":177}
 },
-"gameScreen/beltTiles/cage":
+"gameScreen/blocks/1x1_block":
 {
-	"frame": {"x":1529,"y":1791,"w":150,"h":150},
-	"rotated": false,
+	"frame": {"x":1529,"y":1791,"w":151,"h":152},
+	"rotated": true,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":150},
-	"sourceSize": {"w":150,"h":150}
+	"spriteSourceSize": {"x":0,"y":0,"w":151,"h":152},
+	"sourceSize": {"w":151,"h":152}
 },
 "gameScreen/blocks/1x3_block":
 {
@@ -274,7 +274,7 @@
 },
 "startScreen/titleLetters/title5":
 {
-	"frame": {"x":1529,"y":1945,"w":80,"h":96},
+	"frame": {"x":1529,"y":1946,"w":80,"h":96},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":708,"y":12,"w":80,"h":96},
@@ -288,6 +288,6 @@
 	"size": {"w":2042,"h":2046},
 	"scale": "1",
 	"related_multi_packs": [ "sheet-0.json", "sheet-1.json", "sheet-2.json", "sheet-3.json", "sheet-4.json", "sheet-5.json", "sheet-7.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:62d7fc46971f25c07234f79c1597dd24:64ed3245eb55fdaf10ee87ab7bd95114:58306aed35fbd641194f30afbd1d96db$"
+	"smartupdate": "$TexturePacker:SmartUpdate:15bdab2fbf9ad654e4577e011c4d9689:1f289f1097f4f617402de6034a6d9196:58306aed35fbd641194f30afbd1d96db$"
 }
 }
