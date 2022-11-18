@@ -1,427 +1,307 @@
 {"frames": {
 
-"dialog/cross":
+"gameScreen/beltTiles/goodFieldOverlay":
 {
-	"frame": {"x":546,"y":1152,"w":84,"h":80},
+	"frame": {"x":517,"y":1442,"w":120,"h":120},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":84,"h":80},
-	"sourceSize": {"w":84,"h":80}
+	"spriteSourceSize": {"x":0,"y":0,"w":120,"h":120},
+	"sourceSize": {"w":120,"h":120}
 },
-"gameScreen/beltTiles/moveField0":
+"gameScreen/blocks/2x2_block":
 {
-	"frame": {"x":1761,"y":1394,"w":286,"h":119},
+	"frame": {"x":1716,"y":946,"w":316,"h":316},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":286,"h":119},
-	"sourceSize": {"w":286,"h":119}
+	"spriteSourceSize": {"x":0,"y":0,"w":316,"h":316},
+	"sourceSize": {"w":316,"h":316}
 },
-"gameScreen/beltTiles/moveField1":
+"gameScreen/blocks/2x3_block":
 {
-	"frame": {"x":1761,"y":1515,"w":286,"h":119},
+	"frame": {"x":1721,"y":4,"w":483,"h":316},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":483,"h":316},
+	"sourceSize": {"w":483,"h":316}
+},
+"gameScreen/blocks/3x3_block":
+{
+	"frame": {"x":641,"y":1114,"w":483,"h":487},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":483,"h":487},
+	"sourceSize": {"w":483,"h":487}
+},
+"gameScreen/chains/2x1_chains":
+{
+	"frame": {"x":1683,"y":1698,"w":185,"h":285},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":53,"w":185,"h":285},
+	"sourceSize": {"w":191,"h":356}
+},
+"gameScreen/cookies/baerentatzen":
+{
+	"frame": {"x":1721,"y":491,"w":316,"h":451},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":286,"h":119},
-	"sourceSize": {"w":286,"h":119}
-},
-"gameScreen/beltTiles/proceedButton":
-{
-	"frame": {"x":1538,"y":1338,"w":201,"h":221},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":201,"h":221},
-	"sourceSize": {"w":201,"h":221}
-},
-"gameScreen/blocks/1x2_block":
-{
-	"frame": {"x":1892,"y":1636,"w":316,"h":152},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":316,"h":152},
-	"sourceSize": {"w":316,"h":152}
-},
-"gameScreen/blocks/1x3_block":
-{
-	"frame": {"x":1889,"y":70,"w":483,"h":152},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":483,"h":152},
-	"sourceSize": {"w":483,"h":152}
-},
-"gameScreen/blocks/3x1_block":
-{
-	"frame": {"x":1762,"y":909,"w":276,"h":483},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":276,"h":483},
-	"sourceSize": {"w":276,"h":483}
-},
-"gameScreen/buttons/recipeButton":
-{
-	"frame": {"x":1885,"y":748,"w":114,"h":161},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":161},
-	"sourceSize": {"w":114,"h":161}
-},
-"gameScreen/buttons/recipeButtonOpen":
-{
-	"frame": {"x":1885,"y":555,"w":191,"h":161},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":191,"h":161},
-	"sourceSize": {"w":191,"h":161}
+	"spriteSourceSize": {"x":0,"y":0,"w":316,"h":451},
+	"sourceSize": {"w":316,"h":451}
 },
 "gameScreen/cookies/punsch":
 {
-	"frame": {"x":415,"y":1688,"w":429,"h":356},
-	"rotated": false,
+	"frame": {"x":1684,"y":1266,"w":428,"h":356},
+	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":41,"y":4,"w":429,"h":356},
+	"spriteSourceSize": {"x":42,"y":4,"w":428,"h":356},
 	"sourceSize": {"w":474,"h":363}
-},
-"gameScreen/ingredients/big/boiled_egg":
-{
-	"frame": {"x":1538,"y":1636,"w":352,"h":411},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":352,"h":411},
-	"sourceSize": {"w":352,"h":411}
 },
 "gameScreen/ingredients/big/brown_sugar":
 {
-	"frame": {"x":647,"y":64,"w":538,"h":556},
+	"frame": {"x":572,"y":572,"w":538,"h":556},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":538,"h":556},
 	"sourceSize": {"w":538,"h":556}
 },
-"gameScreen/ingredients/big/cherry_sugar":
+"gameScreen/ingredients/big/chocolate_pudding":
 {
-	"frame": {"x":1,"y":816,"w":543,"h":463},
+	"frame": {"x":1153,"y":4,"w":564,"h":508},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":543,"h":463},
-	"sourceSize": {"w":543,"h":463}
+	"spriteSourceSize": {"x":0,"y":0,"w":564,"h":508},
+	"sourceSize": {"w":564,"h":508}
 },
-"gameScreen/ingredients/big/currant":
+"gameScreen/ingredients/big/currant_pudding":
 {
-	"frame": {"x":1,"y":1688,"w":412,"h":358},
-	"rotated": false,
+	"frame": {"x":581,"y":4,"w":564,"h":568},
+	"rotated": true,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":412,"h":358},
-	"sourceSize": {"w":412,"h":358}
+	"spriteSourceSize": {"x":0,"y":0,"w":564,"h":568},
+	"sourceSize": {"w":564,"h":568}
 },
-"gameScreen/ingredients/big/currant_sugar":
+"gameScreen/ingredients/big/egg_powder":
 {
-	"frame": {"x":1272,"y":56,"w":557,"h":447},
+	"frame": {"x":641,"y":1601,"w":527,"h":443},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":557,"h":447},
-	"sourceSize": {"w":557,"h":447}
-},
-"gameScreen/ingredients/big/dirt":
-{
-	"frame": {"x":1,"y":1,"w":644,"h":392},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":644,"h":392},
-	"sourceSize": {"w":644,"h":392}
-},
-"gameScreen/ingredients/big/egg":
-{
-	"frame": {"x":538,"y":1437,"w":479,"h":248},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":479,"h":248},
-	"sourceSize": {"w":479,"h":248}
+	"spriteSourceSize": {"x":0,"y":0,"w":527,"h":443},
+	"sourceSize": {"w":527,"h":443}
 },
 "gameScreen/ingredients/big/eggnog":
 {
-	"frame": {"x":1205,"y":505,"w":555,"h":437},
+	"frame": {"x":4,"y":1001,"w":555,"h":437},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":555,"h":437},
 	"sourceSize": {"w":555,"h":437}
 },
-"gameScreen/ingredients/big/lemon_aroma":
+"gameScreen/ingredients/big/lemon_pudding":
 {
-	"frame": {"x":846,"y":1687,"w":356,"h":416},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":356,"h":416},
-	"sourceSize": {"w":356,"h":416}
-},
-"gameScreen/ingredients/big/lemon_powder":
-{
-	"frame": {"x":634,"y":1030,"w":535,"h":405},
+	"frame": {"x":4,"y":444,"w":564,"h":553},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":535,"h":405},
-	"sourceSize": {"w":535,"h":405}
+	"spriteSourceSize": {"x":0,"y":0,"w":564,"h":553},
+	"sourceSize": {"w":564,"h":553}
 },
-"gameScreen/ingredients/big/lemon_sugar":
+"gameScreen/ingredients/big/raisins":
 {
-	"frame": {"x":1,"y":1281,"w":535,"h":405},
+	"frame": {"x":4,"y":4,"w":573,"h":436},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":535,"h":405},
-	"sourceSize": {"w":535,"h":405}
+	"spriteSourceSize": {"x":0,"y":0,"w":573,"h":436},
+	"sourceSize": {"w":573,"h":436}
 },
-"gameScreen/ingredients/big/steak":
+"gameScreen/ingredients/big/spices":
 {
-	"frame": {"x":1193,"y":944,"w":537,"h":392},
+	"frame": {"x":1153,"y":516,"w":559,"h":448},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":537,"h":392},
-	"sourceSize": {"w":537,"h":392}
-},
-"gameScreen/ingredients/big/sugar":
-{
-	"frame": {"x":644,"y":604,"w":547,"h":424},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":547,"h":424},
-	"sourceSize": {"w":547,"h":424}
+	"spriteSourceSize": {"x":0,"y":0,"w":559,"h":448},
+	"sourceSize": {"w":559,"h":448}
 },
 "gameScreen/ingredients/big/vanilla_sugar":
 {
-	"frame": {"x":1,"y":395,"w":548,"h":419},
+	"frame": {"x":1132,"y":968,"w":548,"h":419},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":548,"h":419},
 	"sourceSize": {"w":548,"h":419}
 },
-"gameScreen/ingredients/particle":
+"gameScreen/ingredients/small/beet_flour":
 {
-	"frame": {"x":551,"y":545,"w":84,"h":91},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":84,"h":91},
-	"sourceSize": {"w":84,"h":91}
-},
-"gameScreen/ingredients/small/boiled_egg":
-{
-	"frame": {"x":551,"y":467,"w":76,"h":93},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":76,"h":93},
-	"sourceSize": {"w":76,"h":93}
-},
-"gameScreen/ingredients/small/chocolate":
-{
-	"frame": {"x":546,"y":1042,"w":84,"h":108},
+	"frame": {"x":1849,"y":1887,"w":119,"h":106},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":84,"h":108},
-	"sourceSize": {"w":84,"h":108}
+	"spriteSourceSize": {"x":0,"y":0,"w":119,"h":106},
+	"sourceSize": {"w":119,"h":106}
 },
-"gameScreen/ingredients/small/lemon_pudding":
+"gameScreen/ingredients/small/beet_juice":
 {
-	"frame": {"x":1762,"y":682,"w":114,"h":121},
+	"frame": {"x":1739,"y":1914,"w":130,"h":106},
 	"rotated": true,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":121},
-	"sourceSize": {"w":114,"h":121}
+	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":106},
+	"sourceSize": {"w":130,"h":106}
 },
-"gameScreen/ingredients/small/melted_chocolate":
+"gameScreen/ingredients/small/beet_pudding":
 {
-	"frame": {"x":1762,"y":564,"w":121,"h":116},
+	"frame": {"x":1621,"y":1902,"w":114,"h":137},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":121,"h":116},
-	"sourceSize": {"w":121,"h":116}
+	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":137},
+	"sourceSize": {"w":114,"h":137}
+},
+"gameScreen/ingredients/small/brown_sugar":
+{
+	"frame": {"x":1500,"y":1902,"w":137,"h":117},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":137,"h":117},
+	"sourceSize": {"w":137,"h":117}
+},
+"gameScreen/ingredients/small/chocolate_pudding":
+{
+	"frame": {"x":517,"y":1566,"w":114,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":128},
+	"sourceSize": {"w":114,"h":128}
+},
+"gameScreen/ingredients/small/egg":
+{
+	"frame": {"x":563,"y":1272,"w":117,"h":69},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":117,"h":69},
+	"sourceSize": {"w":117,"h":69}
+},
+"gameScreen/ingredients/small/flour":
+{
+	"frame": {"x":1371,"y":1902,"w":139,"h":125},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":125},
+	"sourceSize": {"w":139,"h":125}
 },
 "gameScreen/ingredients/small/old_lemon_candy":
 {
-	"frame": {"x":546,"y":898,"w":142,"h":86},
+	"frame": {"x":1172,"y":1902,"w":142,"h":86},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":142,"h":86},
 	"sourceSize": {"w":142,"h":86}
 },
-"gameScreen/ingredients/small/peeled_nuts":
+"gameScreen/ingredients/small/steak":
 {
-	"frame": {"x":538,"y":1314,"w":71,"h":120},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":71,"h":120},
-	"sourceSize": {"w":71,"h":120}
-},
-"gameScreen/ingredients/small/vanilla_aroma":
-{
-	"frame": {"x":1762,"y":798,"w":121,"h":109},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":121,"h":109},
-	"sourceSize": {"w":121,"h":109}
-},
-"gameScreen/ingredients/small/wine":
-{
-	"frame": {"x":1538,"y":1541,"w":76,"h":119},
+	"frame": {"x":1262,"y":1902,"w":141,"h":105},
 	"rotated": true,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":76,"h":119},
-	"sourceSize": {"w":76,"h":119}
+	"spriteSourceSize": {"x":0,"y":0,"w":141,"h":105},
+	"sourceSize": {"w":141,"h":105}
 },
 "gameScreen/machineIcons/brown":
 {
-	"frame": {"x":1659,"y":1541,"w":68,"h":68},
+	"frame": {"x":1972,"y":1698,"w":68,"h":68},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":68,"h":68},
 	"sourceSize": {"w":68,"h":68}
 },
-"gameScreen/machineIcons/neutral":
+"gameScreen/machineIcons/red":
 {
-	"frame": {"x":546,"y":818,"w":87,"h":78},
+	"frame": {"x":1972,"y":1770,"w":68,"h":68},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":87,"h":78},
-	"sourceSize": {"w":87,"h":78}
+	"spriteSourceSize": {"x":0,"y":0,"w":68,"h":68},
+	"sourceSize": {"w":68,"h":68}
 },
-"gameScreen/machineIcons/savoury":
+"gameScreen/machineIcons/white":
 {
-	"frame": {"x":546,"y":1234,"w":79,"h":78},
+	"frame": {"x":1972,"y":1842,"w":68,"h":68},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":79,"h":78},
-	"sourceSize": {"w":79,"h":78}
+	"spriteSourceSize": {"x":0,"y":0,"w":68,"h":68},
+	"sourceSize": {"w":68,"h":68}
 },
-"gameScreen/machineIcons/sour":
+"gameScreen/machineIcons/yellow":
 {
-	"frame": {"x":1205,"y":64,"w":71,"h":65},
-	"rotated": true,
+	"frame": {"x":1972,"y":1914,"w":68,"h":68},
+	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":71,"h":65},
-	"sourceSize": {"w":71,"h":65}
-},
-"gameScreen/machineIcons/sticky":
-{
-	"frame": {"x":1964,"y":1954,"w":74,"h":75},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":75},
-	"sourceSize": {"w":74,"h":75}
+	"spriteSourceSize": {"x":0,"y":0,"w":68,"h":68},
+	"sourceSize": {"w":68,"h":68}
 },
 "gameScreen/machines/1x1_small":
 {
-	"frame": {"x":1831,"y":128,"w":56,"h":57},
+	"frame": {"x":1972,"y":1986,"w":56,"h":57},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":57},
 	"sourceSize": {"w":56,"h":57}
 },
-"gameScreen/machines/1x3_small":
-{
-	"frame": {"x":1205,"y":314,"w":94,"h":57},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":57},
-	"sourceSize": {"w":94,"h":57}
-},
 "gameScreen/machines/2x1_small":
 {
-	"frame": {"x":1831,"y":56,"w":56,"h":70},
-	"rotated": false,
+	"frame": {"x":563,"y":1212,"w":56,"h":70},
+	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":70},
 	"sourceSize": {"w":56,"h":70}
 },
-"gameScreen/machines/2x2_small":
-{
-	"frame": {"x":1892,"y":1954,"w":77,"h":70},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":77,"h":70},
-	"sourceSize": {"w":77,"h":70}
-},
 "gameScreen/machines/2x3_small":
 {
-	"frame": {"x":551,"y":395,"w":94,"h":70},
-	"rotated": false,
+	"frame": {"x":563,"y":1114,"w":94,"h":70},
+	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":70},
 	"sourceSize": {"w":94,"h":70}
 },
-"gameScreen/machines/3x2_small":
-{
-	"frame": {"x":551,"y":631,"w":77,"h":89},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":77,"h":89},
-	"sourceSize": {"w":77,"h":89}
-},
-"gameScreen/tooltip/tooltipRect":
-{
-	"frame": {"x":1205,"y":137,"w":175,"h":58},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":175,"h":58},
-	"sourceSize": {"w":175,"h":58}
-},
 "gameScreen/winScreen/angel1/body":
 {
-	"frame": {"x":1171,"y":1338,"w":346,"h":365},
+	"frame": {"x":4,"y":1698,"w":346,"h":365},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":346,"h":365},
 	"sourceSize": {"w":346,"h":365}
 },
-"gameScreen/winScreen/sparkle3":
-{
-	"frame": {"x":551,"y":710,"w":87,"h":106},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":87,"h":106},
-	"sourceSize": {"w":87,"h":106}
-},
-"loadingScreen/innerLoadingBar":
-{
-	"frame": {"x":1272,"y":1,"w":615,"h":53},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":10,"y":18,"w":615,"h":53},
-	"sourceSize": {"w":636,"h":89}
-},
-"loadingScreen/outerLoadingBar":
-{
-	"frame": {"x":647,"y":1,"w":623,"h":61},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":6,"y":14,"w":623,"h":61},
-	"sourceSize": {"w":636,"h":89}
-},
 "loadingScreen/redder":
 {
-	"frame": {"x":1264,"y":1686,"w":344,"h":264},
+	"frame": {"x":373,"y":1698,"w":344,"h":264},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":344,"h":264},
 	"sourceSize": {"w":344,"h":264}
 },
-"startScreen/bernd/open_eyes":
+"startScreen/backgroundPatternBrown":
 {
-	"frame": {"x":1889,"y":1,"w":157,"h":67},
+	"frame": {"x":1172,"y":1391,"w":507,"h":507},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":507,"h":507},
+	"sourceSize": {"w":507,"h":507}
+},
+"startScreen/titleLetters/title0":
+{
+	"frame": {"x":203,"y":1442,"w":170,"h":249},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":29,"y":13,"w":157,"h":67},
-	"sourceSize": {"w":231,"h":108}
-},
-"startScreen/pretitle":
-{
-	"frame": {"x":1831,"y":187,"w":375,"h":52},
-	"rotated": true,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":375,"h":52},
-	"sourceSize": {"w":375,"h":52}
+	"spriteSourceSize": {"x":2,"y":17,"w":170,"h":249},
+	"sourceSize": {"w":842,"h":542}
 },
 "startScreen/titleLetters/title3":
 {
-	"frame": {"x":1019,"y":1437,"w":136,"h":248},
+	"frame": {"x":377,"y":1442,"w":136,"h":248},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":445,"y":22,"w":136,"h":248},
+	"sourceSize": {"w":842,"h":542}
+},
+"startScreen/titleLetters/title13":
+{
+	"frame": {"x":4,"y":1442,"w":195,"h":250},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":647,"y":285,"w":195,"h":250},
 	"sourceSize": {"w":842,"h":542}
 }},
 "meta": {
@@ -429,9 +309,9 @@
 	"version": "1.0",
 	"image": "sheet-3.png",
 	"format": "RGBA8888",
-	"size": {"w":2048,"h":2048},
+	"size": {"w":2044,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "sheet-0.json", "sheet-1.json", "sheet-2.json", "sheet-4.json", "sheet-5.json", "sheet-6.json", "sheet-7.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:7ab363eb2a26b34145a8c7d4e10aba86:64ed3245eb55fdaf10ee87ab7bd95114:58306aed35fbd641194f30afbd1d96db$"
+	"smartupdate": "$TexturePacker:SmartUpdate:62d7fc46971f25c07234f79c1597dd24:64ed3245eb55fdaf10ee87ab7bd95114:58306aed35fbd641194f30afbd1d96db$"
 }
 }

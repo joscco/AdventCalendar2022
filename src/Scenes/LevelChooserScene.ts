@@ -1,5 +1,5 @@
 import Scene from "./Basics/Scene";
-import {Application, Text, TilingSprite} from "pixi.js";
+import {Application, MIPMAP_MODES, Text, TilingSprite} from "pixi.js";
 import {LevelButton} from "../UI/Buttons/LevelButton";
 import {ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH} from "../index";
 import {ScalingButton} from "../UI/Buttons/ScalingButton";
@@ -26,6 +26,9 @@ export class LevelChooserScene extends Scene {
         let scrollingBackground = new TilingSprite(texture)
         scrollingBackground.width = 2 * GAME_WIDTH
         scrollingBackground.height = 2 * GAME_HEIGHT
+        scrollingBackground.texture.baseTexture.mipmap = MIPMAP_MODES.OFF
+        scrollingBackground.clampMargin = 0.5
+
         gsap.to(scrollingBackground.tilePosition, {
             x: -texture.width,
             y: -texture.height,

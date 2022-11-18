@@ -73,9 +73,9 @@ export class AssetStore {
         let sheet5 = await Assets.load("assets/spritesheets/sheet-5.json")
         this.loadingScene!.setProgress(0.7)
         let sheet6 = await Assets.load("assets/spritesheets/sheet-6.json")
-        this.loadingScene!.setProgress(0.9)
+        this.loadingScene!.setProgress(0.8)
         let sheet7 = await Assets.load("assets/spritesheets/sheet-7.json")
-        this.loadingScene!.setProgress(1)
+        this.loadingScene!.setProgress(0.9)
         this.ASSETS = [sheet0, sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7]
         await this.oven!.open()
     }

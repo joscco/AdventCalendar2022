@@ -1,28 +1,20 @@
-import {Application, Container, Graphics, Sprite, TilingSprite} from 'pixi.js';
+import {Application, Container, MIPMAP_MODES, SCALE_MODES, Sprite, TilingSprite} from 'pixi.js';
 import {ASSET_STORE, BERND, GAME_HEIGHT, GAME_WIDTH} from "../index";
 import Scene from "./Basics/Scene";
 import {Texture} from "@pixi/core";
 import {StartButton} from "../UI/Buttons/StartButton";
-import {ScalingButton} from "../UI/Buttons/ScalingButton";
 
 export class StartScene extends Scene {
 
-    background: Graphics
     lettersContainer: Container
     letters: Sprite[] = [];
     pretitle?: Sprite;
-    startButton: ScalingButton;
+    startButton: StartButton;
     started: boolean = false
 
     constructor(app: Application) {
         super();
         this.app = app
-
-        this.background = new Graphics()
-        this.background.beginFill(0xF2AFB1)
-        this.background.drawRect(0, 0, GAME_WIDTH, GAME_HEIGHT)
-        this.background.endFill()
-        this.addChild(this.background)
 
         this.addScrollingBackground(ASSET_STORE.getTextureAsset("startScreenBackgroundPattern"));
 
@@ -38,7 +30,7 @@ export class StartScene extends Scene {
             await this.blendInTitle();
             await this.scaleInStartButton();
 
-            this.lettersContainer.cacheAsBitmap = true
+            this.lettersContainer.cacheAsBitmap
         }
         this.started = true
     }
@@ -55,8 +47,12 @@ export class StartScene extends Scene {
 
     private addScrollingBackground(backgroundPatternTexture: Texture) {
         let scrollingBackground = new TilingSprite(backgroundPatternTexture)
+
         scrollingBackground.width = 2 * GAME_WIDTH
         scrollingBackground.height = 2 * GAME_HEIGHT
+        scrollingBackground.clampMargin = 0.5
+        scrollingBackground.texture.baseTexture.mipmap = MIPMAP_MODES.OFF
+
         gsap.to(scrollingBackground.tilePosition, {
             x: backgroundPatternTexture.width,
             y: -backgroundPatternTexture.height,

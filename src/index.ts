@@ -1,7 +1,7 @@
 import {StartScene} from './Scenes/StartScene';
 import SceneManager from './General/SceneManager';
 import {gsap} from "gsap";
-import {Application} from "pixi.js"
+import {Application, settings} from "pixi.js"
 import {AssetStore} from "./General/AssetStore";
 import {LevelChooserScene} from "./Scenes/LevelChooserScene";
 import {TooltipManager} from "./gameobjects/Tooltip/TooltipManager";
@@ -47,10 +47,9 @@ const main = async () => {
             sharedTicker: false,
             powerPreference: "high-performance",
             autoStart: false,
-            backgroundColor: 0x381A1C
+            backgroundColor: 0x381A1C,
         }
     );
-
     App.stage.sortableChildren = true
 
     // Display application properly
