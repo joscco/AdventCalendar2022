@@ -1,5 +1,6 @@
 import {Container, Sprite} from "pixi.js";
 import {ASSET_STORE} from "../../index";
+import {sleep} from "../../General/Helpers";
 
 export class Oven extends Container{
 
@@ -56,6 +57,6 @@ export class Oven extends Container{
         this.ovenTop.texture = ASSET_STORE.LOADING_SCENE_ASSETS!.openOven
         await gsap.to(this.ovenContainer.scale, {x: 1, y: 1, duration: 0.2, ease: Back.easeOut})
         await gsap.to(this.steam.scale, {x: 1, y: 1, duration: 0.2, ease: Back.easeOut})
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await sleep(500);
     }
 }

@@ -1,5 +1,6 @@
 import {Container, Sprite} from "pixi.js";
 import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../../index";
+import {sleep} from "../../General/Helpers";
 
 export class Bernd extends Container {
     private head: Sprite;
@@ -67,10 +68,10 @@ export class Bernd extends Container {
         let unblinkTime = Math.random() * 8000
 
         this.closeEyes()
-        await new Promise(resolve => setTimeout(resolve, blinkTime))
+        await sleep(blinkTime)
 
         this.openEyes()
-        await new Promise(resolve => setTimeout(resolve, unblinkTime))
+        await sleep(unblinkTime)
 
         this.blink()
     }

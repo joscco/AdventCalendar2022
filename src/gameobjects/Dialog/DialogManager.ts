@@ -3,6 +3,7 @@ import {DialogBox} from "./DialogBox";
 import {Dialog, DialogNode} from "./Dialogs/DialogConfig";
 import {BERND, BERND_BUTTON} from "../../index";
 import {FactoryScene} from "../../Scenes/FactoryScene";
+import {sleep} from "../../General/Helpers";
 
 export class DialogManager extends Container {
 
@@ -57,7 +58,7 @@ export class DialogManager extends Container {
         let hint = this.currentLevel?.getHint() ?? undefined
         if (hint) {
             this.startDialog(hint)
-            await new Promise(resolve => setTimeout(resolve, 5000))
+            await sleep(5000)
             if (this.currentNode === hint.getStartDialog()) {
                 this.endDialog()
             }

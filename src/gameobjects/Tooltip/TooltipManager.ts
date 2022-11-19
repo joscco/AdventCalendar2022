@@ -2,7 +2,7 @@
 
 import {Container} from "pixi.js";
 import {Tooltip} from "./Tooltip";
-import {Vector2D} from "../../General/Helpers";
+import {sleep, Vector2D} from "../../General/Helpers";
 
 export class TooltipManager extends Container{
 
@@ -34,7 +34,7 @@ export class TooltipManager extends Container{
             this.lastMousePosition = event.global
             this.currentBearer = bearer
             if (this.enabled && isEnabled()) {
-                await new Promise(resolve => setTimeout(resolve, 800));
+                await sleep(2000);
                 // If we still hover the same thing, show the tooltip
                 if (this.enabled && this.currentBearer === bearer && !this.pointerDown) {
                     let bearer = this.currentBearer

@@ -3,6 +3,11 @@ export function capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+// Async stuff
+export function sleep(durationInMS: number): Promise<any> {
+    return new Promise(resolve => setTimeout(resolve, durationInMS))
+}
+
 // Math stuff
 export type Vector2D = {
     x: number,

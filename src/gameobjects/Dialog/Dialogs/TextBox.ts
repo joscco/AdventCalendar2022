@@ -1,4 +1,5 @@
 import {Container, Text, TextMetrics, TextStyle} from "pixi.js";
+import {SOUND_MANAGER} from "../../../index";
 
 export class TextBox extends Container {
 
@@ -7,7 +8,7 @@ export class TextBox extends Container {
     MAX_LETTERS: number = 200
 
     LETTER_TYPE_DURATION = 0.2
-    LETTER_TYPE_OFFSET = 0.01
+    LETTER_TYPE_OFFSET = 0.03
     LETTER_DETYPE_DURATION = 0.2
     LETTER_DETYPE_OFFSET = 0.005
 
@@ -26,13 +27,13 @@ export class TextBox extends Container {
             fontFamily: "Futurahandwritten",
             fill: "#ffffff",
             fontSize: 60,
-            wordWrapWidth: this.boxWidth - 2*this.TEXT_PADDING_HORIZONTAL
+            wordWrapWidth: this.boxWidth - 2 * this.TEXT_PADDING_HORIZONTAL
         })
 
         this.letters = this.initLetters()
         this.fullText = ""
 
-        this.position.set(-this.boxWidth/2 + this.TEXT_PADDING_HORIZONTAL - 20, -this.boxHeight/2 + this.TEXT_PADDING_VERTICAL)
+        this.position.set(-this.boxWidth / 2 + this.TEXT_PADDING_HORIZONTAL - 20, -this.boxHeight / 2 + this.TEXT_PADDING_VERTICAL)
     }
 
     setFullText(text: string) {
@@ -42,16 +43,41 @@ export class TextBox extends Container {
 
     async type() {
         for (let i = 0; i < this.fullText.length - 1; i++) {
-            gsap.to(this.letters[i].scale, {x: 1, y: 1, duration: this.LETTER_TYPE_DURATION, delay: i * this.LETTER_TYPE_OFFSET, ease: Back.easeOut})
+            gsap.to(this.letters[i].scale, {
+                x: 1, y: 1, duration: this.LETTER_TYPE_DURATION, delay: i * this.LETTER_TYPE_OFFSET, ease: Back.easeOut, onStart: () => {
+                    if (this.letters[i].text.match(/[A-Za-z]/g)) {
+                        SOUND_MANAGER.playDullPlop()
+                    }
+                }
+            })
+
         }
-        await gsap.to(this.letters[this.fullText.length - 1].scale, {x: 1, y: 1, duration: this.LETTER_TYPE_DURATION, delay: (this.fullText.length - 1) * this.LETTER_TYPE_OFFSET, ease: Back.easeIn})
+        await gsap.to(this.letters[this.fullText.length - 1].scale, {
+            x: 1,
+            y: 1,
+            duration: this.LETTER_TYPE_DURATION,
+            delay: (this.fullText.length - 1) * this.LETTER_TYPE_OFFSET,
+            ease: Back.easeIn
+        })
     }
 
     async detype() {
         for (let i = this.fullText.length - 1; i > 0; i--) {
-            gsap.to(this.letters[i].scale, {x: 0, y: 0, duration: this.LETTER_DETYPE_DURATION, delay: (this.fullText.length - 1 - i) * this.LETTER_DETYPE_OFFSET, ease: Back.easeIn})
+            gsap.to(this.letters[i].scale, {
+                x: 0,
+                y: 0,
+                duration: this.LETTER_DETYPE_DURATION,
+                delay: (this.fullText.length - 1 - i) * this.LETTER_DETYPE_OFFSET,
+                ease: Back.easeIn
+            })
         }
-        await gsap.to(this.letters[0].scale, {x: 0, y: 0, duration: this.LETTER_DETYPE_DURATION, delay: (this.fullText.length - 1) * this.LETTER_DETYPE_OFFSET, ease: Back.easeIn})
+        await gsap.to(this.letters[0].scale, {
+            x: 0,
+            y: 0,
+            duration: this.LETTER_DETYPE_DURATION,
+            delay: (this.fullText.length - 1) * this.LETTER_DETYPE_OFFSET,
+            ease: Back.easeIn
+        })
     }
 
     private initLetters() {
@@ -62,7 +88,8 @@ export class TextBox extends Container {
                 fontSize: 60,
                 fill: 0xffffff,
                 align: "left",
-                wordWrapWidth: this.boxWidth - 2 * this.TEXT_PADDING_VERTICAL}))
+                wordWrapWidth: this.boxWidth - 2 * this.TEXT_PADDING_VERTICAL
+            }))
             letter.anchor.set(0.5)
             letter.scale.set(0)
             result.push(letter)
@@ -93,12 +120,12 @@ export class TextBox extends Container {
                 lineText = letter
                 lineMeasure = TextMetrics.measureText(letter, this.style)
             }
-            this.letters[i].position.set(lineMeasure.width - letterMeasure.width/2, lineY)
+            this.letters[i].position.set(lineMeasure.width - letterMeasure.width / 2, lineY)
             this.letters[i].text = letter
         }
 
         if (lineIndex === 0) {
-            this.letters.forEach(letter => letter.position.y = this.boxHeight/2 - this.TEXT_PADDING_VERTICAL)
+            this.letters.forEach(letter => letter.position.y = this.boxHeight / 2 - this.TEXT_PADDING_VERTICAL)
         }
     }
 }

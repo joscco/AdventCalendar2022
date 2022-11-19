@@ -2,6 +2,7 @@ import {ScalingButton} from "./ScalingButton";
 import {Sprite, Texture} from "pixi.js";
 import {ASSET_STORE, DIALOG_MANAGER, SOUND_MANAGER} from "../../index";
 import gsap from "gsap";
+import {sleep} from "../../General/Helpers";
 
 export class BerndButton extends ScalingButton {
     private readonly headSprite: Sprite
@@ -39,10 +40,10 @@ export class BerndButton extends ScalingButton {
             let unblinkTime = Math.random() * 8000
 
             this.closeEyes()
-            await new Promise(resolve => setTimeout(resolve, blinkTime))
+            await sleep(blinkTime)
 
             this.openEyes()
-            await new Promise(resolve => setTimeout(resolve, unblinkTime))
+            await sleep(unblinkTime)
 
             this.blink()
         }

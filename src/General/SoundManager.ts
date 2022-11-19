@@ -35,6 +35,7 @@ export class SoundManager {
     }
 
     playMusic() {
+        this.mainMusic.fade(0, 1, 2000)
         this.mainMusic.play()
     }
 
@@ -62,7 +63,6 @@ export class SoundManager {
 
     playTypeSound(): void {
         if (this.soundAllowed) {
-            this.typeSound.stop()
             this.typeSound.play()
         }
     }
