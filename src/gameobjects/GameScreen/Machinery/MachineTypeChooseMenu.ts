@@ -1,5 +1,5 @@
 import {Container, Sprite} from "pixi.js";
-import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../../../index";
+import {ASSET_STORE, EVENT_EMITTER, GAME_HEIGHT, GAME_WIDTH} from "../../../index";
 import {ScalingButton} from "../../../UI/Buttons/ScalingButton";
 import {Machine, MachineType} from "./Machine";
 import {MachineTypeButton} from "./MachineTypeButton";
@@ -48,6 +48,7 @@ export class MachineTypeChooseMenu extends Sprite {
     }
 
     private async blendIn(): Promise<void> {
+        EVENT_EMITTER.emit("opened_type_choose_menu")
         this.shown = true
         let isOnRightHalf = this.getGlobalPosition().x > GAME_WIDTH/2
         let scaleX = isOnRightHalf ? -1 : 1

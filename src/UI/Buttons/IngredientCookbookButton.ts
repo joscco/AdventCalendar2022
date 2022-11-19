@@ -1,6 +1,6 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "pixi.js";
-import {ASSET_STORE, SOUND_MANAGER} from "../../index";
+import {ASSET_STORE, EVENT_EMITTER, SOUND_MANAGER} from "../../index";
 import {CookbookOverlay} from "../../gameobjects/GameScreen/IngredientBook/CookbookOverlay";
 
 export class IngredientCookbookButton extends ScalingButton {
@@ -16,6 +16,7 @@ export class IngredientCookbookButton extends ScalingButton {
     }
 
     onClick(): void {
+        EVENT_EMITTER.emit("clicked_ingredient_cookbook")
         SOUND_MANAGER.playBlub()
         this.overlay.toggleBlendCookbook()
     }

@@ -3,7 +3,7 @@ import {IngredientCookbookButton} from "../../../UI/Buttons/IngredientCookbookBu
 import {IngredientCookbookCloseButton} from "../../../UI/Buttons/IngredientCookbookCloseButton";
 import {IngredientCookbook} from "./IngredientCookbook";
 import {IngredientID} from "../ConveyorBelt/Ingredient";
-import {GAME_HEIGHT} from "../../../index";
+import {EVENT_EMITTER, GAME_HEIGHT} from "../../../index";
 
 export class CookbookOverlay extends Container {
 
@@ -42,6 +42,7 @@ export class CookbookOverlay extends Container {
     }
 
     async blendOutCookbook() {
+        EVENT_EMITTER.emit("closed_ingredient_cookbook")
         this.showingCookBook = false
         this.cookbookButton.updateTexture()
         await this.cookbook.blendOut()

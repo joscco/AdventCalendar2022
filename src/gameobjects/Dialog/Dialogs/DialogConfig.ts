@@ -2,8 +2,7 @@ import {EmittableEvent} from "../../../General/EventEmitter";
 import {DIALOG_MANAGER, EVENT_EMITTER} from "../../../index";
 import {FactoryScene} from "../../../Scenes/FactoryScene";
 
-export type Emotion = "happy" | "sad" | "neutral"
-export type Speech = { text: string, emotion?: Emotion }
+export type Speech = { text: string}
 
 export type DialogNodeConfig = {
     skippable?: boolean;

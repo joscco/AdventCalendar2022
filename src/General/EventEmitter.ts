@@ -1,9 +1,8 @@
 import {MachineType} from "../gameobjects/GameScreen/Machinery/Machine";
 
 export type EmittableEvent =
-    `moved_${string}_to_index_row_${number}_and_column_${number}`
-    | `changed_${string}_to_type_${MachineType}`
-    | "clicked_music_button"
+    "clicked_ingredient_cookbook" | "closed_ingredient_cookbook" |
+    "opened_type_choose_menu" | `selected_type_${MachineType}`
 
 export type EventSubscriberFunction = () => void
 

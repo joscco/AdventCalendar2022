@@ -1,6 +1,6 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "pixi.js";
-import {ASSET_STORE, EVENT_EMITTER, SOUND_MANAGER} from "../../index";
+import {ASSET_STORE, SOUND_MANAGER} from "../../index";
 
 export class MusicButton extends ScalingButton {
 
@@ -18,7 +18,6 @@ export class MusicButton extends ScalingButton {
     }
 
     onClick(): void {
-        EVENT_EMITTER.emit("clicked_music_button")
         SOUND_MANAGER.playBlub()
         this.enabled = !this.enabled
         SOUND_MANAGER.setMusicEnabled(this.enabled)
