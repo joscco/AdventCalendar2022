@@ -7,6 +7,7 @@ import {FactoryScene} from "../../Scenes/FactoryScene";
 export class DialogManager extends Container {
 
     dialogBox: DialogBox
+    currentNode?: DialogNode
     currentLevel?: FactoryScene
 
     constructor() {
@@ -20,7 +21,8 @@ export class DialogManager extends Container {
     }
 
     async startDialog(dialog: Dialog) {
-        let startNode = dialog.getStartDialog()
+        this.currentNode = dialog.getStartDialog()
+        let startNode = this.currentNode
         startNode.start()
         await BERND.blendIn()
         this.dialogBox.setSpeeches(startNode)
@@ -29,6 +31,7 @@ export class DialogManager extends Container {
     }
 
     async advance(node: DialogNode) {
+        this.currentNode = node
         node.start()
         await this.dialogBox.detype()
         this.dialogBox.setSpeeches(node)
@@ -36,6 +39,7 @@ export class DialogManager extends Container {
     }
 
     async endDialog() {
+        this.currentNode = undefined
         await this.dialogBox.detype()
         await this.dialogBox.blendOut()
         BERND.blendOut()
@@ -49,10 +53,14 @@ export class DialogManager extends Container {
         this.dialogBox.hide()
     }
 
-    showHint() {
-        let hint = this.currentLevel?.getHint()
+    async showHint() {
+        let hint = this.currentLevel?.getHint() ?? undefined
         if (hint) {
             this.startDialog(hint)
+            await new Promise(resolve => setTimeout(resolve, 5000))
+            if (this.currentNode === hint.getStartDialog()) {
+                this.endDialog()
+            }
         }
     }
 
