@@ -5,6 +5,7 @@ import {BlockDefinition, MachineDefinition} from "../../gameobjects/GameScreen/M
 import {IngredientID} from "../../gameobjects/GameScreen/ConveyorBelt/Ingredient";
 import SceneManager from "../../General/SceneManager";
 import {Dialog} from "../../gameobjects/Dialog/Dialogs/DialogConfig";
+import {CookieEyesConfig} from "../../gameobjects/GameScreen/WinScreen/Cookie";
 
 type LevelConfig = {
     level: number;
@@ -847,5 +848,58 @@ export class LevelInitiator {
             return "RUMKUGELN"
         }
         return config.recipe
+    }
+
+    static getCookieEyeConfigForRecipe(recipeID: RecipeID): CookieEyesConfig {
+        switch (recipeID) {
+            case "SANTAMILK":
+                return {x: 0, y: 30};
+            case "SCHOKOCROSSIES":
+                return {x: 25, y: 10, useUnderlay: true, underlayColor: 0xeead48};
+            case "MUERBETEIGKEKSE":
+                return {x: 0, y: 30};
+            case "RUMKUGELN":
+                return {x: 0, y: 5, useUnderlay: true, underlayColor: 0xd89956};
+            case "PUNSCH":
+                return {x: 0, y: 45};
+            case "BETHMAENNCHEN":
+                return {x: 0, y: 0};
+            case "ZIMTSTERNE":
+                return {x: 0, y: 20};
+            case "PRINTEN":
+                return {x: 0, y: 15};
+            case "ENGELSAUGEN":
+                return {x: 0, y: 0};
+            case "VANILLEKIPFERL":
+                return {x: 0, y: 40};
+            case "MAKRONEN":
+                return {x: 0, y: 0};
+            case "FLORENTINER":
+                return {x: 0, y: 0};
+            case "SPRITZGEBAECK":
+                return {x: 0, y: 40};
+            case "LEBKUCHEN":
+                return {x: 0, y: -165};
+            case "SPEKULATIUS":
+                return {x: 0, y: 30};
+            case "PFEFFERNUESSE":
+                return {x: 0, y: 0};
+            case "PANETTONE":
+                return {x: 0, y: 30};
+            case "SCHWARZWEISSKEKSE":
+                return {x: 0, y: 10};
+            case "STOLLEN":
+                return {x: 0, y: -10};
+            case "SCHOKOLADENBROT":
+                return {x: 0, y: 0};
+            case "NUSSECKEN":
+                return {x: 0, y: 20};
+            case "CORNFLAKEWALNUSSKEKSE":
+                return {x: 0, y: 75, useUnderlay: true, underlayColor: 0xd1a949};
+            case "BAERENTATZEN":
+                return {x: 0, y: 130};
+            case "DOMINOSTEINE":
+                return {x: 0, y: 0};
+        }
     }
 }

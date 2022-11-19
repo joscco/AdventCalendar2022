@@ -168,6 +168,7 @@ const TEXTURE_MANIFEST: { [key: string]: string } = {
     // Cookie eyes
     openCookieEyes: "gameScreen/cookies/eyes/open_eyes",
     closedCookieEyes: "gameScreen/cookies/eyes/closed_eyes",
+    underlayCookieEyes: "gameScreen/cookies/eyes/eye_underlay",
 
     // Cookies
     SANTAMILK: "gameScreen/cookies/santamilk",

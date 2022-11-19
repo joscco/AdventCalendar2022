@@ -16,6 +16,7 @@ import {EventEmitter} from "./General/EventEmitter";
 import {DialogManager} from "./gameobjects/Dialog/DialogManager";
 import {Bernd} from "./gameobjects/Characters/Bernd";
 import {BerndButton} from "./UI/Buttons/BerndButton";
+import {EditorScene} from "./Scenes/EditorScene";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -57,8 +58,8 @@ const main = async () => {
     // Display application properly
     document.body.appendChild(App.view);
     document.body.style.margin = '0';
-    App.renderer.view.style!.width = CANVAS_WIDTH + "px"
-    App.renderer.view.style!.height = CANVAS_HEIGHT + "px"
+    App.renderer.view.style!.width = "100%"//CANVAS_WIDTH + "px"
+    App.renderer.view.style!.height = "100%"//CANVAS_HEIGHT + "px"
 
     // Synchronize tickers by using the gsap one
     App.ticker.stop()
@@ -124,8 +125,13 @@ const main = async () => {
     SCENE_MANAGER.add("startScene", new StartScene(App))
     LEVEL_SCREEN = new LevelChooserScene(App)
     SCENE_MANAGER.add("levelChooserScene", LEVEL_SCREEN)
+
+    // For Development only
+    SCENE_MANAGER.add("editorScene", new EditorScene())
+
     LevelInitiator.addLevels(SCENE_MANAGER)
 
+    //SCENE_MANAGER.startWithTransition("editorScene")
     SCENE_MANAGER.startWithTransition("startScene")
 };
 

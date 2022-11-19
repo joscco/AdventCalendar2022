@@ -1,4 +1,4 @@
-import {Sprite, Text} from "pixi.js";
+import {Container, Sprite, Text} from "pixi.js";
 import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH, NUMBER_OF_LEVELS, SCENE_MANAGER, SOUND_MANAGER} from "../../../index";
 import {RecipeID, RECIPES} from "../RecipeBox";
 import {ScalingButton} from "../../../UI/Buttons/ScalingButton";
@@ -7,6 +7,7 @@ import {LevelInitiator} from "../../../Scenes/Basics/LevelInitiator";
 import {LeftAngel} from "./LeftAngel";
 import {RightAngel} from "./RightAngel";
 import {Sparkle} from "./Sparkle";
+import {Cookie} from "./Cookie";
 
 class LevelScreenButton extends ScalingButton {
     getTexture(): Texture | null {
@@ -36,38 +37,43 @@ class NextLevelButton extends ScalingButton {
 
 }
 
-export class WinScreen extends Sprite {
+export class WinScreen extends Container {
 
-    private title: Text
-    private subTitle: Text
-    private cookieIcon: Sprite
-    private leftAngel?: LeftAngel
-    private rightAngel?: RightAngel
-    private sparkles: Sparkle[] = []
-    private nextLevelButton?: ScalingButton
-    private levelScreenButton: ScalingButton
-    private banner: Sprite
-    private bannerText: Text
+    private readonly background: Sprite
+    private readonly title: Text
+    private readonly subTitle: Text
+    private readonly cookie: Cookie
+    private readonly leftAngel?: LeftAngel
+    private readonly rightAngel?: RightAngel
+    private readonly sparkles: Sparkle[] = []
+    private readonly nextLevelButton?: ScalingButton
+    private readonly levelScreenButton: ScalingButton
+    private readonly banner: Sprite
+    private readonly bannerText: Text
 
     constructor(recipe: RecipeID, level: number) {
-        super(ASSET_STORE.getTextureAsset("winScreenBackground"));
-        this.anchor.set(0.5)
+        super()
+
         this.position.set(GAME_WIDTH / 2, GAME_HEIGHT + 700)
 
-        this.title = new Text("Well done!", {fontFamily: "Futurahandwritten", fontSize: 90, fontWeight: "bold", fill: 0x000000})
+        this.background = new Sprite(ASSET_STORE.getTextureAsset("winScreenBackground"))
+        this.background.anchor.set(0.5)
+        this.background.tint = 0x381a1c
+        this.addChild(this.background)
+
+        this.title = new Text("Well done!", {fontFamily: "Futurahandwritten", fontSize: 90, fontWeight: "bold", fill: 0xffffff})
         this.title.anchor.set(0.5)
         this.title.position.set(0, -340)
         this.addChild(this.title)
 
-        this.subTitle = new Text("You made some tasty", {fontFamily: "Futurahandwritten", fontSize: 40, fill: 0xaaaaaa})
+        this.subTitle = new Text("You made some tasty", {fontFamily: "Futurahandwritten", fontSize: 40, fill: 0xf2afb1})
         this.subTitle.anchor.set(0.5)
-        this.subTitle.position.set(0, -280)
+        this.subTitle.position.set(0, -270)
         this.addChild(this.subTitle)
 
-        this.cookieIcon = new Sprite(ASSET_STORE.getTextureAsset(LevelInitiator.getRecipeForDay(level)))
-        this.cookieIcon.anchor.set(0.5)
-        this.cookieIcon.position.set(0, 0)
-        this.addChild(this.cookieIcon)
+        this.cookie = new Cookie(LevelInitiator.getRecipeForDay(level))
+        this.cookie.position.set(0, 10)
+        this.addChild(this.cookie)
 
         this.banner = new Sprite(ASSET_STORE.getTextureAsset("winScreenBanner"))
         this.banner.anchor.set(0.5)
@@ -79,12 +85,12 @@ export class WinScreen extends Sprite {
         this.banner.addChild(this.bannerText)
 
         this.levelScreenButton = new LevelScreenButton()
-        this.levelScreenButton.position.set(-550, 380)
+        this.levelScreenButton.position.set(-550, 280)
         this.addChild(this.levelScreenButton)
 
         if (level < NUMBER_OF_LEVELS) {
             this.nextLevelButton = new NextLevelButton(level + 1)
-            this.nextLevelButton.position.set(550, 380)
+            this.nextLevelButton.position.set(550, 280)
             this.addChild(this.nextLevelButton)
         }
 
@@ -97,11 +103,13 @@ export class WinScreen extends Sprite {
     }
 
     async blendIn() {
+        this.cookie.startBlinking()
         SOUND_MANAGER.playBlub()
         await gsap.to(this.position, {y: GAME_HEIGHT / 2 - 50, duration: 0.5, ease: Back.easeInOut})
     }
 
     blendOut() {
+        this.cookie.stopBlinking()
         this.position.set(GAME_WIDTH / 2, GAME_HEIGHT + 700)
     }
 

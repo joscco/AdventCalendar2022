@@ -72,13 +72,21 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":316,"h":451},
 	"sourceSize": {"w":316,"h":451}
 },
+"gameScreen/cookies/eyes/eye_underlay":
+{
+	"frame": {"x":1849,"y":1995,"w":122,"h":44},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":44},
+	"sourceSize": {"w":122,"h":44}
+},
 "gameScreen/cookies/eyes/open_eyes":
 {
 	"frame": {"x":1581,"y":572,"w":91,"h":22},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":23,"y":20,"w":91,"h":22},
-	"sourceSize": {"w":136,"h":59}
+	"spriteSourceSize": {"x":6,"y":4,"w":91,"h":22},
+	"sourceSize": {"w":102,"h":30}
 },
 "gameScreen/cookies/muerbeteigkekse":
 {
@@ -320,6 +328,6 @@
 	"size": {"w":2048,"h":2047},
 	"scale": "1",
 	"related_multi_packs": [ "sheet-0.json", "sheet-2.json", "sheet-3.json", "sheet-4.json", "sheet-5.json", "sheet-6.json", "sheet-7.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:c671a4a1e7c76bb52a395932bb06becb:08d29d7957f9dcc26ca79cdfd240bbd4:58306aed35fbd641194f30afbd1d96db$"
+	"smartupdate": "$TexturePacker:SmartUpdate:69280d2ecb7a55673f02647024631926:48bd307f636d83254cd02cce213c1404:58306aed35fbd641194f30afbd1d96db$"
 }
 }

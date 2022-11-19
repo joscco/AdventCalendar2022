@@ -1,18 +1,18 @@
 import {Container, Sprite} from "pixi.js";
 import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../../index";
-import {sleep} from "../../General/Helpers";
+import {BlinkingEyes} from "./BlinkingEyes";
 
 export class Bernd extends Container {
-    private head: Sprite;
-    private body: Sprite;
-    private backBody: any;
-    private leftArm: Sprite;
-    private rightArm: Sprite;
-    private eyes: Sprite;
-    private headTween: gsap.core.Tween;
-    private bodyTween: gsap.core.Tween;
-    private leftArmTween: gsap.core.Tween;
-    private rightArmTween: gsap.core.Tween;
+    private readonly head: Sprite;
+    private readonly body: Sprite;
+    private readonly backBody: any;
+    private readonly leftArm: Sprite;
+    private readonly rightArm: Sprite;
+    private readonly eyes: BlinkingEyes;
+    private readonly headTween: gsap.core.Tween;
+    private readonly bodyTween: gsap.core.Tween;
+    private readonly leftArmTween: gsap.core.Tween;
+    private readonly rightArmTween: gsap.core.Tween;
     private tweens: gsap.core.Tween[];
 
     constructor() {
@@ -42,7 +42,7 @@ export class Bernd extends Container {
         this.rightArmTween = gsap.to(this.rightArm, {duration: 3, angle: 10, yoyo: true, repeat: -1, ease: Sine.easeInOut})
         this.addChild(this.rightArm)
 
-        this.eyes = new Sprite(ASSET_STORE.getTextureAsset("bernd_eyes_open"));
+        this.eyes = new BlinkingEyes(ASSET_STORE.getTextureAsset("bernd_eyes_open"), ASSET_STORE.getTextureAsset("bernd_eyes_closed"));
         this.eyes.position.set(45, 80)
 
         this.head.addChild(this.eyes)
@@ -50,46 +50,27 @@ export class Bernd extends Container {
         this.addChild(this.backBody, this.leftArm, this.rightArm, this.body)
         this.position.set(GAME_WIDTH / 2 + 400, GAME_HEIGHT / 2 + 800)
 
-        this.blink()
-
         this.tweens = [this.headTween, this.bodyTween, this.leftArmTween, this.rightArmTween]
     }
 
-    private closeEyes() {
-        this.eyes.texture = ASSET_STORE.getTextureAsset("bernd_eyes_closed")
-    }
-
-    private openEyes() {
-        this.eyes.texture = ASSET_STORE.getTextureAsset("bernd_eyes_open")
-    }
-
-    private async blink() {
-        let blinkTime = Math.random() * 500
-        let unblinkTime = Math.random() * 8000
-
-        this.closeEyes()
-        await sleep(blinkTime)
-
-        this.openEyes()
-        await sleep(unblinkTime)
-
-        this.blink()
-    }
-
     hide() {
+        this.eyes.stopBlinking()
         this.position.y = GAME_HEIGHT / 2 + 800
     }
 
     show() {
+        this.eyes.startBlinking()
         this.position.y = 480
     }
 
     async blendIn() {
+        this.eyes.startBlinking()
         this.tweens.forEach(tween => tween.resume())
         await gsap.to(this.position, {duration: 1, y: 480, ease: Quart.easeInOut});
     }
 
     async blendOut() {
+        this.eyes.stopBlinking()
         await gsap.to(this.position, {duration: 1, y: GAME_HEIGHT/2 + 800, ease: Quart.easeInOut});
         this.tweens.forEach(tween => tween.pause())
     }
