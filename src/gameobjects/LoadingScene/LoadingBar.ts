@@ -26,7 +26,7 @@ export class LoadingBar extends Container {
     }
 
     setProgress(percent: number) {
-        this.barMask.scale.set(percent, 1)
+        gsap.to(this.barMask.scale, {x: percent, duration: 0.2, ease: Quad.easeOut})
     }
 
 }

@@ -1,15 +1,13 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "pixi.js";
-import {ASSET_STORE, EVENT_EMITTER, GAME_HEIGHT, SOUND_MANAGER} from "../../index";
+import {ASSET_STORE, EVENT_EMITTER, SOUND_MANAGER} from "../../index";
+
 export class MusicButton extends ScalingButton {
 
     enabled: boolean = true
 
     constructor() {
         super();
-        this.x = 110
-        this.y = GAME_HEIGHT - 75
-        this.scale.set(0.5)
         this.updateTexture()
     }
 
@@ -28,10 +26,10 @@ export class MusicButton extends ScalingButton {
     }
 
     scaleUp() {
-        this.scaleUpTo(0.6, 0.3)
+        this.scaleUpTo(1.1, 0.3)
     }
 
     scaleDown() {
-        this.scaleUpTo(0.5, 0.3)
+        this.scaleUpTo(1, 0.3)
     }
 }

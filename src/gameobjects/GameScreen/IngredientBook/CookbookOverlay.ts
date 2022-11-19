@@ -3,6 +3,7 @@ import {IngredientCookbookButton} from "../../../UI/Buttons/IngredientCookbookBu
 import {IngredientCookbookCloseButton} from "../../../UI/Buttons/IngredientCookbookCloseButton";
 import {IngredientCookbook} from "./IngredientCookbook";
 import {IngredientID} from "../ConveyorBelt/Ingredient";
+import {GAME_HEIGHT} from "../../../index";
 
 export class CookbookOverlay extends Container {
 
@@ -20,7 +21,7 @@ export class CookbookOverlay extends Container {
         this.showingButton = false
 
         this.cookbookButton = new IngredientCookbookButton(this)
-        this.cookbookButton.position.set(300, 125)
+        this.cookbookButton.position.set(305, GAME_HEIGHT - 130)
         this.cookbookButton.hide()
 
         this.cookbook = new IngredientCookbook(this)

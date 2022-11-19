@@ -29,7 +29,7 @@ export class Ingredient extends Container {
         this.set(this.id)
         this.particleEmitter = this.createParticleEmitter()
 
-        this.animateTween = gsap.to(this.sprite.scale, {x: 1.05, y: 0.95, duration: 0.5, yoyo: true, repeat: -1, ease: Back.easeInOut})
+        this.animateTween = gsap.to(this.sprite.scale, {x: 1.05, y: 0.95, duration: 0.5, yoyo: true, repeat: -1, ease: Expo.easeInOut})
     }
 
     setTaste(newTaste: IngredientTaste): void {

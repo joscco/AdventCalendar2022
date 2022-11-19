@@ -518,32 +518,305 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 0, column: 6}, type: "powdery", typeFixed: true},
             {shape: "2x1", index: {row: 0, column: 4}, type: "brown"},
         ]
-    },
-    // {
-    //     level: 17,
-    //     recipe: "LEBKUCHEN"
-    // },{
-    //     level: 18,
-    //     recipe: "PFEFFERNUESSE"
-    // },{
-    //     level: 19,
-    //     recipe: "PANETTONE"
-    // },{
-    //     level: 20,
-    //     recipe: "BAERENTATZEN"
-    // },{
-    //     level: 21,
-    //     recipe: "NUSSECKEN"
-    // },{
-    //     level: 22,
-    //     recipe: "CORNFLAKEWALNUSSKEKSE"
-    // },{
-    //     level: 23,
-    //     recipe: "DOMINOSTEINE"
-    // },{
-    //     level: 24,
-    //     recipe: "STOLLEN"
-    // }
+    }, {
+        level: 17,
+        recipe: "LEBKUCHEN",
+        conveyorBeltPattern:
+            "A2|A1|A0|E4|E3|E2|E1|F2|G7\n" +
+            "A3|D0|D1|E5|H6|  |E0|F1|G6\n" +
+            "A4|  |D2|D3|H5|H4|  |F0|G5\n" +
+            "A5|B0|  |D4|D5|H3|H2|  |G4\n" +
+            "A6|B1|C0|  |D6|C5|H1|H0|G3\n" +
+            "A7|B2|C1|C2|C3|C4|G0|G1|G2",
+        startIngredients: new Map([
+            ["A", "currant_juice"],
+            ["B", "sweetened_cream"],
+            ["C", "boiled_egg"],
+            ["D", "melted_chocolate"],
+            ["E", "rum_aroma"],
+            ["F", "mud"],
+            ["G", "rotten_fruits"],
+            ["H", "peeled_nuts"]
+        ]),
+        blocks: [
+            {shape: "1x1", index: {row: 2, column: 1}},
+            {shape: "1x1", index: {row: 3, column: 2}},
+            {shape: "1x1", index: {row: 4, column: 3}},
+            {shape: "1x1", index: {row: 1, column: 5}},
+            {shape: "1x1", index: {row: 2, column: 6}},
+            {shape: "1x1", index: {row: 3, column: 7}},
+        ],
+        machines: [
+            {shape: "1x1", index: {row: 0, column: 4}, type: "white", positionFixed: true},
+            {shape: "1x1", index: {row: 0, column: 5}, type: "liquid", positionFixed: true},
+            {shape: "1x2", index: {row: 1, column: 7}, type: "brown", positionFixed: true},
+            {shape: "1x2", index: {row: 2, column: 3}, type: "sticky", positionFixed: true},
+            {shape: "1x2", index: {row: 3, column: 4}, type: "red", positionFixed: true},
+            {shape: "1x2", index: {row: 4, column: 0}, type: "white", positionFixed: true},
+            {shape: "1x1", index: {row: 4, column: 8}, type: "sour", positionFixed: true},
+            {shape: "1x1", index: {row: 5, column: 3}, type: "solid", positionFixed: true}
+        ]
+    }, {
+        level: 18,
+        recipe: "PFEFFERNUESSE",
+        conveyorBeltPattern:
+            "  |  |  |  |  |  |  |  |  \n" +
+            "  |  |  |  |  |  |  |  |  \n" +
+            "A0|B0|C0|C1|C2|C3|C4|C5|C6\n" +
+            "A1|B1|D3|D2|D1|D0|F0|F1|F2\n" +
+            "A2|B2|D4|E0|  |  |G0|H1|H0\n" +
+            "A3|D6|D5|E1|E2|G2|G1|H2|H3",
+        startIngredients: new Map([
+            ["A", "lemon_sugar"],
+            ["B", "boiled_egg"],
+            ["C", "melted_chocolate"],
+            ["D", "egg_powder"],
+            ["E", "sugar"],
+            ["F", "marzipan"],
+            ["G", "cream"],
+            ["H", "lemon_aroma"]
+        ]),
+        blocks: [
+            {shape: "1x1", index: {row: 0, column: 0}},
+            {shape: "1x1", index: {row: 1, column: 0}},
+            {shape: "1x1", index: {row: 1, column: 1}},
+            {shape: "1x1", index: {row: 1, column: 2}},
+            {shape: "1x1", index: {row: 1, column: 3}},
+            {shape: "1x1", index: {row: 1, column: 6}},
+            {shape: "1x1", index: {row: 1, column: 7}},
+            {shape: "1x1", index: {row: 1, column: 8}},
+            {shape: "1x1", index: {row: 4, column: 4}},
+            {shape: "1x1", index: {row: 4, column: 5}}
+        ],
+        machines: [
+            {shape: "1x1", index: {row: 0, column: 1}, type: "red", typeFixed: true},
+            {shape: "1x2", index: {row: 0, column: 2}, type: "neutral"},
+            {shape: "1x1", index: {row: 0, column: 4}, type: "solid"},
+            {shape: "1x1", index: {row: 0, column: 5}, type: "neutral", typeFixed: true},
+            {shape: "1x1", index: {row: 0, column: 6}, type: "liquid"},
+            {shape: "1x1", index: {row: 0, column: 7}, type: "white"},
+            {shape: "1x1", index: {row: 0, column: 8}, type: "sticky", typeFixed: true},
+            {shape: "1x1", index: {row: 1, column: 4}, type: "sweet"},
+            {shape: "1x1", index: {row: 1, column: 5}, type: "white"}
+        ]
+    }, {
+        level: 19,
+        recipe: "PANETTONE",
+        conveyorBeltPattern:
+            "A0|A1|C1|C2|C3|D0|D1|D2|D3\n" +
+            "  |A2|C0|  |C4|C5|C6|C7|  \n" +
+            "A4|A3|  |  |  |  |E1|E0|  \n" +
+            "B0|B1|  |  |  |F5|E2|E3|  \n" +
+            "  |B2|B5|F2|F3|F4|G1|G0|H0\n" +
+            "  |B3|B4|F1|F0|G3|G2|H2|H1",
+        startIngredients: new Map([
+            ["A", "nut_butter"],
+            ["B", "steak"],
+            ["C", "lemon_aroma"],
+            ["D", "cream"],
+            ["E", "honey_comb"],
+            ["F", "umeboshi"],
+            ["G", "steak"],
+            ["H", "melted_butter"]
+        ]),
+        blocks: [
+            {shape: "1x1", index: {row: 1, column: 0}},
+            {shape: "1x1", index: {row: 1, column: 3}},
+            {shape: "1x1", index: {row: 1, column: 8}},
+            {shape: "1x1", index: {row: 2, column: 2}},
+            {shape: "1x1", index: {row: 2, column: 5}},
+            {shape: "1x1", index: {row: 2, column: 8}},
+            {shape: "1x1", index: {row: 3, column: 2}},
+            {shape: "1x1", index: {row: 3, column: 3}},
+            {shape: "1x1", index: {row: 3, column: 4}},
+            {shape: "1x1", index: {row: 3, column: 8}},
+            {shape: "1x1", index: {row: 4, column: 0}},
+            {shape: "1x1", index: {row: 5, column: 0}},
+        ],
+        machines: [
+            {shape: "1x1", index: {row: 0, column: 3}, type: "sweet", typeFixed: true},
+            {shape: "3x1", index: {row: 0, column: 6}, type: "solid", positionFixed: true},
+            {shape: "1x1", index: {row: 2, column: 3}, type: "sour", typeFixed: true},
+            {shape: "1x1", index: {row: 2, column: 4}, type: "brown"},
+            {shape: "1x2", index: {row: 4, column: 5}, type: "sweet", positionFixed: true, typeFixed: true},
+            {shape: "1x1", index: {row: 5, column: 1}, type: "red", positionFixed: true},
+            {shape: "1x1", index: {row: 5, column: 8}, type: "solid", positionFixed: true}
+        ]
+    }, {
+        level: 20,
+        recipe: "BAERENTATZEN",
+        conveyorBeltPattern:
+            "A0|B0|E0|E1|F0|G1|G0|H0\n" +
+            "A1|B1|  |E2|F1|G2|H2|H1\n" +
+            "A2|B2|  |E3|F2|G3|H3|H4\n" +
+            "A3|B3|  |E4|F3|G4|G5|H5\n" +
+            "A4|C5|C4|C3|C2|C1|C0|H6\n" +
+            "A5|D3|D2|D1|D0|  |  |H7",
+        startIngredients: new Map([
+            ["A", "flour"],
+            ["B", "rotten_fruit_juice"],
+            ["C", "cream"],
+            ["D", "peeled_nuts"],
+            ["E", "cherry_sugar"],
+            ["F", "cocoa"],
+            ["G", "beet"],
+            ["H", "cherries"],
+        ]),
+        blocks: [
+            {shape: "1x1", index: {row: 1, column: 2}},
+            {shape: "1x1", index: {row: 2, column: 2}},
+            {shape: "1x1", index: {row: 3, column: 2}},
+            {shape: "1x1", index: {row: 5, column: 5}},
+            {shape: "1x1", index: {row: 5, column: 6}}
+        ],
+        machines: [
+            {shape: "1x1", index: {row: 1, column: 0}, type: "sweet", typeFixed: true},
+            {shape: "2x1", index: {row: 4, column: 3}, type: "solid", positionFixed: true},
+            {shape: "1x3", index: {row: 1, column: 5}, type: "yellow", typeFixed: true},
+            {shape: "1x3", index: {row: 2, column: 5}, type: "sticky", typeFixed: true},
+        ]
+    }, {
+        level: 21,
+        recipe: "NUSSECKEN",
+        conveyorBeltPattern:
+            "A0|B0|C0|D0|E0|F0|G0|H0|I0\n" +
+            "A1|B1|C1|D1|E1|F1|G1|H1|I1\n" +
+            "A2|B2|C2|D2|E2|F2|G2|H2|I2\n" +
+            "A3|B3|C3|D3|E3|  |  |  |  \n" +
+            "A4|B4|  |D4|E4|  |  |  |  \n" +
+            "A5|  |  |D5|E5|  |  |  |  ",
+        startIngredients: new Map([
+            ["A", "spices"],
+            ["B", "steak"],
+            ["C", "beet_flour"],
+            ["D", "beet_pudding"],
+            ["E", "cherry_sauce"],
+            ["F", "rum_aroma"],
+            ["G", "flour"],
+            ["H", "melted_butter"],
+            ["I", "cherry_sugar"],
+        ]),
+        blocks: [
+            {shape: "1x1", index: {row: 3, column: 5}},
+            {shape: "1x1", index: {row: 3, column: 6}},
+            {shape: "1x1", index: {row: 3, column: 7}},
+            {shape: "1x1", index: {row: 3, column: 8}},
+            {shape: "1x1", index: {row: 4, column: 2}},
+            {shape: "1x1", index: {row: 5, column: 1}},
+            {shape: "1x1", index: {row: 5, column: 2}},
+            {shape: "1x1", index: {row: 5, column: 5}},
+        ],
+        machines: [
+            {shape: "1x2", index: {row: 2, column: 0}, type: "yellow", typeFixed: true},
+            {shape: "1x1", index: {row: 4, column: 5}, type: "powdery", typeFixed: true},
+            {shape: "1x2", index: {row: 4, column: 6}, type: "sticky", typeFixed: true},
+            {shape: "1x1", index: {row: 4, column: 8}, type: "savoury", typeFixed: true},
+            {shape: "1x1", index: {row: 5, column: 6}, type: "white", typeFixed: true},
+            {shape: "1x2", index: {row: 5, column: 7}, type: "sour"}
+        ]
+    }, {
+        level: 22,
+        recipe: "DOMINOSTEINE",
+        conveyorBeltPattern:
+            "A0|B0|C0|D0|E0|F0|G0|H0|I0\n" +
+            "A1|B1|C1|D1|E1|F1|G1|H1|I1\n" +
+            "A2|B2|C2|D2|E2|F2|G2|H2|I2\n" +
+            "A3|B3|C3|D3|E3|F3|G3|H3|I3\n" +
+            "A4|B4|C4|D4|E4|F4|G4|H4|I4\n" +
+            "A5|B5|C5|D5|E5|F5|G5|H5|I5",
+        startIngredients: new Map([
+            ["A", "cream"],
+            ["B", "sweetened_milk"],
+            ["C", "swamp_water"],
+            ["D", "nuts"],
+            ["E", "sweetened_cream"],
+            ["F", "currant_sugar"],
+            ["G", "cornflour"],
+            ["H", "brown_sugar"],
+            ["I", "candied_lemon_peel"],
+        ]),
+        machines: [
+            {shape: "1x1", index: {row: 3, column: 0}, type: "liquid", positionFixed: true},
+            {shape: "1x1", index: {row: 3, column: 8}, type: "sweet", positionFixed: true},
+            {shape: "1x2", index: {row: 1, column: 0}, type: "sour", positionFixed: true},
+            {shape: "1x2", index: {row: 1, column: 4}, type: "yellow", positionFixed: true},
+            {shape: "1x2", index: {row: 1, column: 7}, type: "liquid", positionFixed: true},
+            {shape: "1x2", index: {row: 2, column: 1}, type: "solid", positionFixed: true},
+            {shape: "1x2", index: {row: 2, column: 6}, type: "red", positionFixed: true, typeFixed: true},
+            {shape: "1x2", index: {row: 3, column: 2}, type: "white", positionFixed: true, typeFixed: true},
+            {shape: "1x2", index: {row: 3, column: 5}, type: "sweet", positionFixed: true},
+            {shape: "1x2", index: {row: 4, column: 3}, type: "sticky", positionFixed: true},
+        ]
+    }, {
+        level: 23,
+        recipe: "CORNFLAKEWALNUSSKEKSE",
+        conveyorBeltPattern:
+            "A0|A1|A2|A3|A4|A5|A6|A7|I0\n" +
+            "B0|B1|B2|B3|B4|B5|B6|D2|I1\n" +
+            "C0|C1|C2|C3|C4|C5|D0|D1|I2\n" +
+            "E1|E0|F5|F4|F3|F2|F1|F0|I3\n" +
+            "E2|G6|G5|G4|G3|G2|G1|G0|I4\n" +
+            "H7|H6|H5|H4|H3|H2|H1|H0|I5",
+        startIngredients: new Map([
+            ["A", "candied_lemon_peel"],
+            ["B", "sugar"],
+            ["C", "eggnog"],
+            ["D", "lemon_powder"],
+            ["E", "marzipan"],
+            ["F", "lemon_juice"],
+            ["G", "sugar"],
+            ["H", "lemon_aroma"],
+            ["I", "rotten_fruit_juice"],
+        ]),
+        machines: [
+            {shape: "1x1", index: {row: 0, column: 1}, type: "neutral", typeFixed: true},
+            {shape: "2x1", index: {row: 2, column: 3}, type: "sticky", typeFixed: true, positionFixed: true},
+            {shape: "1x2", index: {row: 2, column: 7}, type: "sour", positionFixed: true},
+            {shape: "1x1", index: {row: 3, column: 0}, type: "solid", positionFixed: true},
+            {shape: "1x1", index: {row: 5, column: 6}, type: "savoury", typeFixed: true},
+        ]
+    }, {
+        level: 24,
+        recipe: "STOLLEN",
+        conveyorBeltPattern:
+            "  |A3|B3|E3|  |G0|  |I0|J0\n" +
+            "  |A2|B2|E2|E1|G1|  |I1|J1\n" +
+            "A0|A1|B1|B0|E0|G2|H3|I2|J2\n" +
+            "C0|C1|D1|D0|F0|G3|H2|I3|J3\n" +
+            "  |C2|D2|F2|F1|G4|H1|  |J4\n" +
+            "  |C3|D3|F3|  |G5|H0|  |J5",
+        startIngredients: new Map([
+            ["A", "beet_pudding"],
+            ["B", "cherry_jam"],
+            ["C", "cherry_sauce"],
+            ["D", "cherries"],
+            ["E", "marzipan"],
+            ["F", "lemon_powder"],
+            ["G", "mud"],
+            ["H", "nut_cream"],
+            ["I", "melted_chocolate"],
+            ["J", "eggnog"],
+        ]),
+        machines: [
+            {shape: "1x1", index: {row: 0, column: 6}, type: "liquid", typeFixed: true},
+            {shape: "1x1", index: {row: 1, column: 0}, type: "solid", typeFixed: true},
+            {shape: "1x2", index: {row: 1, column: 6}, type: "powdery", typeFixed: true},
+            {shape: "2x2", index: {row: 2, column: 1}, type: "brown", positionFixed: true},
+            {shape: "1x1", index: {row: 3, column: 8}, type: "red", positionFixed: true},
+            {shape: "1x2", index: {row: 4, column: 1}, type: "neutral", positionFixed: true},
+            {shape: "1x1", index: {row: 4, column: 3}, type: "sour", positionFixed: true},
+            {shape: "1x2", index: {row: 4, column: 4}, type: "white", positionFixed: true, typeFixed: true},
+        ],
+        blocks: [
+            {shape: "1x1", index: {row: 0, column: 0}},
+            {shape: "1x1", index: {row: 0, column: 4}},
+            {shape: "1x1", index: {row: 4, column: 0}},
+            {shape: "1x1", index: {row: 4, column: 7}},
+            {shape: "1x1", index: {row: 5, column: 0}},
+            {shape: "1x1", index: {row: 5, column: 4}},
+            {shape: "1x1", index: {row: 5, column: 7}}
+        ]
+    }
 ]
 
 export class LevelInitiator {

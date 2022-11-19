@@ -78,7 +78,7 @@ export class RecipeBox extends Sprite {
     private addTitle(name: string) {
         let banner = new Sprite(ASSET_STORE.getTextureAsset("recipeNameBanner"))
         banner.anchor.set(0.5)
-        banner.position.set(0, 90)
+        banner.position.set(0, 75)
 
         let title = new Text(name, {fontFamily: "Futurahandwritten", fontSize: 40, fill: 0xffffff})
         title.anchor.set(0.5)
@@ -88,10 +88,11 @@ export class RecipeBox extends Sprite {
     }
 
     private addChecklist(ingredients: IngredientID[]) {
-        ingredients.forEach((id, index) => {
+        let sortedIngredients = ingredients.sort((a, b) => a.localeCompare(b))
+        sortedIngredients.forEach((id, index) => {
             let ingredientSlot = new RecipeBoxIngredient(getNameForID(id))
             this.ingredients.push(ingredientSlot)
-            ingredientSlot.position.set(-130, 175 + index * 50)
+            ingredientSlot.position.set(-130, 150 + index * 45)
             this.addChild(ingredientSlot)
         })
     }

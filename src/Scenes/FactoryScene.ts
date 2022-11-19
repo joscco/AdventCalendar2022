@@ -24,11 +24,11 @@ import {
 import {StickyDragActionHandler} from "../gameobjects/GameScreen/Grid/GridActionHandlers/StickyDragActionHandler";
 import {GridItem} from "../gameobjects/GameScreen/Grid/GridItem";
 import {WinScreen} from "../gameobjects/GameScreen/WinScreen/WinScreen";
-import {UIButtonOverlay} from "../UI/ButtonOverlay";
 import {IngredientID} from "../gameobjects/GameScreen/ConveyorBelt/Ingredient"
 import {Grid} from "../gameobjects/GameScreen/Grid/Grid";
 import {Index2D, isRectangularArray} from "../General/Helpers";
 import {Dialog} from "../gameobjects/Dialog/Dialogs/DialogConfig";
+import {BackToLevelScreenButton} from "../UI/Buttons/BackToLevelScreenButton";
 
 export type FactorySceneOptions = {
     app: Application,
@@ -63,8 +63,7 @@ export class FactoryScene extends Scene {
     // UI
     private recipeBox: RecipeBox;
     private winScreen: WinScreen;
-    private uiOverlay: UIButtonOverlay
-
+    private backToLevelScreenButton: BackToLevelScreenButton;
     private timeInterval?: NodeJS.Timer
 
     constructor(opts: FactorySceneOptions) {
@@ -95,9 +94,10 @@ export class FactoryScene extends Scene {
         this.winScreen.zIndex = 10
         this.addChild(this.winScreen)
 
-        this.uiOverlay = new UIButtonOverlay()
-        this.uiOverlay.zIndex = 5
-        this.addChild(this.uiOverlay)
+        this.backToLevelScreenButton = new BackToLevelScreenButton()
+        this.backToLevelScreenButton.position.set(100, 125)
+        this.backToLevelScreenButton.zIndex = 5
+        this.addChild(this.backToLevelScreenButton)
 
         this.machineLayout = opts.machineLayout
         this.machineGridItems = this.setupMachineGridItems(this.machineLayout, this.machineGrid)
@@ -109,7 +109,7 @@ export class FactoryScene extends Scene {
 
     private setupRecipeBox(recipe: Recipe) {
         let recipeBox = new RecipeBox(recipe);
-        recipeBox.position.set(225, 250)
+        recipeBox.position.set(215, 210)
         this.addChild(recipeBox)
         return recipeBox;
     }
@@ -121,7 +121,7 @@ export class FactoryScene extends Scene {
 
         DIALOG_MANAGER.setLevel(this)
 
-        if (!this.dialog) {
+        if (!this.dialog && this.hints.length > 0) {
             BERND_BUTTON.blendIn()
         }
 
@@ -150,6 +150,7 @@ export class FactoryScene extends Scene {
     }
 
     async beforeFadeOut() {
+        DIALOG_MANAGER.removeLevel()
         await DIALOG_MANAGER.endDialog()
         await TOOLTIP_MANAGER.disableTooltips()
     }
@@ -158,7 +159,6 @@ export class FactoryScene extends Scene {
         INGREDIENT_COOKBOOK.hideButton()
         INGREDIENT_COOKBOOK.hideCookbook()
         BERND_BUTTON.hide()
-        DIALOG_MANAGER.removeLevel()
         this.belts.forEach(belt => belt.pauseIngredientAnimations())
     }
 

@@ -60,23 +60,14 @@ export class AssetStore {
     }
 
     async startLoadingOtherAssets() {
-        let sheet0 = await Assets.load("assets/spritesheets/sheet-0.json")
-        this.loadingScene!.setProgress(0.1)
-        let sheet1 = await Assets.load("assets/spritesheets/sheet-1.json")
-        this.loadingScene!.setProgress(0.2)
-        let sheet2 = await Assets.load("assets/spritesheets/sheet-2.json")
-        this.loadingScene!.setProgress(0.3)
-        let sheet3 = await Assets.load("assets/spritesheets/sheet-3.json")
-        this.loadingScene!.setProgress(0.5)
-        let sheet4 = await Assets.load("assets/spritesheets/sheet-4.json")
-        this.loadingScene!.setProgress(0.6)
-        let sheet5 = await Assets.load("assets/spritesheets/sheet-5.json")
-        this.loadingScene!.setProgress(0.7)
-        let sheet6 = await Assets.load("assets/spritesheets/sheet-6.json")
-        this.loadingScene!.setProgress(0.8)
-        let sheet7 = await Assets.load("assets/spritesheets/sheet-7.json")
-        this.loadingScene!.setProgress(0.9)
-        this.ASSETS = [sheet0, sheet1, sheet2, sheet3, sheet4, sheet5, sheet6, sheet7]
+        let numberSheets = 8
+        this.ASSETS = []
+        for (let i = 0; i < numberSheets; i++) {
+            let sheet = await Assets.load(`assets/spritesheets/sheet-${i}.json`)
+            this.loadingScene!.setProgress((i + 1) / numberSheets)
+            this.ASSETS.push(sheet)
+        }
+
         await this.oven!.open()
     }
 
@@ -358,9 +349,9 @@ const TEXTURE_MANIFEST: { [key: string]: string } = {
     machine_3x1: "gameScreen/machines/3x1_big",
     machine_3x2: "gameScreen/machines/3x2_big",
     machine_3x3: "gameScreen/machines/3x3_big",
-    
+
     // Chains
-    
+
     chain_1x1: "gameScreen/chains/1x1_chains",
     chain_1x2: "gameScreen/chains/1x2_chains",
     chain_1x3: "gameScreen/chains/1x3_chains",
@@ -402,7 +393,7 @@ const TEXTURE_MANIFEST: { [key: string]: string } = {
     liquid: "gameScreen/machineIcons/liquid",
     powdery: "gameScreen/machineIcons/powdery",
     solid: "gameScreen/machineIcons/solid",
-    
+
     // Lock Symbol
     lockSymbol: "gameScreen/machineIcons/lockSymbol",
 

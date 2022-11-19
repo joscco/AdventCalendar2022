@@ -94,10 +94,12 @@ const main = async () => {
     App.stage.addChild(TOOLTIP_MANAGER)
 
     let musicButton = new MusicButton()
+    musicButton.position.set(210, 125)
     musicButton.zIndex = 110
     App.stage.addChild(musicButton);
 
     let soundButton = new SoundButton()
+    soundButton.position.set(325, 125)
     soundButton.zIndex = 110
     App.stage.addChild(soundButton);
 
@@ -115,7 +117,7 @@ const main = async () => {
 
     BERND_BUTTON = new BerndButton()
     BERND_BUTTON.zIndex = 5
-    BERND_BUTTON.position.set(500, 125)
+    BERND_BUTTON.position.set(130, GAME_HEIGHT - 135)
     App.stage.addChild(BERND_BUTTON)
 
     // Finally adding Scenes:

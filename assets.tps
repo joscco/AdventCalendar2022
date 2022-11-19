@@ -3107,21 +3107,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/machines/1x1_small.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>14,14,28,29</rect>
-                <key>scale9Paddings</key>
-                <rect>14,14,28,29</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">assets/gameScreen/machines/1x2_big.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -3134,21 +3119,6 @@
                 <rect>79,38,157,75</rect>
                 <key>scale9Paddings</key>
                 <rect>79,38,157,75</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/machines/1x2_small.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>19,14,39,29</rect>
-                <key>scale9Paddings</key>
-                <rect>19,14,39,29</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -3167,21 +3137,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/machines/1x3_small.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>24,14,47,29</rect>
-                <key>scale9Paddings</key>
-                <rect>24,14,47,29</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">assets/gameScreen/machines/2x1_big.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -3194,21 +3149,6 @@
                 <rect>38,79,75,157</rect>
                 <key>scale9Paddings</key>
                 <rect>38,79,75,157</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/machines/2x1_small.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>14,18,28,35</rect>
-                <key>scale9Paddings</key>
-                <rect>14,18,28,35</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -3227,21 +3167,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/machines/2x2_small.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>19,18,39,35</rect>
-                <key>scale9Paddings</key>
-                <rect>19,18,39,35</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">assets/gameScreen/machines/2x3_big.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -3257,36 +3182,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/machines/2x3_small.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>24,18,47,35</rect>
-                <key>scale9Paddings</key>
-                <rect>24,18,47,35</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/machines/3x1_small.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>14,22,28,45</rect>
-                <key>scale9Paddings</key>
-                <rect>14,22,28,45</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">assets/gameScreen/machines/3x2_big.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -3299,36 +3194,6 @@
                 <rect>79,121,157,242</rect>
                 <key>scale9Paddings</key>
                 <rect>79,121,157,242</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/machines/3x2_small.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>19,22,39,45</rect>
-                <key>scale9Paddings</key>
-                <rect>19,22,39,45</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/machines/3x3_small.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>24,22,47,45</rect>
-                <key>scale9Paddings</key>
-                <rect>24,22,47,45</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
