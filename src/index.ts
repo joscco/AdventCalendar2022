@@ -78,7 +78,7 @@ const main = async () => {
 
     // Load assets
     await ASSET_STORE.startLoadingScreen()
-    await SCENE_MANAGER.start("loadingScene")
+    await SCENE_MANAGER.startWithTransition("loadingScene")
     await ASSET_STORE.startLoadingOtherAssets()
 
     SOUND_MANAGER = new SoundManager()
@@ -131,7 +131,6 @@ const main = async () => {
 
     LevelInitiator.addLevels(SCENE_MANAGER)
 
-    //SCENE_MANAGER.startWithTransition("editorScene")
     SCENE_MANAGER.startWithTransition("startScene")
 };
 

@@ -27,4 +27,8 @@ export class IngredientCookbookButton extends ScalingButton {
     hide() {
         this.scale.set(0)
     }
+
+    blendOut() {
+        gsap.to(this.scale, {x: 0, y: 0, duration: 0.5, ease: Back.easeIn})
+    }
 }

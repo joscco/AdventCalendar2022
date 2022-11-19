@@ -29,7 +29,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             "A3|  |B3\n" +
             "B0|B1|B2",
         recipe: "SANTAMILK",
-        machines: [{shape: "1x1", index: {row: 1, column: 1}, type: "liquid"}],
+        machines: [{shape: "1x1", index: {row: 1, column: 1}, type: "liquid", typeFixed: true}],
         startIngredients: new Map([
             ["A", "honey"],
             ["B", "cream"]
@@ -75,9 +75,9 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 2, column: 2}}
         ],
         machines: [
-            {shape: "1x1", index: {row: 1, column: 1}, type: "liquid"},
-            {shape: "1x1", index: {row: 1, column: 2}, type: "white"},
-            {shape: "1x1", index: {row: 2, column: 1}, type: "solid"}
+            {shape: "1x1", index: {row: 1, column: 1}, type: "liquid", typeFixed: true},
+            {shape: "1x1", index: {row: 1, column: 2}, type: "white", typeFixed: true},
+            {shape: "1x1", index: {row: 2, column: 1}, type: "solid", typeFixed: true}
         ]
     }, {
         level: 3,
@@ -94,9 +94,8 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             ["D", "nut_cream"]
         ]),
         machines: [
-            // Types should be fixed!
-            {shape: "1x2", index: {row: 1, column: 0}, type: "yellow"},
-            {shape: "1x2", index: {row: 2, column: 2}, type: "white"},
+            {shape: "1x2", index: {row: 1, column: 0}, type: "yellow", typeFixed: true},
+            {shape: "1x2", index: {row: 2, column: 2}, type: "white", typeFixed: true},
         ]
     }, {
         level: 4,

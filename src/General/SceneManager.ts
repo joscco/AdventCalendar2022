@@ -29,7 +29,7 @@ export default class SceneManager extends Container{
         this.alpha = 0
 
         let overlay = new Graphics()
-        overlay.beginFill(0xF3AFB1)
+        overlay.beginFill(0x381A1C)
         overlay.drawRect(0, 0, GAME_WIDTH, GAME_HEIGHT)
         overlay.endFill()
 
@@ -123,7 +123,7 @@ export default class SceneManager extends Container{
         }
 
         await this.beforeFadeOut()
-        await gsap.to(this, {alpha: 1, duration: 1, ease: Quad.easeOut})
+        await gsap.to(this, {alpha: 1, duration: 0.8, ease: Quad.easeInOut})
         await this.afterFadeOut()
         this.stop();
 
@@ -140,7 +140,7 @@ export default class SceneManager extends Container{
         }
 
         await this.beforeFadeIn()
-        await gsap.to(this, {alpha: 0, duration: 1, ease: Quad.easeInOut})
+        await gsap.to(this, {alpha: 0, duration: 0.8, ease: Quad.easeInOut})
         await this.afterFadeIn()
     }
 

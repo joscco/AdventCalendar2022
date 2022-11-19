@@ -26,6 +26,10 @@ export class AssetStore {
         return sheet.textures[textureID]
     }
 
+    getTextureAssets(...ids: string[]): Texture[] {
+        return ids.map(id => this.getTextureAsset(id))
+    }
+
     private addAssets() {
         Assets.add("font", "assets/fonts/FuturaHandwritten.ttf")
 

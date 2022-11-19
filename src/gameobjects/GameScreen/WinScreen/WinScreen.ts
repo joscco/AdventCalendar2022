@@ -43,8 +43,8 @@ export class WinScreen extends Container {
     private readonly title: Text
     private readonly subTitle: Text
     private readonly cookie: Cookie
-    private readonly leftAngel?: LeftAngel
-    private readonly rightAngel?: RightAngel
+    private readonly leftAngel: LeftAngel
+    private readonly rightAngel: RightAngel
     private readonly sparkles: Sparkle[] = []
     private readonly nextLevelButton?: ScalingButton
     private readonly levelScreenButton: ScalingButton
@@ -58,6 +58,7 @@ export class WinScreen extends Container {
 
         this.background = new Sprite(ASSET_STORE.getTextureAsset("winScreenBackground"))
         this.background.anchor.set(0.5)
+        this.background.scale.set(2, 1)
         this.background.tint = 0x381a1c
         this.addChild(this.background)
 
@@ -70,6 +71,17 @@ export class WinScreen extends Container {
         this.subTitle.anchor.set(0.5)
         this.subTitle.position.set(0, -270)
         this.addChild(this.subTitle)
+
+        this.sparkles = [new Sparkle(), new Sparkle(), new Sparkle(), new Sparkle(), new Sparkle(), new Sparkle()]
+        this.repositionSparkles()
+
+        this.leftAngel = new LeftAngel()
+        this.leftAngel.position.set(-490, -30)
+
+        this.rightAngel = new RightAngel()
+        this.rightAngel.position.set(490, -30)
+
+        this.addChild(...this.sparkles, this.leftAngel, this.rightAngel)
 
         this.cookie = new Cookie(LevelInitiator.getRecipeForDay(level))
         this.cookie.position.set(0, 10)
@@ -93,24 +105,32 @@ export class WinScreen extends Container {
             this.nextLevelButton.position.set(550, 280)
             this.addChild(this.nextLevelButton)
         }
-
-        this.sparkles = [new Sparkle(), new Sparkle(), new Sparkle(), new Sparkle()]
-
-        this.leftAngel = new LeftAngel()
-        this.rightAngel = new RightAngel()
-
-        this.addChild(...this.sparkles, this.leftAngel, this.rightAngel)
     }
 
     async blendIn() {
         this.cookie.startBlinking()
         SOUND_MANAGER.playBlub()
-        await gsap.to(this.position, {y: GAME_HEIGHT / 2 - 50, duration: 0.5, ease: Back.easeInOut})
+        this.leftAngel.startAnimating()
+        this.rightAngel.startAnimating()
+        this.sparkles.forEach(sparke => sparke.chooseRandomTexture())
+        this.sparkles.forEach(sparke => sparke.startMoving())
+        await gsap.to(this.position, {y: GAME_HEIGHT / 2 - 60, duration: 0.5, ease: Back.easeInOut})
     }
 
     blendOut() {
         this.cookie.stopBlinking()
+        this.leftAngel.stopAnimating()
+        this.rightAngel.stopAnimating()
+        this.sparkles.forEach(sparke => sparke.stopMoving())
         this.position.set(GAME_WIDTH / 2, GAME_HEIGHT + 700)
     }
 
+    private repositionSparkles() {
+        this.sparkles.forEach((sparkle, index) => {
+            let signX = index > 2 ? 1 : -1
+            let valX = 180 + (index % 3) * 100
+            let randY = -150 + Math.random() * 350
+            sparkle.position.set(signX * valX, randY)
+        })
+    }
 }

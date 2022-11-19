@@ -65,6 +65,12 @@ export class CookbookOverlay extends Container {
         this.cookbookButton.updateTexture()
     }
 
+    blendOutButton() {
+        this.cookbookButton.interactive = false
+        this.showingButton = false
+        this.cookbookButton.blendOut()
+    }
+
     showButton() {
         this.cookbookButton.show()
         this.cookbookButton.interactive = true

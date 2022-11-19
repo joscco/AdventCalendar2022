@@ -311,6 +311,8 @@ export class FactoryScene extends Scene {
         if (levelSolved) {
             this.winScreen.blendIn()
             this.machineGridItems.forEach(item => item.tempLock())
+            BERND_BUTTON.blendOut()
+            INGREDIENT_COOKBOOK.blendOutButton()
 
             GAME_DATA.saveUnlockedLevel(Math.max(this.level + 1, GAME_DATA.getUnlockedLevels()))
             clearInterval(this.timeInterval)
