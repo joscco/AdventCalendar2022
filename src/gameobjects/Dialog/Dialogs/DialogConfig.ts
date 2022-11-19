@@ -1,5 +1,6 @@
 import {EmittableEvent} from "../../../General/EventEmitter";
 import {DIALOG_MANAGER, EVENT_EMITTER} from "../../../index";
+import {FactoryScene} from "../../../Scenes/FactoryScene";
 
 export type Emotion = "happy" | "sad" | "neutral"
 export type Speech = { text: string, emotion?: Emotion }
@@ -8,12 +9,13 @@ export type DialogNodeConfig = {
     skippable?: boolean;
     id: string
     speeches: Speech[]; // Skippable Texts
-    successors: { on: EmittableEvent, nextID: string | null }[] // Before next node is used, some action is required
+    onEndDo?: (level: FactoryScene) => void,
+    successors: { on: EmittableEvent, nextID: string | null, do?: (event: EmittableEvent) => void}[] // Before next node is used, some action is required
+    durationUntilAutoClose?: number
 }
 
 export type DialogConfig = {
     nodes: DialogNodeConfig[];
-    startNodeID: string;
 }
 
 export class Dialog {
@@ -23,13 +25,7 @@ export class Dialog {
 
     constructor(config: DialogConfig) {
         config.nodes.forEach(nodeConfig => this.nodes.push(new DialogNode(this, nodeConfig)))
-
-        let potentialStartNode = this.nodes.find(node => node.id === config.startNodeID)
-        if (!potentialStartNode) {
-            throw Error(`${config.startNodeID} is not available in this dialog!`)
-        }
-
-        this.startNode = potentialStartNode
+        this.startNode = this.nodes[0]
     }
 
     continueWith(id: string | null) {
@@ -54,25 +50,38 @@ export class DialogNode {
     id: string
     speeches: Speech[]
     dialog: Dialog
-    successors: {on: EmittableEvent, nextID: string | null}[]
+    successors: {on: EmittableEvent, onEventAction?: (event: EmittableEvent) => void; nextID: string | null}[]
     started: boolean = false
-    skippable: boolean
+    private skippable: boolean
+    onEndDo?: (currentLevel: FactoryScene) => void
+
+    autoCloseDuration?: number
 
     constructor(dialog: Dialog, config: DialogNodeConfig) {
         this.id = config.id
         this.speeches = config.speeches
         this.dialog = dialog
         this.successors = config.successors
-        this.skippable = config.skippable ?? true
+        this.skippable = config.skippable ?? false
+        this.autoCloseDuration = config.durationUntilAutoClose
+
+        this.onEndDo = config.onEndDo
     }
 
-    onEventPresume(event: EmittableEvent, next: string | null) {
+    onEventResume(event: EmittableEvent, next: string | null, onEventAction?: (event: EmittableEvent) => void) {
         this.successors.forEach(successor =>
             EVENT_EMITTER.unsubscribe(
                 successor.on,
-                () => this.onEventPresume(successor.on, successor.nextID)))
+                () => this.onEventResume(successor.on, successor.nextID, successor.onEventAction)))
+        if (onEventAction) {
+            onEventAction(event)
+        }
         this.dialog.continueWith(next)
         this.started = false
+    }
+
+    isSkippable(): boolean {
+        return this.skippable
     }
 
     start() {
@@ -80,6 +89,10 @@ export class DialogNode {
         this.successors.forEach(successor =>
             EVENT_EMITTER.subscribe(
                 successor.on,
-                () => this.onEventPresume(successor.on, successor.nextID)))
+                () => this.onEventResume(successor.on,  successor.nextID, successor.onEventAction)))
+    }
+
+    orSkippabilaty(value: boolean) {
+        this.skippable ||= value
     }
 }

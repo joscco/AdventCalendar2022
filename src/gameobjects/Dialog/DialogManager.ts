@@ -1,15 +1,15 @@
 import {Container} from "pixi.js";
 import {DialogBox} from "./DialogBox";
 import {Dialog, DialogNode} from "./Dialogs/DialogConfig";
-import {BERND, BERND_BUTTON} from "../../index";
+import {BERND, BERND_BUTTON, DIALOG_MANAGER, GAME_DATA} from "../../index";
 import {FactoryScene} from "../../Scenes/FactoryScene";
-import {sleep} from "../../General/Helpers";
 
 export class DialogManager extends Container {
 
     dialogBox: DialogBox
     currentNode?: DialogNode
     currentLevel?: FactoryScene
+    private autocloseTimer?: NodeJS.Timeout;
 
     constructor() {
         super();
@@ -23,27 +23,49 @@ export class DialogManager extends Container {
 
     async startDialog(dialog: Dialog) {
         this.currentNode = dialog.getStartDialog()
+        this.currentNode.orSkippabilaty(this.currentLevel!.level < GAME_DATA.getUnlockedLevels())
         let startNode = this.currentNode
         startNode.start()
         await BERND.blendIn()
+        // Starting first node
         this.dialogBox.setSpeeches(startNode)
         await this.dialogBox.blendIn()
         await this.dialogBox.type()
+
+        if (startNode.speeches.length === 1 && startNode.autoCloseDuration) {
+            DIALOG_MANAGER.startAutocloseTimer()
+        }
     }
 
     async advance(node: DialogNode) {
         this.currentNode = node
+        this.currentNode.orSkippabilaty(this.currentLevel!.level < GAME_DATA.getUnlockedLevels())
         node.start()
+
+        // starting node
         await this.dialogBox.detype()
         this.dialogBox.setSpeeches(node)
         await this.dialogBox.type()
+
+        if (node.speeches.length === 1 && node.autoCloseDuration) {
+            DIALOG_MANAGER.startAutocloseTimer()
+        }
+    }
+
+    hasNode(): boolean {
+        return this.currentNode != undefined
     }
 
     async endDialog() {
+        if (this.currentNode && this.currentNode.onEndDo) {
+            this.currentNode.onEndDo(this.currentLevel!)
+        }
+
         this.currentNode = undefined
+
         await this.dialogBox.detype()
         await this.dialogBox.blendOut()
-        BERND.blendOut()
+        await BERND.blendOut()
 
         if (this.currentLevel) {
             BERND_BUTTON.blendIn()
@@ -58,14 +80,22 @@ export class DialogManager extends Container {
         let hint = this.currentLevel?.getHint() ?? undefined
         if (hint) {
             this.startDialog(hint)
-            await sleep(5000)
-            if (this.currentNode === hint.getStartDialog()) {
-                this.endDialog()
-            }
         }
     }
 
     removeLevel() {
         this.currentLevel = undefined
+    }
+
+    startAutocloseTimer() {
+        if (this.currentNode && this.currentNode.autoCloseDuration) {
+            this.autocloseTimer = setTimeout(() => this.endDialog(), this.currentNode.autoCloseDuration)
+        }
+    }
+
+    killAutocloseTimer() {
+        if(this.autocloseTimer) {
+            clearTimeout(this.autocloseTimer)
+        }
     }
 }

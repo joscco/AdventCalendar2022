@@ -16,7 +16,6 @@ import {EventEmitter} from "./General/EventEmitter";
 import {DialogManager} from "./gameobjects/Dialog/DialogManager";
 import {Bernd} from "./gameobjects/Characters/Bernd";
 import {BerndButton} from "./UI/Buttons/BerndButton";
-import {EditorScene} from "./Scenes/EditorScene";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -118,16 +117,13 @@ const main = async () => {
 
     BERND_BUTTON = new BerndButton()
     BERND_BUTTON.zIndex = 5
-    BERND_BUTTON.position.set(130, GAME_HEIGHT - 135)
+    BERND_BUTTON.position.set(305, GAME_HEIGHT - 135)
     App.stage.addChild(BERND_BUTTON)
 
     // Finally adding Scenes:
     SCENE_MANAGER.add("startScene", new StartScene(App))
     LEVEL_SCREEN = new LevelChooserScene(App)
     SCENE_MANAGER.add("levelChooserScene", LEVEL_SCREEN)
-
-    // For Development only
-    SCENE_MANAGER.add("editorScene", new EditorScene())
 
     LevelInitiator.addLevels(SCENE_MANAGER)
 

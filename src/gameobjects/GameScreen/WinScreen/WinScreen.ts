@@ -114,10 +114,10 @@ export class WinScreen extends Container {
         this.rightAngel.startAnimating()
         this.sparkles.forEach(sparke => sparke.chooseRandomTexture())
         this.sparkles.forEach(sparke => sparke.startMoving())
-        await gsap.to(this.position, {y: GAME_HEIGHT / 2 - 60, duration: 0.5, ease: Back.easeInOut})
+        await gsap.to(this.position, {y: GAME_HEIGHT / 2 - 60, duration: 1, ease: Back.easeInOut})
     }
 
-    blendOut() {
+    hide() {
         this.cookie.stopBlinking()
         this.leftAngel.stopAnimating()
         this.rightAngel.stopAnimating()

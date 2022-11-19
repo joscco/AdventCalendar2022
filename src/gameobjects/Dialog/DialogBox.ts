@@ -28,7 +28,10 @@ export class DialogBox extends Container {
 
         this.previousButton = new ScalingButtonImpl(ASSET_STORE.getTextureAsset("dialog_previous_button"), () => this.previousSpeech())
         this.nextButton = new ScalingButtonImpl(ASSET_STORE.getTextureAsset("dialog_next_button"), () => this.nextSpeech())
-        this.cancelButton = new ScalingButtonImpl(ASSET_STORE.getTextureAsset("dialog_cross"), () => DIALOG_MANAGER.endDialog())
+        this.cancelButton = new ScalingButtonImpl(ASSET_STORE.getTextureAsset("dialog_cross"), () => {
+            DIALOG_MANAGER.killAutocloseTimer()
+            DIALOG_MANAGER.endDialog()
+        })
         this.hide()
 
         this.background.anchor.set(0.5)
@@ -71,11 +74,13 @@ export class DialogBox extends Container {
 
         this.previousButton.hide()
         this.nextButton.hide()
+        this.cancelButton.hide()
 
         if (this.currentSpeeches.length > 1) {
             this.nextButton.blendIn()
         }
-        if (node.skippable) {
+
+        if (node.isSkippable()) {
             this.cancelButton.blendIn()
         }
     }
@@ -83,17 +88,25 @@ export class DialogBox extends Container {
     private async nextSpeech() {
         let index = ++this.currentSpeechIndex!
         await this.detype()
+
         this.textObject.setFullText(this.currentSpeeches![index].text)
-        if (index === this.currentSpeeches!.length - 1) {
+
+        let isLastSpeech = index === this.currentSpeeches!.length - 1
+        if (isLastSpeech) {
             this.nextButton.blendOut()
         }
         this.previousButton.blendIn()
-        this.type()
+
+
+        await this.type()
+        if (isLastSpeech && DIALOG_MANAGER.currentNode!.autoCloseDuration) {
+            DIALOG_MANAGER.startAutocloseTimer()
+        }
     }
 
     private async previousSpeech() {
+        DIALOG_MANAGER.killAutocloseTimer()
         let index = --this.currentSpeechIndex!
-        await this.detype()
         this.textObject.setFullText(this.currentSpeeches![index].text)
         if (index === 0) {
             this.previousButton.blendOut()

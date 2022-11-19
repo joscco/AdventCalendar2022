@@ -14,6 +14,7 @@ export class Bernd extends Container {
     private readonly leftArmTween: gsap.core.Tween;
     private readonly rightArmTween: gsap.core.Tween;
     private tweens: gsap.core.Tween[];
+    private moveTween?: gsap.core.Tween;
 
     constructor() {
         super();
@@ -24,6 +25,7 @@ export class Bernd extends Container {
 
         this.body = new Sprite(ASSET_STORE.getTextureAsset("bernd_torso"));
         this.bodyTween = gsap.to(this.body.scale, {duration: 3, x: 1.01, y: 0.98, yoyo: true, repeat: -1, ease: Sine.easeInOut})
+
         this.backBody = new Sprite(ASSET_STORE.getTextureAsset("bernd_back_torso"));
         this.backBody.position.set(355, 100)
 
@@ -66,12 +68,14 @@ export class Bernd extends Container {
     async blendIn() {
         this.eyes.startBlinking()
         this.tweens.forEach(tween => tween.resume())
-        await gsap.to(this.position, {duration: 1, y: 480, ease: Quart.easeInOut});
+        this.moveTween = gsap.to(this.position, {duration: 1, y: 480, ease: Quart.easeInOut});
+        await this.moveTween
     }
 
     async blendOut() {
         this.eyes.stopBlinking()
-        await gsap.to(this.position, {duration: 1, y: GAME_HEIGHT/2 + 800, ease: Quart.easeInOut});
+        this.moveTween = gsap.to(this.position, {duration: 1, y: GAME_HEIGHT/2 + 800, ease: Quart.easeInOut});
+        await this.moveTween
         this.tweens.forEach(tween => tween.pause())
     }
 }

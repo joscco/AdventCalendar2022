@@ -40,7 +40,8 @@ export type FactorySceneOptions = {
     startIngredients?: Map<string, IngredientID>,
     hasStepButton?: boolean,
     dialog?: Dialog,
-    hints?: Dialog[]
+    hints?: Dialog[],
+    lastWords?: Dialog
 }
 
 export class FactoryScene extends Scene {
@@ -55,10 +56,11 @@ export class FactoryScene extends Scene {
     private startIngredients: IngredientID[]
     private readonly beltGrid: Grid;
     private readonly belts: ConveyorBelt[];
-    private level: number
+    level: number
 
     private dialog?: Dialog
     private hints: Dialog[]
+    private lastWords?: Dialog
 
     // UI
     private recipeBox: RecipeBox;
@@ -74,6 +76,7 @@ export class FactoryScene extends Scene {
 
         this.dialog = opts.dialog
         this.hints = opts.hints ?? []
+        this.lastWords = opts.lastWords
 
         this.initBackground();
 
@@ -116,7 +119,7 @@ export class FactoryScene extends Scene {
 
     start() {
         TOOLTIP_MANAGER.enableTooltips()
-        this.winScreen.blendOut()
+        this.winScreen.hide()
         INGREDIENT_COOKBOOK.showButton()
 
         DIALOG_MANAGER.setLevel(this)
@@ -151,7 +154,9 @@ export class FactoryScene extends Scene {
 
     async beforeFadeOut() {
         DIALOG_MANAGER.removeLevel()
-        await DIALOG_MANAGER.endDialog()
+        if ( DIALOG_MANAGER.hasNode()) {
+            await DIALOG_MANAGER.endDialog()
+        }
         await TOOLTIP_MANAGER.disableTooltips()
     }
 
@@ -309,7 +314,9 @@ export class FactoryScene extends Scene {
         let levelSolved = correctnessPerIngredient.reduce((a, b) => a && b)
 
         if (levelSolved) {
-            this.winScreen.blendIn()
+            if (this.lastWords) {
+                DIALOG_MANAGER.startDialog(this.lastWords)
+            }
             this.machineGridItems.forEach(item => item.tempLock())
             BERND_BUTTON.blendOut()
             INGREDIENT_COOKBOOK.blendOutButton()
@@ -317,6 +324,10 @@ export class FactoryScene extends Scene {
             GAME_DATA.saveUnlockedLevel(Math.max(this.level + 1, GAME_DATA.getUnlockedLevels()))
             clearInterval(this.timeInterval)
         }
+    }
+
+    showWinScreen() {
+        this.winScreen.blendIn()
     }
 
     private setupBelts(patternArr: string[][], beltGrid: Grid, machineGrid: Grid, startIngredients?: Map<string, IngredientID>): ConveyorBelt[] {

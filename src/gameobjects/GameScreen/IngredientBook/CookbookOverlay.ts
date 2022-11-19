@@ -21,7 +21,7 @@ export class CookbookOverlay extends Container {
         this.showingButton = false
 
         this.cookbookButton = new IngredientCookbookButton(this)
-        this.cookbookButton.position.set(305, GAME_HEIGHT - 130)
+        this.cookbookButton.position.set(130, GAME_HEIGHT - 130)
         this.cookbookButton.hide()
 
         this.cookbook = new IngredientCookbook(this)

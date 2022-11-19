@@ -17,6 +17,7 @@ export class TextBox extends Container {
     private boxHeight: number
     private fullText: string
     private letters: Text[]
+    private letterTweens: gsap.core.Tween[] = [];
 
     constructor(width: number, height: number) {
         super()
@@ -42,8 +43,9 @@ export class TextBox extends Container {
     }
 
     async type() {
+        this.letterTweens.forEach(tween => tween.kill())
         for (let i = 0; i < this.fullText.length - 1; i++) {
-            gsap.to(this.letters[i].scale, {
+            this.letterTweens[i] = gsap.to(this.letters[i].scale, {
                 x: 1, y: 1, duration: this.LETTER_TYPE_DURATION, delay: i * this.LETTER_TYPE_OFFSET, ease: Back.easeOut, onStart: () => {
                     if (this.letters[i].text.match(/[A-Za-z]/g)) {
                         SOUND_MANAGER.playDullPlop()
@@ -52,18 +54,20 @@ export class TextBox extends Container {
             })
 
         }
-        await gsap.to(this.letters[this.fullText.length - 1].scale, {
+        this.letterTweens[this.fullText.length - 1] = gsap.to(this.letters[this.fullText.length - 1].scale, {
             x: 1,
             y: 1,
             duration: this.LETTER_TYPE_DURATION,
             delay: (this.fullText.length - 1) * this.LETTER_TYPE_OFFSET,
             ease: Back.easeIn
         })
+        await this.letterTweens[this.fullText.length - 1]
     }
 
     async detype() {
+        this.letterTweens.forEach(tween => tween.kill())
         for (let i = this.fullText.length - 1; i > 0; i--) {
-            gsap.to(this.letters[i].scale, {
+            this.letterTweens[i] = gsap.to(this.letters[i].scale, {
                 x: 0,
                 y: 0,
                 duration: this.LETTER_DETYPE_DURATION,
@@ -71,13 +75,14 @@ export class TextBox extends Container {
                 ease: Back.easeIn
             })
         }
-        await gsap.to(this.letters[0].scale, {
+        this.letterTweens[0] = gsap.to(this.letters[0].scale, {
             x: 0,
             y: 0,
             duration: this.LETTER_DETYPE_DURATION,
             delay: (this.fullText.length - 1) * this.LETTER_DETYPE_OFFSET,
             ease: Back.easeIn
         })
+        await this.letterTweens[0]
     }
 
     private initLetters() {
@@ -105,6 +110,7 @@ export class TextBox extends Container {
         let lineTillEndOfWordMeasure
         let letterMeasure
         let lineText = ""
+
         for (let i = 0; i < this.MAX_LETTERS; i++) {
             let letter = fullText.slice(i, i + 1)
             let lineTextTillEndOfWord = lineText + fullText.substring(i).split(" ")[0]
@@ -121,6 +127,7 @@ export class TextBox extends Container {
                 lineMeasure = TextMetrics.measureText(letter, this.style)
             }
             this.letters[i].position.set(lineMeasure.width - letterMeasure.width / 2, lineY)
+            this.letters[i].scale.set(0)
             this.letters[i].text = letter
         }
 
