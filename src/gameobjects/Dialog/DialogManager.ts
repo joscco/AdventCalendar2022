@@ -26,7 +26,7 @@ export class DialogManager extends Container {
         this.currentNode = dialog.getStartDialog()
         this.currentNode.orSkippabilaty(this.currentLevel!.level < GAME_DATA.getUnlockedLevels())
         let startNode = this.currentNode
-        startNode.start()
+
         await BERND.blendIn()
         // Starting first node
         this.dialogBox.setSpeeches(startNode)
@@ -41,7 +41,6 @@ export class DialogManager extends Container {
     async advance(node: DialogNode) {
         this.currentNode = node
         this.currentNode.orSkippabilaty(this.currentLevel!.level < GAME_DATA.getUnlockedLevels())
-        node.start()
 
         // starting node
         await this.dialogBox.detype()

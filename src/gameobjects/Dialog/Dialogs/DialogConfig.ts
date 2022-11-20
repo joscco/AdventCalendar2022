@@ -50,7 +50,6 @@ export class DialogNode {
     speeches: Speech[]
     dialog: Dialog
     successors: {on: EmittableEvent, onEventAction?: (event: EmittableEvent) => void; nextID: string | null}[]
-    started: boolean = false
     private skippable: boolean
     onEndDo?: (currentLevel: FactoryScene) => void
 
@@ -69,22 +68,25 @@ export class DialogNode {
 
     onEventResume(event: EmittableEvent, next: string | null, onEventAction?: (event: EmittableEvent) => void) {
         this.successors.forEach(successor =>
-            EVENT_EMITTER.unsubscribe(
-                successor.on,
-                () => this.onEventResume(successor.on, successor.nextID, successor.onEventAction)))
+            EVENT_EMITTER.unsubscribe(successor.on))
+
         if (onEventAction) {
             onEventAction(event)
         }
+
         this.dialog.continueWith(next)
-        this.started = false
+    }
+
+    cancelLastSpeech() {
+        this.successors.forEach(successor =>
+            EVENT_EMITTER.unsubscribe(successor.on))
     }
 
     isSkippable(): boolean {
         return this.skippable
     }
 
-    start() {
-        this.started = true
+    startLastSpeech() {
         this.successors.forEach(successor =>
             EVENT_EMITTER.subscribe(
                 successor.on,

@@ -23,14 +23,7 @@ export class EventEmitter {
         }
     }
 
-    unsubscribe(event: EmittableEvent, action: EventSubscriberFunction) {
-        let actions = this.subscribers.get(event)
-
-        if (actions) {
-            const index = actions.indexOf(action, 0);
-            if (index > -1) {
-                actions.splice(index, 1);
-            }
-        }
+    unsubscribe(event: EmittableEvent) {
+        this.subscribers.set(event, []);
     }
 }

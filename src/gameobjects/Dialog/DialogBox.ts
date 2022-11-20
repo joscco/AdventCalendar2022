@@ -29,6 +29,9 @@ export class DialogBox extends Container {
         this.previousButton = new ScalingButtonImpl(ASSET_STORE.getTextureAsset("dialog_previous_button"), () => this.previousSpeech())
         this.nextButton = new ScalingButtonImpl(ASSET_STORE.getTextureAsset("dialog_next_button"), () => this.nextSpeech())
         this.cancelButton = new ScalingButtonImpl(ASSET_STORE.getTextureAsset("dialog_cross"), () => {
+            if (this.currentSpeechIndex === this.currentSpeeches.length - 1) {
+                DIALOG_MANAGER.currentNode!.cancelLastSpeech()
+            }
             DIALOG_MANAGER.killAutocloseTimer()
             DIALOG_MANAGER.endDialog()
         })
@@ -78,6 +81,8 @@ export class DialogBox extends Container {
 
         if (this.currentSpeeches.length > 1) {
             this.nextButton.blendIn()
+        } else {
+            node.startLastSpeech()
         }
 
         if (node.isSkippable()) {
@@ -95,11 +100,13 @@ export class DialogBox extends Container {
             let isLastSpeech = index === this.currentSpeeches!.length - 1
             if (isLastSpeech) {
                 this.nextButton.blendOut()
+                DIALOG_MANAGER.currentNode!.startLastSpeech()
             }
             this.previousButton.blendIn()
 
 
             await this.type()
+
             if (isLastSpeech && DIALOG_MANAGER.currentNode!.autoCloseDuration) {
                 DIALOG_MANAGER.startAutocloseTimer()
             }
@@ -108,6 +115,9 @@ export class DialogBox extends Container {
 
     private async previousSpeech() {
         if (this.currentSpeeches && this.currentSpeechIndex > 0) {
+            if (this.currentSpeechIndex === this.currentSpeeches.length - 1) {
+                DIALOG_MANAGER.currentNode!.cancelLastSpeech()
+            }
             DIALOG_MANAGER.killAutocloseTimer()
             let index = --this.currentSpeechIndex!
             this.textObject.setFullText(this.currentSpeeches[index].text)
