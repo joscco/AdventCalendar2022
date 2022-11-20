@@ -6,7 +6,7 @@ import {IngredientID} from "../../gameobjects/GameScreen/ConveyorBelt/Ingredient
 import SceneManager from "../../General/SceneManager";
 import {Dialog} from "../../gameobjects/Dialog/Dialogs/DialogConfig";
 import {CookieEyesConfig} from "../../gameobjects/GameScreen/WinScreen/Cookie";
-import {DIALOG_DAY_1, HINTS_DAY_1, LAST_WORDS_DAY_1} from "./DialogData";
+import {DIALOG_DAY_1, DIALOG_DAY_2, HINTS_DAY_1, HINTS_DAY_2, LAST_WORDS_DAY_1, LAST_WORDS_DAY_2} from "./DialogData";
 
 type LevelConfig = {
     level: number;
@@ -59,7 +59,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 1, column: 1}, type: "liquid", typeFixed: true},
             {shape: "1x1", index: {row: 1, column: 2}, type: "white", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 1}, type: "solid", typeFixed: true}
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_2),
+        hints: [new Dialog(HINTS_DAY_2)],
+        lastWords: new Dialog(LAST_WORDS_DAY_2)
     }, {
         level: 3,
         conveyorBeltPattern:

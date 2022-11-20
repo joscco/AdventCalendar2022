@@ -3,8 +3,8 @@ import {SOUND_MANAGER} from "../../../index";
 
 export class TextBox extends Container {
 
-    TEXT_PADDING_VERTICAL: number = 80
-    TEXT_PADDING_HORIZONTAL: number = 150
+    TEXT_PADDING_VERTICAL: number = 90
+    TEXT_PADDING_HORIZONTAL: number = 130
     MAX_LETTERS: number = 200
 
     LETTER_TYPE_DURATION = 0.2
@@ -27,7 +27,7 @@ export class TextBox extends Container {
         this.style = new TextStyle({
             fontFamily: "Futurahandwritten",
             fill: "#ffffff",
-            fontSize: 60,
+            fontSize: 50,
             wordWrapWidth: this.boxWidth - 2 * this.TEXT_PADDING_HORIZONTAL
         })
 
@@ -90,10 +90,10 @@ export class TextBox extends Container {
         for (let i = 0; i < this.MAX_LETTERS; i++) {
             let letter = new Text("", new TextStyle({
                 fontFamily: "Futurahandwritten",
-                fontSize: 60,
+                fontSize: 50,
                 fill: 0xffffff,
                 align: "left",
-                wordWrapWidth: this.boxWidth - 2 * this.TEXT_PADDING_VERTICAL
+                wordWrapWidth: this.boxWidth - 2 * this.TEXT_PADDING_HORIZONTAL
             }))
             letter.anchor.set(0.5)
             letter.scale.set(0)

@@ -68,7 +68,7 @@ export class Bernd extends Container {
     async blendIn() {
         this.eyes.startBlinking()
         this.tweens.forEach(tween => tween.resume())
-        this.moveTween = gsap.to(this.position, {duration: 1, y: 480, ease: Quart.easeInOut});
+        this.moveTween = gsap.to(this.position, {duration: 1, y: 530, ease: Quart.easeInOut});
         await this.moveTween
     }
 
