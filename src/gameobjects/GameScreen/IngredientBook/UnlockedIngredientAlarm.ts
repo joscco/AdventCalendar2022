@@ -19,7 +19,7 @@ export class UnlockedIngredientAlarm extends Sprite {
 
         this.ingredientIcon = new Sprite()
         this.ingredientIcon.anchor.set(0.5)
-        this.ingredientIcon.scale.set(0.5)
+        this.ingredientIcon.scale.set(0.4)
         this.ingredientIcon.position.set(-275, 0)
 
         this.title = new Text("New Ingredient!", {fontFamily: "Futurahandwritten", fontSize: 45, fill: 0xFDAC47})

@@ -15,7 +15,7 @@ import {
     DIALOG_DAY_5,
     DIALOG_DAY_6,
     DIALOG_DAY_7,
-    DUAL_MACHINES_HINT,
+    DOUBLE_MACHINES_HINT,
     HINT_DAY_1,
     HINT_DAY_2,
     MOVE_ORDER_LACK_OF_SPACE_HINT,
@@ -27,7 +27,45 @@ import {
     LAST_WORDS_DAY_5,
     LAST_WORDS_DAY_6,
     LAST_WORDS_DAY_7,
-    TWO_MACHINES_ON_ONE_BELT_HINT, LAST_WORDS_DAY_8, DIALOG_DAY_8, DIALOG_DAY_9, LAST_WORDS_DAY_9
+    TWO_MACHINES_ON_ONE_BELT_HINT,
+    LAST_WORDS_DAY_8,
+    DIALOG_DAY_8,
+    DIALOG_DAY_9,
+    LAST_WORDS_DAY_9,
+    DIALOG_DAY_10,
+    LAST_WORDS_DAY_10,
+    QUADRUPLE_MACHINES_HINT,
+    DIALOG_DAY_11,
+    LAST_WORDS_DAY_11,
+    TRIPLE_MACHINES_HINT,
+    DIALOG_DAY_12,
+    LAST_WORDS_DAY_12,
+    DIALOG_DAY_13,
+    LAST_WORDS_DAY_13,
+    LAST_WORDS_DAY_24,
+    DIALOG_DAY_24,
+    LAST_WORDS_DAY_23,
+    DIALOG_DAY_23,
+    LAST_WORDS_DAY_22,
+    DIALOG_DAY_22,
+    LAST_WORDS_DAY_21,
+    DIALOG_DAY_21,
+    LAST_WORDS_DAY_20,
+    DIALOG_DAY_20,
+    LAST_WORDS_DAY_19,
+    DIALOG_DAY_19,
+    DIALOG_DAY_18,
+    LAST_WORDS_DAY_18,
+    DIALOG_DAY_17,
+    LAST_WORDS_DAY_17,
+    DIALOG_DAY_16,
+    LAST_WORDS_DAY_16,
+    LAST_WORDS_DAY_15,
+    DIALOG_DAY_15,
+    DIALOG_DAY_14,
+    LAST_WORDS_DAY_14,
+    BE_FAST_HINT,
+    NON_TIMING_FIRST_HINT
 } from "./DialogData";
 
 type LevelConfig = {
@@ -104,7 +142,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x2", index: {row: 2, column: 2}, type: "white", typeFixed: true},
         ],
         dialog: new Dialog(DIALOG_DAY_3),
-        hints: [new Dialog(DUAL_MACHINES_HINT)],
+        hints: [new Dialog(DOUBLE_MACHINES_HINT)],
         lastWords: new Dialog(LAST_WORDS_DAY_3)
     }, {
         level: 4,
@@ -168,7 +206,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 3, column: 3}, type: "sweet"}
         ],
         dialog: new Dialog(DIALOG_DAY_5),
-        hints: [new Dialog(DUAL_MACHINES_HINT), new Dialog(CHANGE_TYPE_HINT)],
+        hints: [new Dialog(DOUBLE_MACHINES_HINT), new Dialog(CHANGE_TYPE_HINT)],
         lastWords: new Dialog(LAST_WORDS_DAY_5)
     }, {
         level: 6,
@@ -231,7 +269,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "2x1", index: {row: 0, column: 2}, type: "solid", positionFixed: true}
         ],
         dialog: new Dialog(DIALOG_DAY_7),
-        hints: [new Dialog(IRON_CHAINS_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DUAL_MACHINES_HINT)],
+        hints: [new Dialog(IRON_CHAINS_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT)],
         lastWords: new Dialog(LAST_WORDS_DAY_7)
     }, {
         level: 8,
@@ -262,7 +300,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 2, column: 6}, type: "sour", typeFixed: true}
         ],
         dialog: new Dialog(DIALOG_DAY_8),
-        hints: [new Dialog(IRON_CHAINS_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DUAL_MACHINES_HINT)],
+        hints: [new Dialog(IRON_CHAINS_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT)],
         lastWords: new Dialog(LAST_WORDS_DAY_8)
     }, {
         level: 9,
@@ -295,7 +333,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 3, column: 6}, type: "powdery", typeFixed: true},
         ],
         dialog: new Dialog(DIALOG_DAY_9),
-        hints: [new Dialog(IRON_CHAINS_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DUAL_MACHINES_HINT)],
+        hints: [new Dialog(IRON_CHAINS_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT)],
         lastWords: new Dialog(LAST_WORDS_DAY_9)
     }, {
         level: 10,
@@ -328,7 +366,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 0, column: 4}, type: "sticky", typeFixed: true},
             {shape: "1x1", index: {row: 3, column: 1}, type: "red", positionFixed: true},
             {shape: "1x1", index: {row: 3, column: 4}, type: "red", positionFixed: true},
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_10),
+        hints: [new Dialog(IRON_CHAINS_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(QUADRUPLE_MACHINES_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_10)
     }, {
         level: 11,
         recipe: "MAKRONEN",
@@ -353,7 +394,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x2", index: {row: 2, column: 3}, type: "sweet", typeFixed: true},
             {shape: "1x2", index: {row: 3, column: 3}, type: "sticky"},
             {shape: "1x2", index: {row: 4, column: 3}, type: "white", typeFixed: true},
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_11),
+        hints: [new Dialog(IRON_CHAINS_HINT), new Dialog(DOUBLE_MACHINES_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_11)
     }, {
         level: 12,
         recipe: "SPRITZGEBAECK",
@@ -392,7 +436,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 1, column: 3}, type: "sticky", typeFixed: true},
             {shape: "1x1", index: {row: 1, column: 4}, type: "sour"},
             {shape: "1x1", index: {row: 1, column: 5}, type: "white", typeFixed: true},
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_12),
+        hints: [new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT), new Dialog(TRIPLE_MACHINES_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_12)
     }, {
         level: 13,
         recipe: "SPEKULATIUS",
@@ -414,17 +461,20 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
         blocks: [
             {shape: "1x1", index: {row: 0, column: 7}},
             {shape: "1x1", index: {row: 0, column: 8}},
-            {shape: "1x1", index: {row: 5, column: 7}},
-            {shape: "1x1", index: {row: 5, column: 8}},
+            {shape: "1x1", index: {row: 1, column: 7}},
+            {shape: "1x1", index: {row: 1, column: 8}},
         ],
         machines: [
-            {shape: "1x2", index: {row: 1, column: 7}, type: "yellow", typeFixed: true},
+            {shape: "1x2", index: {row: 5, column: 7}, type: "yellow", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 7}, type: "sweet", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 8}, type: "red"},
             {shape: "1x1", index: {row: 3, column: 7}, type: "white", typeFixed: true},
             {shape: "1x1", index: {row: 3, column: 8}, type: "savoury", typeFixed: true},
             {shape: "1x2", index: {row: 4, column: 7}, type: "liquid"}
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_13),
+        hints: [new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT), new Dialog(IRON_CHAINS_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_13)
     }, {
         level: 14,
         recipe: "SCHOKOLADENBROT",
@@ -463,7 +513,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 1, column: 4}, type: "liquid", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 3}, type: "powdery", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 7}, type: "yellow", positionFixed: true},
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_14),
+        hints: [new Dialog(CHANGE_TYPE_HINT), new Dialog(IRON_CHAINS_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_14)
     }, {
         level: 15,
         recipe: "ENGELSAUGEN",
@@ -496,7 +549,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 4, column: 1}, type: "red", typeFixed: true},
             {shape: "1x1", index: {row: 5, column: 3}, type: "red", positionFixed: true},
             {shape: "1x1", index: {row: 5, column: 6}, type: "sweet", typeFixed: true},
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_15),
+        hints: [new Dialog(CHANGE_TYPE_HINT), new Dialog(QUADRUPLE_MACHINES_HINT), new Dialog(IRON_CHAINS_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_15)
     }, {
         level: 16,
         recipe: "SCHWARZWEISSKEKSE",
@@ -543,7 +599,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 0, column: 5}, type: "powdery", typeFixed: true},
             {shape: "1x1", index: {row: 0, column: 6}, type: "powdery", typeFixed: true},
             {shape: "2x1", index: {row: 0, column: 4}, type: "brown"},
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_16),
+        hints: [new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT), new Dialog(IRON_CHAINS_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_16)
     }, {
         level: 17,
         recipe: "LEBKUCHEN",
@@ -581,7 +640,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x2", index: {row: 4, column: 0}, type: "white", positionFixed: true},
             {shape: "1x1", index: {row: 4, column: 8}, type: "sour", positionFixed: true},
             {shape: "1x1", index: {row: 5, column: 3}, type: "solid", positionFixed: true}
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_17),
+        hints: [new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT), new Dialog(IRON_CHAINS_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_17)
     }, {
         level: 18,
         recipe: "PFEFFERNUESSE",
@@ -624,7 +686,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 0, column: 8}, type: "sticky", typeFixed: true},
             {shape: "1x1", index: {row: 1, column: 4}, type: "sweet"},
             {shape: "1x1", index: {row: 1, column: 5}, type: "white"}
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_18),
+        hints: [new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_18)
     }, {
         level: 19,
         recipe: "PANETTONE",
@@ -667,7 +732,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x2", index: {row: 4, column: 5}, type: "sweet", positionFixed: true, typeFixed: true},
             {shape: "1x1", index: {row: 5, column: 1}, type: "red", positionFixed: true},
             {shape: "1x1", index: {row: 5, column: 8}, type: "solid", positionFixed: true}
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_19),
+        hints: [new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT), new Dialog(TRIPLE_MACHINES_HINT), new Dialog(IRON_CHAINS_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_19)
     }, {
         level: 20,
         recipe: "BAERENTATZEN",
@@ -700,7 +768,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "2x1", index: {row: 4, column: 3}, type: "solid", positionFixed: true},
             {shape: "1x3", index: {row: 1, column: 5}, type: "yellow", typeFixed: true},
             {shape: "1x3", index: {row: 2, column: 5}, type: "sticky", typeFixed: true},
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_20),
+        hints: [new Dialog(BE_FAST_HINT), new Dialog(NON_TIMING_FIRST_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT), new Dialog(TRIPLE_MACHINES_HINT), new Dialog(IRON_CHAINS_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_20)
     }, {
         level: 21,
         recipe: "NUSSECKEN",
@@ -739,7 +810,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 4, column: 8}, type: "savoury", typeFixed: true},
             {shape: "1x1", index: {row: 5, column: 6}, type: "white", typeFixed: true},
             {shape: "1x2", index: {row: 5, column: 7}, type: "sour"}
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_21),
+        hints: [new Dialog(BE_FAST_HINT), new Dialog(NON_TIMING_FIRST_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_21)
     }, {
         level: 22,
         recipe: "DOMINOSTEINE",
@@ -772,7 +846,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x2", index: {row: 3, column: 2}, type: "white", positionFixed: true, typeFixed: true},
             {shape: "1x2", index: {row: 3, column: 5}, type: "sweet", positionFixed: true},
             {shape: "1x2", index: {row: 4, column: 3}, type: "sticky", positionFixed: true},
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_22),
+        hints: [new Dialog(BE_FAST_HINT), new Dialog(NON_TIMING_FIRST_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT), new Dialog(IRON_CHAINS_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_22)
     }, {
         level: 23,
         recipe: "CORNFLAKEWALNUSSKEKSE",
@@ -800,7 +877,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x2", index: {row: 2, column: 7}, type: "sour", positionFixed: true},
             {shape: "1x1", index: {row: 3, column: 0}, type: "solid", positionFixed: true},
             {shape: "1x1", index: {row: 5, column: 6}, type: "savoury", typeFixed: true},
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_23),
+        hints: [new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT), new Dialog(IRON_CHAINS_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_23)
     }, {
         level: 24,
         recipe: "STOLLEN",
@@ -841,7 +921,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 5, column: 0}},
             {shape: "1x1", index: {row: 5, column: 4}},
             {shape: "1x1", index: {row: 5, column: 7}}
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_24),
+        hints: [new Dialog(BE_FAST_HINT), new Dialog(NON_TIMING_FIRST_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT), new Dialog(IRON_CHAINS_HINT), new Dialog(QUADRUPLE_MACHINES_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_24)
     }
 ]
 

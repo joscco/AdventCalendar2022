@@ -82,7 +82,7 @@ export class RecipeBox extends Sprite {
 
         let title = new Text(name, {fontFamily: "Futurahandwritten", fontSize: 40, fill: 0xffffff})
         title.anchor.set(0.5)
-        title.position.set(0, -7)
+        title.position.set(0, -2)
         banner.addChild(title)
         this.addChild(banner)
     }
@@ -92,7 +92,7 @@ export class RecipeBox extends Sprite {
         sortedIngredients.forEach((id, index) => {
             let ingredientSlot = new RecipeBoxIngredient(getNameForID(id))
             this.ingredients.push(ingredientSlot)
-            ingredientSlot.position.set(-130, 150 + index * 45)
+            ingredientSlot.position.set(-140, 150 + index * 45)
             this.addChild(ingredientSlot)
         })
     }

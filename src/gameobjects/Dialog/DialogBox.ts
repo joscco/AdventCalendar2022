@@ -14,8 +14,8 @@ export class DialogBox extends Container {
     nextButton: ScalingButtonImpl
     cancelButton: ScalingButtonImpl
 
-    private currentSpeeches?: Speech[]
-    private currentSpeechIndex?: number;
+    private currentSpeeches: Speech[] = []
+    private currentSpeechIndex: number = 0;
 
     constructor() {
         super();
@@ -42,7 +42,7 @@ export class DialogBox extends Container {
 
         this.previousButton.position.set(-this.background.width / 2 + 20, 0)
         this.nextButton.position.set(this.background.width / 2 - 20, 0)
-        this.cancelButton.position.set(this.background.width / 2, - this.background.height / 2)
+        this.cancelButton.position.set(this.background.width / 2, -this.background.height / 2)
 
         this.background.addChild(this.spike, this.textObject)
         this.addChild(this.background, this.previousButton, this.nextButton, this.cancelButton)
@@ -86,33 +86,37 @@ export class DialogBox extends Container {
     }
 
     private async nextSpeech() {
-        let index = ++this.currentSpeechIndex!
-        await this.detype()
+        if (this.currentSpeeches && (this.currentSpeechIndex < this.currentSpeeches.length - 1)) {
+            let index = ++this.currentSpeechIndex!
+            await this.detype()
 
-        this.textObject.setFullText(this.currentSpeeches![index].text)
+            this.textObject.setFullText(this.currentSpeeches![index].text)
 
-        let isLastSpeech = index === this.currentSpeeches!.length - 1
-        if (isLastSpeech) {
-            this.nextButton.blendOut()
-        }
-        this.previousButton.blendIn()
+            let isLastSpeech = index === this.currentSpeeches!.length - 1
+            if (isLastSpeech) {
+                this.nextButton.blendOut()
+            }
+            this.previousButton.blendIn()
 
 
-        await this.type()
-        if (isLastSpeech && DIALOG_MANAGER.currentNode!.autoCloseDuration) {
-            DIALOG_MANAGER.startAutocloseTimer()
+            await this.type()
+            if (isLastSpeech && DIALOG_MANAGER.currentNode!.autoCloseDuration) {
+                DIALOG_MANAGER.startAutocloseTimer()
+            }
         }
     }
 
     private async previousSpeech() {
-        DIALOG_MANAGER.killAutocloseTimer()
-        let index = --this.currentSpeechIndex!
-        this.textObject.setFullText(this.currentSpeeches![index].text)
-        if (index === 0) {
-            this.previousButton.blendOut()
+        if (this.currentSpeeches && this.currentSpeechIndex > 0) {
+            DIALOG_MANAGER.killAutocloseTimer()
+            let index = --this.currentSpeechIndex!
+            this.textObject.setFullText(this.currentSpeeches[index].text)
+            if (index === 0) {
+                this.previousButton.blendOut()
+            }
+            this.nextButton.blendIn()
+            this.type()
         }
-        this.nextButton.blendIn()
-        this.type()
     }
 
     async type() {
