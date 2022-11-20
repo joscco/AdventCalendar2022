@@ -27,7 +27,7 @@ import {
     LAST_WORDS_DAY_5,
     LAST_WORDS_DAY_6,
     LAST_WORDS_DAY_7,
-    TWO_MACHINES_ON_ONE_BELT_HINT
+    TWO_MACHINES_ON_ONE_BELT_HINT, LAST_WORDS_DAY_8, DIALOG_DAY_8, DIALOG_DAY_9, LAST_WORDS_DAY_9
 } from "./DialogData";
 
 type LevelConfig = {
@@ -260,7 +260,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 2, column: 4}, type: "liquid"},
             {shape: "1x1", index: {row: 2, column: 5}, type: "liquid", positionFixed: true},
             {shape: "1x1", index: {row: 2, column: 6}, type: "sour", typeFixed: true}
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_8),
+        hints: [new Dialog(IRON_CHAINS_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DUAL_MACHINES_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_8)
     }, {
         level: 9,
         recipe: "VANILLEKIPFERL",
@@ -290,7 +293,10 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 3, column: 3}, type: "brown"},
             {shape: "1x1", index: {row: 3, column: 4}, type: "liquid"},
             {shape: "1x1", index: {row: 3, column: 6}, type: "powdery", typeFixed: true},
-        ]
+        ],
+        dialog: new Dialog(DIALOG_DAY_9),
+        hints: [new Dialog(IRON_CHAINS_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DUAL_MACHINES_HINT)],
+        lastWords: new Dialog(LAST_WORDS_DAY_9)
     }, {
         level: 10,
         recipe: "FLORENTINER",

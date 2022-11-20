@@ -231,42 +231,6 @@ export const DIALOG_DAY_5: DialogConfig = {
     ]
 }
 
-export const DUAL_MACHINES_HINT: DialogConfig = {
-    nodes: [
-        {
-            id: "hint1",
-            speeches: [{text: "Dual machines involve up to two conveyor belts and apply the same property changes."}],
-            successors: [],
-            durationUntilAutoClose: 5000,
-            skippable: true
-        }
-    ]
-}
-
-export const CHANGE_TYPE_HINT: DialogConfig = {
-    nodes: [
-        {
-            id: "hint1",
-            speeches: [{text: "Click on machines without a lock icon to change the linked property."}],
-            successors: [],
-            durationUntilAutoClose: 5000,
-            skippable: true
-        }
-    ]
-}
-
-export const TWO_MACHINES_ON_ONE_BELT_HINT: DialogConfig = {
-    nodes: [
-        {
-            id: "hint2",
-            speeches: [{text: "In this recipe there is a conveyor belt on which two machines must be placed."}],
-            successors: [],
-            durationUntilAutoClose: 5000,
-            skippable: true
-        }
-    ]
-}
-
 export const LAST_WORDS_DAY_5: DialogConfig = {
     nodes: [
         {
@@ -297,19 +261,6 @@ export const DIALOG_DAY_6: DialogConfig = {
                 {text: "I'll let you get to work then."}],
             durationUntilAutoClose: 2000,
             successors: []
-        }
-    ]
-}
-export const MOVE_ORDER_LACK_OF_SPACE_HINT: DialogConfig = {
-    nodes: [
-        {
-            id: "hint1",
-            speeches: [
-                {text: "In this recipe, the order in which the machines are moved is very important due to the lack of space."},
-                {text: "Think carefully about which machine you want to move first."}],
-            successors: [],
-            durationUntilAutoClose: 5000,
-            skippable: true
         }
     ]
 }
@@ -352,17 +303,6 @@ export const DIALOG_DAY_7: DialogConfig = {
         }
     ]
 }
-export const IRON_CHAINS_HINT: DialogConfig = {
-    nodes: [
-        {
-            id: "hint1",
-            speeches: [{text: "Gray machines with iron chains are bound to a specific position and cannot be moved."}],
-            successors: [],
-            durationUntilAutoClose: 5000,
-            skippable: true
-        }
-    ]
-}
 
 export const LAST_WORDS_DAY_7: DialogConfig = {
     nodes: [
@@ -381,6 +321,95 @@ export const LAST_WORDS_DAY_7: DialogConfig = {
             }
         }
     ]
+}
+
+export const DIALOG_DAY_8: DialogConfig = {
+    nodes: [
+        {
+            id: "start",
+            speeches: [
+                {text: "Welcome to Bernd's bakery! ..."},
+                {text: "Oh it's you! Then let's not waste any more time."},
+                {text: "Today Printen are on the agenda. Do not disappoint me *wink*."}],
+            durationUntilAutoClose: 2000,
+            successors: []
+        }
+    ]
+}
+
+export const LAST_WORDS_DAY_8: DialogConfig = {
+    nodes: [
+        {
+            id: "start",
+            speeches: [
+                {text: "You've really got it, I've rarely eaten such good Printen."}],
+            successors: [],
+            skippable: true,
+            durationUntilAutoClose: 2000,
+            onEndDo: async (level) => {
+                DIALOG_MANAGER.removeLevel()
+                await sleep(1000)
+                level.showWinScreen()
+            }
+        }
+    ]
+}
+
+export const DIALOG_DAY_9: DialogConfig = {
+    nodes: [
+        {
+            id: "start",
+            speeches: [
+                {text: "Tonight when I was walking Rudolph my... my dog, I noticed the beautiful half moon."},
+                {text: "It was immediately clear to me that today we will devote ourselves to beautiful, half-moon vanilla crescents."},
+                {text: "I keep my fingers crossed for you."}],
+            durationUntilAutoClose: 2000,
+            successors: []
+        }
+    ]
+}
+
+export const LAST_WORDS_DAY_9: DialogConfig = {
+    nodes: [
+        {
+            id: "start",
+            speeches: [
+                {text: "*Munch* Really delicious!"}],
+            successors: [],
+            skippable: true,
+            durationUntilAutoClose: 2000,
+            onEndDo: async (level) => {
+                DIALOG_MANAGER.removeLevel()
+                await sleep(1000)
+                level.showWinScreen()
+            }
+        }
+    ]
+}
+
+
+
+// Hints
+export const IRON_CHAINS_HINT: DialogConfig = makeHintConfig("Gray machines with iron chains are bound to a specific position and cannot be moved.")
+export const DUAL_MACHINES_HINT: DialogConfig = makeHintConfig("Dual machines involve up to two conveyor belts and apply the same property changes.")
+export const CHANGE_TYPE_HINT: DialogConfig = makeHintConfig("Click on machines without a lock icon to change the linked property.")
+export const TWO_MACHINES_ON_ONE_BELT_HINT: DialogConfig = makeHintConfig("In this recipe there is a conveyor belt on which two machines must be placed.")
+export const MOVE_ORDER_LACK_OF_SPACE_HINT: DialogConfig = makeHintConfig("In this recipe, the order in which the machines are moved is very important due to the lack of space.", "Think carefully about which machine you want to move first.")
+
+function makeHintConfig(...texts: string[]): DialogConfig {
+    let speeches: { text: string }[] = []
+    texts.forEach(str => speeches.push({text: str}))
+    return {
+        nodes: [
+            {
+                id: "hint",
+                speeches: speeches,
+                successors: [],
+                durationUntilAutoClose: 5000,
+                skippable: true
+            }
+        ]
+    }
 }
 
 
