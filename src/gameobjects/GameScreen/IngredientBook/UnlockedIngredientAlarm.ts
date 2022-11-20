@@ -1,5 +1,5 @@
 import {Sprite, Text} from "pixi.js";
-import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH} from "../../../index";
+import {ASSET_STORE, GAME_WIDTH} from "../../../index";
 import {IngredientID, INGREDIENTS} from "../ConveyorBelt/Ingredient";
 import {IngredientAlarmCancelButton} from "../../../UI/Buttons/IngredientAlarmCancelButton";
 
@@ -15,7 +15,7 @@ export class UnlockedIngredientAlarm extends Sprite {
     constructor() {
         super(ASSET_STORE.getTextureAsset("ingredientOverviewAlarm"));
         this.anchor.set(0.5)
-        this.position.set(GAME_WIDTH / 2, GAME_HEIGHT + 200)
+        this.position.set(GAME_WIDTH / 2,- 200)
 
         this.ingredientIcon = new Sprite()
         this.ingredientIcon.anchor.set(0.5)
@@ -31,7 +31,7 @@ export class UnlockedIngredientAlarm extends Sprite {
         this.ingredientName.position.set(150, 30)
 
         this.cancelButton = new IngredientAlarmCancelButton()
-        this.cancelButton.position.set(this.width / 2 - 5, - this.height / 2 + 5)
+        this.cancelButton.position.set(this.width / 2 - 5, -this.height / 2 + 5)
 
         this.addChild(this.ingredientIcon, this.ingredientName, this.title, this.cancelButton)
     }
@@ -41,17 +41,17 @@ export class UnlockedIngredientAlarm extends Sprite {
         await this.blendOut()
         this.ingredientName.text = INGREDIENTS[newIngredient].text
         this.ingredientIcon.texture = ASSET_STORE.getTextureAsset(newIngredient)
-        await gsap.to(this.position, {y: GAME_HEIGHT - 200, duration: 0.5, ease: Back.easeInOut})
+        await gsap.to(this.position, {y: 200, duration: 0.5, ease: Back.easeInOut})
         this.shown = true
 
-        setTimeout(() => this.blendOut(), 2000)
+        setTimeout(() => this.blendOut(), 1000)
     }
 
     async blendOut() {
         clearTimeout(this.blendOutTimeout)
         if (this.shown) {
             this.shown = false
-            await gsap.to(this.position, {y: GAME_HEIGHT + 200, duration: 0.5, ease: Back.easeInOut})
+            await gsap.to(this.position, {y: -200, duration: 0.5, ease: Back.easeInOut})
         }
     }
 

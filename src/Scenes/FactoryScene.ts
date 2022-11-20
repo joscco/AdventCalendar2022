@@ -67,6 +67,7 @@ export class FactoryScene extends Scene {
     private winScreen: WinScreen;
     private backToLevelScreenButton: BackToLevelScreenButton;
     private timeInterval?: NodeJS.Timer
+    private lastHintIndex;
 
     constructor(opts: FactorySceneOptions) {
         super();
@@ -77,6 +78,8 @@ export class FactoryScene extends Scene {
         this.dialog = opts.dialog
         this.hints = opts.hints ?? []
         this.lastWords = opts.lastWords
+
+        this.lastHintIndex = 0
 
         this.initBackground();
 
@@ -374,8 +377,8 @@ export class FactoryScene extends Scene {
 
     getHint(): Dialog | null {
         if (this.hints.length > 0) {
-            let randIndex = Math.floor(Math.random() * this.hints.length)
-            return this.hints[randIndex]
+            this.lastHintIndex = (this.lastHintIndex + 1) % this.hints.length
+            return this.hints[this.lastHintIndex]
         }
         return null
     }
