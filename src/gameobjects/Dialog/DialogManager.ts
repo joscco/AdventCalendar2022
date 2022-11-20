@@ -1,7 +1,7 @@
 import {Container} from "pixi.js";
 import {DialogBox} from "./DialogBox";
 import {Dialog, DialogNode} from "./Dialogs/DialogConfig";
-import {BERND, BERND_BUTTON, DIALOG_MANAGER, GAME_DATA} from "../../index";
+import {BERND, BERND_BUTTON, DIALOG_MANAGER, GAME_DATA, TOOLTIP_MANAGER} from "../../index";
 import {FactoryScene} from "../../Scenes/FactoryScene";
 
 export class DialogManager extends Container {
@@ -22,6 +22,7 @@ export class DialogManager extends Container {
     }
 
     async startDialog(dialog: Dialog) {
+        TOOLTIP_MANAGER.disableTooltips()
         this.currentNode = dialog.getStartDialog()
         this.currentNode.orSkippabilaty(this.currentLevel!.level < GAME_DATA.getUnlockedLevels())
         let startNode = this.currentNode
@@ -70,6 +71,7 @@ export class DialogManager extends Container {
         if (this.currentLevel) {
             BERND_BUTTON.blendIn()
         }
+        TOOLTIP_MANAGER.enableTooltips()
     }
 
     hideDialog() {

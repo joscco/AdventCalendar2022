@@ -121,7 +121,6 @@ export class FactoryScene extends Scene {
     }
 
     start() {
-        TOOLTIP_MANAGER.enableTooltips()
         this.winScreen.hide()
         INGREDIENT_COOKBOOK.showButton()
 

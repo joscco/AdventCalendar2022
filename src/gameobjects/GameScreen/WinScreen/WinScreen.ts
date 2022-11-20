@@ -1,5 +1,13 @@
 import {Container, Sprite, Text} from "pixi.js";
-import {ASSET_STORE, GAME_HEIGHT, GAME_WIDTH, NUMBER_OF_LEVELS, SCENE_MANAGER, SOUND_MANAGER} from "../../../index";
+import {
+    ASSET_STORE,
+    GAME_HEIGHT,
+    GAME_WIDTH,
+    NUMBER_OF_LEVELS,
+    SCENE_MANAGER,
+    SOUND_MANAGER,
+    TOOLTIP_MANAGER
+} from "../../../index";
 import {RecipeID, RECIPES} from "../RecipeBox";
 import {ScalingButton} from "../../../UI/Buttons/ScalingButton";
 import {Texture} from "@pixi/core";
@@ -94,6 +102,7 @@ export class WinScreen extends Container {
 
         this.bannerText = new Text(RECIPES[recipe].name, {fontFamily: "Futurahandwritten", fontSize: 70, fill: 0xffffff})
         this.bannerText.anchor.set(0.5)
+        this.bannerText.position.set(0, 5)
         this.banner.addChild(this.bannerText)
 
         this.levelScreenButton = new LevelScreenButton()
@@ -108,6 +117,9 @@ export class WinScreen extends Container {
     }
 
     async blendIn() {
+        // Those are nasty
+        TOOLTIP_MANAGER.disableTooltips()
+
         this.cookie.startBlinking()
         SOUND_MANAGER.playBlub()
         this.leftAngel.startAnimating()

@@ -565,7 +565,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             "  |B4|B5|E3|E2|G7|G6|G5|  ",
         startIngredients: new Map([
             ["A", "milk"],
-            ["B", "grinded_umeboshi"],
+            ["B", "lemon_sugar"],
             ["C", "nut_butter"],
             ["D", "sweetened_milk"],
             ["E", "nut_cream"],
@@ -591,7 +591,6 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
         machines: [
             {shape: "1x1", index: {row: 0, column: 1}, type: "sweet", positionFixed: true},
             {shape: "1x1", index: {row: 3, column: 0}, type: "sour", positionFixed: true},
-            {shape: "1x1", index: {row: 4, column: 1}, type: "yellow", positionFixed: true},
             {shape: "1x1", index: {row: 4, column: 4}, type: "white", typeFixed: true},
             {shape: "1x1", index: {row: 4, column: 7}, type: "solid", positionFixed: true},
             {shape: "1x1", index: {row: 2, column: 2}, type: "liquid", positionFixed: true},
