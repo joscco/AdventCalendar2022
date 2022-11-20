@@ -78,7 +78,7 @@ export const DIALOG_DAY_2: DialogConfig = {
                 {text: "Don't worry, that will come soon enough..."},
                 {text: "Bye the way:"},
                 {text: "Whenever you discover a new ingredient, an entry is added to your recipe book."},
-                {text: "You can always look there if you get stuck. Let's see, honey and cream should already be noted."},
+                {text: "You can always look there if you get stuck. Let's see, a few should already be noted..."},
                 {text: "Open the book at the bottom left."}],
             successors: [{on: "clicked_ingredient_cookbook", nextID: "clicked_cookbook"}],
         }, {

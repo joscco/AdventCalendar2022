@@ -34,7 +34,7 @@ export class TooltipManager extends Container{
             this.lastMousePosition = event.global
             this.currentBearer = bearer
             if (this.enabled && isEnabled()) {
-                await sleep(2000);
+                await sleep(1500);
                 // If we still hover the same thing, show the tooltip
                 if (this.enabled && this.currentBearer === bearer && !this.pointerDown) {
                     let bearer = this.currentBearer
