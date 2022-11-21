@@ -214,8 +214,8 @@ export const IngredientIDs = [
     "lemon_cream", "lemon_aroma", "lemon_powder", "old_lemon_candy",
     "lemon_pudding", "lemon_juice", "lemon_sugar", "candied_lemon_peel",
     "currant_pudding", "currant_juice", "currant_sugar", "currants",
-    "rotten_fruits", "rotten_fruit_juice", "grinded_umeboshi", "umeboshi",
-    "nut_cream", "nut_aroma", "grinded_nuts", "peeled_nuts",
+    "rotten_fruits", "rotten_fruit_juice", "ground_umeboshi", "umeboshi",
+    "nut_cream", "nut_aroma", "ground_nuts", "peeled_nuts",
     "egg", "eggnog", "egg_powder", "scrambled_egg",
     "wine_cream", "wine", "spices", "steak",
     "nut_butter", "rum_aroma", "cocoa", "nuts"] as const
@@ -280,12 +280,12 @@ export const INGREDIENTS: {[id in IngredientID]: IngredientData} = {
 
     "rotten_fruits": {text: "Rotten Fruits", taste: "sour", color: "brown", consistence: "sticky"},
     "rotten_fruit_juice": {text: "Rotten Fruit Juice", taste: "sour", color: "brown", consistence: "liquid"},
-    "grinded_umeboshi": {text: "Grinded Umeboshi", taste: "sour", color: "brown", consistence: "powdery"},
+    "ground_umeboshi": {text: "Ground Umeboshi", taste: "sour", color: "brown", consistence: "powdery"},
     "umeboshi": {text: "Umeboshi", taste: "sour", color: "brown", consistence: "solid"},
 
     "nut_cream": {text: "Nut Cream", taste: "savoury", color: "white", consistence: "sticky"},
     "nut_aroma": {text: "Nut Aroma", taste: "savoury", color: "white", consistence: "liquid"},
-    "grinded_nuts": {text: "Grinded Nuts", taste: "savoury", color: "white", consistence: "powdery"},
+    "ground_nuts": {text: "Ground Nuts", taste: "savoury", color: "white", consistence: "powdery"},
     "peeled_nuts": {text: "Peeled Nuts", taste: "savoury", color: "white", consistence: "solid"},
 
     "egg": {text: "Egg", taste: "savoury", color: "yellow", consistence: "sticky"},

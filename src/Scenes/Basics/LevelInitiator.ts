@@ -220,7 +220,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
         startIngredients: new Map([
             ["A", "wine_cream"],
             ["B", "sugar"],
-            ["C", "grinded_nuts"],
+            ["C", "ground_nuts"],
             ["D", "lemon_aroma"]
         ]),
         blocks: [
@@ -383,7 +383,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             ["A", "raisins"],
             ["B", "mud"],
             ["C", "lemon_pudding"],
-            ["D", "grinded_nuts"],
+            ["D", "ground_nuts"],
             ["E", "beet_pudding"],
             ["F", "lemon_powder"]
         ]),
@@ -529,9 +529,9 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             "B0|B1|F4|F3|F2|F1|  |  ",
         startIngredients: new Map([
             ["A", "rum_aroma"],
-            ["B", "grinded_nuts"],
+            ["B", "ground_nuts"],
             ["C", "nut_butter"],
-            ["D", "grinded_nuts"],
+            ["D", "ground_nuts"],
             ["E", "beet_pudding"],
             ["F", "vanilla_sugar"],
             ["G", "chocolate_pudding"]
