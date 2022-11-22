@@ -25,7 +25,7 @@ export const DIALOG_DAY_1: DialogConfig = {
                 {text: "Start and end fields are blocked for this purpose. So: What do we need for Santa's Milk?"},
                 {text: "Honey and Milk that is. The honey is already there and does not need to be changed."},
                 {text: "However, the cream belt seems to be wrong. Cream is \"neutral\", \"sticky\" and \"white\"."},
-                {text: "Fortunately, you already have a liquifiying machine on the grid."},
+                {text: "Fortunately, you already have a liquifying machine on the grid."},
                 {text: "If you drag it onto the cream conveyor belt, the cream will turn to liquid milk. Try it yourself!"}
             ],
             durationUntilAutoClose: 2000,
@@ -115,7 +115,7 @@ export const LAST_WORDS_DAY_2: DialogConfig = {
             id: "start",
             speeches: [
                 {text: "Ever thought about a career as a Christmas baker?"},
-                {text: "I'm going to treat myself with another one of flake nests."}],
+                {text: "I'm going to treat myself with another one of your Flake Nests."}],
             successors: [],
             skippable: true,
             durationUntilAutoClose: 2000,
@@ -133,9 +133,9 @@ export const DIALOG_DAY_3: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: "*Yawn* Sorry, I'm a bit tired today..."},
+                {text: "Yaaaaawn... Sorry, I'm a bit tired today..."},
                 {text: "That might be because I was busy wrapping gifts all night... Anyway."},
-                {text: "Glad you're back! Butter cookies are on the menu today. Real classics!"},
+                {text: "Glad you're back! Butter Cookies are on the menu today. Real classics!"},
                 {text: "See those machines? They're a little wider than the ones you've been using before."},
                 {text: "With these cuties, you can affect two conveyor belts at once."},
                 {text: "Remember, though, that they apply the same change on both conveyor belts."},
@@ -169,7 +169,7 @@ export const DIALOG_DAY_4: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: "Gosh, do I have a hangover... Who came up with mulled wine?"},
+                {text: "Gosh, do I have a hangover... Who came up with Mulled Wine?"},
                 {text: "I still feel tipsy... I guess my sleigh... err... car will remain unmoved today."},
                 {text: "By the by, I'd like to ask you to make me some rum truffles today."},
                 {text: "There is also something new: one of the machines is missing the lock symbol."},
@@ -256,7 +256,7 @@ export const DIALOG_DAY_6: DialogConfig = {
                 {text: "You know what I really feel like today?"},
                 {text: "Punch."},
                 {text: "I actually come from a very cold place...."},
-                {text: "After a long day, there was nothing better for me than a delicious cup of hot, steaming punch."},
+                {text: "After a long day, there was nothing better for me than a delicious cup of hot, steaming Punch."},
                 {text: "I'll let you get to work then."}],
             durationUntilAutoClose: 2000,
             successors: []
@@ -290,8 +290,8 @@ export const DIALOG_DAY_7: DialogConfig = {
                 {text: "Nice to see you again."},
                 {text: "Did you also see the star-filled sky last night?"},
                 {text: "Really good flying weather."},
-                {text: "Well, for planes, not for reindeer, they can't fly *hehe*."},
-                {text: "Inspired by this nightly sight, I want to ask you for cinnamon stars today."},
+                {text: "Well, for planes... not for reindeer... they can't fly..."},
+                {text: "Inspired by this nightly sight, I want to ask you for Cinnamon Stars today."},
                 {text: "This time there is a small change again:"},
                 {text: "Machines can be fixed in their position."},
                 {text: "Such machines are darker and tied to the conveyor belt with iron chains."},
@@ -360,8 +360,8 @@ export const DIALOG_DAY_9: DialogConfig = {
             id: "start",
             speeches: [
                 {text: "Tonight when I was walking Rudolph my... my dog, I noticed the beautiful half moon."},
-                {text: "It made clear to me that today we must devote ourselves to beautiful, half-moon vanilla crescents."},
-                {text: "I keep my fingers crossed for you."}],
+                {text: "It made clear to me that today we must devote ourselves to beautiful Vanilla Crescents."},
+                {text: "I'll keep my fingers crossed for you."}],
             durationUntilAutoClose: 2000,
             successors: []
         }
@@ -426,8 +426,8 @@ export const DIALOG_DAY_11: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: "I woke up this morning craving macarons. Why don't we make some today?"},
-                {text: "For you, this should be a cinch. Here's the recipe."}],
+                {text: "I woke up this morning craving Macarons. Why don't we make some today?"},
+                {text: "For you, this should be a piece of cake. Here's the recipe."}],
             durationUntilAutoClose: 2000,
             successors: []
         }
@@ -457,7 +457,7 @@ export const DIALOG_DAY_12: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: "You know what every baker's nightmare is? Spritz cookies. They are so... time consuming."},
+                {text: "You know what every baker's nightmare is? Spritz Biscuits. They are so... time consuming."},
                 {text: "How lucky I am to have you and be able to spend that time on more meaningful things."},
                 {text: "For example, my bag is in desperate need of mending. So my grocery bag... "},
                 {text: "We're not talking about a huge bag that has room for an infinite number of gifts... "},
@@ -493,8 +493,8 @@ export const DIALOG_DAY_13: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: "Quiz question: What does Bernd never get enough of at Christmas time?"},
-                {text: "Bingo, speculoos! I'm crazy about those. How about you make us some?"}],
+                {text: "Quiz question: What does Bernd never get enough of around Christmas time?"},
+                {text: "Bingo, Speculoos! I'm crazy for those. How about you make us some?"}],
             durationUntilAutoClose: 2000,
             successors: []
         }
@@ -524,10 +524,10 @@ export const DIALOG_DAY_14: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: "Good to see you! What do you think about chocolate bread?"},
+                {text: "Good to see you! What do you think of Chocolate Cake?"},
                 {text: "It's actually a funny name, isn't it? But it doesn't matter."},
                 {text: "What matters is the taste. And it's incomparable when you follow my recipe."},
-                {text: "On your mark... Get... Set... Go!"}],
+                {text: "On your marks... Get set... Go!"}],
             durationUntilAutoClose: 2000,
             successors: []
         }
@@ -591,7 +591,7 @@ export const DIALOG_DAY_16: DialogConfig = {
             id: "start",
             speeches: [
                 {text: "Black and white, dark and light, evil and good. Have you been naughty or nice this year?..."},
-                {text: "Never mind the question. Today you get to try your hand at Chess Cookies. Good luck!"}],
+                {text: "Never mind the question. Today you get to try your hand at making Chess Cookies. Good luck!"}],
             durationUntilAutoClose: 2000,
             successors: []
         }
@@ -622,7 +622,7 @@ export const DIALOG_DAY_17: DialogConfig = {
             id: "start",
             speeches: [
                 {text: "Greetings! You can be counted on! Let's see, what's on my list today? "},
-                {text: "Ah, gingerbread. You've probably noticed that you're up against more conveyor belts."},
+                {text: "Ah, Gingerbread. You've probably noticed that you're up against more conveyor belts."},
                 {text: "But don't worry, I'm sure you'll master this recipe too. Have fun!"}],
             durationUntilAutoClose: 2000,
             successors: []
@@ -654,7 +654,7 @@ export const DIALOG_DAY_18: DialogConfig = {
             id: "start",
             speeches: [
                 {text: "Day 18 already, how time flies!"},
-                {text: "Ruprecht my... my household help has asked me for pepper nuts."},
+                {text: "Ruprecht my... my household help has asked me for Pfeffernüsse."},
                 {text: "We will fulfill this wish today. Grab the ingredients and show me your skills!"}],
             durationUntilAutoClose: 2000,
             successors: []
@@ -751,7 +751,7 @@ export const DIALOG_DAY_21: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: "Glad to see you're still at it. Today we're making nut cookies."},
+                {text: "Glad to see you're still at it. Today we're making Nut Wedges."},
                 {text: "Uff - nine ingredients. But as I know you, that won't be an obstacle. Good luck!"}],
             durationUntilAutoClose: 2000,
             successors: []
@@ -785,7 +785,7 @@ export const DIALOG_DAY_22: DialogConfig = {
                 {text: "In a few days it will be Christmas! Do you have a fireplace? No? "},
                 {text: "If you ever buy one, make sure it's nice and roomy."},
                 {text: "... I'm thinking of the chimney sweeps. They don't have it easy in their job either."},
-                {text: "So, now for today's cookies: Cornflake Walnut Cookies. "},
+                {text: "So, now for today's cookies: Walnut Cookies. "},
                 {text: "I've already put the recipe in the bakery for you. Let's go!"}],
             durationUntilAutoClose: 2000,
             successors: []
@@ -816,7 +816,7 @@ export const DIALOG_DAY_23: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: "Not much left on our list. Today we take care of dominoes."},
+                {text: "Not much left on our list. Today we take care of Dominosteine."},
                 {text: "Not the easiest to make but worth it. I trust in your skills!"}],
             durationUntilAutoClose: 2000,
             successors: []
