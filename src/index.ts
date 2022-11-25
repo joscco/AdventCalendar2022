@@ -37,6 +37,8 @@ export var INGREDIENT_COOKBOOK: CookbookOverlay
 export var INGREDIENT_ALARM: UnlockedIngredientAlarm
 export var BERND: Bernd
 export var BERND_BUTTON: BerndButton
+export var SOUND_BUTTON: SoundButton
+export var MUSIC_BUTTON: MusicButton
 
 const main = async () => {
     // Init Main App
@@ -93,15 +95,15 @@ const main = async () => {
     TOOLTIP_MANAGER = new TooltipManager()
     App.stage.addChild(TOOLTIP_MANAGER)
 
-    let musicButton = new MusicButton()
-    musicButton.position.set(210, 125)
-    musicButton.zIndex = 110
-    App.stage.addChild(musicButton);
+    MUSIC_BUTTON = new MusicButton()
+    MUSIC_BUTTON.position.set(210, 125)
+    MUSIC_BUTTON.zIndex = 110
+    App.stage.addChild(MUSIC_BUTTON);
 
-    let soundButton = new SoundButton()
-    soundButton.position.set(325, 125)
-    soundButton.zIndex = 110
-    App.stage.addChild(soundButton);
+    SOUND_BUTTON = new SoundButton()
+    SOUND_BUTTON.position.set(325, 125)
+    SOUND_BUTTON.zIndex = 110
+    App.stage.addChild(SOUND_BUTTON);
 
     INGREDIENT_COOKBOOK = new CookbookOverlay()
     INGREDIENT_COOKBOOK.zIndex = 6

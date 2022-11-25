@@ -26,9 +26,10 @@ import {GridItem} from "../gameobjects/GameScreen/Grid/GridItem";
 import {WinScreen} from "../gameobjects/GameScreen/WinScreen/WinScreen";
 import {IngredientID} from "../gameobjects/GameScreen/ConveyorBelt/Ingredient"
 import {Grid} from "../gameobjects/GameScreen/Grid/Grid";
-import {Index2D, isRectangularArray} from "../General/Helpers";
+import {Index2D, isRectangularArray, Vector2D, VerticalDirection} from "../General/Helpers";
 import {Dialog} from "../gameobjects/Dialog/Dialogs/DialogConfig";
 import {BackToLevelScreenButton} from "../UI/Buttons/BackToLevelScreenButton";
+import {OutlineFilter} from "@pixi/filter-outline";
 
 export type FactorySceneOptions = {
     app: Application,
@@ -69,6 +70,10 @@ export class FactoryScene extends Scene {
     private timeInterval?: NodeJS.Timer
     private lastHintIndex;
 
+    // Tutorial
+    private slidingHand: Sprite;
+    private slidingHandTween?: gsap.core.Tween;
+
     constructor(opts: FactorySceneOptions) {
         super();
         this.app = opts.app;
@@ -80,6 +85,12 @@ export class FactoryScene extends Scene {
         this.lastWords = opts.lastWords
 
         this.lastHintIndex = 0
+        this.slidingHand = new Sprite(ASSET_STORE.getTextureAsset("dialog_pointer_hand"))
+        this.slidingHand.zIndex = 15
+        this.slidingHand.anchor.set(0.25, 0.1)
+        this.slidingHand.angle = 20
+        this.slidingHand.scale.set(0)
+        this.addChild(this.slidingHand)
 
         this.initBackground();
 
@@ -136,8 +147,9 @@ export class FactoryScene extends Scene {
             let layoutEntry = this.machineLayout[index];
             (item.content as Machine).setType(layoutEntry.type ?? "sweet")
             item.trySetToIndexInstantly(this.machineGrid, layoutEntry.index)
-            item.unlock()
+
         })
+        this.unblockMachines()
 
         this.belts.forEach(belt => belt.resetIngredients())
 
@@ -276,6 +288,9 @@ export class FactoryScene extends Scene {
 
             let index = machineLayoutEntry.index
             let gridItem = new GridItem(machine, machineGrid, index)
+            if (machineLayoutEntry.id) {
+                gridItem.setId(machineLayoutEntry.id)
+            }
 
             if (machineLayoutEntry.positionFixed) {
                 gridItem.positionLock()
@@ -319,13 +334,69 @@ export class FactoryScene extends Scene {
             if (this.lastWords) {
                 DIALOG_MANAGER.startDialog(this.lastWords)
             }
-            this.machineGridItems.forEach(item => item.tempLock())
+            this.blockMachines()
             BERND_BUTTON.blendOut()
             INGREDIENT_COOKBOOK.blendOutButton()
 
-            GAME_DATA.saveUnlockedLevel(Math.max(this.level + 1, GAME_DATA.getUnlockedLevels()))
+            GAME_DATA.saveUnlockedLevel(this.level + 1)
             clearInterval(this.timeInterval)
         }
+    }
+
+    blockMachines() {
+        this.machineGridItems.forEach(item => item.tempLock())
+    }
+
+    unblockMachines() {
+        this.machineGridItems.forEach(item => item.tempUnlock())
+    }
+
+    highlightMachines() {
+        this.machineGridItems.forEach(item => item.content.filters = [new OutlineFilter(10, 0xfd4343)])
+    }
+
+    unhighlightMachines() {
+        this.machineGridItems.forEach(item => item.content.filters = [])
+    }
+
+    unallowMoveDirection(direction: VerticalDirection) {
+        this.machineGridItems.forEach(item => item.unallowDirection(direction))
+    }
+
+    unlimitMoveDirections() {
+        this.machineGridItems.forEach(item => item.unlimitMovement())
+    }
+
+    async showSliding(fromIndex: Index2D, toIndex: Index2D) {
+        let fromPosition: Vector2D = this.machineGrid.getGlobalPositionForIndex(fromIndex)
+        this.slidingHand.position.set(fromPosition.x, fromPosition.y)
+
+        await gsap.to(this.slidingHand.scale, {x: 1, y: 1, duration: 0.3, ease: Back.easeOut})
+        let toPosition: Vector2D = this.machineGrid.getGlobalPositionForIndex(toIndex)
+        this.slidingHandTween = gsap.to(
+            this.slidingHand,
+            {x: toPosition.x, y: toPosition.y, duration: 2, ease: Quad.easeInOut, repeat: -1, repeatDelay: 0.5})
+    }
+
+    hideSliding() {
+        this.slidingHandTween?.kill()
+        gsap.to(this.slidingHand.scale, {x: 0, y: 0, duration: 0.3, ease: Back.easeIn})
+    }
+
+    highlightConveyorBelts() {
+        this.belts.forEach(belt => belt.filters = [new OutlineFilter(10, 0xfd4343, 0.2)])
+    }
+
+    unhighlightConveyorBelts() {
+        this.belts.forEach(belt => belt.filters = [])
+    }
+
+    highlightRecipeBox() {
+        this.recipeBox.filters = [new OutlineFilter(10, 0xfd4343)]
+    }
+
+    unhighlightRecipeBox() {
+        this.recipeBox.filters = []
     }
 
     showWinScreen() {
@@ -349,6 +420,7 @@ export class FactoryScene extends Scene {
                 beltData[beltLength - 1].index,
                 beltData.slice(1, beltLength - 1).map(data => data.index),
                 startIngredients?.get(beltKey) ?? "cream")
+            belt.setId(beltKey)
             this.addChild(belt)
             belts.push(belt)
         }
@@ -380,5 +452,20 @@ export class FactoryScene extends Scene {
             return this.hints[this.lastHintIndex]
         }
         return null
+    }
+
+
+    highlightBeltIngredients(id: string) {
+        this.belts.forEach(belt => {
+            if (belt.id && belt.id === id) {
+                belt.highlightTiles()
+            }
+        })
+    }
+
+    unhighlightBeltIngredients() {
+        this.belts.forEach(belt => {
+            belt.unhighlightTiles()
+        })
     }
 }

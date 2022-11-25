@@ -9,9 +9,11 @@ import {Container, Sprite, Texture} from "pixi.js";
 import {ASSET_STORE, GAME_DATA, TOOLTIP_MANAGER} from "../../../index";
 import {Cage, Machine} from "../Machinery/Machine";
 import {Index2D} from "../../../General/Helpers";
+import {OutlineFilter} from "@pixi/filter-outline";
 
 export class ConveyorBelt extends Container {
 
+    id?: string
     private startIngredient: IngredientID
     private beltGrid: Grid
     private machineGrid: Grid
@@ -181,5 +183,21 @@ export class ConveyorBelt extends Container {
 
         new GridItem(this.firstTileCage, this.machineGrid, firstTile.index)
         new GridItem(this.lastTileCage, this.machineGrid, lastTile.index)
+    }
+
+    setId(beltKey: string) {
+        this.id = beltKey
+    }
+
+    highlightTiles() {
+        this.tiles.forEach(tile => {
+            if (tile.ingredientRef) {
+                tile.ingredientRef.filters = [new OutlineFilter(10, 0xfd4343, 0.2)]
+            }
+        })
+    }
+
+    unhighlightTiles() {
+        this.tiles.forEach(tile => tile.ingredientRef!.filters = [])
     }
 }

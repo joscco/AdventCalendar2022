@@ -20,13 +20,23 @@ import {Grid} from "./Grid";
 import {DisplayObject} from "pixi.js";
 import gsap from "gsap";
 import {Machine} from "../Machinery/Machine";
-import {Index2D, indexAdd, quadVectorDistance, Vector2D, vectorAdd} from "../../../General/Helpers";
-import {SOUND_MANAGER} from "../../../index";
+import {
+    VerticalDirection,
+    Index2D,
+    indexAdd,
+    quadVectorDistance,
+    Vector2D,
+    vectorAdd,
+    getVerticalDirectionForIndices
+} from "../../../General/Helpers";
+import {EVENT_EMITTER, SOUND_MANAGER} from "../../../index";
 
 type MultiSlotArr = (GridSlot | null)[][]
 type GridAdaptingDisplayObject = DisplayObject
 
 export class GridItem {
+    id?: string
+
     // This is realized as a map since a gridItem could have different forms in different grids
     // (e.g. 1x1 in inventory and nxm in a "real" grid)
     gridSlotsMap: Map<Grid, MultiSlotArr> = new Map<Grid, MultiSlotArr>()
@@ -40,6 +50,7 @@ export class GridItem {
     typeLocked: boolean = false
 
     locked: boolean = false
+    unallowedDirections: VerticalDirection[] = []
     moving: boolean = false
 
     dragging: boolean = false
@@ -65,6 +76,13 @@ export class GridItem {
     canBeSetToIndexInGrid(grid?: Grid, index?: Index2D): boolean {
         if (!grid || !index) {
             return true;
+        }
+
+        if (this.currentIndex) {
+            let direction = getVerticalDirectionForIndices(this.currentIndex, index)
+            if (this.unallowedDirections.indexOf(direction) > -1) {
+                return false
+            }
         }
 
         return this.andThroughSlots(slot => {
@@ -107,6 +125,9 @@ export class GridItem {
             grid.set({row: index.row + slot.row, column: index.column + slot.column}, slot);
         }, grid)
         this.currentIndex = index
+        if (this.id) {
+            EVENT_EMITTER.emit(`moved_item_${this.id}_to_${index.row}_${index.column}`)
+        }
     }
 
     async trySetToIndex(grid: Grid, index: Index2D): Promise<boolean> {
@@ -167,8 +188,8 @@ export class GridItem {
         await gsap.to(this.content.position, {
             x: position.x,
             y: position.y,
-            duration: 0.15,
-            ease: Quad.easeOut
+            duration: 0.1,
+            ease: Sine.easeInOut
         })
     }
 
@@ -366,7 +387,7 @@ export class GridItem {
         this.content.zIndex = 1
     }
 
-    unlock() {
+    tempUnlock() {
         this.locked = false
     }
 
@@ -408,5 +429,18 @@ export class GridItem {
         if (this.content instanceof Machine) {
             this.content.renderAsPositionLocked()
         }
+    }
+
+    // An id for referencing
+    setId(id: string) {
+        this.id = id
+    }
+
+    unallowDirection(direction: VerticalDirection) {
+        this.unallowedDirections = [direction]
+    }
+
+    unlimitMovement() {
+        this.unallowedDirections = []
     }
 }

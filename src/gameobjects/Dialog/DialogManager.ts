@@ -25,24 +25,29 @@ export class DialogManager extends Container {
         TOOLTIP_MANAGER.disableTooltips()
         this.currentNode = dialog.getStartDialog()
         this.currentNode.orSkippabilaty(this.currentLevel!.level < GAME_DATA.getUnlockedLevels())
-        let startNode = this.currentNode
 
         await BERND.blendIn()
         // Starting first node
-        this.dialogBox.setSpeeches(startNode)
+        this.currentNode.start(this.currentLevel!)
+        this.dialogBox.setSpeeches(this.currentNode)
         await this.dialogBox.blendIn()
         await this.dialogBox.type()
 
-        if (startNode.speeches.length === 1 && startNode.autoCloseDuration) {
+        if (this.currentNode.speeches.length === 1 && this.currentNode.autoCloseDuration) {
             DIALOG_MANAGER.startAutocloseTimer()
         }
     }
 
     async advance(node: DialogNode) {
+        if (this.currentNode) {
+            this.currentNode.end(this.currentLevel!)
+        }
+
         this.currentNode = node
         this.currentNode.orSkippabilaty(this.currentLevel!.level < GAME_DATA.getUnlockedLevels())
 
         // starting node
+        this.currentNode.start(this.currentLevel!)
         await this.dialogBox.detype()
         this.dialogBox.setSpeeches(node)
         await this.dialogBox.type()
@@ -57,8 +62,8 @@ export class DialogManager extends Container {
     }
 
     async endDialog() {
-        if (this.currentNode && this.currentNode.onEndDo) {
-            this.currentNode.onEndDo(this.currentLevel!)
+        if (this.currentNode) {
+            this.currentNode.end(this.currentLevel!)
         }
 
         this.currentNode = undefined

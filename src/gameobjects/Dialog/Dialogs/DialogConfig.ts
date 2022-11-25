@@ -2,19 +2,29 @@ import {EmittableEvent} from "../../../General/EventEmitter";
 import {DIALOG_MANAGER, EVENT_EMITTER} from "../../../index";
 import {FactoryScene} from "../../../Scenes/FactoryScene";
 
-export type Speech = { text: string}
-
-export type DialogNodeConfig = {
-    skippable?: boolean;
-    id: string
-    speeches: Speech[]; // Skippable Texts
-    onEndDo?: (level: FactoryScene) => void,
-    successors: { on: EmittableEvent, nextID: string | null, do?: (event: EmittableEvent) => void}[] // Before next node is used, some action is required
-    durationUntilAutoClose?: number
-}
+export type DialogNodeSpeech = { text: string }
 
 export type DialogConfig = {
     nodes: DialogNodeConfig[];
+}
+
+export const END = -1
+
+export type NextNodeConfig = { on: EmittableEvent, nextNodeId: string | -1}
+
+export type DialogNodeConfig = {
+    id: string,
+    speeches: DialogNodeSpeech[],
+    nextNodes: NextNodeConfig[],
+
+    skippable?: boolean,
+    durationUntilAutoClose?: number,
+    continuationText?: string,
+
+    onStartDo?: (level: FactoryScene) => void,
+    onEndDo?: (level: FactoryScene) => void,
+    onLastSpeechDo?: (level: FactoryScene) => void,
+    onLastSpeechUndo?: (level: FactoryScene) => void,
 }
 
 export class Dialog {
@@ -27,11 +37,14 @@ export class Dialog {
         this.startNode = this.nodes[0]
     }
 
-    continueWith(id: string | null) {
+    continueWith(id: string | -1) {
+        if (id === -1) {
+            DIALOG_MANAGER.endDialog()
+            return
+        }
+
         if (id && this.getDialogForID(id)) {
             DIALOG_MANAGER.advance(this.getDialogForID(id)!)
-        } else {
-            DIALOG_MANAGER.endDialog()
         }
     }
 
@@ -47,50 +60,75 @@ export class Dialog {
 
 export class DialogNode {
     id: string
-    speeches: Speech[]
-    dialog: Dialog
-    successors: {on: EmittableEvent, onEventAction?: (event: EmittableEvent) => void; nextID: string | null}[]
-    private skippable: boolean
-    onEndDo?: (currentLevel: FactoryScene) => void
 
+    private onStartDo?: (currentLevel: FactoryScene) => void
+    private onEndDo?: (currentLevel: FactoryScene) => void
+    private onLastSpeechDo?: (currentLevel: FactoryScene) => void
+    private onLastSpeechUndo?: (currentLevel: FactoryScene) => void
+
+    speeches: DialogNodeSpeech[]
+    dialog: Dialog
+    nextNodes: NextNodeConfig[]
+
+    skippable: boolean
     autoCloseDuration?: number
+    continuationText?: string
 
     constructor(dialog: Dialog, config: DialogNodeConfig) {
         this.id = config.id
         this.speeches = config.speeches
         this.dialog = dialog
-        this.successors = config.successors
+        this.nextNodes = config.nextNodes
         this.skippable = config.skippable ?? false
         this.autoCloseDuration = config.durationUntilAutoClose
+        this.continuationText = config.continuationText
 
+        this.onStartDo = config.onStartDo
         this.onEndDo = config.onEndDo
+        this.onLastSpeechDo = config.onLastSpeechDo
+        this.onLastSpeechUndo = config.onLastSpeechUndo
     }
 
-    onEventResume(event: EmittableEvent, next: string | null, onEventAction?: (event: EmittableEvent) => void) {
-        this.successors.forEach(successor =>
+    start(level: FactoryScene) {
+        if (this.onStartDo) {
+            this.onStartDo(level)
+        }
+    }
+
+    end(level: FactoryScene) {
+        if (this.onEndDo) {
+            this.onEndDo(level)
+        }
+    }
+
+    onEventResume(event: EmittableEvent, next: string | -1, level: FactoryScene) {
+        this.nextNodes.forEach(successor =>
             EVENT_EMITTER.unsubscribe(successor.on))
 
-        if (onEventAction) {
-            onEventAction(event)
+        if (this.onLastSpeechUndo) {
+            this.onLastSpeechUndo(level)
         }
-
         this.dialog.continueWith(next)
     }
 
-    cancelLastSpeech() {
-        this.successors.forEach(successor =>
+    cancelLastSpeech(level: FactoryScene) {
+        this.nextNodes.forEach(successor =>
             EVENT_EMITTER.unsubscribe(successor.on))
+
+        if (this.onLastSpeechUndo) {
+            this.onLastSpeechUndo(level)
+        }
     }
 
-    isSkippable(): boolean {
-        return this.skippable
-    }
-
-    startLastSpeech() {
-        this.successors.forEach(successor =>
+    startLastSpeech(level: FactoryScene) {
+        this.nextNodes.forEach(successor =>
             EVENT_EMITTER.subscribe(
                 successor.on,
-                () => this.onEventResume(successor.on,  successor.nextID, successor.onEventAction)))
+                () => this.onEventResume(successor.on,  successor.nextNodeId, level)))
+
+        if (this.onLastSpeechDo) {
+            this.onLastSpeechDo(level)
+        }
     }
 
     orSkippabilaty(value: boolean) {

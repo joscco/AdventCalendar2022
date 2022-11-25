@@ -103,6 +103,8 @@ const TEXTURE_MANIFEST: { [key: string]: string } = {
     dialog_spike: "dialog/dialogSpike",
     dialog_next_button: "dialog/next",
     dialog_previous_button: "dialog/previous",
+    dialog_understood_button: "dialog/understoodButton",
+    dialog_pointer_hand: "dialog/pointerHand",
 
     // Belt Fields
     background: "gameScreen/background",

@@ -72,7 +72,7 @@ type LevelConfig = {
     level: number;
     recipe: RecipeID;
     conveyorBeltPattern: string;
-    machines: MachineDefinition[];
+    machineLayout: MachineDefinition[];
     blocks?: BlockDefinition[];
     startIngredients?: Map<string, IngredientID>;
     hasStepButton?: boolean,
@@ -91,7 +91,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             "A3|  |B3\n" +
             "B0|B1|B2",
         recipe: "SANTAMILK",
-        machines: [{shape: "1x1", index: {row: 1, column: 1}, type: "liquid", typeFixed: true}],
+        machineLayout: [{shape: "1x1", index: {row: 1, column: 1}, type: "liquid", typeFixed: true, id: "A"}],
         startIngredients: new Map([
             ["A", "honey"],
             ["B", "cream"]
@@ -115,7 +115,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
         blocks: [
             {shape: "1x1", index: {row: 2, column: 2}}
         ],
-        machines: [
+        machineLayout: [
             {shape: "1x1", index: {row: 1, column: 1}, type: "liquid", typeFixed: true},
             {shape: "1x1", index: {row: 1, column: 2}, type: "white", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 1}, type: "solid", typeFixed: true}
@@ -137,7 +137,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             ["C", "cream"],
             ["D", "nut_cream"]
         ]),
-        machines: [
+        machineLayout: [
             {shape: "1x2", index: {row: 1, column: 0}, type: "yellow", typeFixed: true},
             {shape: "1x2", index: {row: 2, column: 2}, type: "white", typeFixed: true},
         ],
@@ -165,7 +165,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 1, column: 3}},
             {shape: "1x1", index: {row: 3, column: 3}}
         ],
-        machines: [
+        machineLayout: [
             // Types should be fixed!
             {shape: "1x1", index: {row: 1, column: 2}, type: "sour"},
             {shape: "1x1", index: {row: 2, column: 1}, type: "yellow", typeFixed: true},
@@ -198,7 +198,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 2, column: 5}},
             {shape: "1x1", index: {row: 4, column: 3}}
         ],
-        machines: [
+        machineLayout: [
             // Types should be fixed!
             {shape: "1x1", index: {row: 1, column: 3}, type: "savoury", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 2}, type: "sticky", typeFixed: true},
@@ -237,7 +237,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 3, column: 4}},
             {shape: "1x1", index: {row: 3, column: 5}},
         ],
-        machines: [
+        machineLayout: [
             {shape: "1x1", index: {row: 1, column: 3}, type: "red", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 3}, type: "yellow", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 4}, type: "brown", typeFixed: true},
@@ -262,7 +262,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             ["D", "rum_aroma"],
             ["E", "nuts"]
         ]),
-        machines: [
+        machineLayout: [
             {shape: "1x1", index: {row: 4, column: 1}, type: "sticky", typeFixed: true},
             {shape: "1x1", index: {row: 4, column: 2}, type: "solid", positionFixed: true},
             {shape: "2x1", index: {row: 2, column: 1}, type: "red"},
@@ -291,7 +291,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 0, column: 3}},
             {shape: "1x1", index: {row: 4, column: 3}}
         ],
-        machines: [
+        machineLayout: [
             {shape: "1x2", index: {row: 2, column: 0}, type: "liquid"},
             {shape: "1x1", index: {row: 2, column: 2}, type: "yellow", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 3}, type: "sweet"},
@@ -324,7 +324,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 2, column: 5}},
             {shape: "1x1", index: {row: 3, column: 5}},
         ],
-        machines: [
+        machineLayout: [
             // Types should be fixed!
             {shape: "2x1", index: {row: 0, column: 2}, type: "brown", positionFixed: true},
             {shape: "1x1", index: {row: 1, column: 3}, type: "liquid"},
@@ -359,7 +359,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 2, column: 5}},
             {shape: "1x1", index: {row: 4, column: 5}},
         ],
-        machines: [
+        machineLayout: [
             // Types should be fixed!
             {shape: "2x2", index: {row: 0, column: 2}, type: "savoury"},
             {shape: "1x1", index: {row: 0, column: 1}, type: "white", typeFixed: true},
@@ -387,7 +387,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             ["E", "beet_pudding"],
             ["F", "lemon_powder"]
         ]),
-        machines: [
+        machineLayout: [
             // Types should be fixed!
             {shape: "1x2", index: {row: 0, column: 3}, type: "powdery", typeFixed: true},
             {shape: "1x2", index: {row: 1, column: 3}, type: "sour"},
@@ -429,7 +429,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 1, column: 7}},
             {shape: "1x1", index: {row: 1, column: 8}},
         ],
-        machines: [
+        machineLayout: [
             {shape: "1x3", index: {row: 0, column: 1}, type: "yellow", typeFixed: true},
             {shape: "1x1", index: {row: 0, column: 4}, type: "powdery", typeFixed: true},
             {shape: "1x2", index: {row: 0, column: 5}, type: "solid"},
@@ -464,7 +464,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 1, column: 7}},
             {shape: "1x1", index: {row: 1, column: 8}},
         ],
-        machines: [
+        machineLayout: [
             {shape: "1x2", index: {row: 5, column: 7}, type: "yellow", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 7}, type: "sweet", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 8}, type: "red"},
@@ -503,7 +503,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 2, column: 2}},
             {shape: "1x1", index: {row: 2, column: 4}},
         ],
-        machines: [
+        machineLayout: [
             {shape: "1x1", index: {row: 0, column: 1}, type: "powdery", typeFixed: true},
             {shape: "1x1", index: {row: 0, column: 2}, type: "red"},
             {shape: "1x1", index: {row: 0, column: 4}, type: "sweet", typeFixed: true},
@@ -542,7 +542,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 4, column: 0}},
             {shape: "1x1", index: {row: 5, column: 7}},
         ],
-        machines: [
+        machineLayout: [
             {shape: "2x2", index: {row: 0, column: 6}, type: "brown"},
             {shape: "1x1", index: {row: 0, column: 3}, type: "sour", positionFixed: true},
             {shape: "1x1", index: {row: 1, column: 1}, type: "savoury", positionFixed: true},
@@ -588,7 +588,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 5, column: 0}},
             {shape: "1x1", index: {row: 5, column: 8}},
         ],
-        machines: [
+        machineLayout: [
             {shape: "1x1", index: {row: 0, column: 1}, type: "sweet", positionFixed: true},
             {shape: "1x1", index: {row: 3, column: 0}, type: "sour", positionFixed: true},
             {shape: "1x1", index: {row: 4, column: 4}, type: "white", typeFixed: true},
@@ -630,7 +630,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 2, column: 6}},
             {shape: "1x1", index: {row: 3, column: 7}},
         ],
-        machines: [
+        machineLayout: [
             {shape: "1x1", index: {row: 0, column: 4}, type: "white", positionFixed: true},
             {shape: "1x1", index: {row: 0, column: 5}, type: "liquid", positionFixed: true},
             {shape: "1x2", index: {row: 1, column: 7}, type: "brown", positionFixed: true},
@@ -675,7 +675,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 4, column: 4}},
             {shape: "1x1", index: {row: 4, column: 5}}
         ],
-        machines: [
+        machineLayout: [
             {shape: "1x1", index: {row: 0, column: 1}, type: "red", typeFixed: true},
             {shape: "1x2", index: {row: 0, column: 2}, type: "neutral"},
             {shape: "1x1", index: {row: 0, column: 4}, type: "solid"},
@@ -723,7 +723,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 4, column: 0}},
             {shape: "1x1", index: {row: 5, column: 0}},
         ],
-        machines: [
+        machineLayout: [
             {shape: "1x1", index: {row: 0, column: 3}, type: "sweet", typeFixed: true},
             {shape: "3x1", index: {row: 0, column: 6}, type: "solid", positionFixed: true},
             {shape: "1x1", index: {row: 2, column: 3}, type: "sour", typeFixed: true},
@@ -762,7 +762,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 5, column: 5}},
             {shape: "1x1", index: {row: 5, column: 6}}
         ],
-        machines: [
+        machineLayout: [
             {shape: "1x1", index: {row: 1, column: 0}, type: "sweet", typeFixed: true},
             {shape: "2x1", index: {row: 4, column: 3}, type: "solid", positionFixed: true},
             {shape: "1x3", index: {row: 1, column: 5}, type: "yellow", typeFixed: true},
@@ -802,7 +802,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             {shape: "1x1", index: {row: 5, column: 2}},
             {shape: "1x1", index: {row: 5, column: 5}},
         ],
-        machines: [
+        machineLayout: [
             {shape: "1x2", index: {row: 2, column: 0}, type: "yellow", typeFixed: true},
             {shape: "1x1", index: {row: 4, column: 5}, type: "powdery", typeFixed: true},
             {shape: "1x2", index: {row: 4, column: 6}, type: "sticky", typeFixed: true},
@@ -834,7 +834,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             ["H", "brown_sugar"],
             ["I", "candied_lemon_peel"],
         ]),
-        machines: [
+        machineLayout: [
             {shape: "1x1", index: {row: 3, column: 0}, type: "liquid", positionFixed: true},
             {shape: "1x1", index: {row: 3, column: 8}, type: "sweet", positionFixed: true},
             {shape: "1x2", index: {row: 1, column: 0}, type: "sour", positionFixed: true},
@@ -870,7 +870,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             ["H", "lemon_aroma"],
             ["I", "rotten_fruit_juice"],
         ]),
-        machines: [
+        machineLayout: [
             {shape: "1x1", index: {row: 0, column: 1}, type: "neutral", typeFixed: true},
             {shape: "2x1", index: {row: 2, column: 3}, type: "sticky", typeFixed: true, positionFixed: true},
             {shape: "1x2", index: {row: 2, column: 7}, type: "sour", positionFixed: true},
@@ -902,7 +902,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
             ["I", "melted_chocolate"],
             ["J", "eggnog"],
         ]),
-        machines: [
+        machineLayout: [
             {shape: "1x1", index: {row: 0, column: 6}, type: "liquid", typeFixed: true},
             {shape: "1x1", index: {row: 1, column: 0}, type: "solid", typeFixed: true},
             {shape: "1x2", index: {row: 1, column: 6}, type: "powdery", typeFixed: true},
@@ -937,7 +937,7 @@ export class LevelInitiator {
                         level: config.level,
                         conveyorBeltPattern: config.conveyorBeltPattern,
                         recipe: config.recipe,
-                        machineLayout: config.machines,
+                        machineLayout: config.machineLayout,
                         blockLayout: config.blocks,
                         startIngredients: config.startIngredients,
                         hasStepButton: config.hasStepButton,

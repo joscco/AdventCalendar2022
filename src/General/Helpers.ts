@@ -9,6 +9,19 @@ export function sleep(durationInMS: number): Promise<any> {
 }
 
 // Math stuff
+
+export type VerticalDirection = "UP" | "DOWN" | "NONE"
+
+export function getVerticalDirectionForIndices(from: Index2D, to: Index2D): VerticalDirection {
+    let verticalDiff = to.row - from.row;
+    if (verticalDiff > 0) {
+        return "DOWN"
+    } else if(verticalDiff < 0) {
+        return "UP"
+    }
+    return "NONE"
+}
+
 export type Vector2D = {
     x: number,
     y: number

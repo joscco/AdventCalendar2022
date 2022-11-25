@@ -7,9 +7,9 @@ export class TextBox extends Container {
     TEXT_PADDING_HORIZONTAL: number = 130
     MAX_LETTERS: number = 200
 
-    LETTER_TYPE_DURATION = 0.2
-    LETTER_TYPE_OFFSET = 0.03
-    LETTER_DETYPE_DURATION = 0.2
+    LETTER_TYPE_DURATION = 0.15
+    LETTER_TYPE_OFFSET = 0.02
+    LETTER_DETYPE_DURATION = 0.1
     LETTER_DETYPE_OFFSET = 0.005
 
     private style: TextStyle

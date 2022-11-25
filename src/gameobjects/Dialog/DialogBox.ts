@@ -1,8 +1,9 @@
 import {Container, Sprite} from "pixi.js";
 import {ASSET_STORE, DIALOG_MANAGER, GAME_HEIGHT, GAME_WIDTH} from "../../index";
 import {ScalingButtonImpl} from "../../UI/Buttons/ScalingButton";
-import {DialogNode, Speech} from "./Dialogs/DialogConfig";
+import {DialogNode, DialogNodeSpeech} from "./Dialogs/DialogConfig";
 import {TextBox} from "./Dialogs/TextBox";
+import {UnderstoodButton} from "../../UI/Buttons/UnderstoodButton";
 
 export class DialogBox extends Container {
 
@@ -13,8 +14,9 @@ export class DialogBox extends Container {
     previousButton: ScalingButtonImpl
     nextButton: ScalingButtonImpl
     cancelButton: ScalingButtonImpl
+    understoodButton: UnderstoodButton
 
-    private currentSpeeches: Speech[] = []
+    private currentSpeeches: DialogNodeSpeech[] = []
     private currentSpeechIndex: number = 0;
 
     constructor() {
@@ -30,29 +32,32 @@ export class DialogBox extends Container {
         this.nextButton = new ScalingButtonImpl(ASSET_STORE.getTextureAsset("dialog_next_button"), () => this.nextSpeech())
         this.cancelButton = new ScalingButtonImpl(ASSET_STORE.getTextureAsset("dialog_cross"), () => {
             if (this.currentSpeechIndex === this.currentSpeeches.length - 1) {
-                DIALOG_MANAGER.currentNode!.cancelLastSpeech()
+                DIALOG_MANAGER.currentNode!.cancelLastSpeech(DIALOG_MANAGER.currentLevel!)
             }
             DIALOG_MANAGER.killAutocloseTimer()
             DIALOG_MANAGER.endDialog()
         })
+        this.understoodButton = new UnderstoodButton()
+
         this.hide()
 
         this.background.anchor.set(0.5)
 
         this.spike.anchor.set(0.5, 1)
-        this.spike.position.set(575, -75)
+        this.spike.position.set(575, -50)
         this.spike.angle = 20
 
         this.previousButton.position.set(-this.background.width / 2 + 20, 0)
         this.nextButton.position.set(this.background.width / 2 - 20, 0)
         this.cancelButton.position.set(this.background.width / 2, -this.background.height / 2)
+        this.understoodButton.position.set(this.background.width / 2, 0)
 
         this.background.addChild(this.spike, this.textObject)
-        this.addChild(this.background, this.previousButton, this.nextButton, this.cancelButton)
+        this.addChild(this.background, this.previousButton, this.nextButton, this.cancelButton, this.understoodButton)
     }
 
     async blendIn() {
-        await gsap.to(this.position, {y: GAME_HEIGHT - 200, duration: 0.5, ease: Back.easeInOut})
+        await gsap.to(this.position, {y: GAME_HEIGHT - 150, duration: 0.5, ease: Back.easeInOut})
     }
 
     async blendOut() {
@@ -78,14 +83,20 @@ export class DialogBox extends Container {
         this.previousButton.hide()
         this.nextButton.hide()
         this.cancelButton.hide()
+        this.understoodButton.hide()
+        this.understoodButton.setText(node.continuationText ?? "")
 
         if (this.currentSpeeches.length > 1) {
             this.nextButton.blendIn()
         } else {
-            node.startLastSpeech()
+            // Handle last Speech
+            node.startLastSpeech(DIALOG_MANAGER.currentLevel!)
+            if (node.continuationText) {
+                this.understoodButton.blendIn()
+            }
         }
 
-        if (node.isSkippable()) {
+        if (node.skippable) {
             this.cancelButton.blendIn()
         }
     }
@@ -100,10 +111,12 @@ export class DialogBox extends Container {
             let isLastSpeech = index === this.currentSpeeches!.length - 1
             if (isLastSpeech) {
                 this.nextButton.blendOut()
-                DIALOG_MANAGER.currentNode!.startLastSpeech()
+                DIALOG_MANAGER.currentNode!.startLastSpeech(DIALOG_MANAGER.currentLevel!)
+                if (DIALOG_MANAGER.currentNode!.continuationText) {
+                    this.understoodButton.blendIn()
+                }
             }
             this.previousButton.blendIn()
-
 
             await this.type()
 
@@ -116,7 +129,8 @@ export class DialogBox extends Container {
     private async previousSpeech() {
         if (this.currentSpeeches && this.currentSpeechIndex > 0) {
             if (this.currentSpeechIndex === this.currentSpeeches.length - 1) {
-                DIALOG_MANAGER.currentNode!.cancelLastSpeech()
+                DIALOG_MANAGER.currentNode!.cancelLastSpeech(DIALOG_MANAGER.currentLevel!)
+                this.understoodButton.blendOut()
             }
             DIALOG_MANAGER.killAutocloseTimer()
             let index = --this.currentSpeechIndex!

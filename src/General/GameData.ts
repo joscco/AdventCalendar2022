@@ -1,42 +1,55 @@
 import {INGREDIENT_ALARM, INGREDIENT_COOKBOOK, LEVEL_SCREEN} from "../index";
 import {IngredientID} from "../gameobjects/GameScreen/ConveyorBelt/Ingredient";
 
+export type GameState = {
+    unlockedLevel: number,
+    unlockedIngredients: IngredientID[]
+}
+
+const INITIAL_GAMESTATE: GameState = {unlockedLevel: 1, unlockedIngredients: ["cream"]}
+
 export class GameData {
     private GAME_STATE_KEY: string = "berndsBakeryGame"
-
-    private initialGameState: GAME_STATE = { unlockedLevel: 1, unlockedIngredients: ["cream"] }
-
-    private currentState: GAME_STATE
+    private currentState: GameState
 
     constructor() {
         this.currentState = this.loadGame()
     }
 
+    private unite(state1: GameState, state2: GameState): GameState {
+        return {
+            unlockedLevel: Math.max(state1.unlockedLevel, state2.unlockedLevel),
+            unlockedIngredients: [...new Set([...state1.unlockedIngredients, ...state2.unlockedIngredients])]
+        }
+    }
+
     saveUnlockedLevel(unlockedLevel: number): void {
-        this.saveGame(unlockedLevel, this.currentState.unlockedIngredients)
-        // Update everything
+        this.currentState.unlockedLevel = unlockedLevel
+        this.saveGame(this.currentState)
+
+        // Update Game
         LEVEL_SCREEN.updateLevelButtons()
     }
 
-    // Todo: Hübscher Machen
+    private addNewIngredient(newIngredient: IngredientID) {
+        this.currentState.unlockedIngredients.push(newIngredient);
+    }
+
     saveNewUnlockedIngredient(newIngredient: IngredientID) {
         if (this.currentState.unlockedIngredients.indexOf(newIngredient) === -1) {
-            this.currentState.unlockedIngredients.push(newIngredient);
-            this.saveGame(this.currentState.unlockedLevel, this.currentState.unlockedIngredients)
+            this.addNewIngredient(newIngredient)
+            this.saveGame(this.currentState)
 
+            // Update Game
             INGREDIENT_COOKBOOK.updateEntries(this.currentState.unlockedIngredients)
             INGREDIENT_ALARM.blendIn(newIngredient)
         }
     }
 
-    private saveGame(unlockedLevel: number, unlockedIngredients: IngredientID[]): void {
-        let gameState: GAME_STATE = {
-            unlockedLevel: unlockedLevel,
-            unlockedIngredients: unlockedIngredients
-        }
-
-        localStorage.setItem(this.GAME_STATE_KEY, JSON.stringify(gameState))
-        this.currentState = gameState
+    private saveGame(gameState: GameState): void {
+        let newState = this.unite(gameState, this.loadGame())
+        localStorage.setItem(this.GAME_STATE_KEY, JSON.stringify(newState))
+        this.currentState = newState
     }
 
     getUnlockedLevels(): number {
@@ -47,32 +60,28 @@ export class GameData {
         return this.currentState.unlockedIngredients;
     }
 
-    private loadGame(): GAME_STATE {
+    private loadGame(): GameState {
         let lastGameStateRaw = localStorage.getItem(this.GAME_STATE_KEY)
         if (!lastGameStateRaw) {
             // No stored game state found, return to initial one
-            return this.initialGameState
+            return INITIAL_GAMESTATE
         }
 
         try {
             let parsedGameState = JSON.parse(lastGameStateRaw)
             if (parsedGameState && this.isGameState(parsedGameState)) {
                 // Game State found and parsed
-                return parsedGameState as GAME_STATE
+                return parsedGameState as GameState
             }
         } catch (err) {
         }
 
         // Game State was found but could not be parsed
-        return this.initialGameState
+        return INITIAL_GAMESTATE
     }
 
-    private isGameState(state: any): state is GAME_STATE {
-        return (state as GAME_STATE).unlockedLevel !== undefined && (state as GAME_STATE).unlockedIngredients !== undefined;
+    private isGameState(state: any): state is GameState {
+        return (state as GameState).unlockedLevel !== undefined
+            && (state as GameState).unlockedIngredients !== undefined;
     }
-}
-
-export type GAME_STATE = {
-    unlockedLevel: number,
-    unlockedIngredients: IngredientID[]
 }

@@ -1,6 +1,7 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "pixi.js";
 import {ASSET_STORE, SOUND_MANAGER} from "../../index";
+import {OutlineFilter} from "@pixi/filter-outline";
 
 export class MusicButton extends ScalingButton {
 
@@ -30,5 +31,13 @@ export class MusicButton extends ScalingButton {
 
     scaleDown() {
         this.scaleUpTo(1, 0.3)
+    }
+
+    highlight() {
+        this.filters = [new OutlineFilter(10, 0xfd4343, 0.2)]
+    }
+
+    unhighlight() {
+        this.filters = []
     }
 }
