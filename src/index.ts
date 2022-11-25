@@ -19,8 +19,6 @@ import {BerndButton} from "./UI/Buttons/BerndButton";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
-export const CANVAS_WIDTH: number = 960;
-export const CANVAS_HEIGHT: number = 540;
 export const NUMBER_OF_LEVELS: number = 24;
 
 export var App: Application;

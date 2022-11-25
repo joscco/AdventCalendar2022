@@ -35,7 +35,7 @@ export class CookbookEntry extends Container {
         this.id = id
         let ingredientData = INGREDIENTS[id]
 
-        this.ingredientIcon = new CenteredSprite(ASSET_STORE.getTextureAsset(("small_" + id)))
+        this.ingredientIcon = new CenteredSprite(ASSET_STORE.getTextureAsset(id))
         this.ingredientIcon.position.set(-450, 0)
 
         this.ingredientName = new Text(ingredientData.text, textStyle)

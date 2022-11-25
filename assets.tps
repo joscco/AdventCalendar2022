@@ -212,9 +212,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>25,44,50,89</rect>
+                <rect>25,56,51,112</rect>
                 <key>scale9Paddings</key>
-                <rect>25,44,50,89</rect>
+                <rect>25,56,51,112</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -258,9 +258,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>95,31,191,63</rect>
+                <rect>55,31,109,63</rect>
                 <key>scale9Paddings</key>
-                <rect>95,31,191,63</rect>
+                <rect>55,31,109,63</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -511,7 +511,6 @@
                 <false/>
             </struct>
             <key type="filename">assets/gameScreen/blocks/3x1_block.png</key>
-            <key type="filename">assets/gameScreen/machines/3x1_big.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -542,7 +541,6 @@
                 <false/>
             </struct>
             <key type="filename">assets/gameScreen/blocks/3x3_block.png</key>
-            <key type="filename">assets/gameScreen/machines/3x3_big.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -558,37 +556,8 @@
                 <false/>
             </struct>
             <key type="filename">assets/gameScreen/buttons/backButton.png</key>
-            <key type="filename">assets/gameScreen/ingredients/small/sweetened_cream.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>30,33,59,66</rect>
-                <key>scale9Paddings</key>
-                <rect>30,33,59,66</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">assets/gameScreen/buttons/musicButton.png</key>
             <key type="filename">assets/gameScreen/buttons/noMusicButton.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>37,38,75,76</rect>
-                <key>scale9Paddings</key>
-                <rect>37,38,75,76</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">assets/gameScreen/buttons/noSoundButton.png</key>
             <key type="filename">assets/gameScreen/buttons/soundButton.png</key>
             <struct type="IndividualSpriteSettings">
@@ -599,9 +568,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>37,35,75,69</rect>
+                <rect>25,31,51,61</rect>
                 <key>scale9Paddings</key>
-                <rect>37,35,75,69</rect>
+                <rect>25,31,51,61</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -840,9 +809,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>34,15,68,29</rect>
+                <rect>26,8,51,15</rect>
                 <key>scale9Paddings</key>
-                <rect>34,15,68,29</rect>
+                <rect>26,8,51,15</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -1266,7 +1235,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/beet.png</key>
+            <key type="filename">assets/gameScreen/ingredients/beet.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1275,14 +1244,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>98,94,197,187</rect>
+                <rect>27,26,53,51</rect>
                 <key>scale9Paddings</key>
-                <rect>98,94,197,187</rect>
+                <rect>27,26,53,51</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/beet_flour.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/flour.png</key>
+            <key type="filename">assets/gameScreen/ingredients/beet_flour.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1291,21 +1259,21 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>132,110,264,219</rect>
+                <rect>30,27,59,53</rect>
                 <key>scale9Paddings</key>
-                <rect>132,110,264,219</rect>
+                <rect>30,27,59,53</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/beet_juice.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/currant_juice.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/expired_milk.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/lemon_juice.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/milk.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/rotten_fruit_juice.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/swamp_water.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/sweetened_milk.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/vanilla_milk.png</key>
+            <key type="filename">assets/gameScreen/ingredients/beet_juice.png</key>
+            <key type="filename">assets/gameScreen/ingredients/currant_juice.png</key>
+            <key type="filename">assets/gameScreen/ingredients/expired_milk.png</key>
+            <key type="filename">assets/gameScreen/ingredients/lemon_juice.png</key>
+            <key type="filename">assets/gameScreen/ingredients/milk.png</key>
+            <key type="filename">assets/gameScreen/ingredients/rotten_fruit_juice.png</key>
+            <key type="filename">assets/gameScreen/ingredients/swamp_water.png</key>
+            <key type="filename">assets/gameScreen/ingredients/sweetened_milk.png</key>
+            <key type="filename">assets/gameScreen/ingredients/vanilla_milk.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1314,13 +1282,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>122,109,243,219</rect>
+                <rect>33,27,65,53</rect>
                 <key>scale9Paddings</key>
-                <rect>122,109,243,219</rect>
+                <rect>33,27,65,53</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/beet_pudding.png</key>
+            <key type="filename">assets/gameScreen/ingredients/beet_pudding.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1329,13 +1297,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>141,145,282,291</rect>
+                <rect>29,34,57,69</rect>
                 <key>scale9Paddings</key>
-                <rect>141,145,282,291</rect>
+                <rect>29,34,57,69</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/boiled_egg.png</key>
+            <key type="filename">assets/gameScreen/ingredients/boiled_egg.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1344,13 +1312,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>88,103,176,205</rect>
+                <rect>19,23,38,47</rect>
                 <key>scale9Paddings</key>
-                <rect>88,103,176,205</rect>
+                <rect>19,23,38,47</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/brown_sugar.png</key>
+            <key type="filename">assets/gameScreen/ingredients/brown_sugar.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1359,13 +1327,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>135,139,269,278</rect>
+                <rect>34,29,69,59</rect>
                 <key>scale9Paddings</key>
-                <rect>135,139,269,278</rect>
+                <rect>34,29,69,59</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/butter.png</key>
+            <key type="filename">assets/gameScreen/ingredients/butter.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1374,13 +1342,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>116,110,232,221</rect>
+                <rect>30,30,59,60</rect>
                 <key>scale9Paddings</key>
-                <rect>116,110,232,221</rect>
+                <rect>30,30,59,60</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/candied_lemon_peel.png</key>
+            <key type="filename">assets/gameScreen/ingredients/candied_lemon_peel.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1389,13 +1357,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>118,100,235,199</rect>
+                <rect>34,26,68,52</rect>
                 <key>scale9Paddings</key>
-                <rect>118,100,235,199</rect>
+                <rect>34,26,68,52</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/cherry.png</key>
+            <key type="filename">assets/gameScreen/ingredients/cherry.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1404,13 +1372,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>116,127,231,253</rect>
+                <rect>29,28,57,56</rect>
                 <key>scale9Paddings</key>
-                <rect>116,127,231,253</rect>
+                <rect>29,28,57,56</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/cherry_jam.png</key>
+            <key type="filename">assets/gameScreen/ingredients/cherry_jam.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1419,13 +1387,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>116,123,232,247</rect>
+                <rect>31,33,61,65</rect>
                 <key>scale9Paddings</key>
-                <rect>116,123,232,247</rect>
+                <rect>31,33,61,65</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/cherry_sauce.png</key>
+            <key type="filename">assets/gameScreen/ingredients/cherry_sauce.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1434,13 +1402,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>84,104,168,208</rect>
+                <rect>31,29,61,57</rect>
                 <key>scale9Paddings</key>
-                <rect>84,104,168,208</rect>
+                <rect>31,29,61,57</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/cherry_sugar.png</key>
+            <key type="filename">assets/gameScreen/ingredients/cherry_sugar.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1449,13 +1417,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>136,116,271,231</rect>
+                <rect>31,28,63,55</rect>
                 <key>scale9Paddings</key>
-                <rect>136,116,271,231</rect>
+                <rect>31,28,63,55</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/chocolate.png</key>
+            <key type="filename">assets/gameScreen/ingredients/chocolate.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1464,13 +1432,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>53,88,106,175</rect>
+                <rect>21,27,42,54</rect>
                 <key>scale9Paddings</key>
-                <rect>53,88,106,175</rect>
+                <rect>21,27,42,54</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/chocolate_pudding.png</key>
+            <key type="filename">assets/gameScreen/ingredients/chocolate_pudding.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1479,13 +1447,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>141,127,282,254</rect>
+                <rect>29,32,57,64</rect>
                 <key>scale9Paddings</key>
-                <rect>141,127,282,254</rect>
+                <rect>29,32,57,64</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/cocoa.png</key>
+            <key type="filename">assets/gameScreen/ingredients/cocoa.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1494,13 +1462,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>131,119,261,237</rect>
+                <rect>34,25,69,51</rect>
                 <key>scale9Paddings</key>
-                <rect>131,119,261,237</rect>
+                <rect>34,25,69,51</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/cornflakes.png</key>
+            <key type="filename">assets/gameScreen/ingredients/cornflakes.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1509,13 +1477,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>137,136,273,271</rect>
+                <rect>32,33,63,66</rect>
                 <key>scale9Paddings</key>
-                <rect>137,136,273,271</rect>
+                <rect>32,33,63,66</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/cornflour.png</key>
+            <key type="filename">assets/gameScreen/ingredients/cornflour.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1524,13 +1492,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>131,110,261,219</rect>
+                <rect>33,28,65,56</rect>
                 <key>scale9Paddings</key>
-                <rect>131,110,261,219</rect>
+                <rect>33,28,65,56</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/cream.png</key>
+            <key type="filename">assets/gameScreen/ingredients/cream.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1539,13 +1507,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>116,99,232,199</rect>
+                <rect>26,28,52,56</rect>
                 <key>scale9Paddings</key>
-                <rect>116,99,232,199</rect>
+                <rect>26,28,52,56</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/currant.png</key>
+            <key type="filename">assets/gameScreen/ingredients/currant.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1554,13 +1522,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>103,90,206,179</rect>
+                <rect>27,31,54,61</rect>
                 <key>scale9Paddings</key>
-                <rect>103,90,206,179</rect>
+                <rect>27,31,54,61</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/currant_pudding.png</key>
+            <key type="filename">assets/gameScreen/ingredients/currant_pudding.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1569,13 +1537,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>141,142,282,284</rect>
+                <rect>29,33,57,67</rect>
                 <key>scale9Paddings</key>
-                <rect>141,142,282,284</rect>
+                <rect>29,33,57,67</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/currant_sugar.png</key>
+            <key type="filename">assets/gameScreen/ingredients/currant_sugar.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1584,13 +1552,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>139,112,279,223</rect>
+                <rect>29,25,58,50</rect>
                 <key>scale9Paddings</key>
-                <rect>139,112,279,223</rect>
+                <rect>29,25,58,50</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/dirt.png</key>
+            <key type="filename">assets/gameScreen/ingredients/dirt.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1599,13 +1567,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>161,98,322,196</rect>
+                <rect>36,28,71,56</rect>
                 <key>scale9Paddings</key>
-                <rect>161,98,322,196</rect>
+                <rect>36,28,71,56</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/dry_dirt.png</key>
+            <key type="filename">assets/gameScreen/ingredients/dry_dirt.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1614,13 +1582,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>131,112,261,223</rect>
+                <rect>33,26,67,51</rect>
                 <key>scale9Paddings</key>
-                <rect>131,112,261,223</rect>
+                <rect>33,26,67,51</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/egg.png</key>
+            <key type="filename">assets/gameScreen/ingredients/egg.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1629,13 +1597,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>120,62,239,124</rect>
+                <rect>29,17,59,35</rect>
                 <key>scale9Paddings</key>
-                <rect>120,62,239,124</rect>
+                <rect>29,17,59,35</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/egg_powder.png</key>
+            <key type="filename">assets/gameScreen/ingredients/egg_powder.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1644,13 +1612,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>132,111,263,221</rect>
+                <rect>29,26,58,51</rect>
                 <key>scale9Paddings</key>
-                <rect>132,111,263,221</rect>
+                <rect>29,26,58,51</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/eggnog.png</key>
+            <key type="filename">assets/gameScreen/ingredients/eggnog.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1659,13 +1627,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>139,109,277,219</rect>
+                <rect>22,31,44,61</rect>
                 <key>scale9Paddings</key>
-                <rect>139,109,277,219</rect>
+                <rect>22,31,44,61</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/grinded_nuts.png</key>
+            <key type="filename">assets/gameScreen/ingredients/flour.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1674,13 +1642,15 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>131,120,261,241</rect>
+                <rect>35,31,69,63</rect>
                 <key>scale9Paddings</key>
-                <rect>131,120,261,241</rect>
+                <rect>35,31,69,63</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/grinded_umeboshi.png</key>
+            <key type="filename">assets/gameScreen/ingredients/grinded_nuts.png</key>
+            <key type="filename">assets/gameScreen/ingredients/lemon_powder.png</key>
+            <key type="filename">assets/gameScreen/ingredients/lemon_sugar.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1689,13 +1659,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>132,98,265,197</rect>
+                <rect>29,25,58,51</rect>
                 <key>scale9Paddings</key>
-                <rect>132,98,265,197</rect>
+                <rect>29,25,58,51</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/honey.png</key>
+            <key type="filename">assets/gameScreen/ingredients/grinded_umeboshi.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1704,13 +1674,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>116,93,232,185</rect>
+                <rect>31,25,61,51</rect>
                 <key>scale9Paddings</key>
-                <rect>116,93,232,185</rect>
+                <rect>31,25,61,51</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/honeycomb.png</key>
+            <key type="filename">assets/gameScreen/ingredients/honey.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1719,13 +1689,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>109,110,218,220</rect>
+                <rect>28,28,55,55</rect>
                 <key>scale9Paddings</key>
-                <rect>109,110,218,220</rect>
+                <rect>28,28,55,55</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/lemon_aroma.png</key>
+            <key type="filename">assets/gameScreen/ingredients/honeycomb.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1734,14 +1704,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>89,104,178,208</rect>
+                <rect>26,27,53,55</rect>
                 <key>scale9Paddings</key>
-                <rect>89,104,178,208</rect>
+                <rect>26,27,53,55</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/lemon_cream.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/mud.png</key>
+            <key type="filename">assets/gameScreen/ingredients/lemon_aroma.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1750,14 +1719,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>116,117,232,233</rect>
+                <rect>29,27,59,55</rect>
                 <key>scale9Paddings</key>
-                <rect>116,117,232,233</rect>
+                <rect>29,27,59,55</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/lemon_powder.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/lemon_sugar.png</key>
+            <key type="filename">assets/gameScreen/ingredients/lemon_cream.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1766,13 +1734,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>134,101,267,203</rect>
+                <rect>30,29,60,58</rect>
                 <key>scale9Paddings</key>
-                <rect>134,101,267,203</rect>
+                <rect>30,29,60,58</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/lemon_pudding.png</key>
+            <key type="filename">assets/gameScreen/ingredients/lemon_pudding.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1781,13 +1749,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>141,138,282,277</rect>
+                <rect>29,30,57,61</rect>
                 <key>scale9Paddings</key>
-                <rect>141,138,282,277</rect>
+                <rect>29,30,57,61</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/marzipan.png</key>
+            <key type="filename">assets/gameScreen/ingredients/marzipan.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1796,14 +1764,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>122,125,244,249</rect>
+                <rect>32,24,63,48</rect>
                 <key>scale9Paddings</key>
-                <rect>122,125,244,249</rect>
+                <rect>32,24,63,48</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/melted_butter.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/nut_aroma.png</key>
+            <key type="filename">assets/gameScreen/ingredients/melted_butter.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1812,13 +1779,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>83,104,166,208</rect>
+                <rect>31,27,62,55</rect>
                 <key>scale9Paddings</key>
-                <rect>83,104,166,208</rect>
+                <rect>31,27,62,55</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/melted_chocolate.png</key>
+            <key type="filename">assets/gameScreen/ingredients/melted_chocolate.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1827,14 +1794,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>85,104,169,208</rect>
+                <rect>30,29,61,58</rect>
                 <key>scale9Paddings</key>
-                <rect>85,104,169,208</rect>
+                <rect>30,29,61,58</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/nut_butter.png</key>
-            <key type="filename">assets/gameScreen/ingredients/big/nut_cream.png</key>
+            <key type="filename">assets/gameScreen/ingredients/mud.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1843,13 +1809,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>116,122,232,244</rect>
+                <rect>28,34,55,68</rect>
                 <key>scale9Paddings</key>
-                <rect>116,122,232,244</rect>
+                <rect>28,34,55,68</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/nuts.png</key>
+            <key type="filename">assets/gameScreen/ingredients/nut_aroma.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1858,13 +1824,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>74,120,147,239</rect>
+                <rect>29,31,57,61</rect>
                 <key>scale9Paddings</key>
-                <rect>74,120,147,239</rect>
+                <rect>29,31,57,61</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/old_lemon_candy.png</key>
+            <key type="filename">assets/gameScreen/ingredients/nut_butter.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1873,13 +1839,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>131,81,263,161</rect>
+                <rect>27,32,53,64</rect>
                 <key>scale9Paddings</key>
-                <rect>131,81,263,161</rect>
+                <rect>27,32,53,64</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/peeled_nuts.png</key>
+            <key type="filename">assets/gameScreen/ingredients/nut_cream.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1888,13 +1854,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>67,115,135,231</rect>
+                <rect>29,32,57,63</rect>
                 <key>scale9Paddings</key>
-                <rect>67,115,135,231</rect>
+                <rect>29,32,57,63</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/raisins.png</key>
+            <key type="filename">assets/gameScreen/ingredients/nuts.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1903,13 +1869,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>143,109,287,218</rect>
+                <rect>21,32,41,63</rect>
                 <key>scale9Paddings</key>
-                <rect>143,109,287,218</rect>
+                <rect>21,32,41,63</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/rotten_fruit.png</key>
+            <key type="filename">assets/gameScreen/ingredients/old_lemon_candy.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -1918,174 +1884,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>128,94,257,189</rect>
+                <rect>36,22,71,43</rect>
                 <key>scale9Paddings</key>
-                <rect>128,94,257,189</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/rum_aroma.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>81,154,161,307</rect>
-                <key>scale9Paddings</key>
-                <rect>81,154,161,307</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/scrambled_egg.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>99,94,199,189</rect>
-                <key>scale9Paddings</key>
-                <rect>99,94,199,189</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/spices.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>140,112,279,224</rect>
-                <key>scale9Paddings</key>
-                <rect>140,112,279,224</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/steak.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>134,98,269,196</rect>
-                <key>scale9Paddings</key>
-                <rect>134,98,269,196</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/sugar.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>137,106,273,212</rect>
-                <key>scale9Paddings</key>
-                <rect>137,106,273,212</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/sweetened_cream.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>116,104,232,207</rect>
-                <key>scale9Paddings</key>
-                <rect>116,104,232,207</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/umeboshi.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>99,94,199,188</rect>
-                <key>scale9Paddings</key>
-                <rect>99,94,199,188</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/vanilla_aroma.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>95,104,189,208</rect>
-                <key>scale9Paddings</key>
-                <rect>95,104,189,208</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/vanilla_sugar.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>137,105,274,209</rect>
-                <key>scale9Paddings</key>
-                <rect>137,105,274,209</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/wine.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>144,164,289,328</rect>
-                <key>scale9Paddings</key>
-                <rect>144,164,289,328</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/big/wine_cream.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>132,153,264,306</rect>
-                <key>scale9Paddings</key>
-                <rect>132,153,264,306</rect>
+                <rect>36,22,71,43</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -2104,662 +1905,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/beet.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>27,26,53,51</rect>
-                <key>scale9Paddings</key>
-                <rect>27,26,53,51</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/beet_flour.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>30,27,59,53</rect>
-                <key>scale9Paddings</key>
-                <rect>30,27,59,53</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/beet_juice.png</key>
-            <key type="filename">assets/gameScreen/ingredients/small/currant_juice.png</key>
-            <key type="filename">assets/gameScreen/ingredients/small/expired_milk.png</key>
-            <key type="filename">assets/gameScreen/ingredients/small/lemon_juice.png</key>
-            <key type="filename">assets/gameScreen/ingredients/small/milk.png</key>
-            <key type="filename">assets/gameScreen/ingredients/small/rotten_fruit_juice.png</key>
-            <key type="filename">assets/gameScreen/ingredients/small/swamp_water.png</key>
-            <key type="filename">assets/gameScreen/ingredients/small/sweetened_milk.png</key>
-            <key type="filename">assets/gameScreen/ingredients/small/vanilla_milk.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>33,27,65,53</rect>
-                <key>scale9Paddings</key>
-                <rect>33,27,65,53</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/beet_pudding.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,34,57,69</rect>
-                <key>scale9Paddings</key>
-                <rect>29,34,57,69</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/boiled_egg.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>19,23,38,47</rect>
-                <key>scale9Paddings</key>
-                <rect>19,23,38,47</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/brown_sugar.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>34,29,69,59</rect>
-                <key>scale9Paddings</key>
-                <rect>34,29,69,59</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/butter.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>30,30,59,60</rect>
-                <key>scale9Paddings</key>
-                <rect>30,30,59,60</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/candied_lemon_peel.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>34,26,68,52</rect>
-                <key>scale9Paddings</key>
-                <rect>34,26,68,52</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/cherry.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,28,57,56</rect>
-                <key>scale9Paddings</key>
-                <rect>29,28,57,56</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/cherry_jam.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>31,33,61,65</rect>
-                <key>scale9Paddings</key>
-                <rect>31,33,61,65</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/cherry_sauce.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>31,29,61,57</rect>
-                <key>scale9Paddings</key>
-                <rect>31,29,61,57</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/cherry_sugar.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>31,28,63,55</rect>
-                <key>scale9Paddings</key>
-                <rect>31,28,63,55</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/chocolate.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>21,27,42,54</rect>
-                <key>scale9Paddings</key>
-                <rect>21,27,42,54</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/chocolate_pudding.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,32,57,64</rect>
-                <key>scale9Paddings</key>
-                <rect>29,32,57,64</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/cocoa.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>34,25,69,51</rect>
-                <key>scale9Paddings</key>
-                <rect>34,25,69,51</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/cornflakes.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>32,33,63,66</rect>
-                <key>scale9Paddings</key>
-                <rect>32,33,63,66</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/cornflour.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>33,28,65,56</rect>
-                <key>scale9Paddings</key>
-                <rect>33,28,65,56</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/cream.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>26,28,52,56</rect>
-                <key>scale9Paddings</key>
-                <rect>26,28,52,56</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/currant.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>27,31,54,61</rect>
-                <key>scale9Paddings</key>
-                <rect>27,31,54,61</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/currant_pudding.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,33,57,67</rect>
-                <key>scale9Paddings</key>
-                <rect>29,33,57,67</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/currant_sugar.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,25,58,50</rect>
-                <key>scale9Paddings</key>
-                <rect>29,25,58,50</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/dirt.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>36,28,71,56</rect>
-                <key>scale9Paddings</key>
-                <rect>36,28,71,56</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/dry_dirt.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>33,26,67,51</rect>
-                <key>scale9Paddings</key>
-                <rect>33,26,67,51</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/egg.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,17,59,35</rect>
-                <key>scale9Paddings</key>
-                <rect>29,17,59,35</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/egg_powder.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,26,58,51</rect>
-                <key>scale9Paddings</key>
-                <rect>29,26,58,51</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/eggnog.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>22,31,44,61</rect>
-                <key>scale9Paddings</key>
-                <rect>22,31,44,61</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/flour.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>35,31,69,63</rect>
-                <key>scale9Paddings</key>
-                <rect>35,31,69,63</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/grinded_nuts.png</key>
-            <key type="filename">assets/gameScreen/ingredients/small/lemon_powder.png</key>
-            <key type="filename">assets/gameScreen/ingredients/small/lemon_sugar.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,25,58,51</rect>
-                <key>scale9Paddings</key>
-                <rect>29,25,58,51</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/grinded_umeboshi.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>31,25,61,51</rect>
-                <key>scale9Paddings</key>
-                <rect>31,25,61,51</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/honey.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>28,28,55,55</rect>
-                <key>scale9Paddings</key>
-                <rect>28,28,55,55</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/honeycomb.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>26,27,53,55</rect>
-                <key>scale9Paddings</key>
-                <rect>26,27,53,55</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/lemon_aroma.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,27,59,55</rect>
-                <key>scale9Paddings</key>
-                <rect>29,27,59,55</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/lemon_cream.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>30,29,60,58</rect>
-                <key>scale9Paddings</key>
-                <rect>30,29,60,58</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/lemon_pudding.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,30,57,61</rect>
-                <key>scale9Paddings</key>
-                <rect>29,30,57,61</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/marzipan.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>32,24,63,48</rect>
-                <key>scale9Paddings</key>
-                <rect>32,24,63,48</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/melted_butter.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>31,27,62,55</rect>
-                <key>scale9Paddings</key>
-                <rect>31,27,62,55</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/melted_chocolate.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>30,29,61,58</rect>
-                <key>scale9Paddings</key>
-                <rect>30,29,61,58</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/mud.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>28,34,55,68</rect>
-                <key>scale9Paddings</key>
-                <rect>28,34,55,68</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/nut_aroma.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,31,57,61</rect>
-                <key>scale9Paddings</key>
-                <rect>29,31,57,61</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/nut_butter.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>27,32,53,64</rect>
-                <key>scale9Paddings</key>
-                <rect>27,32,53,64</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/nut_cream.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,32,57,63</rect>
-                <key>scale9Paddings</key>
-                <rect>29,32,57,63</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/nuts.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>21,32,41,63</rect>
-                <key>scale9Paddings</key>
-                <rect>21,32,41,63</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/old_lemon_candy.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>36,22,71,43</rect>
-                <key>scale9Paddings</key>
-                <rect>36,22,71,43</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/peeled_nuts.png</key>
+            <key type="filename">assets/gameScreen/ingredients/peeled_nuts.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -2774,7 +1920,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/raisins.png</key>
+            <key type="filename">assets/gameScreen/ingredients/raisins.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -2789,7 +1935,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/rotten_fruit.png</key>
+            <key type="filename">assets/gameScreen/ingredients/rotten_fruit.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -2804,7 +1950,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/rum_aroma.png</key>
+            <key type="filename">assets/gameScreen/ingredients/rum_aroma.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -2819,7 +1965,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/scrambled_egg.png</key>
+            <key type="filename">assets/gameScreen/ingredients/scrambled_egg.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -2834,7 +1980,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/spices.png</key>
+            <key type="filename">assets/gameScreen/ingredients/spices.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -2849,7 +1995,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/steak.png</key>
+            <key type="filename">assets/gameScreen/ingredients/steak.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -2864,7 +2010,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/sugar.png</key>
+            <key type="filename">assets/gameScreen/ingredients/sugar.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -2879,7 +2025,22 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/umeboshi.png</key>
+            <key type="filename">assets/gameScreen/ingredients/sweetened_cream.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>30,33,59,66</rect>
+                <key>scale9Paddings</key>
+                <rect>30,33,59,66</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gameScreen/ingredients/umeboshi.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -2894,7 +2055,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/vanilla_aroma.png</key>
+            <key type="filename">assets/gameScreen/ingredients/vanilla_aroma.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -2909,7 +2070,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/vanilla_sugar.png</key>
+            <key type="filename">assets/gameScreen/ingredients/vanilla_sugar.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -2924,7 +2085,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/wine.png</key>
+            <key type="filename">assets/gameScreen/ingredients/wine.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -2939,7 +2100,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">assets/gameScreen/ingredients/small/wine_cream.png</key>
+            <key type="filename">assets/gameScreen/ingredients/wine_cream.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -3227,6 +2388,21 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">assets/gameScreen/machines/3x1_big.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>38,121,75,241</rect>
+                <key>scale9Paddings</key>
+                <rect>38,121,75,241</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">assets/gameScreen/machines/3x2_big.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -3236,9 +2412,24 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>79,121,157,242</rect>
+                <rect>79,121,158,241</rect>
                 <key>scale9Paddings</key>
-                <rect>79,121,157,242</rect>
+                <rect>79,121,158,241</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">assets/gameScreen/machines/3x3_big.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>121,121,241,241</rect>
+                <key>scale9Paddings</key>
+                <rect>121,121,241,241</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -3266,9 +2457,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>79,174,157,348</rect>
+                <rect>84,155,167,311</rect>
                 <key>scale9Paddings</key>
-                <rect>79,174,157,348</rect>
+                <rect>84,155,167,311</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -3281,9 +2472,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>99,27,199,53</rect>
+                <rect>89,25,178,50</rect>
                 <key>scale9Paddings</key>
-                <rect>99,27,199,53</rect>
+                <rect>89,25,178,50</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

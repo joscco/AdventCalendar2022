@@ -361,7 +361,7 @@ export const DIALOG_DAY_4: DialogConfig = {
             },
             id: "selected_sweet",
             speeches: [
-                {text: "Perfect! Now move the sweetening machine onto the flour belt to start the recipe."},
+                {text: "Perfect! Now move the sweetening machine onto the flour belt to make sugar."},
             ],
             continuationText: "Yep.",
             nextNodes: [
@@ -1045,8 +1045,8 @@ export const LAST_WORDS_DAY_24: DialogConfig = {
             id: "start",
             speeches: [
                 {text: "Unbelievable, you really did it, I'm impressed!"},
-                {text: "Maybe this time next year you can help again?"},
-                {text: "Thanks again and Merry Christmas!"}],
+                {text: "Maybe this time next year you can help me again?"},
+                {text: "Thanks again so much and Merry Christmas!"}],
             nextNodes: [],
             skippable: true,
             durationUntilAutoClose: 2000,

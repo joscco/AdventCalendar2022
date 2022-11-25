@@ -19,16 +19,15 @@ export class UnlockedIngredientAlarm extends Sprite {
 
         this.ingredientIcon = new Sprite()
         this.ingredientIcon.anchor.set(0.5)
-        this.ingredientIcon.scale.set(0.4)
-        this.ingredientIcon.position.set(-275, 0)
+        this.ingredientIcon.position.set(-240, 0)
 
         this.title = new Text("New Ingredient!", {fontFamily: "Futurahandwritten", fontSize: 45, fill: 0xFDAC47})
         this.title.anchor.set(0.5)
-        this.title.position.set(150, -55)
+        this.title.position.set(60, -45)
 
-        this.ingredientName = new Text("", {fontFamily: "Futurahandwritten", fontSize: 60, fill: 0xFFFFFF})
+        this.ingredientName = new Text("", {fontFamily: "Futurahandwritten", fontSize: 55, fill: 0xFFFFFF})
         this.ingredientName.anchor.set(0.5)
-        this.ingredientName.position.set(150, 30)
+        this.ingredientName.position.set(60, 30)
 
         this.cancelButton = new IngredientAlarmCancelButton()
         this.cancelButton.position.set(this.width / 2 - 5, -this.height / 2 + 5)
@@ -41,7 +40,7 @@ export class UnlockedIngredientAlarm extends Sprite {
         await this.blendOut()
         this.ingredientName.text = INGREDIENTS[newIngredient].text
         this.ingredientIcon.texture = ASSET_STORE.getTextureAsset(newIngredient)
-        await gsap.to(this.position, {y: 200, duration: 0.5, ease: Back.easeInOut})
+        await gsap.to(this.position, {y: 150, duration: 0.5, ease: Back.easeInOut})
         this.shown = true
 
         setTimeout(() => this.blendOut(), 1000)

@@ -1,5 +1,6 @@
 import {Container, Text, TextMetrics, TextStyle} from "pixi.js";
 import {SOUND_MANAGER} from "../../../index";
+import {sleep} from "../../../General/Helpers";
 
 export class TextBox extends Container {
 
@@ -9,8 +10,8 @@ export class TextBox extends Container {
 
     LETTER_TYPE_DURATION = 0.15
     LETTER_TYPE_OFFSET = 0.02
-    LETTER_DETYPE_DURATION = 0.1
-    LETTER_DETYPE_OFFSET = 0.005
+    LETTER_DETYPE_DURATION = 0.15
+    LETTER_DETYPE_OFFSET = 0.001
 
     private style: TextStyle
     private boxWidth: number
@@ -59,7 +60,7 @@ export class TextBox extends Container {
             y: 1,
             duration: this.LETTER_TYPE_DURATION,
             delay: (this.fullText.length - 1) * this.LETTER_TYPE_OFFSET,
-            ease: Back.easeIn
+            ease: Back.easeOut
         })
         await this.letterTweens[this.fullText.length - 1]
     }
@@ -72,7 +73,7 @@ export class TextBox extends Container {
                 y: 0,
                 duration: this.LETTER_DETYPE_DURATION,
                 delay: (this.fullText.length - 1 - i) * this.LETTER_DETYPE_OFFSET,
-                ease: Back.easeIn
+                ease: Quad.easeIn
             })
         }
         this.letterTweens[0] = gsap.to(this.letters[0].scale, {
@@ -80,9 +81,10 @@ export class TextBox extends Container {
             y: 0,
             duration: this.LETTER_DETYPE_DURATION,
             delay: (this.fullText.length - 1) * this.LETTER_DETYPE_OFFSET,
-            ease: Back.easeIn
+            ease: Quad.easeIn
         })
         await this.letterTweens[0]
+        await sleep(300)
     }
 
     private initLetters() {
