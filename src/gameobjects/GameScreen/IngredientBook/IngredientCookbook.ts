@@ -8,6 +8,8 @@ import {CookbookOverlay} from "./CookbookOverlay";
 
 export class IngredientCookbook extends Container {
     backgroundSprite: Sprite;
+    private slidingHand: Sprite;
+    private slidingHandTween?: gsap.core.Tween;
 
     content: Container;
     items: CookbookEntry[] = []
@@ -27,9 +29,8 @@ export class IngredientCookbook extends Container {
     constructor(private overlay: CookbookOverlay) {
         super()
 
-        //this.angle = 5
         this.sortableChildren = true
-        this.position.set(GAME_WIDTH/2 + 160, GAME_HEIGHT + 200)
+        this.position.set(GAME_WIDTH / 2 + 160, GAME_HEIGHT + 200)
 
         this.backgroundSprite = new Sprite(ASSET_STORE.getTextureAsset("ingredientOverviewBook"))
         this.backgroundSprite.anchor.set(0.5, 0)
@@ -64,7 +65,13 @@ export class IngredientCookbook extends Container {
         this.initScrollbarDragging();
         this.initContentDragging();
 
+        this.slidingHand = new Sprite(ASSET_STORE.getTextureAsset("dialog_pointer_hand"))
+        this.slidingHand.scale.set(0)
+        this.slidingHand.anchor.set(0.25, 0.1)
+        this.slidingHand.angle = 20
+
         this.addChild(this.backgroundSprite, this.content, this.scrollBar)
+        this.scrollBar.addChild(this.slidingHand)
     }
 
     private initScrollbarDragging() {
@@ -137,6 +144,7 @@ export class IngredientCookbook extends Container {
     }
 
     private updateScrollbarHandlePosition(mousePosition: Vector2D) {
+        this.stopSlidingFinger()
         let newY = clamp(mousePosition.y, this.SCROLL_BAR_MIN_Y, this.SCROLL_BAR_MAX_Y)
         this.scrollBarHandle.position.y = newY
 
@@ -146,6 +154,7 @@ export class IngredientCookbook extends Container {
     }
 
     private updateContentPositionByMouse(mousePosition: Vector2D) {
+        this.stopSlidingFinger()
         let newY = clamp(mousePosition.y, this.CONTENT_MIN_Y, this.CONTENT_MAX_Y)
         this.content.position.y = newY
 
@@ -155,6 +164,7 @@ export class IngredientCookbook extends Container {
     }
 
     private updateContentPosition(offsetY: number) {
+        this.stopSlidingFinger()
         let newY = clamp(this.content.position.y + offsetY, this.CONTENT_MIN_Y, this.CONTENT_MAX_Y)
         this.content.position.y = newY
 
@@ -184,7 +194,7 @@ export class IngredientCookbook extends Container {
 
     private initEntries(): CookbookEntry[] {
         let result = [];
-        let alphabeticIDs = [...IngredientIDs].sort((a,b) => a.localeCompare(b))
+        let alphabeticIDs = [...IngredientIDs].sort((a, b) => a.localeCompare(b))
         for (let ingredientID of alphabeticIDs) {
             let newEntry = new CookbookEntry(ingredientID)
             result.push(newEntry)
@@ -208,21 +218,23 @@ export class IngredientCookbook extends Container {
             }
         }
 
-        this.CONTENT_MIN_Y = Math.min(- this.content.height + this.contentMask.height + 10, -10)
+        this.CONTENT_MIN_Y = Math.min(-this.content.height + this.contentMask.height + 10, -10)
     }
 
     private hideAllEntries() {
-        for(let item of this.items) {
+        for (let item of this.items) {
             item.hide()
             item.position.set(0, 90)
         }
     }
 
     async blendIn() {
-        await gsap.to(this.position, { y: 120, duration: 0.5, ease: Back.easeInOut})
+        await gsap.to(this.position, {y: 120, duration: 0.5, ease: Back.easeInOut})
+        this.startSlidingFinger()
     }
 
     async blendOut() {
+        this.stopSlidingFinger()
         await gsap.to(this.position, {y: GAME_HEIGHT + 200, duration: 0.5, ease: Back.easeInOut})
     }
 
@@ -232,5 +244,24 @@ export class IngredientCookbook extends Container {
 
     show() {
         this.position.y = 120
+    }
+
+    private async startSlidingFinger() {
+        if (GAME_DATA.getUnlockedIngredients().length > 5) {
+            let fromPosition: Vector2D = vectorAdd(this.scrollBarHandle.position, {x: 50, y: 0})
+            this.slidingHand.position.set(fromPosition.x, fromPosition.y)
+
+            await gsap.to(this.slidingHand.scale, {x: 1, y: 1, duration: 0.3, ease: Back.easeOut})
+            await gsap.to(this.slidingHand.scale, {x: 0.9, y: 0.9, duration: 0.3, ease: Back.easeOut})
+            let toPosition: Vector2D = vectorAdd(fromPosition, {x: 0, y: 300})
+            this.slidingHandTween = gsap.to(
+                this.slidingHand,
+                {x: toPosition.x, y: toPosition.y, duration: 2, ease: Quad.easeInOut, repeat: -1, repeatDelay: 0.5})
+        }
+    }
+
+    private stopSlidingFinger() {
+        this.slidingHandTween?.kill()
+        gsap.to(this.slidingHand.scale, {x: 0, y: 0, duration: 0.3, ease: Back.easeIn})
     }
 }

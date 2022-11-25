@@ -3,6 +3,7 @@ import {DialogBox} from "./DialogBox";
 import {Dialog, DialogNode} from "./Dialogs/DialogConfig";
 import {BERND, BERND_BUTTON, DIALOG_MANAGER, GAME_DATA, TOOLTIP_MANAGER} from "../../index";
 import {FactoryScene} from "../../Scenes/FactoryScene";
+import {sleep} from "../../General/Helpers";
 
 export class DialogManager extends Container {
 
@@ -26,7 +27,8 @@ export class DialogManager extends Container {
         this.currentNode = dialog.getStartDialog()
         this.currentNode.orSkippabilaty(this.currentLevel!.level < GAME_DATA.getUnlockedLevels())
 
-        await BERND.blendIn()
+        BERND.blendIn()
+        await sleep(700)
         // Starting first node
         this.currentNode.start(this.currentLevel!)
         this.dialogBox.setSpeeches(this.currentNode)
