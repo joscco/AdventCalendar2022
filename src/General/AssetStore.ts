@@ -65,6 +65,7 @@ export class AssetStore {
 
     async startLoadingOtherAssets() {
         let numberSheets = 8
+        Assets.loader.reset()
         this.ASSETS = []
         for (let i = 0; i < numberSheets; i++) {
             let sheet = await Assets.load(`assets/spritesheets/sheet-${i}.json`)

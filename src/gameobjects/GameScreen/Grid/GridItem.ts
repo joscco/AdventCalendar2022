@@ -184,12 +184,12 @@ export class GridItem {
         })
     }
 
-    private async moveTo(position: Vector2D) {
-        await gsap.to(this.content.position, {
+    private moveTo(position: Vector2D) {
+        gsap.to(this.content.position, {
             x: position.x,
             y: position.y,
-            duration: 0.1,
-            ease: Sine.easeInOut
+            duration: 0.15,
+            ease: Quad.easeOut
         })
     }
 

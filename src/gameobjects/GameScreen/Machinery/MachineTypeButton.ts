@@ -5,7 +5,6 @@ import {MachineTypeChooseMenu} from "./MachineTypeChooseMenu";
 import {ASSET_STORE, EVENT_EMITTER} from "../../../index";
 
 export class MachineTypeButton extends ScalingButton {
-
     chooseMenu: MachineTypeChooseMenu;
     type: MachineType
 

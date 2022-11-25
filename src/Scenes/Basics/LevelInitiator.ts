@@ -167,7 +167,7 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
         ],
         machineLayout: [
             // Types should be fixed!
-            {shape: "1x1", index: {row: 1, column: 2}, type: "sour"},
+            {shape: "1x1", index: {row: 1, column: 2}, type: "sour", id: "typeVariable"},
             {shape: "1x1", index: {row: 2, column: 1}, type: "yellow", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 2}, type: "savoury", typeFixed: true},
             {shape: "1x1", index: {row: 2, column: 3}, type: "sweet", typeFixed: true},
@@ -264,9 +264,9 @@ export const LEVEL_MANIFEST: LevelConfigManifest = [
         ]),
         machineLayout: [
             {shape: "1x1", index: {row: 4, column: 1}, type: "sticky", typeFixed: true},
-            {shape: "1x1", index: {row: 4, column: 2}, type: "solid", positionFixed: true},
+            {shape: "1x1", index: {row: 4, column: 2}, type: "solid", positionFixed: true, id: "Locked"},
             {shape: "2x1", index: {row: 2, column: 1}, type: "red"},
-            {shape: "2x1", index: {row: 0, column: 2}, type: "solid", positionFixed: true}
+            {shape: "2x1", index: {row: 0, column: 2}, type: "solid", positionFixed: true, id: "Locked"}
         ],
         dialog: new Dialog(DIALOG_DAY_7),
         hints: [new Dialog(IRON_CHAINS_HINT), new Dialog(CHANGE_TYPE_HINT), new Dialog(DOUBLE_MACHINES_HINT)],

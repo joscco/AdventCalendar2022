@@ -4,7 +4,7 @@ import {
     BlockLayout,
     getMachineNameForType,
     Machine,
-    MachineLayout,
+    MachineLayout, MachineType,
     parseShape
 } from "../gameobjects/GameScreen/Machinery/Machine";
 import {GridConnector} from "../gameobjects/GameScreen/Grid/GridConnector";
@@ -168,7 +168,7 @@ export class FactoryScene extends Scene {
 
     async beforeFadeOut() {
         DIALOG_MANAGER.removeLevel()
-        if ( DIALOG_MANAGER.hasNode()) {
+        if (DIALOG_MANAGER.hasNode()) {
             await DIALOG_MANAGER.endDialog()
         }
         await TOOLTIP_MANAGER.disableTooltips()
@@ -347,16 +347,16 @@ export class FactoryScene extends Scene {
         this.machineGridItems.forEach(item => item.tempLock())
     }
 
-    unblockMachines() {
-        this.machineGridItems.forEach(item => item.tempUnlock())
-    }
-
-    highlightMachines() {
-        this.machineGridItems.forEach(item => item.content.filters = [new OutlineFilter(10, 0xfd4343)])
-    }
-
-    unhighlightMachines() {
-        this.machineGridItems.forEach(item => item.content.filters = [])
+    unblockMachines(ids?: string[]) {
+        if (ids) {
+            this.machineGridItems.forEach(item => {
+                if (item.id && ids.indexOf(item.id) > -1) {
+                    item.tempUnlock()
+                }
+            })
+        } else {
+            this.machineGridItems.forEach(item => item.tempUnlock())
+        }
     }
 
     unallowMoveDirection(direction: VerticalDirection) {
@@ -397,6 +397,58 @@ export class FactoryScene extends Scene {
 
     unhighlightRecipeBox() {
         this.recipeBox.filters = []
+    }
+
+    highlightBeltIngredients(id: string) {
+        this.belts.forEach(belt => {
+            if (belt.id && belt.id === id) {
+                belt.highlightTiles()
+            }
+        })
+    }
+
+    unhighlightBeltIngredients() {
+        this.belts.forEach(belt => {
+            belt.unhighlightTiles()
+        })
+    }
+
+    highlightMachines(ids?: string) {
+        if (ids) {
+            this.machineGridItems.forEach(item => {
+                if (item.id && ids.indexOf(item.id) > -1) {
+                    item.content.filters = [new OutlineFilter(10, 0xfd4343)]
+                }
+            })
+        } else {
+            this.machineGridItems.forEach(item => item.content.filters = [new OutlineFilter(10, 0xfd4343)])
+        }
+    }
+
+    unhighlightMachines() {
+        this.machineGridItems.forEach(item => item.content.filters = [])
+    }
+
+    highlightMachineIcon(id: string, iconType: MachineType) {
+        this.machineGridItems.forEach(item => {
+            if (item.id && id === item.id) {
+                (item.content as Machine).highlightTypeIcon(iconType)
+            }
+        })
+    }
+
+    unhighlightMachineIcons() {
+        this.machineGridItems.forEach(item => {
+            (item.content as Machine).unhighlightTypeIcon()
+        })
+    }
+
+    highlightBlocks() {
+        this.blockGridItems.forEach(block => block.content.filters = [new OutlineFilter(10, 0xfd4343)])
+    }
+
+    unhighlightBlocks() {
+        this.blockGridItems.forEach(block => block.content.filters = [])
     }
 
     showWinScreen() {
@@ -452,20 +504,5 @@ export class FactoryScene extends Scene {
             return this.hints[this.lastHintIndex]
         }
         return null
-    }
-
-
-    highlightBeltIngredients(id: string) {
-        this.belts.forEach(belt => {
-            if (belt.id && belt.id === id) {
-                belt.highlightTiles()
-            }
-        })
-    }
-
-    unhighlightBeltIngredients() {
-        this.belts.forEach(belt => {
-            belt.unhighlightTiles()
-        })
     }
 }

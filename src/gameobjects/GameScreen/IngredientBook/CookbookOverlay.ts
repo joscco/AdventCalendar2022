@@ -4,6 +4,7 @@ import {IngredientCookbookCloseButton} from "../../../UI/Buttons/IngredientCookb
 import {IngredientCookbook} from "./IngredientCookbook";
 import {IngredientID} from "../ConveyorBelt/Ingredient";
 import {EVENT_EMITTER, GAME_HEIGHT} from "../../../index";
+import {OutlineFilter} from "@pixi/filter-outline";
 
 export class CookbookOverlay extends Container {
 
@@ -86,5 +87,37 @@ export class CookbookOverlay extends Container {
 
     updateEntries(unlockedIngredients: IngredientID[]) {
         this.cookbook.updateEntries(unlockedIngredients)
+    }
+
+    disableButton() {
+        this.cookbookButton.interactive = false
+    }
+
+    enableButton() {
+        this.cookbookButton.interactive = true
+    }
+
+    highlightButton() {
+        this.cookbookButton.filters = [new OutlineFilter(10, 0xfd4343, 0.2)]
+    }
+
+    unhighlightButton() {
+        this.cookbookButton.filters = []
+    }
+
+    enableCancelButton() {
+        this.closeButton.interactive = true
+    }
+
+    disableCancelButton() {
+        this.closeButton.interactive = false
+    }
+
+    highlightCancelButton() {
+        this.closeButton.filters = [new OutlineFilter(10, 0xfd4343, 0.2)]
+    }
+
+    unhighlightCancelButton() {
+        this.closeButton.filters = []
     }
 }

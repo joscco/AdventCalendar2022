@@ -33,7 +33,6 @@ export class UnderstoodButton extends ScalingButton {
     }
 
     hide() {
-        console.log("Hiding understood button")
         this.interactive = false
         this.scale.set(0)
     }

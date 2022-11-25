@@ -27,10 +27,12 @@
         "@pixi/assets": "^6.5.8",
         "@pixi/filter-outline": "^4.2.0",
         "@pixi/particle-emitter": "^5.0.7",
+        "babel-loader": "^9.1.0",
         "gsap": "^3.11.3",
         "howler": "^2.2.3",
         "pixi-filters": "^5.0.0",
         "pixi-viewport": "^4.37.0",
-        "pixi.js": "^6.5.8"
+        "pixi.js": "^6.5.8",
+        "webpack-preprocessor-loader": "^1.2.0"
     }
 }

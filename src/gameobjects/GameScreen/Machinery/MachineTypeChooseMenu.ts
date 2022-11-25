@@ -1,12 +1,11 @@
 import {Container, Sprite} from "pixi.js";
 import {ASSET_STORE, EVENT_EMITTER, GAME_HEIGHT, GAME_WIDTH} from "../../../index";
-import {ScalingButton} from "../../../UI/Buttons/ScalingButton";
 import {Machine, MachineType} from "./Machine";
 import {MachineTypeButton} from "./MachineTypeButton";
 
 export class MachineTypeChooseMenu extends Sprite {
     spike: Sprite;
-    typeButtons: ScalingButton[]
+    typeButtons: MachineTypeButton[]
     buttonContainer: Container
     machine: Machine
     shown: boolean = false

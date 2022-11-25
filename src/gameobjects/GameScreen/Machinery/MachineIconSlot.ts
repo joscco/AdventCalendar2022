@@ -4,6 +4,7 @@ import {ASSET_STORE} from "../../../index";
 import {Texture} from "@pixi/core";
 import {MachineTypeChooseMenu} from "./MachineTypeChooseMenu";
 import {GridItem} from "../Grid/GridItem";
+import {OutlineFilter} from "@pixi/filter-outline";
 
 export class MachineIconSlot extends Container {
     private iconSlot: Sprite;
@@ -88,5 +89,17 @@ export class MachineIconSlot extends Container {
         this.iconTypeImage.tint = 0xffffff
         this.iconSlot.visible = true
 
+    }
+
+    highlightTypeIcon(iconType: MachineType) {
+        this.typeChooseMenu.typeButtons.forEach(button => {
+            if (button.type === iconType) {
+                button.filters = [new OutlineFilter(10, 0xfd4343, 0.2)]
+            }
+        })
+    }
+
+    unhighlightTypeIcons() {
+        this.typeChooseMenu.typeButtons.forEach(button => button.filters = [])
     }
 }

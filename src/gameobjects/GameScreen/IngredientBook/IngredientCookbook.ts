@@ -27,7 +27,7 @@ export class IngredientCookbook extends Container {
     constructor(private overlay: CookbookOverlay) {
         super()
 
-        this.angle = 5
+        //this.angle = 5
         this.sortableChildren = true
         this.position.set(GAME_WIDTH/2 + 160, GAME_HEIGHT + 200)
 
@@ -232,18 +232,5 @@ export class IngredientCookbook extends Container {
 
     show() {
         this.position.y = 120
-    }
-
-    private downloadContentAsPNG() {
-        App.renderer.plugins.extract.canvas(this.content).toBlob(function(b: Blob){
-
-            let a = document.createElement('a');
-            document.body.append(a);
-            a.download = "content";
-            a.href = URL.createObjectURL(b);
-            a.click();
-            a.remove();
-
-        }, 'image/png');
     }
 }

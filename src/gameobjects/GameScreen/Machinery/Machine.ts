@@ -127,6 +127,14 @@ export class Machine extends Block {
         this.tint = 0xaaaaaa
         this.updateAppearance()
     }
+
+    highlightTypeIcon(iconType: MachineType) {
+        this.iconSlot.highlightTypeIcon(iconType)
+    }
+
+    unhighlightTypeIcon() {
+        this.iconSlot.unhighlightTypeIcons()
+    }
 }
 
 export class Cage extends Block {

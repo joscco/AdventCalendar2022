@@ -62,8 +62,8 @@ export class DialogManager extends Container {
     }
 
     async endDialog() {
-        if (this.currentNode) {
-            this.currentNode.end(this.currentLevel!)
+        if (this.currentNode && this.currentLevel) {
+            this.currentNode.end(this.currentLevel)
         }
 
         this.currentNode = undefined
