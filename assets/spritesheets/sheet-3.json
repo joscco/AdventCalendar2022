@@ -1,12 +1,12 @@
 {"frames": {
 
-"gameScreen/blocks/1x3_block":
+"gameScreen/beltTiles/proceedButton":
 {
-	"frame": {"x":1561,"y":1832,"w":483,"h":152},
-	"rotated": false,
+	"frame": {"x":1451,"y":1832,"w":201,"h":221},
+	"rotated": true,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":483,"h":152},
-	"sourceSize": {"w":483,"h":152}
+	"spriteSourceSize": {"x":0,"y":0,"w":201,"h":221},
+	"sourceSize": {"w":201,"h":221}
 },
 "gameScreen/blocks/3x2_block":
 {
@@ -15,14 +15,6 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":316,"h":484},
 	"sourceSize": {"w":316,"h":484}
-},
-"gameScreen/buttons/musicButton":
-{
-	"frame": {"x":705,"y":1229,"w":67,"h":97},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":18,"y":11,"w":67,"h":97},
-	"sourceSize": {"w":101,"h":123}
 },
 "gameScreen/chains/1x3_chains":
 {
@@ -106,7 +98,7 @@
 },
 "gameScreen/ingredients/big/old_lemon_candy":
 {
-	"frame": {"x":1721,"y":317,"w":525,"h":322},
+	"frame": {"x":1721,"y":4,"w":525,"h":322},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":525,"h":322},
@@ -144,6 +136,22 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":137,"h":101},
 	"sourceSize": {"w":137,"h":101}
 },
+"gameScreen/machineIcons/red":
+{
+	"frame": {"x":705,"y":1229,"w":68,"h":68},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":68,"h":68},
+	"sourceSize": {"w":68,"h":68}
+},
+"gameScreen/winScreen/angel1/leftWing":
+{
+	"frame": {"x":1826,"y":1832,"w":194,"h":188},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":194,"h":188},
+	"sourceSize": {"w":194,"h":188}
+},
 "gameScreen/winScreen/angel1/rightWing":
 {
 	"frame": {"x":564,"y":1334,"w":241,"h":203},
@@ -152,13 +160,13 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":241,"h":203},
 	"sourceSize": {"w":241,"h":203}
 },
-"gameScreen/winScreen/angel2/armRight":
+"gameScreen/winScreen/angel2/wingLeft":
 {
-	"frame": {"x":1451,"y":1832,"w":210,"h":106},
+	"frame": {"x":1676,"y":1832,"w":198,"h":146},
 	"rotated": true,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":210,"h":106},
-	"sourceSize": {"w":210,"h":106}
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":146},
+	"sourceSize": {"w":198,"h":146}
 },
 "gameScreen/winScreen/angel2/wingRight":
 {
@@ -178,7 +186,7 @@
 },
 "startScreen/bernd/head":
 {
-	"frame": {"x":1721,"y":4,"w":309,"h":323},
+	"frame": {"x":1716,"y":533,"w":309,"h":323},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":6,"y":0,"w":309,"h":323},
@@ -197,9 +205,9 @@
 	"version": "1.0",
 	"image": "sheet-3.png",
 	"format": "RGBA8888",
-	"size": {"w":2048,"h":2048},
+	"size": {"w":2047,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "sheet-0.json", "sheet-1.json", "sheet-2.json", "sheet-4.json", "sheet-5.json", "sheet-6.json", "sheet-7.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:9dea962b94cb36ea23897749f71a2a4a:2dd4448bf460e48ffea51b652e0e020c:58306aed35fbd641194f30afbd1d96db$"
+	"smartupdate": "$TexturePacker:SmartUpdate:c862894bfb963a3ca2a61188238de67f:68e6fb1eebc8f63b9c7e24f10ecf0338:58306aed35fbd641194f30afbd1d96db$"
 }
 }
