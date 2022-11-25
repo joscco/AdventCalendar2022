@@ -9,8 +9,9 @@ export class Ingredient extends Container {
     private taste: IngredientTaste = "neutral"
     private consistency: IngredientConsistence = "sticky"
     private color: IngredientColor = "white"
+
     private text?: string
-    private sprite: Sprite
+    private readonly sprite: Sprite
     private particleEmitter: Emitter
     private animateTween: gsap.core.Tween;
 

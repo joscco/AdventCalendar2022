@@ -7,9 +7,10 @@ import {IngredientID, IngredientIDs} from "../ConveyorBelt/Ingredient";
 import {CookbookOverlay} from "./CookbookOverlay";
 
 export class IngredientCookbook extends Container {
-    backgroundSprite: Sprite;
-    private slidingHand: Sprite;
+    private readonly backgroundSprite: Sprite;
+    private readonly slidingHand: Sprite;
     private slidingHandTween?: gsap.core.Tween;
+    private fadingOutSlidingHand: boolean = false
 
     content: Container;
     items: CookbookEntry[] = []
@@ -260,8 +261,12 @@ export class IngredientCookbook extends Container {
         }
     }
 
-    private stopSlidingFinger() {
-        this.slidingHandTween?.kill()
-        gsap.to(this.slidingHand.scale, {x: 0, y: 0, duration: 0.3, ease: Back.easeIn})
+    private async stopSlidingFinger() {
+        if (!this.fadingOutSlidingHand) {
+            this.fadingOutSlidingHand = true
+            this.slidingHandTween?.kill()
+            await gsap.to(this.slidingHand.scale, {x: 0, y: 0, duration: 0.3, ease: Back.easeIn})
+            this.fadingOutSlidingHand = false
+        }
     }
 }
