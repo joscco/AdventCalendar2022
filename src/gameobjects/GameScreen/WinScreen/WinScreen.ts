@@ -101,7 +101,7 @@ export class WinScreen extends Container implements LanguageDependantItem {
         this.addChild(...this.sparkles, this.leftAngel, this.rightAngel)
 
         this.cookie = new Cookie(LevelInitiator.getRecipeForDay(level))
-        this.cookie.position.set(0, 10)
+        this.cookie.position.set(0, 20)
         this.addChild(this.cookie)
 
         this.banner = new Sprite(ASSET_STORE.getTextureAsset("winScreenBanner"))

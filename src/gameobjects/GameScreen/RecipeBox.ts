@@ -4,7 +4,7 @@ import {ASSET_STORE, LANGUAGE_MANAGER} from "../../index";
 import {Language, LanguageDependantItem} from "../../General/LanguageManager";
 
 export type Recipe = {
-    name: {en: string, de: string},
+    name: { en: string, de: string },
     ingredients: IngredientID[]
 }
 
@@ -28,7 +28,7 @@ class RecipeBoxIngredient extends Container implements LanguageDependantItem {
 
         this.lineMask = new Graphics()
         this.lineMask.beginFill(0x000000)
-        this.lineMask.drawRect(0, 0, this.textObject.width + 15, this.textObject.height)
+        this.lineMask.drawRect(0, 0, this.strikeLine.width + 15, this.textObject.height)
         this.lineMask.endFill()
         this.lineMask.scale.set(0, 1)
         this.strikeLine.addChild(this.lineMask)
@@ -46,7 +46,8 @@ class RecipeBoxIngredient extends Container implements LanguageDependantItem {
 
     setFulfilled(value: boolean) {
         this.isFulfilled = value
-        gsap.to(this.lineMask.scale, {x: this.isFulfilled ? 1 : 0, y: 1, duration: 0.4, ease: Quad.easeInOut})
+        let fullstrikeScale = (this.textObject.width + 15) / this.strikeLine.width
+        gsap.to(this.lineMask.scale, {x: this.isFulfilled ? fullstrikeScale : 0, y: 1, duration: 0.4, ease: Quad.easeInOut})
     }
 
     reset() {
@@ -139,33 +140,102 @@ export const RecipeIDs = [
     "CORNFLAKEWALNUSSKEKSE",
     "BAERENTATZEN",
     "DOMINOSTEINE"
-    ] as const
+] as const
 
 export type RecipeID = typeof RecipeIDs[number]
 
 export const RECIPES: { [keys in RecipeID]: Recipe } = {
     SANTAMILK: {name: {en: "Santa's Milk", de: "Weihnachtsmilch"}, ingredients: ["milk", "honey"]},
-    SCHOKOCROSSIES: {name: {en: "Flake Nests", de: "Schokocrossies"}, ingredients: ["melted_chocolate", "peeled_nuts", "cornflakes"]},
-    MUERBETEIGKEKSE: {name: {en: "Butter Cookies", de: "Mürbeteigkekse"}, ingredients: ["flour", "butter", "egg", "sugar"]},
-    RUMKUGELN: {name: {en: "Rum Truffles", de: "Rumkugeln"}, ingredients: ["butter", "sugar", "melted_chocolate", "rum_aroma"]},
-    BETHMAENNCHEN: {name: {en: "Bethmännchen", de: "Bethmännchen"}, ingredients: ["flour", "egg", "sugar", "marzipan", "nuts"]},
-    PUNSCH: {name: {en: "Hot Punch", de: "Heißer Punsch"}, ingredients: ["wine", "spices", "brown_sugar", "lemon_juice"]},
-    ZIMTSTERNE: {name: {en: "Cinnamon Stars", de: "Zimtsterne"}, ingredients: ["egg", "sugar", "spices", "ground_nuts", "nut_aroma"]},
-    PRINTEN: {name: {en: "Printen", de: "Printen"}, ingredients: ["flour", "egg", "honey", "candied_lemon_peel", "spices"]},
-    VANILLEKIPFERL: {name: {en: "Vanilla Crescents", de: "Vanillekipferl"}, ingredients: ["flour", "butter", "sugar", "vanilla_sugar", "ground_nuts"]},
-    FLORENTINER: {name: {en: "Florentines", de: "Florentiner"}, ingredients: ["butter", "sugar", "melted_chocolate", "honey", "peeled_nuts"]},
-    MAKRONEN: {name: {en: "Macarons", de: "Makronen"}, ingredients: ["egg", "sugar", "vanilla_sugar", "ground_nuts", "nut_aroma", "cherry_sauce"]},
-    SPRITZGEBAECK: {name: {en: "Spritz Biscuits", de: "Spritzgebäck"}, ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "lemon_juice"]},
-    SPEKULATIUS: {name: {en: "Speculoos", de: "Spekulatius"}, ingredients: ["flour", "butter", "egg", "sugar", "spices", "ground_nuts"]},
-    SCHOKOLADENBROT: {name: {en: "Chocolate Bread", de: "Schokoladenbrot"}, ingredients: ["flour", "butter", "egg", "sugar", "melted_chocolate", "ground_nuts"]},
-    ENGELSAUGEN: {name: {en: "Angel Eyes", de: "Engelsaugen"}, ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "lemon_juice", "cherry_jam"]},
-    SCHWARZWEISSKEKSE: {name: {en: "Chess Cookies", de: "Schwarzweißkekse"}, ingredients: ["flour", "butter", "egg", "vanilla_sugar", "sugar", "nut_aroma", "cocoa"]},
-    LEBKUCHEN: {name: {en: "Gingerbread", de: "Lebkuchen"}, ingredients: ["flour", "butter", "egg", "lemon_juice", "honey", "spices", "brown_sugar", "cocoa"]},
-    PFEFFERNUESSE: {name: {en: "Pfeffernüsse", de: "Pfeffernüsse"}, ingredients: ["flour", "butter", "egg", "sugar", "honey", "spices", "peeled_nuts", "nut_aroma"]},
-    PANETTONE: {name: {en: "Panettone", de: "Panettone"}, ingredients: ["flour", "butter", "egg", "vanilla_sugar", "sugar", "candied_lemon_peel", "raisins", "cherries"]},
-    BAERENTATZEN: {name: {en: "Bear Paws", de: "Bärentatzen"}, ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "cherry_jam", "melted_chocolate", "ground_nuts"]},
-    NUSSECKEN: {name: {en: "Nut Wedges", de: "Nussecken"}, ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "cherry_jam", "melted_chocolate", "ground_nuts", "peeled_nuts"]},
-    DOMINOSTEINE: {name: {en: "Dominosteine", de: "Dominosteine"}, ingredients: ["flour", "egg", "sugar", "cherry_jam", "marzipan", "melted_chocolate", "spices", "cocoa", "nut_aroma"]},
-    CORNFLAKEWALNUSSKEKSE: {name: {en: "Walnut Cookies", de: "Walnusskekse"}, ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "melted_chocolate", "ground_nuts", "cornflakes", "nut_aroma"]},
-    STOLLEN: {name: {en: "Stollen", de: "Stollen"}, ingredients: ["flour", "butter", "vanilla_sugar", "sugar", "lemon_juice", "candied_lemon_peel", "nut_aroma", "peeled_nuts", "milk", "raisins"]}
+    SCHOKOCROSSIES: {
+        name: {en: "Flake Nests", de: "Schokocrossies"},
+        ingredients: ["melted_chocolate", "peeled_nuts", "cornflakes"]
+    },
+    MUERBETEIGKEKSE: {
+        name: {en: "Butter Cookies", de: "Mürbeteigkekse"},
+        ingredients: ["flour", "butter", "egg", "sugar"]
+    },
+    RUMKUGELN: {
+        name: {en: "Rum Truffles", de: "Rumkugeln"},
+        ingredients: ["butter", "sugar", "melted_chocolate", "rum_aroma"]
+    },
+    BETHMAENNCHEN: {
+        name: {en: "Bethmännchen", de: "Bethmännchen"},
+        ingredients: ["flour", "egg", "sugar", "marzipan", "nuts"]
+    },
+    PUNSCH: {
+        name: {en: "Hot Punch", de: "Heißer Punsch"},
+        ingredients: ["wine", "spices", "brown_sugar", "lemon_juice"]
+    },
+    ZIMTSTERNE: {
+        name: {en: "Cinnamon Stars", de: "Zimtsterne"},
+        ingredients: ["egg", "sugar", "spices", "ground_nuts", "nut_aroma"]
+    },
+    PRINTEN: {
+        name: {en: "Printen", de: "Printen"},
+        ingredients: ["flour", "egg", "honey", "candied_lemon_peel", "spices"]
+    },
+    VANILLEKIPFERL: {
+        name: {en: "Vanilla Crescents", de: "Vanillekipferl"},
+        ingredients: ["flour", "butter", "sugar", "vanilla_sugar", "ground_nuts"]
+    },
+    FLORENTINER: {
+        name: {en: "Florentines", de: "Florentiner"},
+        ingredients: ["butter", "sugar", "melted_chocolate", "honey", "peeled_nuts"]
+    },
+    MAKRONEN: {
+        name: {en: "Macarons", de: "Makronen"},
+        ingredients: ["egg", "sugar", "vanilla_sugar", "ground_nuts", "nut_aroma", "cherry_sauce"]
+    },
+    SPRITZGEBAECK: {
+        name: {en: "Spritz Biscuits", de: "Spritzgebäck"},
+        ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "lemon_juice"]
+    },
+    SPEKULATIUS: {
+        name: {en: "Speculoos", de: "Spekulatius"},
+        ingredients: ["flour", "butter", "egg", "sugar", "spices", "ground_nuts"]
+    },
+    SCHOKOLADENBROT: {
+        name: {en: "Chocolate Bread", de: "Schokoladenbrot"},
+        ingredients: ["flour", "butter", "egg", "sugar", "melted_chocolate", "ground_nuts"]
+    },
+    ENGELSAUGEN: {
+        name: {en: "Angel Eyes", de: "Engelsaugen"},
+        ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "lemon_juice", "cherry_jam"]
+    },
+    SCHWARZWEISSKEKSE: {
+        name: {en: "Chess Cookies", de: "Schwarzweißkekse"},
+        ingredients: ["flour", "butter", "egg", "vanilla_sugar", "sugar", "nut_aroma", "cocoa"]
+    },
+    LEBKUCHEN: {
+        name: {en: "Gingerbread", de: "Lebkuchen"},
+        ingredients: ["flour", "butter", "egg", "lemon_juice", "honey", "spices", "brown_sugar", "cocoa"]
+    },
+    PFEFFERNUESSE: {
+        name: {en: "Pfeffernüsse", de: "Pfeffernüsse"},
+        ingredients: ["flour", "butter", "egg", "sugar", "honey", "spices", "peeled_nuts", "nut_aroma"]
+    },
+    PANETTONE: {
+        name: {en: "Panettone", de: "Panettone"},
+        ingredients: ["flour", "butter", "egg", "vanilla_sugar", "sugar", "candied_lemon_peel", "raisins", "cherries"]
+    },
+    BAERENTATZEN: {
+        name: {en: "Bear Paws", de: "Bärentatzen"},
+        ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "cherry_jam", "melted_chocolate", "ground_nuts"]
+    },
+    NUSSECKEN: {
+        name: {en: "Nut Wedges", de: "Nussecken"},
+        ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "cherry_jam", "melted_chocolate", "ground_nuts", "peeled_nuts"]
+    },
+    DOMINOSTEINE: {
+        name: {en: "Dominosteine", de: "Dominosteine"},
+        ingredients: ["flour", "egg", "sugar", "cherry_jam", "marzipan", "melted_chocolate", "spices", "cocoa", "nut_aroma"]
+    },
+    CORNFLAKEWALNUSSKEKSE: {
+        name: {en: "Walnut Cookies", de: "Walnusskekse"},
+        ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "melted_chocolate", "ground_nuts", "cornflakes", "nut_aroma"]
+    },
+    STOLLEN: {
+        name: {en: "Stollen", de: "Stollen"},
+        ingredients: ["flour", "butter", "vanilla_sugar", "sugar", "lemon_juice", "candied_lemon_peel", "nut_aroma", "peeled_nuts", "milk", "raisins"]
+    }
 }
