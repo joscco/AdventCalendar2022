@@ -57,8 +57,8 @@ export const DIALOG_DAY_1: DialogConfig = {
             speeches: [
                 {text: "Machines come in all different types and shapes. Each one alters ingredients differently."},
                 {text: "The gray block with the drop symbol is such a machine. It's a liquefier to be precise."},
-                {text: "If you place this machine on a conveyor belt, it will turns all ingredients passing it into liquid."},
-                {text: "Try it yourself by dragging the liquefying machine on the honey belt."}],
+                {text: "If you place this machine on a conveyor belt, it will turn all ingredients passing it into liquid."},
+                {text: "Try it yourself by dragging the liquefying machine onto the honey belt."}],
             nextNodes: [{on: "moved_item_A_to_0_1", nextNodeId: "finished_first_drag"}]
         }, {
             onStartDo: (level) => {
@@ -105,8 +105,8 @@ export const DIALOG_DAY_1: DialogConfig = {
             },
             id: "willTry",
             speeches: [{text: "Oh... One thing before you start... I always like to listen to music while baking."},
-                {text: "If you prefer silence, you can turn the music off by clicking on the musical note icon on the top left."},
-                {text: "Sound effects are turned on and off via the speaker icon next to it."}
+                {text: "If you prefer silence, you can turn the music off by clicking on the musical note icon in the top left."},
+                {text: "Sound effects can be toggled via the speaker icon next to it."}
             ],
             continuationText: "Thanks",
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -169,7 +169,7 @@ export const DIALOG_DAY_2: DialogConfig = {
         },
         speeches: [
             {text: "Basically it works the same as yesterday, but there is one new difficulty: Blocks"},
-            {text: "You can see a such block above between the conveyor belts. Blocks are basically walls."},
+            {text: "You can see such a block between the conveyor belts above. Blocks are basically walls."},
             {text: "You can't place any machines on them, nor can you pass them."}],
         continuationText: "Ok.",
         nextNodes: [{on: "clicked_continuation_button", nextNodeId: "node3"}]
@@ -211,7 +211,7 @@ export const DIALOG_DAY_2: DialogConfig = {
         },
         speeches: [
             {text: "Lots of space here to be filled with ingredient recipes!"},
-            {text: "You can scroll up and down within in here by dragging the red bookmark."},
+            {text: "You can scroll up and down within the book by dragging the red bookmark."},
             {text: "You can now close the book by clicking on the red X on its top left."}],
         nextNodes: [{on: "closed_ingredient_cookbook", nextNodeId: "closed_cookbook"}]
     }, {
@@ -230,7 +230,7 @@ export const HINT_DAY_2: DialogConfig = {
     nodes: [
         {
             id: "hint1",
-            speeches: [{text: "Place one machine on each conveyor belt and all should work."}],
+            speeches: [{text: "Place one machine on each conveyor belt and everything should work."}],
             continuationText: "Ok.",
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
         }
@@ -272,8 +272,8 @@ export const DIALOG_DAY_3: DialogConfig = {
             onEndDo: (level) => level.unhighlightMachines(),
             speeches: [
                 {text: "See those machines? They're a little wider than the ones you've been using before."},
-                {text: "With these cuties, you can affect two conveyor belts at once."},
-                {text: "Remember, though, that they apply the same change on both conveyor belts."},
+                {text: "With these cuties you can affect two conveyor belts at once."},
+                {text: "Remember though, that they apply the same change on both conveyor belts."},
                 {text: "Let's see what you can do!"}],
             continuationText: "Ok.",
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -489,7 +489,7 @@ export const LAST_WORDS_DAY_7: DialogConfig = {
             id: "start",
             speeches: [
                 {text: "You're a real star!"},
-                {text: "... Yeah, that joke was a bad one..."}],
+                {text: "... Yeah, that was a bad joke..."}],
             nextNodes: [],
             skippable: true,
             durationUntilAutoClose: 2000,
@@ -801,7 +801,7 @@ export const DIALOG_DAY_17: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: "Greetings! You can be counted on! Let's see, what's on my list today? "},
+                {text: "Greetings! You can be counted on! Let's see, what's on my list today?"},
                 {text: "Ah, Gingerbread. You've probably noticed that you're up against more conveyor belts."},
                 {text: "But don't worry, I'm sure you'll master this recipe too. Have fun!"}],
             continuationText: "Thanks",
@@ -899,8 +899,8 @@ export const DIALOG_DAY_20: DialogConfig = {
             speeches: [
                 {text: "We are approaching the home straight. Today we are going to bake Bear Paws."},
                 {text: "There is one difficulty with this recipe: there are not enough machines for all belts."},
-                {text: "But if you are fast, you can of course use one machine on several treadmills."},
-                {text: "The important thing is that all desired ingredients leave the treadmills at the same time."},
+                {text: "But if you are fast, you can of course use one machine on several conveyor belts."},
+                {text: "The important thing is that all desired ingredients leave the belts at the same time."},
                 {text: "This will surely be a piece of cake for you!"}],
             continuationText: "Mhh.",
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -965,7 +965,7 @@ export const DIALOG_DAY_22: DialogConfig = {
                 {text: "In a few days it will be Christmas! Do you have a fireplace? No?"},
                 {text: "If you ever buy one, make sure it's nice and roomy."},
                 {text: "... I'm thinking of the chimney sweeps. They don't have it easy in their job either."},
-                {text: "So, now for today's cookies: Walnut Cookies. "},
+                {text: "So, now for today's cookies: Walnut Cookies."},
                 {text: "I've already put the recipe in the bakery for you. Let's go!"}],
             continuationText: "Yeah!",
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -978,7 +978,7 @@ export const LAST_WORDS_DAY_22: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: "These are not cookies, this is art!"}],
+                {text: "These are no cookies, this is art!"}],
             nextNodes: [],
             skippable: true,
             durationUntilAutoClose: 2000,
@@ -1068,7 +1068,7 @@ export const CHANGE_TYPE_HINT: DialogConfig = makeHintConfig("Click on machines 
 export const TWO_MACHINES_ON_ONE_BELT_HINT: DialogConfig = makeHintConfig("In this recipe there is a conveyor belt on which two machines must be placed.")
 export const MOVE_ORDER_LACK_OF_SPACE_HINT: DialogConfig = makeHintConfig("In this recipe, the order in which the machines are moved is very important due to the lack of space.", "Think carefully about which machine you want to move first.")
 export const BE_FAST_HINT: DialogConfig = makeHintConfig("In this recipe, you must be quick and apply a specific single machine to multiple conveyor belts.", "Pay attention to the right timing so that the desired ingredients leave the conveyor belts at the same time.")
-export const NON_TIMING_FIRST_HINT: DialogConfig = makeHintConfig("It is advisable to deal with the time independent ingredients first..")
+export const NON_TIMING_FIRST_HINT: DialogConfig = makeHintConfig("It is advisable to deal with the time independent ingredients first.")
 
 function makeHintConfig(...texts: string[]): DialogConfig {
     let speeches: { text: string }[] = []
@@ -1084,9 +1084,3 @@ function makeHintConfig(...texts: string[]): DialogConfig {
         ]
     }
 }
-
-
-
-
-
-
