@@ -48,8 +48,8 @@ export class TextBox extends Container {
         for (let i = 0; i < this.fullText.length - 1; i++) {
             this.letterTweens[i] = gsap.to(this.letters[i].scale, {
                 x: 1, y: 1, duration: this.LETTER_TYPE_DURATION, delay: i * this.LETTER_TYPE_OFFSET, ease: Back.easeOut, onStart: () => {
-                    if (this.letters[i].text.match(/[A-Za-z]/g)) {
-                        SOUND_MANAGER.playDullPlop()
+                    if (i % 5 == 0) {
+                        SOUND_MANAGER.playTalkSound()
                     }
                 }
             })

@@ -133,7 +133,7 @@ export class GridItem {
     async trySetToIndex(grid: Grid, index: Index2D): Promise<boolean> {
         if (this.canBeSetToIndexInGrid(grid, index) && !this.moving && !this.positionLocked) {
             this.moving = true
-            SOUND_MANAGER.playBlub()
+            SOUND_MANAGER.playMoveSound()
             await this.moveToIndex(grid, index)
             this.moving = false
             return true;

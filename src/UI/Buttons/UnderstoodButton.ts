@@ -1,7 +1,7 @@
 import {Text} from "pixi.js";
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "@pixi/core";
-import {ASSET_STORE, DIALOG_MANAGER, EVENT_EMITTER} from "../../index";
+import {ASSET_STORE, DIALOG_MANAGER, EVENT_EMITTER, SOUND_MANAGER} from "../../index";
 import gsap from "gsap";
 
 export class UnderstoodButton extends ScalingButton {
@@ -29,6 +29,7 @@ export class UnderstoodButton extends ScalingButton {
     onClick(): void {
         DIALOG_MANAGER.endDialog()
         EVENT_EMITTER.emit("clicked_continuation_button")
+        SOUND_MANAGER.playBlub()
         this.blendOut()
     }
 

@@ -7,30 +7,45 @@ export class SoundManager {
 
     private mainMusic: Howl
     private blubs: Howl[]
-    private crunches: Howl[]
-    private dullPlops: Howl[]
-    private plops: Howl[]
-    private typeSound: Howl
+    private talkSounds: Howl[]
+    private moveSounds: Howl[]
 
     constructor() {
-        this.mainMusic = SoundManager.createHowl("Main.ogg", true)
+        this.mainMusic = SoundManager.createHowl("music/Main.ogg", true)
 
-        this.blubs = SoundManager.createHowls(["Blub1.ogg", "Blub2.ogg"])
-        this.crunches = SoundManager.createHowls(["Crunch1.ogg", "Crunch2.ogg"])
-        this.dullPlops = SoundManager.createHowls(["DullPlop1.ogg", "DullPlop2.ogg"])
-        this.plops = SoundManager.createHowls(["Plop1.ogg", "Plop2.ogg", "Plop3.ogg"])
-        this.typeSound = SoundManager.createHowl("Type1.ogg")
+        this.blubs = SoundManager.createHowls(["click/Blub1.ogg", "click/Blub2.ogg"])
+        this.talkSounds = SoundManager.createHowls([
+            "talk/talk-01.ogg",
+            "talk/talk-02.ogg",
+            "talk/talk-03.ogg",
+            "talk/talk-04.ogg",
+            "talk/talk-05.ogg",
+            "talk/talk-06.ogg",
+            "talk/talk-07.ogg",
+            "talk/talk-08.ogg",
+            "talk/talk-09.ogg"
+        ])
+        this.moveSounds = SoundManager.createHowls([
+                "move/move-01.ogg",
+                "move/move-02.ogg",
+                "move/move-03.ogg",
+                "move/move-04.ogg"],
+            0.5)
     }
 
-    static createHowls(sources: string[]): Howl[] {
-        return sources.map(source => SoundManager.createHowl(source))
+    static createHowls(sources: string[], volume?: number, rate?: number): Howl[] {
+        return sources.map(source => {
+            return SoundManager.createHowl(source, false, volume, rate)
+        })
     }
 
-    static createHowl(source: string, loop: boolean = false): Howl {
+    static createHowl(source: string, loop: boolean = false, volume?: number, rate?: number): Howl {
         return new Howl({
             src: "assets/sounds/" + source,
             html5: true,
-            loop: loop
+            loop: loop,
+            volume: volume ?? 1,
+            rate: rate ?? 1
         })
     }
 
@@ -49,26 +64,15 @@ export class SoundManager {
         this.playAnyOf(this.blubs)
     }
 
-    playCrunch(): void {
-        this.playAnyOf(this.crunches)
+    playTalkSound(): void {
+        this.playAnyOf(this.talkSounds)
     }
 
-    playDullPlop(): void {
-        this.playAnyOf(this.dullPlops)
-    }
-
-    playPlop(): void {
-        this.playAnyOf(this.plops)
-    }
-
-    playTypeSound(): void {
-        if (this.soundAllowed) {
-            this.typeSound.play()
-        }
+    playMoveSound(): void {
+        this.playAnyOf(this.moveSounds)
     }
 
     private playAnyOf(howlArr: Howl[]) {
-        howlArr.forEach(howl => howl.stop())
         if (this.soundAllowed) {
             howlArr[Math.floor(Math.random() * howlArr.length)].play()
         }
