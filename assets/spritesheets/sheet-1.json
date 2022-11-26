@@ -16,6 +16,22 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":1437,"h":245},
 	"sourceSize": {"w":1437,"h":245}
 },
+"dialog/englishFlag":
+{
+	"frame": {"x":1900,"y":1796,"w":144,"h":104},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":104},
+	"sourceSize": {"w":144,"h":104}
+},
+"dialog/germanFlag":
+{
+	"frame": {"x":1900,"y":1904,"w":144,"h":104},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":104},
+	"sourceSize": {"w":144,"h":104}
+},
 "gameScreen/berndButton/eyes_closed":
 {
 	"frame": {"x":1967,"y":677,"w":68,"h":23},
@@ -159,22 +175,6 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":120},
 	"sourceSize": {"w":118,"h":120}
-},
-"gameScreen/ingredients/cornflakes":
-{
-	"frame": {"x":1900,"y":1912,"w":126,"h":132},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":126,"h":132},
-	"sourceSize": {"w":126,"h":132}
-},
-"gameScreen/ingredients/dirt":
-{
-	"frame": {"x":1900,"y":1796,"w":143,"h":112},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":143,"h":112},
-	"sourceSize": {"w":143,"h":112}
 },
 "gameScreen/ingredients/egg":
 {
@@ -376,6 +376,6 @@
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "sheet-0.json", "sheet-2.json", "sheet-3.json", "sheet-4.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:af0fcd928812e296c9b8ba9cc65ff6dc:055e92955e747b62b6e3b098eac4d5f2:81a6f0a70957ea4181bc37a27f6e7b67$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d6e15cd8a160ebd21f949e31d43efddb:949bfc4ed220e4581004aff29c72f70a:81a6f0a70957ea4181bc37a27f6e7b67$"
 }
 }

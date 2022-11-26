@@ -1,15 +1,18 @@
-import {Application, Container, MIPMAP_MODES, Sprite, TilingSprite} from 'pixi.js';
-import {ASSET_STORE, BERND, GAME_HEIGHT, GAME_WIDTH} from "../index";
+import {Application, Container, MIPMAP_MODES, Sprite, Text, TilingSprite} from 'pixi.js';
+import {ASSET_STORE, BERND, GAME_HEIGHT, GAME_WIDTH, LANGUAGE_MANAGER} from "../index";
 import Scene from "./Basics/Scene";
 import {Texture} from "@pixi/core";
 import {StartButton} from "../UI/Buttons/StartButton";
+import {LanguageButton} from "../UI/Buttons/LanguageButton";
+import {Language, LanguageDependantItem} from "../General/LanguageManager";
 
-export class StartScene extends Scene {
+export class StartScene extends Scene implements LanguageDependantItem {
 
     lettersContainer: Container
     letters: Sprite[] = [];
-    pretitle?: Sprite;
+    pretitle: Text;
     startButton: StartButton;
+    languageButton: LanguageButton;
     started: boolean = false
     private backgroundMoveTween?: gsap.core.Tween;
 
@@ -19,9 +22,22 @@ export class StartScene extends Scene {
 
         this.addScrollingBackground(ASSET_STORE.getTextureAsset("startScreenBackgroundPattern"));
 
-        this.addPretitle(ASSET_STORE.getTextureAsset("startScreenPretitle"))
+        this.pretitle = this.addPretitle()
         this.lettersContainer = this.addTitle(ASSET_STORE.getTitleLetterTextures());
         this.startButton = this.initStartButton();
+        this.languageButton = this.initLanguageButton();
+
+        LANGUAGE_MANAGER.addLanguageItem(this)
+    }
+
+    setLanguage(newLanguage: Language): void {
+        this.changePretitleText(newLanguage)
+    }
+
+    private async changePretitleText(newLanguage: Language) {
+        await gsap.to(this.pretitle.scale, {x: 0, y: 0, duration: 0.3, ease: Back.easeIn})
+        this.pretitle.text = newLanguage === "en" ? "joscco presents" : "joscco präsentiert"
+        gsap.to(this.pretitle.scale, {x: 1, y: 1, duration: 0.3, ease: Back.easeOut})
     }
 
     async start(): Promise<void> {
@@ -66,11 +82,12 @@ export class StartScene extends Scene {
         this.addChild(scrollingBackground);
     }
 
-    private addPretitle(pretitleTexture: Texture) {
-        this.pretitle = new Sprite(pretitleTexture);
-        this.pretitle.anchor.set(0.5)
-        this.pretitle.position.set(GAME_WIDTH / 2, GAME_HEIGHT + 125)
-        this.addChild(this.pretitle)
+    private addPretitle(): Text {
+        let pretitle = new Text("joscco presents", {fontFamily: "Futurahandwritten", fontWeight: "bold", fontSize: 50, fill: 0x381a1b});
+        pretitle.anchor.set(0.5)
+        pretitle.position.set(GAME_WIDTH / 2, GAME_HEIGHT + 125)
+        this.addChild(pretitle)
+        return pretitle
     }
 
     private addTitle(lettersTextures: Texture[]): Container {
@@ -101,7 +118,7 @@ export class StartScene extends Scene {
     }
 
     private async blendInPretitle() {
-        await gsap.to(this.pretitle!, {duration: 1, y: 125, ease: Back.easeInOut})
+        await gsap.to(this.pretitle, {duration: 1, y: 125, ease: Back.easeInOut})
     }
 
     private async blendInTitle() {
@@ -115,5 +132,12 @@ export class StartScene extends Scene {
         this.startButton.interactive = false
         await gsap.to(this.startButton!.scale, {duration: 1, x: 1, y: 1, ease: Quart.easeInOut, delay: 1.5})
         this.startButton.interactive = true
+    }
+
+    private initLanguageButton() {
+        let button = new LanguageButton()
+        button.position.set(GAME_WIDTH - 210, 125)
+        this.addChild(button)
+        return button;
     }
 }

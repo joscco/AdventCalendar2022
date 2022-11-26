@@ -1,12 +1,18 @@
 import {INGREDIENT_ALARM, INGREDIENT_COOKBOOK, LEVEL_SCREEN} from "../index";
 import {IngredientID} from "../gameobjects/GameScreen/ConveyorBelt/Ingredient";
+import {Language} from "./LanguageManager";
 
 export type GameState = {
     unlockedLevel: number,
-    unlockedIngredients: IngredientID[]
+    unlockedIngredients: IngredientID[],
+    preferredLanguage: Language
 }
 
-const INITIAL_GAMESTATE: GameState = {unlockedLevel: 1, unlockedIngredients: ["cream"]}
+const INITIAL_GAMESTATE: GameState = {
+    unlockedLevel: 1,
+    unlockedIngredients: ["cream"],
+    preferredLanguage: "en"
+}
 
 export class GameData {
     private GAME_STATE_KEY: string = "berndsBakeryGame"
@@ -16,10 +22,11 @@ export class GameData {
         this.currentState = this.loadGame()
     }
 
-    private unite(state1: GameState, state2: GameState): GameState {
+    private unite(newState: GameState, oldState: GameState): GameState {
         return {
-            unlockedLevel: Math.max(state1.unlockedLevel, state2.unlockedLevel),
-            unlockedIngredients: [...new Set([...state1.unlockedIngredients, ...state2.unlockedIngredients])]
+            preferredLanguage: newState.preferredLanguage,
+            unlockedLevel: Math.max(newState.unlockedLevel, oldState.unlockedLevel),
+            unlockedIngredients: [...new Set([...newState.unlockedIngredients, ...oldState.unlockedIngredients])]
         }
     }
 
@@ -46,10 +53,15 @@ export class GameData {
         }
     }
 
-    private saveGame(gameState: GameState): void {
-        let newState = this.unite(gameState, this.loadGame())
-        localStorage.setItem(this.GAME_STATE_KEY, JSON.stringify(newState))
-        this.currentState = newState
+    savePreferredLanguage(newLanguage: Language) {
+        this.currentState.preferredLanguage = newLanguage
+        this.saveGame(this.currentState)
+    }
+
+    private saveGame(newState: GameState): void {
+        let finalState = this.unite(newState, this.loadGame())
+        localStorage.setItem(this.GAME_STATE_KEY, JSON.stringify(finalState))
+        this.currentState = finalState
     }
 
     getUnlockedLevels(): number {
@@ -58,6 +70,10 @@ export class GameData {
 
     getUnlockedIngredients(): IngredientID[] {
         return this.currentState.unlockedIngredients;
+    }
+
+    getPreferredLanguage() {
+        return this.currentState.preferredLanguage;
     }
 
     private loadGame(): GameState {
@@ -82,6 +98,7 @@ export class GameData {
 
     private isGameState(state: any): state is GameState {
         return (state as GameState).unlockedLevel !== undefined
-            && (state as GameState).unlockedIngredients !== undefined;
+            && (state as GameState).unlockedIngredients !== undefined
+            && (state as GameState).preferredLanguage !== undefined;
     }
 }

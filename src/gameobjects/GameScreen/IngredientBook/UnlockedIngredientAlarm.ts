@@ -1,9 +1,10 @@
 import {Sprite, Text} from "pixi.js";
-import {ASSET_STORE, GAME_WIDTH} from "../../../index";
+import {ASSET_STORE, GAME_WIDTH, LANGUAGE_MANAGER} from "../../../index";
 import {IngredientID, INGREDIENTS} from "../ConveyorBelt/Ingredient";
 import {IngredientAlarmCancelButton} from "../../../UI/Buttons/IngredientAlarmCancelButton";
+import {Language, LanguageDependantItem} from "../../../General/LanguageManager";
 
-export class UnlockedIngredientAlarm extends Sprite {
+export class UnlockedIngredientAlarm extends Sprite implements LanguageDependantItem {
 
     ingredientIcon: Sprite
     title: Text
@@ -15,7 +16,7 @@ export class UnlockedIngredientAlarm extends Sprite {
     constructor() {
         super(ASSET_STORE.getTextureAsset("ingredientOverviewAlarm"));
         this.anchor.set(0.5)
-        this.position.set(GAME_WIDTH / 2,- 200)
+        this.position.set(GAME_WIDTH / 2, -200)
 
         this.ingredientIcon = new Sprite()
         this.ingredientIcon.anchor.set(0.5)
@@ -33,12 +34,18 @@ export class UnlockedIngredientAlarm extends Sprite {
         this.cancelButton.position.set(this.width / 2 - 5, -this.height / 2 + 5)
 
         this.addChild(this.ingredientIcon, this.ingredientName, this.title, this.cancelButton)
+
+        LANGUAGE_MANAGER.addLanguageItem(this)
+    }
+
+    setLanguage(newLanguage: Language): void {
+        this.title.text = newLanguage === "en" ? "New Ingredient!" : "Neue Zutat!"
     }
 
 
     async blendIn(newIngredient: IngredientID) {
         await this.blendOut()
-        this.ingredientName.text = INGREDIENTS[newIngredient].text
+        this.ingredientName.text = INGREDIENTS[newIngredient].text[LANGUAGE_MANAGER.getCurrentLanguage()]
         this.ingredientIcon.texture = ASSET_STORE.getTextureAsset(newIngredient)
         await gsap.to(this.position, {y: 150, duration: 0.5, ease: Back.easeInOut})
         this.shown = true

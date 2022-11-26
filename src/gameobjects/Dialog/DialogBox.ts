@@ -1,5 +1,5 @@
 import {Container, Sprite} from "pixi.js";
-import {ASSET_STORE, DIALOG_MANAGER, GAME_HEIGHT, GAME_WIDTH} from "../../index";
+import {ASSET_STORE, DIALOG_MANAGER, GAME_HEIGHT, GAME_WIDTH, LANGUAGE_MANAGER} from "../../index";
 import {ScalingButtonImpl} from "../../UI/Buttons/ScalingButton";
 import {DialogNode, DialogNodeSpeech} from "./Dialogs/DialogConfig";
 import {TextBox} from "./Dialogs/TextBox";
@@ -78,13 +78,15 @@ export class DialogBox extends Container {
     setSpeeches(node: DialogNode) {
         this.currentSpeeches = node.speeches
         this.currentSpeechIndex = 0
-        this.textObject.setFullText(this.currentSpeeches[this.currentSpeechIndex].text)
+        this.textObject.setFullText(this.currentSpeeches[this.currentSpeechIndex].text[LANGUAGE_MANAGER.getCurrentLanguage()])
 
         this.previousButton.hide()
         this.nextButton.hide()
         this.cancelButton.hide()
         this.understoodButton.hide()
-        this.understoodButton.setText(node.continuationText ?? "")
+        this.understoodButton.setText(node.continuationText
+            ? node.continuationText[LANGUAGE_MANAGER.getCurrentLanguage()]
+            : "")
 
         if (this.currentSpeeches.length > 1) {
             this.nextButton.blendIn()
@@ -106,7 +108,7 @@ export class DialogBox extends Container {
             let index = ++this.currentSpeechIndex!
             await this.detype()
 
-            this.textObject.setFullText(this.currentSpeeches![index].text)
+            this.textObject.setFullText(this.currentSpeeches![index].text[LANGUAGE_MANAGER.getCurrentLanguage()])
 
             let isLastSpeech = index === this.currentSpeeches!.length - 1
             if (isLastSpeech) {
@@ -134,7 +136,7 @@ export class DialogBox extends Container {
             }
             DIALOG_MANAGER.killAutocloseTimer()
             let index = --this.currentSpeechIndex!
-            this.textObject.setFullText(this.currentSpeeches[index].text)
+            this.textObject.setFullText(this.currentSpeeches[index].text[LANGUAGE_MANAGER.getCurrentLanguage()])
             if (index === 0) {
                 this.previousButton.blendOut()
             }

@@ -2,7 +2,7 @@ import {EmittableEvent} from "../../../General/EventEmitter";
 import {DIALOG_MANAGER, EVENT_EMITTER} from "../../../index";
 import {FactoryScene} from "../../../Scenes/FactoryScene";
 
-export type DialogNodeSpeech = { text: string }
+export type DialogNodeSpeech = { text: { en: string, de: string } }
 
 export type DialogConfig = {
     nodes: DialogNodeConfig[];
@@ -10,7 +10,7 @@ export type DialogConfig = {
 
 export const END = -1
 
-export type NextNodeConfig = { on: EmittableEvent, nextNodeId: string | -1}
+export type NextNodeConfig = { on: EmittableEvent, nextNodeId: string | -1 }
 
 export type DialogNodeConfig = {
     id: string,
@@ -19,7 +19,7 @@ export type DialogNodeConfig = {
 
     skippable?: boolean,
     durationUntilAutoClose?: number,
-    continuationText?: string,
+    continuationText?: {en: string, de: string},
 
     onStartDo?: (level: FactoryScene) => void,
     onEndDo?: (level: FactoryScene) => void,
@@ -72,7 +72,7 @@ export class DialogNode {
 
     skippable: boolean
     autoCloseDuration?: number
-    continuationText?: string
+    continuationText?: {en: string, de: string}
 
     constructor(dialog: Dialog, config: DialogNodeConfig) {
         this.id = config.id
@@ -124,7 +124,7 @@ export class DialogNode {
         this.nextNodes.forEach(successor =>
             EVENT_EMITTER.subscribe(
                 successor.on,
-                () => this.onEventResume(successor.on,  successor.nextNodeId, level)))
+                () => this.onEventResume(successor.on, successor.nextNodeId, level)))
 
         if (this.onLastSpeechDo) {
             this.onLastSpeechDo(level)

@@ -1,10 +1,10 @@
-// Klasse als Darstellung eines Zutaten-Zustands (Geschmack, Konsistenz, Farbe, Position)
 import {Container, Sprite} from "pixi.js";
 import {Texture} from "@pixi/core";
-import {ASSET_STORE} from "../../../index";
+import {ASSET_STORE, LANGUAGE_MANAGER} from "../../../index";
 import {Emitter} from "@pixi/particle-emitter";
+import {Language, LanguageDependantItem} from "../../../General/LanguageManager";
 
-export class Ingredient extends Container {
+export class Ingredient extends Container implements LanguageDependantItem {
 
     private taste: IngredientTaste = "neutral"
     private consistency: IngredientConsistence = "sticky"
@@ -30,7 +30,20 @@ export class Ingredient extends Container {
         this.set(this.id)
         this.particleEmitter = this.createParticleEmitter()
 
-        this.animateTween = gsap.to(this.sprite.scale, {x: 1.05, y: 0.95, duration: 0.5, yoyo: true, repeat: -1, ease: Expo.easeInOut})
+        this.animateTween = gsap.to(this.sprite.scale, {
+            x: 1.05,
+            y: 0.95,
+            duration: 0.5,
+            yoyo: true,
+            repeat: -1,
+            ease: Expo.easeInOut
+        })
+
+        LANGUAGE_MANAGER.addLanguageItem(this)
+    }
+
+    setLanguage(newLanguage: Language): void {
+        this.text = INGREDIENTS[this.id].text[newLanguage]
     }
 
     setTaste(newTaste: IngredientTaste): void {
@@ -103,7 +116,7 @@ export class Ingredient extends Container {
 
     private updateTextAndID() {
         this.id = getIDForData(this.taste, this.color, this.consistency)
-        this.text = INGREDIENTS[this.id].text
+        this.text = INGREDIENTS[this.id].text[LANGUAGE_MANAGER.getCurrentLanguage()]
     }
 
     private createParticleEmitter() {
@@ -176,8 +189,8 @@ export class Ingredient extends Container {
     }
 }
 
-export function getNameForID(id: IngredientID) {
-    return INGREDIENTS[id]!.text
+export function getNameForID(id: IngredientID, language: Language) {
+    return INGREDIENTS[id]!.text[language]
 }
 
 export function getIDForData(taste: IngredientTaste, color: IngredientColor, consistency: IngredientConsistence): IngredientID {
@@ -191,7 +204,7 @@ export function getIDForData(taste: IngredientTaste, color: IngredientColor, con
 }
 
 export type IngredientData = {
-    text: string,
+    text: { "en": string, "de": string },
     taste: IngredientTaste,
     consistence: IngredientConsistence,
     color: IngredientColor
@@ -223,84 +236,84 @@ export const IngredientIDs = [
 
 export type IngredientID = typeof IngredientIDs[number]
 
-export const INGREDIENTS: {[id in IngredientID]: IngredientData} = {
-    "cream": {text: "Cream", taste: "neutral", color: "white", consistence: "sticky"}, // -
-    "milk": {text: "Milk", taste: "neutral", color: "white", consistence: "liquid"}, // +
-    "flour": {text: "Flour", taste: "neutral", color: "white", consistence: "powdery"}, // +
-    "boiled_egg": {text: "Boiled Egg", taste: "neutral", color: "white", consistence: "solid"}, // -
+export const INGREDIENTS: { [id in IngredientID]: IngredientData } = {
+    "cream": {text: {en: "Cream", de: "Sahne"}, taste: "neutral", color: "white", consistence: "sticky"}, // -
+    "milk": {text: {en: "Milk", de: "Milch"}, taste: "neutral", color: "white", consistence: "liquid"}, // +
+    "flour": {text: {en: "Flour", de: "Mehl"}, taste: "neutral", color: "white", consistence: "powdery"}, // +
+    "boiled_egg": {text: {en: "Boiled Egg", de: "Gekochtes Ei"}, taste: "neutral", color: "white", consistence: "solid"}, // -
 
-    "butter": {text: "Butter", taste: "neutral", color: "yellow", consistence: "sticky"}, // +
-    "melted_butter": {text: "Melted Butter", taste: "neutral", color: "yellow", consistence: "liquid"}, // -
-    "cornflour": {text: "Cornflour", taste: "neutral", color: "yellow", consistence: "powdery"}, // -
-    "cornflakes": {text: "Cornflakes", taste: "neutral", color: "yellow", consistence: "solid"}, // +
+    "butter": {text: {en: "Butter", de: "Butter"}, taste: "neutral", color: "yellow", consistence: "sticky"}, // +
+    "melted_butter": {text: {en: "Melted Butter", de: "flüssige Butter"}, taste: "neutral", color: "yellow", consistence: "liquid"}, // -
+    "cornflour": {text: {en: "Cornflour", de: "Maismehl"}, taste: "neutral", color: "yellow", consistence: "powdery"}, // -
+    "cornflakes": {text: {en: "Cornflakes", de: "Cornflakes"}, taste: "neutral", color: "yellow", consistence: "solid"}, // +
 
-    "beet_pudding": {text: "Beet Pudding", taste: "neutral", color: "red", consistence: "sticky"}, // -
-    "beet_juice": {text: "Beet Juice", taste: "neutral", color: "red", consistence: "liquid"}, // -
-    "beet_flour": {text: "Beet Flour", taste: "neutral", color: "red", consistence: "powdery"}, // -
-    "beet": {text: "Red Beet", taste: "neutral", color: "red", consistence: "solid"}, // -
+    "beet_pudding": {text: {en: "Beet Pudding", de: "Rübenpudding"}, taste: "neutral", color: "red", consistence: "sticky"}, // -
+    "beet_juice": {text: {en: "Beet Juice", de: "Rübensaft"}, taste: "neutral", color: "red", consistence: "liquid"}, // -
+    "beet_flour": {text: {en: "Beet Flour", de: "Rübenmehl"}, taste: "neutral", color: "red", consistence: "powdery"}, // -
+    "beet": {text: {en: "Red Beet", de: "Rübe"}, taste: "neutral", color: "red", consistence: "solid"}, // -
 
-    "mud": {text: "Mud", taste: "neutral", color: "brown", consistence: "sticky"}, // -
-    "swamp_water": {text: "Swamp Water", taste: "neutral", color: "brown", consistence: "liquid"}, // -
-    "dry_dirt": {text: "Dry Dirt", taste: "neutral", color: "brown", consistence: "powdery"}, // -
-    "dirt": {text: "Dirt", taste: "neutral", color: "brown", consistence: "solid"}, // -
+    "mud": {text: {en: "Mud", de: "Schlamm"}, taste: "neutral", color: "brown", consistence: "sticky"}, // -
+    "swamp_water": {text: {en: "Swamp Water", de: "Moorwasser"}, taste: "neutral", color: "brown", consistence: "liquid"}, // -
+    "dry_dirt": {text: {en: "Dry Dirt", de: "Staub"}, taste: "neutral", color: "brown", consistence: "powdery"}, // -
+    "dirt": {text: {en: "Dirt", de: "Dreck"}, taste: "neutral", color: "brown", consistence: "solid"}, // -
 
-    "sweetened_cream": {text: "Sweetened Cream", taste: "sweet", color: "white", consistence: "sticky"}, // -
-    "sweetened_milk": {text: "Sweetened Milk", taste: "sweet", color: "white", consistence: "liquid"}, // -
-    "sugar": {text: "Sugar", taste: "sweet", color: "white", consistence: "powdery"}, // +
-    "marzipan": {text: "Marzipan", taste: "sweet", color: "white", consistence: "solid"}, // +
+    "sweetened_cream": {text: {en: "Sweetened Cream", de: "Süße Sahne"}, taste: "sweet", color: "white", consistence: "sticky"}, // -
+    "sweetened_milk": {text: {en: "Sweetened Milk", de: "Süße Milch"}, taste: "sweet", color: "white", consistence: "liquid"}, // -
+    "sugar": {text: {en: "Sugar", de: "Zucker"}, taste: "sweet", color: "white", consistence: "powdery"}, // +
+    "marzipan": {text: {en: "Marzipan", de: "Marzipan"}, taste: "sweet", color: "white", consistence: "solid"}, // +
 
-    "honey": {text: "Honey", taste: "sweet", color: "yellow", consistence: "sticky"}, // +
-    "vanilla_milk": {text: "Vanilla Milk", taste: "sweet", color: "yellow", consistence: "liquid"}, // -
-    "vanilla_sugar": {text: "Vanilla Sugar", taste: "sweet", color: "yellow", consistence: "powdery"}, // +
-    "honey_comb": {text: "Honey Comb", taste: "sweet", color: "yellow", consistence: "solid"}, // -
+    "honey": {text: {en: "Honey", de: "Honig"}, taste: "sweet", color: "yellow", consistence: "sticky"}, // +
+    "vanilla_milk": {text: {en: "Vanilla Milk", de: "Vanillemilch"}, taste: "sweet", color: "yellow", consistence: "liquid"}, // -
+    "vanilla_sugar": {text: {en: "Vanilla Sugar", de: "Vanillezucker"}, taste: "sweet", color: "yellow", consistence: "powdery"}, // +
+    "honey_comb": {text: {en: "Honey Comb", de: "Honigwabe"}, taste: "sweet", color: "yellow", consistence: "solid"}, // -
 
-    "cherry_jam": {text: "Cherry Jam", taste: "sweet", color: "red", consistence: "sticky"}, // +
-    "cherry_sauce": {text: "Cherry Sauce", taste: "sweet", color: "red", consistence: "liquid"}, // -
-    "cherry_sugar": {text: "Cherry Sugar", taste: "sweet", color: "red", consistence: "powdery"}, // -
-    "cherries": {text: "Cherries", taste: "sweet", color: "red", consistence: "solid"}, // +
+    "cherry_jam": {text: {en: "Cherry Jam", de: "Kirschmus"}, taste: "sweet", color: "red", consistence: "sticky"}, // +
+    "cherry_sauce": {text: {en: "Cherry Sauce", de: "Kirschsoße"}, taste: "sweet", color: "red", consistence: "liquid"}, // -
+    "cherry_sugar": {text: {en: "Cherry Sugar", de: "Kirschzucker"}, taste: "sweet", color: "red", consistence: "powdery"}, // -
+    "cherries": {text: {en: "Cherries", de: "Kirschen"}, taste: "sweet", color: "red", consistence: "solid"}, // +
 
-    "chocolate_pudding": {text: "Chocolate Pudding", taste: "sweet", color: "brown", consistence: "sticky"},
-    "melted_chocolate": {text: "Melted Chocolate", taste: "sweet", color: "brown", consistence: "liquid"},
-    "brown_sugar": {text: "Brown Sugar", taste: "sweet", color: "brown", consistence: "powdery"},
-    "raisins": {text: "Raisins", taste: "sweet", color: "brown", consistence: "solid"},
+    "chocolate_pudding": {text: {en: "Chocolate Pudding", de: "Schokoladenpudding"}, taste: "sweet", color: "brown", consistence: "sticky"},
+    "melted_chocolate": {text: {en: "Melted Chocolate", de: "Geschm. Schokolade"}, taste: "sweet", color: "brown", consistence: "liquid"},
+    "brown_sugar": {text: {en: "Brown Sugar", de: "Brauner Zucker"}, taste: "sweet", color: "brown", consistence: "powdery"},
+    "raisins": {text: {en: "Raisins", de: "Rosinen"}, taste: "sweet", color: "brown", consistence: "solid"},
 
-    "lemon_cream": {text: "Lemon Cream", taste: "sour", color: "white", consistence: "sticky"},
-    "lemon_aroma": {text: "Lemon Aroma", taste: "sour", color: "white", consistence: "liquid"},
-    "lemon_sugar": {text: "Lemon Sugar", taste: "sour", color: "white", consistence: "powdery"},
-    "old_lemon_candy": {text: "Old Lemon Candy", taste: "sour", color: "white", consistence: "solid"},
+    "lemon_cream": {text: {en: "Lemon Cream", de: "Zitronencreme"}, taste: "sour", color: "white", consistence: "sticky"},
+    "lemon_aroma": {text: {en: "Lemon Aroma", de: "Zitronenaroma"}, taste: "sour", color: "white", consistence: "liquid"},
+    "lemon_sugar": {text: {en: "Lemon Sugar", de: "Zitronenzucker"}, taste: "sour", color: "white", consistence: "powdery"},
+    "old_lemon_candy": {text: {en: "Old Lemon Candy", de: "Zitronenbonbon"}, taste: "sour", color: "white", consistence: "solid"},
 
-    "lemon_pudding": {text: "Lemon Pudding", taste: "sour", color: "yellow", consistence: "sticky"},
-    "lemon_juice": {text: "Lemon Juice", taste: "sour", color: "yellow", consistence: "liquid"},
-    "lemon_powder": {text: "Lemon Powder", taste: "sour", color: "yellow", consistence: "powdery"},
-    "candied_lemon_peel": {text: "Candied Lemon Peel", taste: "sour", color: "yellow", consistence: "solid"},
+    "lemon_pudding": {text: {en: "Lemon Pudding", de: "Zitronenpudding"}, taste: "sour", color: "yellow", consistence: "sticky"},
+    "lemon_juice": {text: {en: "Lemon Juice", de: "Zitronensaft"}, taste: "sour", color: "yellow", consistence: "liquid"},
+    "lemon_powder": {text: {en: "Lemon Powder", de: "Zitronenpulver"}, taste: "sour", color: "yellow", consistence: "powdery"},
+    "candied_lemon_peel": {text: {en: "Candied Lemon Peel", de: "Zitronat"}, taste: "sour", color: "yellow", consistence: "solid"},
 
-    "currant_pudding": {text: "Currant Pudding", taste: "sour", color: "red", consistence: "sticky"},
-    "currant_juice": {text: "Currant Juice", taste: "sour", color: "red", consistence: "liquid"},
-    "currant_sugar": {text: "Currant Sugar", taste: "sour", color: "red", consistence: "powdery"},
-    "currants": {text: "Currants", taste: "sour", color: "red", consistence: "solid"},
+    "currant_pudding": {text: {en: "Currant Pudding", de: "Zitronat"}, taste: "sour", color: "red", consistence: "sticky"},
+    "currant_juice": {text: {en: "Currant Juice", de: "Johannisbeersaft"}, taste: "sour", color: "red", consistence: "liquid"},
+    "currant_sugar": {text: {en: "Currant Sugar", de: "Johannisbeerzucker"}, taste: "sour", color: "red", consistence: "powdery"},
+    "currants": {text: {en: "Currants", de: "Johannisbeeren"}, taste: "sour", color: "red", consistence: "solid"},
 
-    "rotten_fruits": {text: "Rotten Fruits", taste: "sour", color: "brown", consistence: "sticky"},
-    "rotten_fruit_juice": {text: "Rotten Fruit Juice", taste: "sour", color: "brown", consistence: "liquid"},
-    "ground_umeboshi": {text: "Ground Umeboshi", taste: "sour", color: "brown", consistence: "powdery"},
-    "umeboshi": {text: "Umeboshi", taste: "sour", color: "brown", consistence: "solid"},
+    "rotten_fruits": {text: {en: "Rotten Fruits", de: "Faule Früchte"}, taste: "sour", color: "brown", consistence: "sticky"},
+    "rotten_fruit_juice": {text: {en: "Rotten Fruit Juice", de: "Fauler Fruchtsaft"}, taste: "sour", color: "brown", consistence: "liquid"},
+    "ground_umeboshi": {text: {en: "Ground Umeboshi", de: "Gemahlene Sauerpflaume"}, taste: "sour", color: "brown", consistence: "powdery"},
+    "umeboshi": {text: {en: "Umeboshi", de: "Sauerpflaume"}, taste: "sour", color: "brown", consistence: "solid"},
 
-    "nut_cream": {text: "Nut Cream", taste: "savoury", color: "white", consistence: "sticky"},
-    "nut_aroma": {text: "Nut Aroma", taste: "savoury", color: "white", consistence: "liquid"},
-    "ground_nuts": {text: "Ground Nuts", taste: "savoury", color: "white", consistence: "powdery"},
-    "peeled_nuts": {text: "Peeled Nuts", taste: "savoury", color: "white", consistence: "solid"},
+    "nut_cream": {text: {en: "Nut Cream", de: "Nusscreme"}, taste: "savoury", color: "white", consistence: "sticky"},
+    "nut_aroma": {text: {en: "Nut Aroma", de: "Nussaroma"}, taste: "savoury", color: "white", consistence: "liquid"},
+    "ground_nuts": {text: {en: "Ground Nuts", de: "Gemahlene Nüsse"}, taste: "savoury", color: "white", consistence: "powdery"},
+    "peeled_nuts": {text: {en: "Peeled Nuts", de: "Geschälte Nüsse"}, taste: "savoury", color: "white", consistence: "solid"},
 
-    "egg": {text: "Egg", taste: "savoury", color: "yellow", consistence: "sticky"},
-    "eggnog": {text: "Eggnog", taste: "savoury", color: "yellow", consistence: "liquid"},
-    "egg_powder": {text: "Egg Powder", taste: "savoury", color: "yellow", consistence: "powdery"},
-    "scrambled_egg": {text: "Scrambled Egg", taste: "savoury", color: "yellow", consistence: "solid"},
+    "egg": {text: {en: "Egg", de: "Ei"}, taste: "savoury", color: "yellow", consistence: "sticky"},
+    "eggnog": {text: {en: "Eggnog", de: "Eierlikör"}, taste: "savoury", color: "yellow", consistence: "liquid"},
+    "egg_powder": {text: {en: "Egg Powder", de: "Eipulver"}, taste: "savoury", color: "yellow", consistence: "powdery"},
+    "scrambled_egg": {text: {en: "Scrambled Egg", de: "Rührei"}, taste: "savoury", color: "yellow", consistence: "solid"},
 
-    "wine_cream": {text: "Wine Cream", taste: "savoury", color: "red", consistence: "sticky"},
-    "wine": {text: "Wine", taste: "savoury", color: "red", consistence: "liquid"},
-    "spices": {text: "Spices", taste: "savoury", color: "red", consistence: "powdery"},
-    "steak": {text: "Steak", taste: "savoury", color: "red", consistence: "solid"},
+    "wine_cream": {text: {en: "Wine Cream", de: "Weincreme"}, taste: "savoury", color: "red", consistence: "sticky"},
+    "wine": {text: {en: "Wine", de: "Wein"}, taste: "savoury", color: "red", consistence: "liquid"},
+    "spices": {text: {en: "Spices", de: "Gewürze"}, taste: "savoury", color: "red", consistence: "powdery"},
+    "steak": {text: {en: "Steak", de: "Steak"}, taste: "savoury", color: "red", consistence: "solid"},
 
-    "nut_butter": {text: "Nut Butter", taste: "savoury", color: "brown", consistence: "sticky"},
-    "rum_aroma": {text: "Rum Aroma", taste: "savoury", color: "brown", consistence: "liquid"},
-    "cocoa": {text: "Cocoa", taste: "savoury", color: "brown", consistence: "powdery"},
-    "nuts": {text: "Nuts", taste: "savoury", color: "brown", consistence: "solid"}
+    "nut_butter": {text: {en: "Nut Butter", de: "Nussbutter"}, taste: "savoury", color: "brown", consistence: "sticky"},
+    "rum_aroma": {text: {en: "Rum Aroma", de: "Rumaroma"}, taste: "savoury", color: "brown", consistence: "liquid"},
+    "cocoa": {text: {en: "Cocoa", de: "Kakao"}, taste: "savoury", color: "brown", consistence: "powdery"},
+    "nuts": {text: {en: "Nuts", de: "Nüsse"}, taste: "savoury", color: "brown", consistence: "solid"}
 } as const

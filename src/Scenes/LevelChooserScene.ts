@@ -1,25 +1,33 @@
 import Scene from "./Basics/Scene";
 import {Application, MIPMAP_MODES, Text, TilingSprite} from "pixi.js";
 import {LevelButton} from "../UI/Buttons/LevelButton";
-import {ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH} from "../index";
+import {ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH, LANGUAGE_MANAGER} from "../index";
 import {ScalingButton} from "../UI/Buttons/ScalingButton";
 import {BackToStartScreenButton} from "../UI/Buttons/BackToStartScreen";
 import {LEVEL_MANIFEST} from "./Basics/LevelInitiator";
+import {Language, LanguageDependantItem} from "../General/LanguageManager";
 
-export class LevelChooserScene extends Scene {
+export class LevelChooserScene extends Scene implements LanguageDependantItem {
 
+    title: Text
     levelButtons: LevelButton[]
     backButton: ScalingButton
     backgroundMoveTween?: gsap.core.Tween
 
-        constructor(app: Application) {
+    constructor(app: Application) {
         super();
         this.app = app
 
         this.setupBackground()
-        this.setUpTitle()
+        this.title = this.setUpTitle()
         this.levelButtons = this.setUpLevelButtons()
         this.backButton = this.setUpBackButton()
+
+        LANGUAGE_MANAGER.addLanguageItem(this)
+    }
+
+    setLanguage(newLanguage: Language): void {
+        this.title.text = newLanguage === "en" ? "Choose a level" : "Wähle ein Level"
     }
 
     private setupBackground() {
@@ -40,11 +48,12 @@ export class LevelChooserScene extends Scene {
         this.addChild(scrollingBackground);
     }
 
-    private setUpTitle() {
+    private setUpTitle(): Text {
         let title = new Text("Choose a level", {fontFamily: "Futurahandwritten", fontWeight: "bold", fontSize: 75, fill: 0x000000})
         title.anchor.set(0.5)
         title.position.set(GAME_WIDTH / 2, 125)
         this.addChild(title)
+        return title
     }
 
     beforeFadeIn() {

@@ -16,6 +16,7 @@ import {EventEmitter} from "./General/EventEmitter";
 import {DialogManager} from "./gameobjects/Dialog/DialogManager";
 import {Bernd} from "./gameobjects/Characters/Bernd";
 import {BerndButton} from "./UI/Buttons/BerndButton";
+import {LanguageManager} from "./General/LanguageManager";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
@@ -27,6 +28,7 @@ export var SCENE_MANAGER: SceneManager;
 export var ASSET_STORE: AssetStore;
 export var GAME_DATA: GameData;
 export var SOUND_MANAGER: SoundManager;
+export var LANGUAGE_MANAGER: LanguageManager
 export var LEVEL_SCREEN: LevelChooserScene;
 
 export var TOOLTIP_MANAGER: TooltipManager;
@@ -73,6 +75,7 @@ const main = async () => {
     // Add all loading bundles
     ASSET_STORE = new AssetStore()
     SCENE_MANAGER = new SceneManager(App);
+    LANGUAGE_MANAGER = new LanguageManager()
     App.stage.addChild(SCENE_MANAGER)
 
     // Load assets

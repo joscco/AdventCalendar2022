@@ -218,6 +218,22 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">assets/dialog/englishFlag.png</key>
+            <key type="filename">assets/dialog/germanFlag.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>36,26,72,52</rect>
+                <key>scale9Paddings</key>
+                <rect>36,26,72,52</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">assets/dialog/next.png</key>
             <key type="filename">assets/dialog/previous.png</key>
             <struct type="IndividualSpriteSettings">
