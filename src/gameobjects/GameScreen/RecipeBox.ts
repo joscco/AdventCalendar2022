@@ -157,7 +157,7 @@ export const RECIPES: { [keys in RecipeID]: Recipe } = {
     MAKRONEN: {name: {en: "Macarons", de: "Makronen"}, ingredients: ["egg", "sugar", "vanilla_sugar", "ground_nuts", "nut_aroma", "cherry_sauce"]},
     SPRITZGEBAECK: {name: {en: "Spritz Biscuits", de: "Spritzgebäck"}, ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "lemon_juice"]},
     SPEKULATIUS: {name: {en: "Speculoos", de: "Spekulatius"}, ingredients: ["flour", "butter", "egg", "sugar", "spices", "ground_nuts"]},
-    SCHOKOLADENBROT: {name: {en: "Chocolate Cake", de: "Schokoladenbrot"}, ingredients: ["flour", "butter", "egg", "sugar", "melted_chocolate", "ground_nuts"]},
+    SCHOKOLADENBROT: {name: {en: "Chocolate Bread", de: "Schokoladenbrot"}, ingredients: ["flour", "butter", "egg", "sugar", "melted_chocolate", "ground_nuts"]},
     ENGELSAUGEN: {name: {en: "Angel Eyes", de: "Engelsaugen"}, ingredients: ["flour", "butter", "egg", "sugar", "vanilla_sugar", "lemon_juice", "cherry_jam"]},
     SCHWARZWEISSKEKSE: {name: {en: "Chess Cookies", de: "Schwarzweißkekse"}, ingredients: ["flour", "butter", "egg", "vanilla_sugar", "sugar", "nut_aroma", "cocoa"]},
     LEBKUCHEN: {name: {en: "Gingerbread", de: "Lebkuchen"}, ingredients: ["flour", "butter", "egg", "lemon_juice", "honey", "spices", "brown_sugar", "cocoa"]},

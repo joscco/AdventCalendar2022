@@ -707,10 +707,25 @@ export const DIALOG_DAY_5: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Already your fifth day in my bakery. You seem to be enjoying yourself!", de: ""}},
-                {text: {en: "Today I'd like you to prepare some Bethmännchen.", de: ""}},
-                {text: {en: "You will have to apply everything you've learned so far.", de: ""}},
-                {text: {en: "You can do it, good luck!", de: ""}}
+                {
+                    text: {
+                        en: "Already your fifth day in my bakery. You seem to be enjoying yourself!",
+                        de: "Schon dein fünfter Tag in meiner Bäckerei. Du scheinst Spaß zu haben!"
+                    }
+                },
+                {
+                    text: {
+                        en: "Today I'd like you to prepare some Bethmännchen.",
+                        de: "Heute würde ich dich darum bitten, Bethmännchen herzustellen."
+                    }
+                },
+                {
+                    text: {
+                        en: "You will have to apply everything you've learned so far.",
+                        de: "Du wirst alles anwenden müssen, was du bisher gelernt hast."
+                    }
+                },
+                {text: {en: "You can do it, good luck!", de: "Du schaffst das, viel Erfolg!"}}
             ],
             continuationText: {en: "K.", de: "O.K."},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -746,15 +761,20 @@ export const DIALOG_DAY_6: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "You know what I really feel like today?", de: ""}},
-                {text: {en: "Punch. I actually come from a very cold place....", de: ""}},
+                {text: {en: "You know what I really feel like today?", de: "Weißt du, wonach mir heute ist?"}},
+                {
+                    text: {
+                        en: "Punch. I actually come from a very cold place....",
+                        de: "Punsch. Ich komme eigentlich aus einer sehr kalten Gegend..."
+                    }
+                },
                 {
                     text: {
                         en: "After a long day, there was nothing better for me than a delicious cup of hot, steaming Punch.",
-                        de: ""
+                        de: "Nach langen Tagen gab es dort nichts Besseres als eine köstliche Tasse dampfend heißen Punsch."
                     }
                 },
-                {text: {en: "I'll let you get to work then.", de: ""}}
+                {text: {en: "I'll let you get to work then.", de: "Ich werde dich also mal an die Arbeit lassen."}}
             ],
             continuationText: {en: "Yep.", de: "Jep."},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -767,7 +787,12 @@ export const LAST_WORDS_DAY_6: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Ahh, this tastes like home. Thank you!", de: ""}}
+                {
+                    text: {
+                        en: "Ahh, this tastes like home. Thank you!",
+                        de: "Ahh, das schmeckt nach Zuhause. Danke dir!"
+                    }
+                }
             ],
             nextNodes: [],
             skippable: true,
@@ -786,11 +811,26 @@ export const DIALOG_DAY_7: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Nice to see you again.", de: ""}},
-                {text: {en: "Did you also see the star-filled sky last night?", de: ""}},
-                {text: {en: "Really good flying weather.", de: ""}},
-                {text: {en: "Well, for planes... not for reindeer... they can't fly...", de: ""}},
-                {text: {en: "Inspired by this nightly sight, I want to ask you for Cinnamon Stars today.", de: ""}}
+                {text: {en: "Nice to see you again.", de: "Schön, dich wieder zu sehen."}},
+                {
+                    text: {
+                        en: "Did you also see the star-filled sky last night?",
+                        de: "Hast du auch den Sternenhimmel letzte Nacht gesehen?"
+                    }
+                },
+                {text: {en: "Really good flying weather.", de: "Wirklich super Flugwetter."}},
+                {
+                    text: {
+                        en: "Well, for planes... not for reindeer... they can't fly...",
+                        de: "Also für Flugzeuge... Nicht für Rentiere... Die können nicht fliegen..."
+                    }
+                },
+                {
+                    text: {
+                        en: "Inspired by this nightly sight, I want to ask you for Cinnamon Stars today.",
+                        de: "Von diesem nächtlichen Anblick inspiriert machen wir heute Zimtsterne."
+                    }
+                }
             ],
             continuationText: {en: "Ok.", de: "Ok."},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: "node2"}]
@@ -799,10 +839,30 @@ export const DIALOG_DAY_7: DialogConfig = {
             onStartDo: (level) => level.highlightMachines("Locked"),
             onEndDo: (level) => level.unhighlightMachines(),
             speeches: [
-                {text: {en: "This time there is a small change again: Machine positions can be locked.", de: ""}},
-                {text: {en: "Such machines are darker and tied to the conveyor belt with iron chains.", de: ""}},
-                {text: {en: "You can only change the machines' type in that case.", de: ""}},
-                {text: {en: "I am sure you will master the recipe anyway.", de: ""}}
+                {
+                    text: {
+                        en: "This time there is a small change again: Machine positions can be locked.",
+                        de: "Es gibt wieder eine kleine Neuerung: Maschinen können nun positions-fixiert sein."
+                    }
+                },
+                {
+                    text: {
+                        en: "Such machines are darker and tied to the conveyor belt with iron chains.",
+                        de: "Solche Maschinen sind dunkler und mit Eisenketten an die Laufbänder gekettet."
+                    }
+                },
+                {
+                    text: {
+                        en: "You can only change the machines' type in that case.",
+                        de: "In diesem Fall kannst du nur den Typen der Maschinen ändern."
+                    }
+                },
+                {
+                    text: {
+                        en: "I am sure you will master the recipe anyway.",
+                        de: "Ich bin sicher, du wirst das Rezept dennoch meistern."
+                    }
+                }
             ],
             continuationText: {en: "Ok.", de: "Ok."},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -815,8 +875,8 @@ export const LAST_WORDS_DAY_7: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "You're a real star!", de: ""}},
-                {text: {en: "... Yeah, that joke was a bad one...", de: ""}}
+                {text: {en: "You're a real star!", de: "Du bist ein echter Star!"}},
+                {text: {en: "... Yeah, that joke was a bad one...", de: "... Ja okay, der war flach..."}}
             ],
             nextNodes: [],
             skippable: true,
@@ -835,9 +895,19 @@ export const DIALOG_DAY_8: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Welcome to Bernd's bakery! ...", de: ""}},
-                {text: {en: "Oh it's you! Then let's not waste any more time.", de: ""}},
-                {text: {en: "Today Printen are on the agenda. Do not disappoint me!", de: ""}}
+                {text: {en: "Welcome to Bernd's bakery! ...", de: "Willkommen in Bernds Bäckerei! ..."}},
+                {
+                    text: {
+                        en: "Oh it's you! Then let's not waste any more time.",
+                        de: "Oh, du bist es! Na dann verplempert wir keine weitere Zeit."
+                    }
+                },
+                {
+                    text: {
+                        en: "Today Printen are on the agenda. Do not disappoint me!",
+                        de: "Heute machen wir Printen. Enttäusch mich nicht!"
+                    }
+                }
             ],
             continuationText: {en: "Sure.", de: "Klar."},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -850,7 +920,12 @@ export const LAST_WORDS_DAY_8: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "You've really got it, I've rarely eaten such good Printen.", de: ""}}
+                {
+                    text: {
+                        en: "You've really got it, I've rarely eaten such good Printen.",
+                        de: "Du hast es wirklich drauf. Ich habe selten so gute Printen gegessen."
+                    }
+                }
             ],
             nextNodes: [],
             skippable: true,
@@ -872,16 +947,16 @@ export const DIALOG_DAY_9: DialogConfig = {
                 {
                     text: {
                         en: "Tonight when I was walking Rudolph my... my dog, I noticed the beautiful half moon.",
-                        de: ""
+                        de: "Als ich letzte Nacht mit Rudolph meinem... meinem Hund ging, sah ich den wunderschönen Halbmond."
                     }
                 },
                 {
                     text: {
                         en: "It made clear to me that today we must devote ourselves to beautiful Vanilla Crescents.",
-                        de: ""
+                        de: "Das machte mir klar, dass wir uns heute wunderschönen Vanillekipferln widmen sollten."
                     }
                 },
-                {text: {en: "I'll keep my fingers crossed for you.", de: ""}}
+                {text: {en: "I'll keep my fingers crossed for you.", de: "Ich drücke dir die Daumen."}}
             ],
             continuationText: {en: "Ok.", de: "Ok."},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -894,7 +969,7 @@ export const LAST_WORDS_DAY_9: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "*Munch* ... Really delicious!", de: ""}}
+                {text: {en: "*Munch* ... Really delicious!", de: "*Mampf* ... Wirklich köstlich!"}}
             ],
             nextNodes: [],
             skippable: true,
@@ -913,11 +988,31 @@ export const DIALOG_DAY_10: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Glad you're here, we have a lot planned. Have you ever heard of Florentines?", de: ""}},
-                {text: {en: "No? I'm sure after today you won't forget them so easily.", de: ""}},
-                {text: {en: "There is another innovation I would like to tell you about: Quadruple machines.", de: ""}},
-                {text: {en: "They work like other machines, but they affect up to four conveyor belts.", de: ""}},
-                {text: {en: "I believe in you!", de: ""}}
+                {
+                    text: {
+                        en: "Glad you're here, we have a lot planned. Have you ever heard of Florentines?",
+                        de: "Gut, dass du da bist, wir haben viel vor. Schonmal von Florentinern gehört?"
+                    }
+                },
+                {
+                    text: {
+                        en: "No? I'm sure after today you won't forget them so easily.",
+                        de: "Nein? Naja, nach heute wirst du sie so schnell nicht vergessen."
+                    }
+                },
+                {
+                    text: {
+                        en: "There is another innovation I would like to tell you about: Quadruple machines.",
+                        de: "Es gibt noch etwas neues, von dem ich dir erzählen will: Vierfach-Maschinen."
+                    }
+                },
+                {
+                    text: {
+                        en: "They work like other machines, but they affect up to four conveyor belts.",
+                        de: "Sie funktionieren wie andere Maschinen, aber bedienen bis zu vier Laufbänder."
+                    }
+                },
+                {text: {en: "I believe in you!", de: "Ich glaube an dich!"}}
             ],
             continuationText: {en: "Ok.", de: "Ok."},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -930,8 +1025,18 @@ export const LAST_WORDS_DAY_10: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "You would make a good Christmas elf! ... At least I think so...", de: ""}},
-                {text: {en: "I... I don't know any Christmas elves. Not one!", de: ""}}
+                {
+                    text: {
+                        en: "You would make a good Christmas elf! ... At least I think so...",
+                        de: "Du würdest einen guten Weihnachtself abgeben!... Also, denke ich..."
+                    }
+                },
+                {
+                    text: {
+                        en: "I... I don't know any Christmas elves. Not one!",
+                        de: "Nicht, dass ich irgendwelche Elfen kennen würde... Nicht einen!"
+                    }
+                }
             ],
             nextNodes: [],
             skippable: true,
@@ -950,8 +1055,18 @@ export const DIALOG_DAY_11: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "I woke up this morning craving Macarons. Why don't we make some today?", de: ""}},
-                {text: {en: "For you, this should be a piece of cake. Here's the recipe.", de: ""}}
+                {
+                    text: {
+                        en: "I woke up this morning craving Macarons. Why don't we make some today?",
+                        de: "Ich bin heute mit einem starken Verlangen nach Makronen aufgewacht. Machst du uns welche?"
+                    }
+                },
+                {
+                    text: {
+                        en: "For you, this should be a piece of cake. Here's the recipe.",
+                        de: "Das sollte für dich ein Klacks sein. Hier ist das Rezept."
+                    }
+                }
             ],
             continuationText: {en: "Thanks", de: "Danke"},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -964,7 +1079,12 @@ export const LAST_WORDS_DAY_11: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Thank you, you are really a great help to me! ", de: ""}}
+                {
+                    text: {
+                        en: "Thank you, you are really a great help to me! ",
+                        de: "Danke, du bist mir wirklich eine große Hilfe!"
+                    }
+                }
             ],
             nextNodes: [],
             skippable: true,
@@ -986,30 +1106,35 @@ export const DIALOG_DAY_12: DialogConfig = {
                 {
                     text: {
                         en: "You know what every baker's nightmare is? Spritz Biscuits. They are so... time consuming.",
-                        de: ""
+                        de: "Weißt du, was der Alptraum eines jeden Bäckers ist? Spritzgebäck. Sooo ... zeitaufwändig."
                     }
                 },
                 {
                     text: {
                         en: "How lucky I am to have you and be able to spend that time on more meaningful things.",
-                        de: ""
+                        de: "Was für ein Glück, dass ich dich habe und Zeit mit wichtigeren Dingen verbringen kann."
                     }
                 },
-                {text: {en: "For example, my bag is in desperate need of mending. So my grocery bag... ", de: ""}},
+                {
+                    text: {
+                        en: "For example, my bag is in desperate need of mending. So my grocery bag... ",
+                        de: "Zum Beispiel müsste mein Beutel mal repariert werden. Also mein Einkaufsbeutel..."
+                    }
+                },
                 {
                     text: {
                         en: "We're not talking about a huge bag that has room for an infinite number of gifts...",
-                        de: ""
+                        de: "Wir sprechen nicht über einen riesigen Beutel mit Platz für unendlich viele Geschenke..."
                     }
                 },
-                {text: {en: "Such a thing does not exist at all...", de: ""}},
+                {text: {en: "Such a thing does not exist at all...", de: "Sowas gibt es schließlich nicht..."}},
                 {
                     text: {
                         en: "Oh! There are now also triple machines. I think these are self-explanatory by now.",
-                        de: ""
+                        de: "Oh! Es gibt jetzt Dreifach-Maschinen. Ich glaube, die erklären sich mittlerweile selbst."
                     }
                 },
-                {text: {en: "So, the bakery is yours!", de: ""}}
+                {text: {en: "So, the bakery is yours!", de: "So, die Bäckerei gehört dir!"}}
             ],
             continuationText: {en: "Okay.", de: "Okay."},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -1022,7 +1147,12 @@ export const LAST_WORDS_DAY_12: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "What would I do without you? Thank you!", de: ""}}
+                {
+                    text: {
+                        en: "What would I do without you? Thank you!",
+                        de: "Was würde ich nur ohne dich tun? Tausend Dank!"
+                    }
+                }
             ],
             nextNodes: [],
             skippable: true,
@@ -1041,8 +1171,18 @@ export const DIALOG_DAY_13: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Quiz question: What does Bernd never get enough of around Christmas time?", de: ""}},
-                {text: {en: "Bingo, Speculoos! I'm crazy for those. How about you make us some?", de: ""}}
+                {
+                    text: {
+                        en: "Quiz question: What does Bernd never get enough of around Christmas time?",
+                        de: "Quizfrage: Wovon kriegt Bernd in der Weihnachtszeit nie genug?"
+                    }
+                },
+                {
+                    text: {
+                        en: "Bingo, Speculoos! I'm crazy for those. How about you make us some?",
+                        de: "Richtig, Spekulatius. Ich bin verrück danach. Wie wär's, wenn du uns welche machst?"
+                    }
+                }
             ],
             continuationText: {en: "Sure.", de: "Klar."},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -1055,7 +1195,12 @@ export const LAST_WORDS_DAY_13: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "You know how to make old Bernd happy.", de: ""}}
+                {
+                    text: {
+                        en: "You know how to make old Bernd happy.",
+                        de: "Du weißt, wie man den alten Bernd glücklich macht."
+                    }
+                }
             ],
             nextNodes: [],
             skippable: true,
@@ -1074,10 +1219,25 @@ export const DIALOG_DAY_14: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Good to see you! What do you think of Chocolate Cake?", de: ""}},
-                {text: {en: "It's actually a funny name, isn't it? But it doesn't matter.", de: ""}},
-                {text: {en: "What matters is the taste. And it's incomparable when you follow my recipe.", de: ""}},
-                {text: {en: "On your marks... Get set... Go!", de: ""}}
+                {
+                    text: {
+                        en: "Good to see you! What do you think of Chocolate Bread?",
+                        de: "Schön dich zu sehen! Wie stehst du zu Schokoladenbrot?"
+                    }
+                },
+                {
+                    text: {
+                        en: "It's actually a funny name, isn't it? But it doesn't matter.",
+                        de: "Ist eigentlich ein witziger Name, nicht? Ist aber auch egal."
+                    }
+                },
+                {
+                    text: {
+                        en: "What matters is the taste. And it's incomparable when you follow my recipe.",
+                        de: "Wichtig ist nur der Geschmack. Und der ist unvergleichlich, wenn du mein Rezept befolgst."
+                    }
+                },
+                {text: {en: "On your marks... Get set... Go!", de: "Auf die Plätze... Fertig... Los!"}}
             ],
             continuationText: {en: "Yup.", de: "Jup"},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -1090,7 +1250,12 @@ export const LAST_WORDS_DAY_14: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "I guess you want to be employee of the month! Keep it up!", de: ""}}
+                {
+                    text: {
+                        en: "I guess you want to be employee of the month! Keep it up!",
+                        de: "Du willst wohl Angestellter des Monats werden! Weiter so!"
+                    }
+                }
             ],
             nextNodes: [],
             skippable: true,
@@ -1109,10 +1274,30 @@ export const DIALOG_DAY_15: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Today is a very special day: We will make Angel Eyes.", de: ""}},
-                {text: {en: "The jam we use for this has a beautiful red color.", de: ""}},
-                {text: {en: "Did you know that red is my favorite color? My winter clothes are mostly red.", de: ""}},
-                {text: {en: "It really suits me. I'm talking too much again... Good luck today!", de: ""}}
+                {
+                    text: {
+                        en: "Today is a very special day: We will make Angel Eyes.",
+                        de: "Heute ist ein besonderer Tag: Wir machen Engelsaugen."
+                    }
+                },
+                {
+                    text: {
+                        en: "The jam we use for this has a beautiful red color.",
+                        de: "Die Marmelade dafür hat eine wunderschöne rote Farbe."
+                    }
+                },
+                {
+                    text: {
+                        en: "Did you know that red is my favorite color? My winter clothes are mostly red.",
+                        de: "Wusstest du, dass Rot meine Lieblingsfarbe ist? Meine Winterkleidung ist überwiegend rot."
+                    }
+                },
+                {
+                    text: {
+                        en: "It really suits me. I'm talking too much again... Good luck today!",
+                        de: "Es steht mir wirklich ausgezeichnet. Ich rede wieder zu viel... Viel Glück heute!"
+                    }
+                }
             ],
             continuationText: {en: "Thanks", de: "Danke"},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -1125,7 +1310,7 @@ export const LAST_WORDS_DAY_15: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Perfect, such a beautiful red!", de: ""}}
+                {text: {en: "Perfect, such a beautiful red!", de: "Perfekt, so ein wunderschönes Rot!"}}
             ],
             nextNodes: [],
             skippable: true,
@@ -1147,13 +1332,13 @@ export const DIALOG_DAY_16: DialogConfig = {
                 {
                     text: {
                         en: "Black and white, dark and light, evil and good. Have you been naughty or nice this year?...",
-                        de: ""
+                        de: "Schwarz und Weiß, Licht und Schatten, Gut und Böse. Warst du dieses Jahr artig?..."
                     }
                 },
                 {
                     text: {
                         en: "Never mind the question. Today you get to try your hand at making Chess Cookies. Good luck!",
-                        de: ""
+                        de: "Vergiss die Frage. Heute wirst du dich an Schwarzweißgebäck versuchen. Viel Glück!"
                     }
                 }
             ],
@@ -1168,7 +1353,12 @@ export const LAST_WORDS_DAY_16: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Hmm... the smell of freshly baked cookies. There is nothing better!", de: ""}}
+                {
+                    text: {
+                        en: "Hmm... the smell of freshly baked cookies. There is nothing better!",
+                        de: "Hmm... der Geruch frisch gebackener Kekse. Es gibt nichts besseres!"
+                    }
+                }
             ],
             nextNodes: [],
             skippable: true,
@@ -1187,14 +1377,24 @@ export const DIALOG_DAY_17: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Greetings! You can be counted on! Let's see, what's on my list today?", de: ""}},
+                {
+                    text: {
+                        en: "Greetings! You can be counted on! Let's see, what's on my list today?",
+                        de: "Grüß dich! Ich wusste auf dich kann man zählen. Also, was steht heute an?"
+                    }
+                },
                 {
                     text: {
                         en: "Ah, Gingerbread. You've probably noticed that you're up against more conveyor belts.",
-                        de: ""
+                        de: "Ah, Lebkuchen. Du hast bestimmt gemerkt, dass du ziemlich viele Laufbänder vor dir hast."
                     }
                 },
-                {text: {en: "But don't worry, I'm sure you'll master this recipe too. Have fun!", de: ""}}
+                {
+                    text: {
+                        en: "But don't worry, I'm sure you'll master this recipe too. Have fun!",
+                        de: "Aber keine Sorge, dieses Rezept wirst du auch meistern. Viel Spaß!"
+                    }
+                }
             ],
             continuationText: {en: "Thanks", de: "Danke"},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -1207,7 +1407,7 @@ export const LAST_WORDS_DAY_17: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "You have real talent. Keep it up!", de: ""}}
+                {text: {en: "You have real talent. Keep it up!", de: "Du hast wirklich Talent. Weiter so!"}}
             ],
             nextNodes: [],
             skippable: true,
@@ -1226,9 +1426,19 @@ export const DIALOG_DAY_18: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Day 18 already, how time flies!", de: ""}},
-                {text: {en: "Ruprecht my... my household help has asked me for Pfeffernüsse.", de: ""}},
-                {text: {en: "We will fulfill this wish today. Grab the ingredients and show me your skills!", de: ""}}
+                {text: {en: "Day 18 already, how time flies!", de: "Tag 18 schon, wie die Zeit verfliegt."}},
+                {
+                    text: {
+                        en: "Ruprecht my... my household help has asked me for Pfeffernüsse.",
+                        de: "Ruprecht mein... meine Haushaltshilfe hat mich um Pfeffernüsse gebeten."
+                    }
+                },
+                {
+                    text: {
+                        en: "We will fulfill this wish today. Grab the ingredients and show me your skills!",
+                        de: "Wir werden seinen Wunsch erfüllen. Schnapp dir die Zutaten und zeig, was du drauf hast!"
+                    }
+                }
             ],
             continuationText: {en: "Yep.", de: "Jep."},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -1241,7 +1451,12 @@ export const LAST_WORDS_DAY_18: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Fantastic, Ruprecht will be thrilled!", de: "Fantastisch, Ruprecht wird begeistert sein!"}}
+                {
+                    text: {
+                        en: "Fantastic, Ruprecht will be thrilled!",
+                        de: "Fantastisch, Ruprecht wird begeistert sein!"
+                    }
+                }
             ],
             nextNodes: [],
             skippable: true,
@@ -1260,9 +1475,24 @@ export const DIALOG_DAY_19: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Today we're taking a culinary trip to Italy: Panettone is on the list.", de: ""}},
-                {text: {en: "Super airy, delicious, highly recommended.", de: ""}},
-                {text: {en: "Grab the recipe and get started right away.", de: ""}}
+                {
+                    text: {
+                        en: "Today we're taking a culinary trip to Italy: Panettone is on the list.",
+                        de: "Heute mal ein kulinarischer Ausflug nach Italien: Panettone steht auf dem Programm."
+                    }
+                },
+                {
+                    text: {
+                        en: "Super airy, delicious, highly recommended.",
+                        de: "Super luftig, schmackhaft und sehr zu empfehlen."
+                    }
+                },
+                {
+                    text: {
+                        en: "Grab the recipe and get started right away.",
+                        de: "Schnapp dir das Rezept und leg direkt los."
+                    }
+                }
             ],
             continuationText: {en: "Ok.", de: "Ok."},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -1275,7 +1505,7 @@ export const LAST_WORDS_DAY_19: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Delizioso! ... or something like that.", de: ""}}
+                {text: {en: "Delizioso! ... or something like that.", de: "Delizioso! ... Oder so ähnlich."}}
             ],
             nextNodes: [],
             skippable: true,
@@ -1294,21 +1524,36 @@ export const DIALOG_DAY_20: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "We are approaching the home straight. Today we are going to bake Bear Paws.", de: ""}},
+                {
+                    text: {
+                        en: "We are approaching the home straight. Today we are going to bake Bear Paws.",
+                        de: "Wir nähern uns der Zielgeraden. Heute werden wir Bärentatzen backen."
+                    }
+                },
                 {
                     text: {
                         en: "There is one difficulty with this recipe: there are not enough machines for all belts.",
-                        de: ""
+                        de: "Die Schwierigkeit hierbei: Es gibt nicht genug Maschinen für alle Laufbänder."
                     }
                 },
-                {text: {en: "But if you are fast, you can of course use one machine on several treadmills.", de: ""}},
+                {
+                    text: {
+                        en: "But if you are fast, you can of course use one machine on several treadmills.",
+                        de: "Vielleicht kannst du ja aber eine Maschine zeitversetzt für mehrere Bänder nutzen..."
+                    }
+                },
                 {
                     text: {
                         en: "The important thing is that all desired ingredients leave the treadmills at the same time.",
-                        de: ""
+                        de: "Das Wichtige ist, dass alle gewünschten Zutaten gleichzeitig die Laufbänder verlassen."
                     }
                 },
-                {text: {en: "This will surely be a piece of cake for you!", de: ""}}
+                {
+                    text: {
+                        en: "This will surely be a piece of cake for you!",
+                        de: "Das wird sicher ein Kinderspiel für dich!"
+                    }
+                }
             ],
             continuationText: {en: "Mhh.", de: "Mhh"},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -1340,11 +1585,15 @@ export const DIALOG_DAY_21: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Glad to see you're still at it. Today we're making Nut Wedges.", de: ""}},
                 {
                     text: {
+                        en: "Glad to see you're still at it. Today we're making Nut Wedges.",
+                        de: "Schön zu sehen, dass du noch dabei bist. Heute machen wir Nussecken."
+                    }
+                }, {
+                    text: {
                         en: "Phew - nine ingredients. But as I know you, that won't be an obstacle. Good luck!",
-                        de: ""
+                        de: "Uff - neun Zutaten. Aber wie ich dich kenne, wird das kein Problem sein. Viel Glück!"
                     }
                 }
             ],
@@ -1359,7 +1608,12 @@ export const LAST_WORDS_DAY_21: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Hohoho, you impress me every day anew!", de: ""}}
+                {
+                    text: {
+                        en: "Hohoho, you impress me every day anew!",
+                        de: "Hohoho, du beeindruckst mich jeden Tag aufs Neue!"
+                    }
+                }
             ],
             nextNodes: [],
             skippable: true,
@@ -1378,16 +1632,36 @@ export const DIALOG_DAY_22: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "In a few days it will be Christmas! Do you have a fireplace? No?", de: ""}},
-                {text: {en: "If you ever buy one, make sure it's nice and roomy.", de: ""}},
+                {
+                    text: {
+                        en: "In a few days it will be Christmas! Do you have a fireplace? No?",
+                        de: "In ein paar Tagen ist Weihnachten. Hast du einen Kamin? Nein?"
+                    }
+                },
+                {
+                    text: {
+                        en: "If you ever buy one, make sure it's nice and roomy.",
+                        de: "Falls du jemals einen kaufen solltest, sollte er schön groß und geräumig sein."
+                    }
+                },
                 {
                     text: {
                         en: "... I'm thinking of the chimney sweeps. They don't have it easy in their job either.",
-                        de: ""
+                        de: "... Ich denke nur an die Schornsteinfeger. Die habens auch nicht leicht in ihrem Job."
                     }
                 },
-                {text: {en: "So, now for today's cookies: Walnut Cookies.", de: ""}},
-                {text: {en: "I've already put the recipe in the bakery for you. Let's go!", de: ""}}
+                {
+                    text: {
+                        en: "So, now for today's cookies: Walnut Cookies.",
+                        de: "So, zu unseren heutigen Keksen: Walnusskekse."
+                    }
+                },
+                {
+                    text: {
+                        en: "I've already put the recipe in the bakery for you. Let's go!",
+                        de: "Ich habe das Rezept schon für dich hinterlegt. Ab dafür!"
+                    }
+                }
             ],
             continuationText: {en: "Yeah!", de: "Yeah!"},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -1400,7 +1674,7 @@ export const LAST_WORDS_DAY_22: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "These are not cookies, this is art!", de: ""}}
+                {text: {en: "These are not cookies, this is art!", de: "Das sind keine Kekse, das ist Kunst!"}}
             ],
             nextNodes: [],
             skippable: true,
@@ -1419,8 +1693,18 @@ export const DIALOG_DAY_23: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Not much left on our list. Today we'll take care of Dominosteine.", de: ""}},
-                {text: {en: "Not the easiest to make but worth it. I trust in your skills!", de: ""}}
+                {
+                    text: {
+                        en: "Not much left on our list. Today we'll take care of Dominosteine.",
+                        de: "Es steht nicht mehr viel auf unserer Liste. Heute kümmern wir uns um Dominosteine."
+                    }
+                },
+                {
+                    text: {
+                        en: "Not the easiest to make but worth it. I trust in your skills!",
+                        de: "Nicht gerade einfach zu machen, aber die Arbeit wert. Ich glaube an dich!"
+                    }
+                }
             ],
             continuationText: {en: "Cool", de: "Cool"},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -1433,7 +1717,12 @@ export const LAST_WORDS_DAY_23: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "You did not disappoint me. So tasty!", de: ""}}
+                {
+                    text: {
+                        en: "You did not disappoint me. So tasty!",
+                        de: "Du hast mich wahrlich nicht enttäuscht. So schmackhaft!"
+                    }
+                }
             ],
             nextNodes: [],
             skippable: true,
@@ -1452,12 +1741,37 @@ export const DIALOG_DAY_24: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Hello for the last time... ", de: ""}},
-                {text: {en: "I must say it makes me a little sad that our time together ends today.", de: ""}},
-                {text: {en: "I really had fun testing your skills and experiencing your expertise.", de: ""}},
-                {text: {en: "Are you ready for the mother of all Christmas baked goods, the Stollen?", de: ""}},
-                {text: {en: "Unfortunately, we have to hurry up a bit, I was about to take a nap.", de: ""}},
-                {text: {en: "It's going to be a busy night for me... Don't disappoint me!", de: ""}}
+                {text: {en: "Hello for the last time... ", de: "Hallo zum letzten Mal..."}},
+                {
+                    text: {
+                        en: "I must say it makes me a little sad that our time together ends today.",
+                        de: "Es macht mich schon etwas traurig, dass unsere Zeit zusammen heute endet."
+                    }
+                },
+                {
+                    text: {
+                        en: "I really had fun testing your skills and experiencing your expertise.",
+                        de: "Ich hatte wirklich Spaß, dein Können zu testen und deine Expertise zu sehen."
+                    }
+                },
+                {
+                    text: {
+                        en: "Are you ready for the mother of all Christmas baked goods, the Stollen?",
+                        de: "Bist du bereit für die Mutter aller Weihnachtsgebäcke, den Stollen?"
+                    }
+                },
+                {
+                    text: {
+                        en: "Unfortunately, we have to hurry up a bit, I was about to take a nap.",
+                        de: "Leider müssen wir uns heute etwas beeilen, ich war dabei, ein Nickerchen zu machen."
+                    }
+                },
+                {
+                    text: {
+                        en: "It's going to be a busy night for me... Don't disappoint me!",
+                        de: "Es wird eine harte Nacht für mich... Enttäusch mich nicht!"
+                    }
+                }
             ],
             continuationText: {en: "Okay", de: "Okay"},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
@@ -1470,9 +1784,24 @@ export const LAST_WORDS_DAY_24: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "Unbelievable, you really did it, I'm impressed!", de: ""}},
-                {text: {en: "Maybe this time next year you can help me again?", de: ""}},
-                {text: {en: "Thanks again so much and Merry Christmas!", de: ""}}
+                {
+                    text: {
+                        en: "Unbelievable, you really did it, I'm impressed!",
+                        de: "Unglaublich, du hast es wirklich geschafft, ich bin beeindruckt!"
+                    }
+                },
+                {
+                    text: {
+                        en: "Maybe this time next year you can help me again?",
+                        de: "Vielleicht kann ich auch im nächsten Jahr wieder auf deine Hilfe zählen?"
+                    }
+                },
+                {
+                    text: {
+                        en: "Thanks again so much and Merry Christmas!",
+                        de: "Vielen lieben Dank nochmal und Frohe Weihnachten!"
+                    }
+                }
             ],
             nextNodes: [],
             skippable: true,
@@ -1489,42 +1818,45 @@ export const LAST_WORDS_DAY_24: DialogConfig = {
 // Hints
 export const IRON_CHAINS_HINT: DialogConfig = makeHintConfig({
     en: "Gray machines with iron chains are bound to a specific position and cannot be moved.",
-    de: ""
+    de: "Graue Maschinen mit Eisenketten können nicht bewegt werden."
 })
 export const DOUBLE_MACHINES_HINT: DialogConfig = makeHintConfig({
     en: "Double machines involve up to two conveyor belts and apply the same property changes.",
-    de: ""
+    de: "Doppel-Maschinen bedienen bis zu zwei Laufbänder und bewirken auf allen den gleichen Effekt."
 })
 export const TRIPLE_MACHINES_HINT: DialogConfig = makeHintConfig({
     en: "Triple machines involve up to three conveyor belts and apply the same property changes.",
-    de: ""
+    de: "Dreifach-Maschinen bedienen bis zu drei Laufbänder und bewirken auf allen den gleichen Effekt."
 })
 export const QUADRUPLE_MACHINES_HINT: DialogConfig = makeHintConfig({
     en: "Quadruple machines involve up to four conveyor belts and apply the same property changes.",
-    de: ""
+    de: "Vierfach-Maschinen bedienen bis zu vier Laufbänder und bewirken auf allen den gleichen Effekt."
 })
 export const CHANGE_TYPE_HINT: DialogConfig = makeHintConfig({
     en: "Click on machines without a lock icon to change the linked property.",
-    de: ""
+    de: "Klicke auf die Maschinen ohne Schlosssymbol, um ihren Typ zu ändern."
 })
 export const TWO_MACHINES_ON_ONE_BELT_HINT: DialogConfig = makeHintConfig({
     en: "In this recipe there is a conveyor belt on which two machines must be placed.",
-    de: ""
+    de: "In diesem Level gibt es ein Laufband, das von zwei Maschinen bedient werden muss."
 })
 export const MOVE_ORDER_LACK_OF_SPACE_HINT: DialogConfig = makeHintConfig({
     en: "In this recipe, the order in which the machines are moved is very important due to the lack of space.",
-    de: ""
-}, {en: "Think carefully about which machine you want to move first.", de: ""})
+    de: "In diesem Level ist die Zugreihenfolge relevant, da nur sehr wenig Platz zur Verfügung steht."
+}, {
+    en: "Think carefully about which machine you want to move first.",
+    de: "Denk gründlich darüber nach, welche Masschine du zuerst bewegen willst."
+})
 export const BE_FAST_HINT: DialogConfig = makeHintConfig({
     en: "In this recipe, you must be quick and apply a specific single machine to multiple conveyor belts.",
-    de: ""
+    de: "In diesem Rezept musst du schnell sein und einzelne Maschinen zwischen mehreren Bändern bewegen."
 }, {
     en: "Pay attention to the right timing so that the desired ingredients leave the conveyor belts at the same time.",
-    de: ""
+    de: "Achte auf das richtige Timing, sodass alle gewünschten Zutaten gleichzeitig die Laufbänder verlassen."
 })
 export const NON_TIMING_FIRST_HINT: DialogConfig = makeHintConfig({
-    en: "It is advisable to deal with the time independent ingredients first..",
-    de: ""
+    en: "It is advisable to deal with the time independent ingredients first.",
+    de: "Es ist ratsam, die zeitunabhängigen Zutaten zuerst vorzubereiten."
 })
 
 function makeHintConfig(...texts: { en: string, de: string }[]): DialogConfig {
