@@ -184,13 +184,13 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":1020,"h":16},
 	"sourceSize": {"w":1020,"h":16}
 },
-"gameScreen/ingredients/cherry_jam":
+"gameScreen/ingredients/beet_juice":
 {
-	"frame": {"x":1701,"y":737,"w":123,"h":131},
+	"frame": {"x":1701,"y":763,"w":130,"h":106},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":123,"h":131},
-	"sourceSize": {"w":123,"h":131}
+	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":106},
+	"sourceSize": {"w":130,"h":106}
 },
 "gameScreen/ingredients/chocolate":
 {
@@ -199,6 +199,14 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":84,"h":108},
 	"sourceSize": {"w":84,"h":108}
+},
+"gameScreen/ingredients/dirt":
+{
+	"frame": {"x":1701,"y":647,"w":143,"h":112},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":143,"h":112},
+	"sourceSize": {"w":143,"h":112}
 },
 "gameScreen/ingredients/eggnog":
 {
@@ -215,14 +223,6 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":82,"h":126},
 	"sourceSize": {"w":82,"h":126}
-},
-"gameScreen/ingredients/old_lemon_candy":
-{
-	"frame": {"x":1701,"y":647,"w":142,"h":86},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":142,"h":86},
-	"sourceSize": {"w":142,"h":86}
 },
 "gameScreen/ingredients/particle":
 {
@@ -440,6 +440,6 @@
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "sheet-0.json", "sheet-1.json", "sheet-3.json", "sheet-4.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:af0fcd928812e296c9b8ba9cc65ff6dc:055e92955e747b62b6e3b098eac4d5f2:81a6f0a70957ea4181bc37a27f6e7b67$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d6e15cd8a160ebd21f949e31d43efddb:949bfc4ed220e4581004aff29c72f70a:81a6f0a70957ea4181bc37a27f6e7b67$"
 }
 }
