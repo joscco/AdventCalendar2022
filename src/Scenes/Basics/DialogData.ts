@@ -113,13 +113,13 @@ export const DIALOG_DAY_1: DialogConfig = {
                 },
                 {
                     text: {
-                        en: "If you place this machine on a conveyor belt, it will turns all ingredients passing it into liquid.",
+                        en: "If you place this machine on a conveyor belt, it will turn all ingredients passing it into liquid.",
                         de: "Wenn du diese Maschine auf ein Laufband ziehst, verflüssigt sie alle Zutaten, die sie passieren."
                     }
                 },
                 {
                     text: {
-                        en: "Try it yourself by dragging the liquefying machine on the honey belt.",
+                        en: "Try it yourself by dragging the liquefying machine onto the honey belt.",
                         de: "Versuch's mal selbst, indem du den Verflüssiger auf das Laufband mit dem Honig ziehst."
                     }
                 }],
@@ -212,13 +212,13 @@ export const DIALOG_DAY_1: DialogConfig = {
                 },
                 {
                     text: {
-                        en: "If you prefer silence, you can turn the music off by clicking on the musical note icon on the top left.",
+                        en: "If you prefer silence, you can turn the music off by clicking on the musical note icon in the top left.",
                         de: "Wenn du Stille bevorzugst, kannst du die Musik mit dem Musiknotenknopf oben links ausschalten."
                     }
                 },
                 {
                     text: {
-                        en: "Sound effects are turned on and off via the speaker icon next to it.",
+                        en: "Sound effects can be toggled via the speaker icon next to it.",
                         de: "Die Soundeffekte regelt der Lautsprecherknopf direkt daneben."
                     }
                 }
@@ -319,7 +319,7 @@ export const DIALOG_DAY_2: DialogConfig = {
             },
             {
                 text: {
-                    en: "You can see a such block above between the conveyor belts. Blocks are basically walls.",
+                    en: "You can see such a block between the conveyor belts above. Blocks are basically walls.",
                     de: "Einen solchen Block kannst du oben zwischen den Laufbändern sehen. Blöcke sind quasi Wände."
                 }
             },
@@ -381,13 +381,13 @@ export const DIALOG_DAY_2: DialogConfig = {
         speeches: [
             {
                 text: {
-                    en: "Lots of space here to be filled with ingredient information!",
+                    en: "Lots of space here to be filled with ingredient recipes!",
                     de: "Hier ist viel Platz für Zutateninfos!"
                 }
             },
             {
                 text: {
-                    en: "You can scroll up and down within in here by dragging the red bookmark.",
+                    en: "You can scroll up and down within the book by dragging the red bookmark.",
                     de: "Durch Ziehen des roten Lesezeichens kannst du hier auf- und abscrollen."
                 }
             },
@@ -428,7 +428,7 @@ export const HINT_DAY_2: DialogConfig = {
             speeches: [
                 {
                     text: {
-                        en: "Place one machine on each conveyor belt and all should work.",
+                        en: "Place one machine on each conveyor belt and everything should work.",
                         de: "Platziere eine Maschine pro Laufband und alles sollte klappen."
                     }
                 }
@@ -508,13 +508,13 @@ export const DIALOG_DAY_3: DialogConfig = {
                 },
                 {
                     text: {
-                        en: "With these cuties, you can affect two conveyor belts at once.",
+                        en: "With these cuties you can affect two conveyor belts at once.",
                         de: "Mit diesen Schätzchen kannst du zwei Laufbänder auf einmal bedienen."
                     }
                 },
                 {
                     text: {
-                        en: "Remember, though, that they apply the same change on both conveyor belts.",
+                        en: "Remember though, that they apply the same change on both conveyor belts.",
                         de: "Bedenke aber, dass sie den gleichen Effekt auf beiden Bänder bewirken."
                     }
                 },
@@ -876,7 +876,7 @@ export const LAST_WORDS_DAY_7: DialogConfig = {
             id: "start",
             speeches: [
                 {text: {en: "You're a real star!", de: "Du bist ein echter Star!"}},
-                {text: {en: "... Yeah, that joke was a bad one...", de: "... Ja okay, der war flach..."}}
+                {text: {en: "... Yeah, that was a bad joke...", de: "... Ja okay, der war flach..."}}
             ],
             nextNodes: [],
             skippable: true,
@@ -1538,13 +1538,13 @@ export const DIALOG_DAY_20: DialogConfig = {
                 },
                 {
                     text: {
-                        en: "But if you are fast, you can of course use one machine on several treadmills.",
+                        en: "But if you are fast, you can of course use one machine on several conveyor belts.",
                         de: "Vielleicht kannst du ja aber eine Maschine zeitversetzt für mehrere Bänder nutzen..."
                     }
                 },
                 {
                     text: {
-                        en: "The important thing is that all desired ingredients leave the treadmills at the same time.",
+                        en: "The important thing is that all desired ingredients leave the belts at the same time.",
                         de: "Das Wichtige ist, dass alle gewünschten Zutaten gleichzeitig die Laufbänder verlassen."
                     }
                 },
@@ -1555,7 +1555,7 @@ export const DIALOG_DAY_20: DialogConfig = {
                     }
                 }
             ],
-            continuationText: {en: "Mhh.", de: "Mhh"},
+            continuationText: {en: "Mhh.", de: "Mhh."},
             nextNodes: [{on: "clicked_continuation_button", nextNodeId: END}]
         }
     ]
@@ -1674,7 +1674,7 @@ export const LAST_WORDS_DAY_22: DialogConfig = {
         {
             id: "start",
             speeches: [
-                {text: {en: "These are not cookies, this is art!", de: "Das sind keine Kekse, das ist Kunst!"}}
+                {text: {en: "These are no cookies, this is art!", de: "Das sind keine Kekse, das ist Kunst!"}}
             ],
             nextNodes: [],
             skippable: true,
