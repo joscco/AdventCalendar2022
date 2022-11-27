@@ -69,6 +69,8 @@ export class RecipeBox extends Sprite implements LanguageDependantItem {
 
         this.titleText = this.addTitle(this.recipe.name[LANGUAGE_MANAGER.getCurrentLanguage()])
         this.addChecklist(this.recipe.ingredients)
+
+        LANGUAGE_MANAGER.addLanguageItem(this)
     }
 
     setLanguage(newLanguage: Language): void {

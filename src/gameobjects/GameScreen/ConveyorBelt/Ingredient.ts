@@ -288,9 +288,9 @@ export const INGREDIENTS: { [id in IngredientID]: IngredientData } = {
     "candied_lemon_peel": {text: {en: "Candied Lemon Peel", de: "Zitronat"}, taste: "sour", color: "yellow", consistence: "solid"},
 
     "currant_pudding": {text: {en: "Currant Pudding", de: "Zitronat"}, taste: "sour", color: "red", consistence: "sticky"},
-    "currant_juice": {text: {en: "Currant Juice", de: "Johannisbeersaft"}, taste: "sour", color: "red", consistence: "liquid"},
-    "currant_sugar": {text: {en: "Currant Sugar", de: "Johannisbeerzucker"}, taste: "sour", color: "red", consistence: "powdery"},
-    "currants": {text: {en: "Currants", de: "Johannisbeeren"}, taste: "sour", color: "red", consistence: "solid"},
+    "currant_juice": {text: {en: "Currant Juice", de: "Cranberrysaft"}, taste: "sour", color: "red", consistence: "liquid"},
+    "currant_sugar": {text: {en: "Currant Sugar", de: "Cranberryzucker"}, taste: "sour", color: "red", consistence: "powdery"},
+    "currants": {text: {en: "Currants", de: "Cranberries"}, taste: "sour", color: "red", consistence: "solid"},
 
     "rotten_fruits": {text: {en: "Rotten Fruits", de: "Faule Früchte"}, taste: "sour", color: "brown", consistence: "sticky"},
     "rotten_fruit_juice": {text: {en: "Rotten Fruit Juice", de: "Fauler Fruchtsaft"}, taste: "sour", color: "brown", consistence: "liquid"},

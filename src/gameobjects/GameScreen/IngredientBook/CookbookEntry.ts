@@ -87,6 +87,8 @@ export class CookbookEntry extends Container implements LanguageDependantItem {
             this.consistenceIcon, this.consistenceText,
             this.colorIcon, this.colorText,
             this.plusSign1, this.plusSign2, this.divider)
+
+        LANGUAGE_MANAGER.addLanguageItem(this)
     }
 
     setLanguage(newLanguage: Language): void {
