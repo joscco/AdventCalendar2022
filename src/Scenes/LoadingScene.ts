@@ -1,8 +1,8 @@
 import Scene from "./Basics/Scene";
 import {Application, Text} from "pixi.js";
 import {GAME_HEIGHT, GAME_WIDTH} from "../index";
-import {Oven} from "../gameobjects/LoadingScene/Oven";
-import {LoadingBar} from "../gameobjects/LoadingScene/LoadingBar";
+import {Oven} from "../GameObjects/LoadingScene/Oven";
+import {LoadingBar} from "../GameObjects/LoadingScene/LoadingBar";
 
 export class LoadingScene extends Scene {
 

@@ -1,11 +1,11 @@
 import {FactoryScene} from "../FactoryScene";
-import {RecipeID} from "../../gameobjects/GameScreen/RecipeBox";
+import {RecipeID} from "../../GameObjects/GameScreen/RecipeBox";
 import {App} from "../../index";
-import {BlockDefinition, MachineDefinition} from "../../gameobjects/GameScreen/Machinery/Machine";
-import {IngredientID} from "../../gameobjects/GameScreen/ConveyorBelt/Ingredient";
+import {BlockDefinition, MachineDefinition} from "../../GameObjects/GameScreen/Machinery/Machine";
+import {IngredientID} from "../../GameObjects/GameScreen/Ingredient";
 import SceneManager from "../../General/SceneManager";
-import {Dialog} from "../../gameobjects/Dialog/Dialogs/DialogConfig";
-import {CookieEyesConfig} from "../../gameobjects/GameScreen/WinScreen/Cookie";
+import {Dialog} from "../../GameObjects/Dialog/DialogConfig";
+import {CookieEyesConfig} from "../../GameObjects/GameScreen/WinScreen/Cookie";
 import {
     CHANGE_TYPE_HINT,
     DIALOG_DAY_1,
@@ -66,7 +66,7 @@ import {
     LAST_WORDS_DAY_14,
     BE_FAST_HINT,
     NON_TIMING_FIRST_HINT
-} from "./DialogData";
+} from "../../GameObjects/Dialog/DialogData";
 
 type LevelConfig = {
     level: number;

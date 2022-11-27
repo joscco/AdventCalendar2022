@@ -2,40 +2,43 @@ import {StartScene} from './Scenes/StartScene';
 import SceneManager from './General/SceneManager';
 import {gsap} from "gsap";
 import {Application} from "pixi.js"
-import {AssetStore} from "./General/AssetStore";
+import {AssetManager} from "./General/AssetManager";
 import {LevelChooserScene} from "./Scenes/LevelChooserScene";
-import {TooltipManager} from "./gameobjects/Tooltip/TooltipManager";
+import {TooltipManager} from "./GameObjects/Tooltip/TooltipManager";
 import {GameData} from "./General/GameData";
 import {SoundManager} from "./General/SoundManager";
 import {MusicButton} from "./UI/Buttons/MusicButton";
 import {SoundButton} from "./UI/Buttons/SoundButton";
 import {LevelInitiator} from "./Scenes/Basics/LevelInitiator";
-import {UnlockedIngredientAlarm} from "./gameobjects/GameScreen/IngredientBook/UnlockedIngredientAlarm";
-import {CookbookOverlay} from "./gameobjects/GameScreen/IngredientBook/CookbookOverlay";
+import {UnlockedIngredientAlarm} from "./GameObjects/GameScreen/UnlockedIngredientAlarm";
+import {CookbookOverlay} from "./GameObjects/GameScreen/IngredientBook/CookbookOverlay";
 import {EventEmitter} from "./General/EventEmitter";
-import {DialogManager} from "./gameobjects/Dialog/DialogManager";
-import {Bernd} from "./gameobjects/Characters/Bernd";
+import {DialogManager} from "./GameObjects/Dialog/DialogManager";
+import {Bernd} from "./GameObjects/Characters/Bernd";
 import {BerndButton} from "./UI/Buttons/BerndButton";
 import {LanguageManager} from "./General/LanguageManager";
 
 export const GAME_WIDTH: number = 1920;
 export const GAME_HEIGHT: number = 1080;
 export const NUMBER_OF_LEVELS: number = 24;
+const FPS: number = 30
 
 export var App: Application;
-export var EVENT_EMITTER: EventEmitter;
-export var SCENE_MANAGER: SceneManager;
-export var ASSET_STORE: AssetStore;
 export var GAME_DATA: GameData;
+
+export var SCENE_MANAGER: SceneManager;
+export var ASSET_MANAGER: AssetManager;
 export var SOUND_MANAGER: SoundManager;
 export var LANGUAGE_MANAGER: LanguageManager
 export var LEVEL_SCREEN: LevelChooserScene;
-
 export var TOOLTIP_MANAGER: TooltipManager;
 export var DIALOG_MANAGER: DialogManager;
+
+export var EVENT_EMITTER: EventEmitter;
 export var INGREDIENT_COOKBOOK: CookbookOverlay
 export var INGREDIENT_ALARM: UnlockedIngredientAlarm
 export var BERND: Bernd
+
 export var BERND_BUTTON: BerndButton
 export var SOUND_BUTTON: SoundButton
 export var MUSIC_BUTTON: MusicButton
@@ -59,29 +62,29 @@ const main = async () => {
     // Display application properly
     document.body.appendChild(App.view);
     document.body.style.margin = '0';
-    App.renderer.view.style!.width = "100%"//CANVAS_WIDTH + "px"
-    App.renderer.view.style!.height = "100%"//CANVAS_HEIGHT + "px"
+    App.renderer.view.style!.width = "100%"
+    App.renderer.view.style!.height = "100%"
 
     // Synchronize tickers by using the gsap one
     App.ticker.stop()
     gsap.ticker.add(() => App.ticker.update())
 
     // Nobody needs 60 fps for a browser game
-    gsap.ticker.fps(30)
+    gsap.ticker.fps(FPS)
 
     // Make gsap available globally
     gsap.install(window)
 
     // Add all loading bundles
-    ASSET_STORE = new AssetStore()
+    ASSET_MANAGER = new AssetManager()
     SCENE_MANAGER = new SceneManager(App);
     LANGUAGE_MANAGER = new LanguageManager()
     App.stage.addChild(SCENE_MANAGER)
 
     // Load assets
-    await ASSET_STORE.startLoadingScreen()
+    await ASSET_MANAGER.startLoadingScreen()
     await SCENE_MANAGER.startWithTransition("loadingScene")
-    await ASSET_STORE.startLoadingOtherAssets()
+    await ASSET_MANAGER.startLoadingOtherAssets()
 
     SOUND_MANAGER = new SoundManager()
     SOUND_MANAGER.playMusic()

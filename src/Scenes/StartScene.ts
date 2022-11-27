@@ -1,5 +1,5 @@
 import {Application, Container, MIPMAP_MODES, Sprite, Text, TilingSprite} from 'pixi.js';
-import {ASSET_STORE, BERND, GAME_HEIGHT, GAME_WIDTH, LANGUAGE_MANAGER} from "../index";
+import {ASSET_MANAGER, BERND, GAME_HEIGHT, GAME_WIDTH, LANGUAGE_MANAGER} from "../index";
 import Scene from "./Basics/Scene";
 import {Texture} from "@pixi/core";
 import {StartButton} from "../UI/Buttons/StartButton";
@@ -20,10 +20,10 @@ export class StartScene extends Scene implements LanguageDependantItem {
         super();
         this.app = app
 
-        this.addScrollingBackground(ASSET_STORE.getTextureAsset("startScreenBackgroundPattern"));
+        this.addScrollingBackground(ASSET_MANAGER.getTextureAsset("startScreenBackgroundPattern"));
 
         this.pretitle = this.addPretitle()
-        this.lettersContainer = this.addTitle(ASSET_STORE.getTitleLetterTextures());
+        this.lettersContainer = this.addTitle(ASSET_MANAGER.getTitleLetterTextures());
         this.startButton = this.initStartButton();
         this.languageButton = this.initLanguageButton();
 

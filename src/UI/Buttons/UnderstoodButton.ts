@@ -1,7 +1,7 @@
 import {Text} from "pixi.js";
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "@pixi/core";
-import {ASSET_STORE, DIALOG_MANAGER, EVENT_EMITTER, SOUND_MANAGER} from "../../index";
+import {ASSET_MANAGER, DIALOG_MANAGER, EVENT_EMITTER, SOUND_MANAGER} from "../../index";
 import gsap from "gsap";
 
 export class UnderstoodButton extends ScalingButton {
@@ -23,7 +23,7 @@ export class UnderstoodButton extends ScalingButton {
     }
 
     getTexture(): Texture | null {
-        return ASSET_STORE.getTextureAsset("dialog_understood_button");
+        return ASSET_MANAGER.getTextureAsset("dialog_understood_button");
     }
 
     onClick(): void {

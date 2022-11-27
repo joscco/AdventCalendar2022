@@ -1,7 +1,7 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "pixi.js";
-import {ASSET_STORE, SOUND_MANAGER} from "../../index";
-import {CookbookOverlay} from "../../gameobjects/GameScreen/IngredientBook/CookbookOverlay";
+import {ASSET_MANAGER, SOUND_MANAGER} from "../../index";
+import {CookbookOverlay} from "../../GameObjects/GameScreen/IngredientBook/CookbookOverlay";
 
 export class IngredientCookbookCloseButton extends ScalingButton {
     constructor(private overlay: CookbookOverlay) {
@@ -9,7 +9,7 @@ export class IngredientCookbookCloseButton extends ScalingButton {
     }
 
     getTexture(): Texture | null {
-        return ASSET_STORE.getTextureAsset("dialog_cross");
+        return ASSET_MANAGER.getTextureAsset("dialog_cross");
     }
 
     onClick(): void {

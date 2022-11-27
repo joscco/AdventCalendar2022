@@ -1,6 +1,6 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "pixi.js";
-import {ASSET_STORE, SOUND_MANAGER} from "../../index";
+import {ASSET_MANAGER, SOUND_MANAGER} from "../../index";
 import {OutlineFilter} from "@pixi/filter-outline";
 
 export class MusicButton extends ScalingButton {
@@ -14,8 +14,8 @@ export class MusicButton extends ScalingButton {
 
     getTexture(): Texture | null {
         return this.enabled
-            ? ASSET_STORE.getTextureAsset("musicButton")
-            : ASSET_STORE.getTextureAsset("noMusicButton");
+            ? ASSET_MANAGER.getTextureAsset("musicButton")
+            : ASSET_MANAGER.getTextureAsset("noMusicButton");
     }
 
     onClick(): void {

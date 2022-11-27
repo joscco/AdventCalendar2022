@@ -1,8 +1,8 @@
 import Scene from "./Basics/Scene";
-import {LeftAngel} from "../gameobjects/GameScreen/WinScreen/LeftAngel";
-import {RightAngel} from "../gameobjects/GameScreen/WinScreen/RightAngel";
+import {LeftAngel} from "../GameObjects/GameScreen/WinScreen/LeftAngel";
+import {RightAngel} from "../GameObjects/GameScreen/WinScreen/RightAngel";
 import {GAME_HEIGHT, GAME_WIDTH} from "../index";
-import {Sparkle} from "../gameobjects/GameScreen/WinScreen/Sparkle";
+import {Sparkle} from "../GameObjects/GameScreen/WinScreen/Sparkle";
 
 export class EditorScene extends Scene {
     constructor() {

@@ -1,4 +1,4 @@
-import {MachineType} from "../gameobjects/GameScreen/Machinery/Machine";
+import {MachineType} from "../GameObjects/GameScreen/Machinery/Machine";
 
 export type EmittableEvent =
     "clicked_ingredient_cookbook" | "closed_ingredient_cookbook" |

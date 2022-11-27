@@ -1,5 +1,5 @@
 import {ScalingButton} from "./ScalingButton";
-import {ASSET_STORE, SCENE_MANAGER, SOUND_MANAGER} from "../../index";
+import {ASSET_MANAGER, SCENE_MANAGER, SOUND_MANAGER} from "../../index";
 import {Text, Texture} from "pixi.js";
 import {LevelInitiator} from "../../Scenes/Basics/LevelInitiator";
 
@@ -19,7 +19,7 @@ export class LevelButton extends ScalingButton {
     }
 
     getTexture(): Texture | null {
-        return ASSET_STORE.getTextureAsset(LevelInitiator.getRecipeForDay(this.level))
+        return ASSET_MANAGER.getTextureAsset(LevelInitiator.getRecipeForDay(this.level))
     }
 
     constructor(n: number, enabled: boolean) {

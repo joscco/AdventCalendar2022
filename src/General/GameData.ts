@@ -1,5 +1,5 @@
 import {INGREDIENT_ALARM, INGREDIENT_COOKBOOK, LEVEL_SCREEN} from "../index";
-import {IngredientID} from "../gameobjects/GameScreen/ConveyorBelt/Ingredient";
+import {IngredientID} from "../GameObjects/GameScreen/Ingredient";
 import {Language} from "./LanguageManager";
 
 export type GameState = {

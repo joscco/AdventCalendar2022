@@ -1,11 +1,11 @@
 import {ScalingButton} from "./ScalingButton";
-import {ASSET_STORE, INGREDIENT_ALARM, SOUND_MANAGER} from "../../index";
+import {ASSET_MANAGER, INGREDIENT_ALARM, SOUND_MANAGER} from "../../index";
 import {Texture} from "@pixi/core";
 
 export class IngredientAlarmCancelButton extends ScalingButton {
 
     getTexture(): Texture | null {
-        return ASSET_STORE.getTextureAsset("dialog_cross")
+        return ASSET_MANAGER.getTextureAsset("dialog_cross")
     }
 
     onClick(): void {

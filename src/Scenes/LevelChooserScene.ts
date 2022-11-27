@@ -1,9 +1,9 @@
 import Scene from "./Basics/Scene";
 import {Application, MIPMAP_MODES, Text, TilingSprite} from "pixi.js";
 import {LevelButton} from "../UI/Buttons/LevelButton";
-import {ASSET_STORE, GAME_DATA, GAME_HEIGHT, GAME_WIDTH, LANGUAGE_MANAGER} from "../index";
+import {ASSET_MANAGER, GAME_DATA, GAME_HEIGHT, GAME_WIDTH, LANGUAGE_MANAGER} from "../index";
 import {ScalingButton} from "../UI/Buttons/ScalingButton";
-import {BackToStartScreenButton} from "../UI/Buttons/BackToStartScreen";
+import {BackToStartScreenButton} from "../UI/Buttons/BackToStartScreenButton";
 import {LEVEL_MANIFEST} from "./Basics/LevelInitiator";
 import {Language, LanguageDependantItem} from "../General/LanguageManager";
 
@@ -31,7 +31,7 @@ export class LevelChooserScene extends Scene implements LanguageDependantItem {
     }
 
     private setupBackground() {
-        let texture = ASSET_STORE.getTextureAsset("startScreenBackgroundPatternBrown")
+        let texture = ASSET_MANAGER.getTextureAsset("startScreenBackgroundPatternBrown")
         let scrollingBackground = new TilingSprite(texture)
         scrollingBackground.width = 2 * GAME_WIDTH
         scrollingBackground.height = 2 * GAME_HEIGHT

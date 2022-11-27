@@ -1,7 +1,7 @@
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "pixi.js";
-import {ASSET_STORE, EVENT_EMITTER, SOUND_MANAGER} from "../../index";
-import {CookbookOverlay} from "../../gameobjects/GameScreen/IngredientBook/CookbookOverlay";
+import {ASSET_MANAGER, EVENT_EMITTER, SOUND_MANAGER} from "../../index";
+import {CookbookOverlay} from "../../GameObjects/GameScreen/IngredientBook/CookbookOverlay";
 
 export class IngredientCookbookButton extends ScalingButton {
 
@@ -11,8 +11,8 @@ export class IngredientCookbookButton extends ScalingButton {
 
     getTexture(): Texture | null {
         return this.overlay?.showingCookBook
-            ? ASSET_STORE.getTextureAsset("recipeButtonOpen")
-            : ASSET_STORE.getTextureAsset("recipeButtonClosed");
+            ? ASSET_MANAGER.getTextureAsset("recipeButtonOpen")
+            : ASSET_MANAGER.getTextureAsset("recipeButtonClosed");
     }
 
     onClick(): void {

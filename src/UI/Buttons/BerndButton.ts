@@ -1,8 +1,8 @@
 import {ScalingButton} from "./ScalingButton";
 import {Sprite, Texture} from "pixi.js";
-import {ASSET_STORE, DIALOG_MANAGER, SOUND_MANAGER} from "../../index";
+import {ASSET_MANAGER, DIALOG_MANAGER, SOUND_MANAGER} from "../../index";
 import gsap from "gsap";
-import {BlinkingEyes} from "../../gameobjects/Characters/BlinkingEyes";
+import {BlinkingEyes} from "../../GameObjects/Characters/BlinkingEyes";
 
 export class BerndButton extends ScalingButton {
     private readonly headSprite: Sprite
@@ -11,10 +11,10 @@ export class BerndButton extends ScalingButton {
     constructor() {
         super();
 
-        this.headSprite = new Sprite(ASSET_STORE.getTextureAsset("bernd_button_head"))
+        this.headSprite = new Sprite(ASSET_MANAGER.getTextureAsset("bernd_button_head"))
         this.headSprite.anchor.set(0.5)
 
-        this.eyesSprite = new BlinkingEyes(ASSET_STORE.getTextureAsset("bernd_button_eyes_open"), ASSET_STORE.getTextureAsset("bernd_button_eyes_closed"))
+        this.eyesSprite = new BlinkingEyes(ASSET_MANAGER.getTextureAsset("bernd_button_eyes_open"), ASSET_MANAGER.getTextureAsset("bernd_button_eyes_closed"))
         this.eyesSprite.anchor.set(0.5)
 
         this.addChild(this.headSprite)

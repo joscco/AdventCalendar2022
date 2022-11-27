@@ -1,10 +1,10 @@
 import {ScalingButton} from "./ScalingButton";
-import {ASSET_STORE, SCENE_MANAGER, SOUND_MANAGER} from "../../index";
+import {ASSET_MANAGER, SCENE_MANAGER, SOUND_MANAGER} from "../../index";
 import {Texture} from "pixi.js";
 
 export class StartButton extends ScalingButton {
     getTexture(): Texture {
-        return ASSET_STORE.getTextureAsset("startScreenStartButton")
+        return ASSET_MANAGER.getTextureAsset("startScreenStartButton")
     }
 
     onClick(): void {

@@ -1,4 +1,4 @@
-import {Recipe, RecipeBox, RecipeID, RECIPES} from "../gameobjects/GameScreen/RecipeBox";
+import {Recipe, RecipeBox, RecipeID, RECIPES} from "../GameObjects/GameScreen/RecipeBox";
 import {
     Block,
     BlockLayout,
@@ -6,13 +6,13 @@ import {
     Machine,
     MachineLayout, MachineType,
     parseShape
-} from "../gameobjects/GameScreen/Machinery/Machine";
-import {GridConnector} from "../gameobjects/GameScreen/Grid/GridConnector";
+} from "../GameObjects/GameScreen/Machinery/Machine";
+import {GridConnector} from "../GameObjects/GameScreen/Grid/GridConnector";
 import Scene from "./Basics/Scene";
-import {ConveyorBelt} from "../gameobjects/GameScreen/ConveyorBelt/ConveyorBelt";
+import {ConveyorBelt} from "../GameObjects/GameScreen/ConveyorBelt/ConveyorBelt";
 import {Application, Sprite} from "pixi.js";
 import {
-    ASSET_STORE,
+    ASSET_MANAGER,
     BERND_BUTTON,
     DIALOG_MANAGER,
     GAME_DATA,
@@ -21,13 +21,13 @@ import {
     INGREDIENT_COOKBOOK,
     TOOLTIP_MANAGER
 } from "../index";
-import {StickyDragActionHandler} from "../gameobjects/GameScreen/Grid/GridActionHandlers/StickyDragActionHandler";
-import {GridItem} from "../gameobjects/GameScreen/Grid/GridItem";
-import {WinScreen} from "../gameobjects/GameScreen/WinScreen/WinScreen";
-import {IngredientID} from "../gameobjects/GameScreen/ConveyorBelt/Ingredient"
-import {Grid} from "../gameobjects/GameScreen/Grid/Grid";
+import {StickyDragActionHandler} from "../GameObjects/GameScreen/Grid/GridActionHandlers/StickyDragActionHandler";
+import {GridItem} from "../GameObjects/GameScreen/Grid/GridItem";
+import {WinScreen} from "../GameObjects/GameScreen/WinScreen/WinScreen";
+import {IngredientID} from "../GameObjects/GameScreen/Ingredient"
+import {Grid} from "../GameObjects/GameScreen/Grid/Grid";
 import {Index2D, isRectangularArray, Vector2D, VerticalDirection} from "../General/Helpers";
-import {Dialog} from "../gameobjects/Dialog/Dialogs/DialogConfig";
+import {Dialog} from "../GameObjects/Dialog/DialogConfig";
 import {BackToLevelScreenButton} from "../UI/Buttons/BackToLevelScreenButton";
 import {OutlineFilter} from "@pixi/filter-outline";
 
@@ -85,7 +85,7 @@ export class FactoryScene extends Scene {
         this.lastWords = opts.lastWords
 
         this.lastHintIndex = 0
-        this.slidingHand = new Sprite(ASSET_STORE.getTextureAsset("dialog_pointer_hand"))
+        this.slidingHand = new Sprite(ASSET_MANAGER.getTextureAsset("dialog_pointer_hand"))
         this.slidingHand.zIndex = 15
         this.slidingHand.anchor.set(0.25, 0.1)
         this.slidingHand.angle = 20
@@ -249,7 +249,7 @@ export class FactoryScene extends Scene {
     }
 
     private initBackground() {
-        let background = new Sprite(ASSET_STORE.getTextureAsset("background"))
+        let background = new Sprite(ASSET_MANAGER.getTextureAsset("background"))
         background.zIndex = -1
         this.addChild(background)
     }
@@ -261,7 +261,7 @@ export class FactoryScene extends Scene {
         machineUsageGrid.columnOffsetX = 15
         machineUsageGrid.rowOffsetY = 15
         machineUsageGrid.centerIn({x: 400, y: 0, width: GAME_WIDTH - 400, height: GAME_HEIGHT})
-        machineUsageGrid.setDefaultSlotTexture(ASSET_STORE.getTextureAsset("emptyField"))
+        machineUsageGrid.setDefaultSlotTexture(ASSET_MANAGER.getTextureAsset("emptyField"))
         machineUsageGrid.drawGrid()
         machineUsageGrid.zIndex = -1
         this.addChild(machineUsageGrid)
