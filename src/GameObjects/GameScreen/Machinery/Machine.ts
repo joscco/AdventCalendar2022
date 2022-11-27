@@ -6,6 +6,7 @@ import {MachineIconSlot} from "./MachineIconSlot";
 import {GridItem} from "../Grid/GridItem";
 import {Index2D, Vector2D} from "../../../General/Helpers";
 import {Texture} from "@pixi/core";
+import {Tooltipable} from "../../Tooltip/TooltipManager";
 
 export type MachineType = IngredientTaste | IngredientColor | IngredientConsistence
 export type MachineShape = "1x1" | "2x1" | "3x1" | "1x2" | "2x2" | "3x2" | "1x3" | "2x3" | "3x3"
@@ -46,7 +47,7 @@ export class Block extends Sprite {
     }
 }
 
-export class Machine extends Block {
+export class Machine extends Block implements Tooltipable {
 
     private type: MachineType;
     private iconSlot: MachineIconSlot;
@@ -69,6 +70,14 @@ export class Machine extends Block {
         this.addChild(this.iconSlot)
 
         this.updateAppearance()
+    }
+
+    getTooltipText(): string {
+        return getMachineNameForType(this.getType())
+    }
+
+    isTooltipEnabled(): boolean {
+        return !this.isShowingTypeChoosingMenu() && this.gridItem !== undefined && !this.gridItem.dragging
     }
 
     setGridItem(gridItem: GridItem) {

@@ -1,11 +1,12 @@
 import {AnimatedSprite} from "pixi.js";
 import {Texture} from "@pixi/core";
 import {Ingredient} from "../Ingredient";
-import {ASSET_MANAGER} from "../../../index";
+import {ASSET_MANAGER, TOOLTIP_MANAGER} from "../../../index";
 import {Index2D, Vector2D} from "../../../General/Helpers";
+import {Tooltipable} from "../../Tooltip/TooltipManager";
 
 
-export abstract class ConveyorBeltTile extends AnimatedSprite {
+export abstract class ConveyorBeltTile extends AnimatedSprite implements Tooltipable{
     index: Index2D
     ingredientRef?: Ingredient
 
@@ -17,6 +18,16 @@ export abstract class ConveyorBeltTile extends AnimatedSprite {
         this.animationSpeed = 1/60
         this.play()
         this.pivot.set(60, this.height/2)
+
+        TOOLTIP_MANAGER.registerTooltipFor(this)
+    }
+
+    getTooltipText(): string {
+        return this.ingredientRef!.getTooltipText()
+    }
+
+    isTooltipEnabled(): boolean {
+        return this.ingredientRef !== undefined
     }
 
     setIngredientRef(ingredientRef: Ingredient) {

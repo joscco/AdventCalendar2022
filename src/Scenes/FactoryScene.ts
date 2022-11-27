@@ -2,9 +2,9 @@ import {Recipe, RecipeBox, RecipeID, RECIPES} from "../GameObjects/GameScreen/Re
 import {
     Block,
     BlockLayout,
-    getMachineNameForType,
     Machine,
-    MachineLayout, MachineType,
+    MachineLayout,
+    MachineType,
     parseShape
 } from "../GameObjects/GameScreen/Machinery/Machine";
 import {GridConnector} from "../GameObjects/GameScreen/Grid/GridConnector";
@@ -288,6 +288,8 @@ export class FactoryScene extends Scene {
 
             let index = machineLayoutEntry.index
             let gridItem = new GridItem(machine, machineGrid, index)
+            machine.setGridItem(gridItem)
+
             if (machineLayoutEntry.id) {
                 gridItem.setId(machineLayoutEntry.id)
             }
@@ -303,10 +305,7 @@ export class FactoryScene extends Scene {
             gridItem.addShape(machineGrid, parseShape(shape))
             gridItems.push(gridItem)
 
-            TOOLTIP_MANAGER.registerTooltipFor(machine,
-                () => getMachineNameForType(machine.getType()),
-                () => (!gridItem.dragging
-                    && !(gridItem.content as Machine).isShowingTypeChoosingMenu()))
+            TOOLTIP_MANAGER.registerTooltipFor(machine)
         }
 
         return gridItems;

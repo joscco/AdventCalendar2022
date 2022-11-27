@@ -2,13 +2,21 @@
 
 import {Container} from "pixi.js";
 import {Tooltip} from "./Tooltip";
-import {sleep, Vector2D} from "../../General/Helpers";
+import {Vector2D} from "../../General/Helpers";
 
-export class TooltipManager extends Container{
+export interface Tooltipable extends Container {
+    getTooltipText(): string
 
+    isTooltipEnabled(): boolean
+}
+
+export class TooltipManager extends Container {
+
+    private readonly TOOLTIP_DELAY: number = 500
+    private tooltipTimer?: NodeJS.Timer
     private tooltip: Tooltip
     private enabled: boolean = true
-    private currentBearer?: Container
+    private currentBearer?: Tooltipable
     private pointerDown: boolean = false
     private offsetX: number = 0
     private offsetY: number = -110
@@ -21,7 +29,7 @@ export class TooltipManager extends Container{
         this.addChild(this.tooltip)
     }
 
-    registerTooltipFor(bearer: Container, textDeliverer: () => string, isEnabled: () => boolean = () => true) {
+    registerTooltipFor(bearer: Tooltipable) {
         bearer.interactive = true
 
         bearer.on("pointerdown", () => this.pointerDown = true)
@@ -33,14 +41,15 @@ export class TooltipManager extends Container{
         bearer.on("pointerover", async (event) => {
             this.lastMousePosition = event.global
             this.currentBearer = bearer
-            if (this.enabled && isEnabled()) {
-                await sleep(1500);
-                // If we still hover the same thing, show the tooltip
-                if (this.enabled && this.currentBearer === bearer && !this.pointerDown) {
-                    let bearer = this.currentBearer
-                    let currentMousePosition = bearer.getGlobalPosition()
-                    this.showTooltip(currentMousePosition, textDeliverer())
-                }
+            if (this.enabled && this.currentBearer.isTooltipEnabled()) {
+                clearTimeout(this.tooltipTimer)
+                this.tooltipTimer = setTimeout(() => {
+                    // If we still hover the same thing, show the tooltip
+                    if (this.enabled && this.currentBearer === bearer && !this.pointerDown) {
+                        let currentMousePosition = this.currentBearer.getGlobalPosition()
+                        this.showTooltip(currentMousePosition, this.currentBearer.getTooltipText())
+                    }
+                }, this.TOOLTIP_DELAY)
             }
         })
 
@@ -51,14 +60,29 @@ export class TooltipManager extends Container{
         })
     }
 
-    showTooltip(position: Vector2D, text: string): void {
-        this.tooltip.repositionTo(position)
-        this.tooltip.update(text)
-        this.tooltip.show()
+    async updateText() {
+        if (this.currentBearer
+            && this.enabled
+            && this.currentBearer.isTooltipEnabled()) {
+            let newText = this.currentBearer.getTooltipText()
+
+            if (this.tooltip.getText() !== newText) {
+
+                this.showTooltip(this.currentBearer.position, newText)
+            }
+        }
     }
 
-    hideTooltip(): void {
-        this.tooltip.hide()
+    async showTooltip(position: Vector2D, text: string): Promise<void> {
+            await this.tooltip.hide()
+            this.tooltip.repositionTo(position)
+            this.tooltip.update(text)
+            this.tooltip.show()
+    }
+
+    async hideTooltip(): Promise<void> {
+        clearTimeout(this.tooltipTimer)
+        await this.tooltip.hide()
     }
 
     disableTooltips() {
@@ -69,6 +93,4 @@ export class TooltipManager extends Container{
     enableTooltips() {
         this.enabled = true
     }
-
-
 }

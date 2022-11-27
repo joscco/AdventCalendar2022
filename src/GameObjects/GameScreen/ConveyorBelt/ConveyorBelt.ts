@@ -63,7 +63,6 @@ export class ConveyorBelt extends Container {
 
             let ingredient = new Ingredient(this.startIngredient)
             ingredient.zIndex = 2
-            TOOLTIP_MANAGER.registerTooltipFor(ingredient, () => ingredient.getTooltipText())
             tile.setIngredientRef(ingredient)
             ingredient.position.set(tile.x, tile.y)
 
@@ -85,13 +84,14 @@ export class ConveyorBelt extends Container {
             let currentIngredient = ingredientsCopy[i]
             nextTile.setIngredientRef(currentIngredient)
 
-
             await currentTile.repositionIngredient(currentIngredient, nextTile.position)
             if (i === beltLength - 1) {
                 currentIngredient.set(this.startIngredient)
             }
 
         }
+
+        TOOLTIP_MANAGER.updateText()
     }
 
     getEndIngredient(): Ingredient {

@@ -10,10 +10,11 @@ export class Tooltip extends Container {
     private offsetX: number
     private offsetY: number
     private initialOffsetY: number
-    private parentTooltip?: TooltipManager
-    private textRectangle?: NineSlicePlane
-    private textObject?: Text
-    private spike?: Sprite
+    private parentTooltip: TooltipManager
+    private textRectangle: NineSlicePlane
+    private textObject: Text
+    private spike: Sprite
+    private scaleTween?: gsap.core.Tween;
 
     constructor(parent: TooltipManager, offsetX: number, offsetY: number) {
         super();
@@ -49,25 +50,33 @@ export class Tooltip extends Container {
         this.spike!.position.y = this.textRectangle!.height
     }
 
-    show(): void {
-        gsap.to(this.scale, {
+    async show(): Promise<void> {
+        this.scaleTween?.kill()
+        this.scaleTween = gsap.to(this.scale, {
             x: 1,
             y: 1,
-            duration: 0.3,
-            ease: Quart.easeOut
-        })
-    }
-
-    hide(): void {
-        gsap.to(this.scale, {
-            x: 0,
-            y: 0,
             duration: 0.2,
             ease: Quart.easeOut
         })
+        await this.scaleTween
+    }
+
+    async hide(): Promise<void> {
+        this.scaleTween?.kill()
+        this.scaleTween = gsap.to(this.scale, {
+            x: 0,
+            y: 0,
+            duration: 0.2 * this.scale.x,
+            ease: Quart.easeIn
+        })
+        await this.scaleTween
     }
 
     repositionTo(position: Vector2D) {
-       this.position = {x: position.x + this.offsetX, y: position.y + this.offsetY}
+        this.position = {x: position.x + this.offsetX, y: position.y + this.offsetY}
+    }
+
+    getText() {
+        return this.textObject.text
     }
 }
