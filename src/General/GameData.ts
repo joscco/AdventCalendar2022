@@ -77,19 +77,20 @@ export class GameData {
     }
 
     private loadGame(): GameState {
-        let lastGameStateRaw = localStorage.getItem(this.GAME_STATE_KEY)
-        if (!lastGameStateRaw) {
-            // No stored game state found, return to initial one
-            return INITIAL_GAMESTATE
-        }
-
         try {
+            let lastGameStateRaw = localStorage.getItem(this.GAME_STATE_KEY)
+            if (!lastGameStateRaw) {
+                // No stored game state found, return to initial one
+                return INITIAL_GAMESTATE
+            }
+
             let parsedGameState = JSON.parse(lastGameStateRaw)
             if (parsedGameState && this.isGameState(parsedGameState)) {
                 // Game State found and parsed
                 return parsedGameState as GameState
             }
         } catch (err) {
+            console.log("You must allow cookies in order for Bernd to remember your unlocked levels!")
         }
 
         // Game State was found but could not be parsed
