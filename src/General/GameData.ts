@@ -60,7 +60,12 @@ export class GameData {
 
     private saveGame(newState: GameState): void {
         let finalState = this.unite(newState, this.loadGame())
-        localStorage.setItem(this.GAME_STATE_KEY, JSON.stringify(finalState))
+        try {
+            localStorage.setItem(this.GAME_STATE_KEY, JSON.stringify(finalState))
+        } catch (err) {
+            console.error("You must allow localStorage access in order for Bernd to remember your levels!", err)
+        }
+
         this.currentState = finalState
     }
 
@@ -78,6 +83,7 @@ export class GameData {
 
     private loadGame(): GameState {
         try {
+            // If we do not have localStorage access, this will fail
             let lastGameStateRaw = localStorage.getItem(this.GAME_STATE_KEY)
             if (!lastGameStateRaw) {
                 // No stored game state found, return to initial one
@@ -90,7 +96,7 @@ export class GameData {
                 return parsedGameState as GameState
             }
         } catch (err) {
-            console.log("You must allow cookies in order for Bernd to remember your unlocked levels!")
+            console.error("You must allow localStorage access in order for Bernd to remember your levels!", err)
         }
 
         // Game State was found but could not be parsed

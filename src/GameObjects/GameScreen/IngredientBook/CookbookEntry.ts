@@ -100,14 +100,17 @@ export class CookbookEntry extends Container implements LanguageDependantItem {
         this.cacheAsBitmap = true
     }
 
-   hide() {
+    hide() {
+        this.cacheAsBitmap = false
         this.scale.y = 0
-   }
+        this.cacheAsBitmap = true
+    }
 
-   show() {
+    show() {
+        this.cacheAsBitmap = false
         this.scale.y = 1
-       this.cacheAsBitmap = true
-   }
+        this.cacheAsBitmap = true
+    }
 }
 
 function getColorName(id: IngredientColor, language: Language): string {
@@ -127,7 +130,7 @@ function getColorName(id: IngredientColor, language: Language): string {
     }
 }
 
-function getConsistenceName(id: IngredientConsistence, language: Language): string  {
+function getConsistenceName(id: IngredientConsistence, language: Language): string {
     if (language === "en") {
         return capitalizeFirstLetter(id)
     } else {
@@ -144,7 +147,7 @@ function getConsistenceName(id: IngredientConsistence, language: Language): stri
     }
 }
 
-function getTasteName(id: IngredientTaste, language: Language): string  {
+function getTasteName(id: IngredientTaste, language: Language): string {
     if (language === "en") {
         return capitalizeFirstLetter(id)
     } else {
