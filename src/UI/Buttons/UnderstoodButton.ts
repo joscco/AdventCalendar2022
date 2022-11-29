@@ -1,7 +1,7 @@
 import {Text} from "pixi.js";
 import {ScalingButton} from "./ScalingButton";
 import {Texture} from "@pixi/core";
-import {ASSET_MANAGER, DIALOG_MANAGER, EVENT_EMITTER, SOUND_MANAGER} from "../../index";
+import {ASSET_MANAGER, EVENT_EMITTER, SOUND_MANAGER} from "../../index";
 import gsap from "gsap";
 
 export class UnderstoodButton extends ScalingButton {
@@ -26,11 +26,10 @@ export class UnderstoodButton extends ScalingButton {
         return ASSET_MANAGER.getTextureAsset("dialog_understood_button");
     }
 
-    onClick(): void {
-        DIALOG_MANAGER.endDialog()
+    async onClick(): Promise<void> {
+        await this.blendOut()
         EVENT_EMITTER.emit("clicked_continuation_button")
         SOUND_MANAGER.playBlub()
-        this.blendOut()
     }
 
     hide() {
@@ -43,9 +42,9 @@ export class UnderstoodButton extends ScalingButton {
         this.scale.set(1)
     }
 
-    blendOut(): void {
+    async blendOut(): Promise<void> {
         this.interactive = false
-        gsap.to(this.scale, {x: 0, y: 0, duration: 0.3, ease: Back.easeIn})
+        await gsap.to(this.scale, {x: 0, y: 0, duration: 0.3, ease: Back.easeIn})
     }
 
     async blendIn(): Promise<void> {

@@ -1,10 +1,11 @@
 import {Container, Graphics, Sprite} from "pixi.js";
 import {App, ASSET_MANAGER, GAME_DATA, GAME_HEIGHT, GAME_WIDTH} from "../../../index";
 import {CookbookEntry} from "./CookbookEntry";
-import {clamp, vectorAdd, Vector2D} from "../../../General/Helpers";
+import {clamp, Vector2D, vectorAdd} from "../../../General/Helpers";
 import {MousewheelListener} from "../../../General/MouseWheelPlugin";
 import {IngredientID, IngredientIDs} from "../Ingredient";
 import {CookbookOverlay} from "./CookbookOverlay";
+import {VerticalSlider} from "./VerticalSlider";
 
 export class Cookbook extends Container {
     private readonly backgroundSprite: Sprite;
@@ -16,14 +17,12 @@ export class Cookbook extends Container {
     items: CookbookEntry[] = []
     contentMask: Graphics
 
-    scrollBar: Sprite;
-    scrollBarHandle: Sprite;
-
-    scrollBarDragging: boolean = false
-    contentDragging: boolean = false
-
+    scrollBar: VerticalSlider;
     SCROLL_BAR_MIN_Y: number = 40
     SCROLL_BAR_MAX_Y: number = 750
+
+    contentDragging: boolean = false
+
     CONTENT_MIN_Y: number = 0
     CONTENT_MAX_Y: number = 0
 
@@ -54,16 +53,6 @@ export class Cookbook extends Container {
         this.items = this.initEntries()
         this.updateEntries(GAME_DATA.getUnlockedIngredients())
 
-        this.scrollBar = new Sprite(ASSET_MANAGER.getTextureAsset("ingredientOverviewScrollBar"))
-        this.scrollBar.anchor.set(0.5, 0)
-        this.scrollBar.position.set(600, this.SCROLL_BAR_MIN_Y)
-
-        this.scrollBarHandle = new Sprite(ASSET_MANAGER.getTextureAsset("ingredientOverviewScrollFlag"))
-        this.scrollBarHandle.anchor.set(0, 0.5)
-        this.scrollBarHandle.position.set(-10, 50)
-        this.scrollBar.addChild(this.scrollBarHandle)
-
-        this.initScrollbarDragging();
         this.initContentDragging();
 
         this.slidingHand = new Sprite(ASSET_MANAGER.getTextureAsset("dialog_pointer_hand"))
@@ -71,39 +60,20 @@ export class Cookbook extends Container {
         this.slidingHand.anchor.set(0.25, 0.1)
         this.slidingHand.angle = 20
 
+        this.scrollBar = new VerticalSlider({
+            increaseToBottom: true,
+            outerTexture: ASSET_MANAGER.getTextureAsset("ingredientOverviewScrollBar"),
+            knobTexture: ASSET_MANAGER.getTextureAsset("ingredientOverviewScrollFlag"),
+            anchorKnob: {x: 0, y: 0.5},
+            offsetX: -10,
+            marginBottom: 50,
+            marginTop: 50
+        })
+        this.scrollBar.position.set(600, this.SCROLL_BAR_MIN_Y)
+        this.scrollBar.setValueHandler(val => this.onUpdateKnobPosition(val))
+
         this.addChild(this.backgroundSprite, this.content, this.scrollBar)
         this.scrollBar.addChild(this.slidingHand)
-    }
-
-    private initScrollbarDragging() {
-        this.scrollBarHandle.interactive = true
-        this.scrollBarHandle.cursor = "pointer"
-
-        let dragOffset: Vector2D
-
-        this.scrollBarHandle.on("pointerdown", (event) => {
-            let mousePosition: Vector2D = event.data.global
-            dragOffset = {
-                x: this.scrollBarHandle.x - mousePosition.x,
-                y: this.scrollBarHandle.y - mousePosition.y
-            }
-            this.scrollBarDragging = true
-        })
-
-        this.scrollBarHandle.on("pointermove", (event) => {
-            if (this.scrollBarDragging) {
-                let mousePosition = event.data.global
-                this.updateScrollbarHandlePosition(vectorAdd(mousePosition, dragOffset));
-            }
-        })
-
-        this.scrollBarHandle.on("pointerup", () => {
-            this.scrollBarDragging = false
-        })
-
-        this.scrollBarHandle.on("pointerupoutside", () => {
-            this.scrollBarDragging = false
-        })
     }
 
     private initContentDragging() {
@@ -144,34 +114,22 @@ export class Cookbook extends Container {
         this.repositionEntries(unlockedIngredients)
     }
 
-    private updateScrollbarHandlePosition(mousePosition: Vector2D) {
+    private onUpdateKnobPosition(relativeValue: number) {
         this.stopSlidingFinger()
-        let newY = clamp(mousePosition.y, this.SCROLL_BAR_MIN_Y, this.SCROLL_BAR_MAX_Y)
-        this.scrollBarHandle.position.y = newY
-
-        let relativeY = (newY - this.SCROLL_BAR_MIN_Y) / (this.SCROLL_BAR_MAX_Y - this.SCROLL_BAR_MIN_Y)
         // Content positions inversely
-        this.content.position.y = this.CONTENT_MAX_Y - relativeY * (this.CONTENT_MAX_Y - this.CONTENT_MIN_Y)
+        this.content.position.y = this.CONTENT_MAX_Y - relativeValue * (this.CONTENT_MAX_Y - this.CONTENT_MIN_Y)
     }
 
     private updateContentPositionByMouse(mousePosition: Vector2D) {
-        this.stopSlidingFinger()
         let newY = clamp(mousePosition.y, this.CONTENT_MIN_Y, this.CONTENT_MAX_Y)
-        this.content.position.y = newY
-
         let relativeY = (newY - this.CONTENT_MIN_Y) / (this.CONTENT_MAX_Y - this.CONTENT_MIN_Y)
-        // Content positions inversely
-        this.scrollBarHandle.position.y = this.SCROLL_BAR_MAX_Y - relativeY * (this.SCROLL_BAR_MAX_Y - this.SCROLL_BAR_MIN_Y)
+        this.scrollBar.updateValue(1 - relativeY)
     }
 
     private updateContentPosition(offsetY: number) {
-        this.stopSlidingFinger()
         let newY = clamp(this.content.position.y + offsetY, this.CONTENT_MIN_Y, this.CONTENT_MAX_Y)
-        this.content.position.y = newY
-
         let relativeY = (newY - this.CONTENT_MIN_Y) / (this.CONTENT_MAX_Y - this.CONTENT_MIN_Y)
-        // Content positions inversely
-        this.scrollBarHandle.position.y = this.SCROLL_BAR_MAX_Y - relativeY * (this.SCROLL_BAR_MAX_Y - this.SCROLL_BAR_MIN_Y)
+        this.scrollBar.updateValue(1 - relativeY)
     }
 
     private handleWheel(delta: number, mousePos: Vector2D): void {
@@ -249,7 +207,7 @@ export class Cookbook extends Container {
 
     private async startSlidingFinger() {
         if (GAME_DATA.getUnlockedIngredients().length > 5) {
-            let fromPosition: Vector2D = vectorAdd(this.scrollBarHandle.position, {x: 50, y: 0})
+            let fromPosition: Vector2D = {x: 50, y: 30}
             this.slidingHand.position.set(fromPosition.x, fromPosition.y)
 
             await gsap.to(this.slidingHand.scale, {x: 1, y: 1, duration: 0.3, ease: Back.easeOut})

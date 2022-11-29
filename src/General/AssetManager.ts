@@ -124,8 +124,13 @@ const TEXTURE_MANIFEST: { [key: string]: string } = {
 
     // Buttons
     backButton: "gameScreen/buttons/backButton",
+
     soundButton: "gameScreen/buttons/soundButton",
     noSoundButton: "gameScreen/buttons/noSoundButton",
+    sliderKnob: "gameScreen/buttons/knobSlider",
+    sliderInner: "gameScreen/buttons/innerSlider",
+    sliderOuter: "gameScreen/buttons/outerSlider",
+
     musicButton: "gameScreen/buttons/musicButton",
     noMusicButton: "gameScreen/buttons/noMusicButton",
     recipeButtonOpen: "gameScreen/buttons/recipeButtonOpen",

@@ -1,5 +1,5 @@
 import {EmittableEvent} from "../../General/EventEmitter";
-import {DIALOG_MANAGER, EVENT_EMITTER} from "../../index";
+import {DIALOG_MANAGER, EVENT_EMITTER, LANGUAGE_MANAGER} from "../../index";
 import {FactoryScene} from "../../Scenes/FactoryScene";
 
 export type DialogNodeSpeech = { text: { en: string, de: string } }
@@ -67,6 +67,7 @@ export class DialogNode {
     private onLastSpeechUndo?: (currentLevel: FactoryScene) => void
 
     speeches: DialogNodeSpeech[]
+    currentIndex: number
     dialog: Dialog
     nextNodes: NextNodeConfig[]
 
@@ -77,6 +78,7 @@ export class DialogNode {
     constructor(dialog: Dialog, config: DialogNodeConfig) {
         this.id = config.id
         this.speeches = config.speeches
+        this.currentIndex = 0
         this.dialog = dialog
         this.nextNodes = config.nextNodes
         this.skippable = config.canSkip ?? false
@@ -90,9 +92,30 @@ export class DialogNode {
     }
 
     start(level: FactoryScene) {
+        this.currentIndex = 0
         if (this.onStartDo) {
             this.onStartDo(level)
         }
+    }
+
+    increaseIndex() {
+        this.currentIndex++
+    }
+
+    decreaseIndex() {
+        this.currentIndex--
+    }
+
+    isOnLastSpeech(): boolean {
+        return this.currentIndex === this.speeches.length - 1
+    }
+
+    isOnFirstSpeech(): boolean {
+        return this.currentIndex === 0
+    }
+
+    getSpeech(): string {
+        return this.speeches[this.currentIndex].text[LANGUAGE_MANAGER.getCurrentLanguage()]
     }
 
     end(level: FactoryScene) {

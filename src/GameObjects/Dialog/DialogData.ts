@@ -202,13 +202,13 @@ export const DIALOG_DAY_1: DialogConfig = {
                     }
                 }, {
                     text: {
-                        en: "If you prefer silence, you can turn the music off by clicking on the musical note icon in the top left.",
-                        de: "Wenn du Stille bevorzugst, kannst du die Musik mit dem Musiknotenknopf oben links ausschalten."
+                        en: "If you prefer silence, you can adjust the music volume with the musical note slider in the top left.",
+                        de: "Wenn du Stille bevorzugst, kannst du die Musik mit dem Musiknoten-Slider oben links anpassen."
                     }
                 }, {
                     text: {
-                        en: "Sound effects can be toggled via the speaker icon next to it.",
-                        de: "Die Soundeffekte regelt der Lautsprecherknopf direkt daneben."
+                        en: "The volume of sound effects can be adjusted via the speaker icon slider next to it.",
+                        de: "Die Lautstärke der Soundeffekte regelt der Lautsprecher-Slider direkt daneben."
                     }
                 }
             ],
@@ -337,7 +337,7 @@ export const DIALOG_DAY_2: DialogConfig = {
             {
                 text: {
                     en: "By the way: Whenever you discover a new ingredient, an entry is added to your recipe book.",
-                    de: "Ah ja: Immer eine neue Zutat entdeckt wird, bekommt dein Rezeptbuch einen neuen Eintrag."
+                    de: "Ah ja: Immer, wenn eine neue Zutat entdeckt wird, bekommt dein Rezeptbuch einen neuen Eintrag."
                 }
             }, {
                 text: {

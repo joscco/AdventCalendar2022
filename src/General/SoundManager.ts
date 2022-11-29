@@ -1,14 +1,12 @@
 import {Howl} from "howler";
-import {SOUND_MANAGER} from "../index";
 
 export class SoundManager {
-    private soundAllowed: boolean = true
-    private musicAllowed: boolean = true
-
     private mainMusic: Howl
     private blubs: Howl[]
     private talkSounds: Howl[]
     private moveSounds: Howl[]
+    private soundVolume: number = 1;
+    private musicVolume: number = 1;
 
     constructor() {
         this.mainMusic = SoundManager.createHowl("music/Main.ogg", true)
@@ -26,31 +24,27 @@ export class SoundManager {
             "talk/talk-09.ogg"
         ])
         this.moveSounds = SoundManager.createHowls([
-                "move/move-01.ogg",
-                "move/move-02.ogg",
-                "move/move-03.ogg",
-                "move/move-04.ogg"],
-            0.5)
+            "move/move-01.ogg",
+            "move/move-02.ogg",
+            "move/move-03.ogg",
+            "move/move-04.ogg"])
     }
 
-    static createHowls(sources: string[], volume?: number, rate?: number): Howl[] {
+    static createHowls(sources: string[]): Howl[] {
         return sources.map(source => {
-            return SoundManager.createHowl(source, false, volume, rate)
+            return SoundManager.createHowl(source, false)
         })
     }
 
-    static createHowl(source: string, loop: boolean = false, volume?: number, rate?: number): Howl {
+    static createHowl(source: string, loop: boolean = false): Howl {
         return new Howl({
             src: "assets/sounds/" + source,
             html5: true,
-            loop: loop,
-            volume: volume ?? 1,
-            rate: rate ?? 1
+            loop: loop
         })
     }
 
     playMusic() {
-        this.mainMusic.fade(0, 1, 2000)
         this.mainMusic.play()
     }
 
@@ -73,21 +67,27 @@ export class SoundManager {
     }
 
     private playAnyOf(howlArr: Howl[]) {
-        if (this.soundAllowed) {
-            howlArr[Math.floor(Math.random() * howlArr.length)].play()
+        if (this.soundVolume > 0) {
+            let howl = howlArr[Math.floor(Math.random() * howlArr.length)]
+            howl.volume(this.soundVolume)
+            howl.play()
         }
     }
 
-    setMusicEnabled(value: boolean) {
-        this.musicAllowed = value
-        if (this.musicAllowed) {
-            SOUND_MANAGER.playMusic()
-        } else {
-            SOUND_MANAGER.stopMusic()
-        }
+    setSoundVolume(newValue: number) {
+        this.soundVolume = newValue
     }
 
-    setSoundEnabled(value: boolean) {
-        this.soundAllowed = value
+    setMusicVolume(newValue: number) {
+        let oldValue = this.musicVolume
+        this.musicVolume = newValue
+
+        this.mainMusic.fade(this.mainMusic.volume(), this.musicVolume, 200)
+
+        if (oldValue === 0 && newValue > 0) {
+            this.playMusic()
+        } else if (oldValue > 0 && newValue === 0) {
+            this.stopMusic()
+        }
     }
 }

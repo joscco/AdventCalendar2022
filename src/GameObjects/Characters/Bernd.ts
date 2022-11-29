@@ -74,7 +74,8 @@ export class Bernd extends Container {
 
     async blendOut() {
         this.eyes.stopBlinking()
-        this.moveTween = gsap.to(this.position, {duration: 1, y: GAME_HEIGHT/2 + 800, ease: Quart.easeInOut});
+        let relDistance = Math.abs(GAME_HEIGHT/2 + 800 - this.position.y) / 1350
+        this.moveTween = gsap.to(this.position, {duration: relDistance, y: GAME_HEIGHT/2 + 800, ease: Quart.easeInOut});
         await this.moveTween
         this.tweens.forEach(tween => tween.pause())
     }

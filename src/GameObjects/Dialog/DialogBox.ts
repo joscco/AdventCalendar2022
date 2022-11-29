@@ -1,7 +1,7 @@
 import {Container, Sprite} from "pixi.js";
 import {ASSET_MANAGER, DIALOG_MANAGER, GAME_HEIGHT, GAME_WIDTH, LANGUAGE_MANAGER} from "../../index";
 import {ScalingButtonImpl} from "../../UI/Buttons/ScalingButton";
-import {DialogNode, DialogNodeSpeech} from "./DialogConfig";
+import {DialogNode} from "./DialogConfig";
 import {DialogTextBox} from "./DialogTextBox";
 import {UnderstoodButton} from "../../UI/Buttons/UnderstoodButton";
 
@@ -11,13 +11,12 @@ export class DialogBox extends Container {
     spike: Sprite
     textObject: DialogTextBox
 
+    private currentNode?: DialogNode
+
     previousButton: ScalingButtonImpl
     nextButton: ScalingButtonImpl
     cancelButton: ScalingButtonImpl
     understoodButton: UnderstoodButton
-
-    private currentSpeeches: DialogNodeSpeech[] = []
-    private currentSpeechIndex: number = 0;
 
     constructor() {
         super();
@@ -31,7 +30,7 @@ export class DialogBox extends Container {
         this.previousButton = new ScalingButtonImpl(ASSET_MANAGER.getTextureAsset("dialog_previous_button"), () => this.previousSpeech())
         this.nextButton = new ScalingButtonImpl(ASSET_MANAGER.getTextureAsset("dialog_next_button"), () => this.nextSpeech())
         this.cancelButton = new ScalingButtonImpl(ASSET_MANAGER.getTextureAsset("dialog_cross"), () => {
-            if (this.currentSpeechIndex === this.currentSpeeches.length - 1) {
+            if (this.currentNode && this.currentNode.isOnLastSpeech()) {
                 DIALOG_MANAGER.currentNode!.cancelLastSpeech(DIALOG_MANAGER.currentLevel!)
             }
             DIALOG_MANAGER.killAutocloseTimer()
@@ -61,7 +60,8 @@ export class DialogBox extends Container {
     }
 
     async blendOut() {
-        await gsap.to(this.position, {y: GAME_HEIGHT + 300, duration: 0.5, ease: Back.easeInOut})
+        let relDistance = Math.abs(GAME_HEIGHT + 300 - this.position.y) / 450
+        await gsap.to(this.position, {y: GAME_HEIGHT + 300, duration: 0.5 * relDistance, ease: Back.easeInOut})
     }
 
     hide() {
@@ -76,21 +76,20 @@ export class DialogBox extends Container {
     }
 
     setSpeeches(node: DialogNode) {
-        this.currentSpeeches = node.speeches
-        this.currentSpeechIndex = 0
-        this.textObject.setFullText(this.currentSpeeches[this.currentSpeechIndex].text[LANGUAGE_MANAGER.getCurrentLanguage()])
+        this.currentNode = node
+        this.textObject.setFullText(this.currentNode.getSpeech())
 
-        this.previousButton.hide()
-        this.nextButton.hide()
-        this.cancelButton.hide()
-        this.understoodButton.hide()
+        this.previousButton.blendOut()
+        this.understoodButton.blendOut()
+
         this.understoodButton.setText(node.continuationText
             ? node.continuationText[LANGUAGE_MANAGER.getCurrentLanguage()]
             : "")
 
-        if (this.currentSpeeches.length > 1) {
+        if (!this.currentNode.isOnLastSpeech()) {
             this.nextButton.blendIn()
         } else {
+            this.nextButton.blendOut()
             // Handle last Speech
             node.startLastSpeech(DIALOG_MANAGER.currentLevel!)
             if (node.continuationText) {
@@ -100,46 +99,49 @@ export class DialogBox extends Container {
 
         if (node.skippable) {
             this.cancelButton.blendIn()
+        } else {
+            this.cancelButton.blendOut()
         }
     }
 
     private async nextSpeech() {
-        if (this.currentSpeeches && (this.currentSpeechIndex < this.currentSpeeches.length - 1)) {
-            let index = ++this.currentSpeechIndex!
-            await this.detype()
+        if (this.currentNode && !this.currentNode.isOnLastSpeech()) {
+            this.currentNode.increaseIndex()
+            this.textObject.setFullText(this.currentNode.getSpeech())
 
-            this.textObject.setFullText(this.currentSpeeches![index].text[LANGUAGE_MANAGER.getCurrentLanguage()])
-
-            let isLastSpeech = index === this.currentSpeeches!.length - 1
-            if (isLastSpeech) {
+            if (this.currentNode.isOnLastSpeech()) {
                 this.nextButton.blendOut()
                 DIALOG_MANAGER.currentNode!.startLastSpeech(DIALOG_MANAGER.currentLevel!)
                 if (DIALOG_MANAGER.currentNode!.continuationText) {
                     this.understoodButton.blendIn()
                 }
             }
-            this.previousButton.blendIn()
 
+            this.previousButton.blendIn()
             await this.type()
 
-            if (isLastSpeech && DIALOG_MANAGER.currentNode!.autoCloseDuration) {
+            if (this.currentNode.isOnLastSpeech() && DIALOG_MANAGER.currentNode!.autoCloseDuration) {
                 DIALOG_MANAGER.startAutocloseTimer()
             }
         }
     }
 
     private async previousSpeech() {
-        if (this.currentSpeeches && this.currentSpeechIndex > 0) {
-            if (this.currentSpeechIndex === this.currentSpeeches.length - 1) {
+        if (this.currentNode && !this.currentNode.isOnFirstSpeech()) {
+            if (this.currentNode.isOnLastSpeech()) {
                 DIALOG_MANAGER.currentNode!.cancelLastSpeech(DIALOG_MANAGER.currentLevel!)
                 this.understoodButton.blendOut()
             }
+
             DIALOG_MANAGER.killAutocloseTimer()
-            let index = --this.currentSpeechIndex!
-            this.textObject.setFullText(this.currentSpeeches[index].text[LANGUAGE_MANAGER.getCurrentLanguage()])
-            if (index === 0) {
+
+            this.currentNode.decreaseIndex()
+            this.textObject.setFullText(this.currentNode.getSpeech())
+
+            if (this.currentNode.isOnFirstSpeech()) {
                 this.previousButton.blendOut()
             }
+
             this.nextButton.blendIn()
             this.type()
         }
@@ -147,9 +149,5 @@ export class DialogBox extends Container {
 
     async type() {
         await this.textObject.type()
-    }
-
-    async detype() {
-        await this.textObject.detype()
     }
 }

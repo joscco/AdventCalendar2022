@@ -87,7 +87,6 @@ const main = async () => {
     await ASSET_MANAGER.startLoadingOtherAssets()
 
     SOUND_MANAGER = new SoundManager()
-    SOUND_MANAGER.playMusic()
 
     GAME_DATA = new GameData()
     EVENT_EMITTER = new EventEmitter()
@@ -100,12 +99,12 @@ const main = async () => {
     App.stage.addChild(TOOLTIP_MANAGER)
 
     MUSIC_BUTTON = new MusicButton()
-    MUSIC_BUTTON.position.set(210, 125)
+    MUSIC_BUTTON.position.set(170, 125)
     MUSIC_BUTTON.zIndex = 110
     App.stage.addChild(MUSIC_BUTTON);
 
     SOUND_BUTTON = new SoundButton()
-    SOUND_BUTTON.position.set(325, 125)
+    SOUND_BUTTON.position.set(310, 125)
     SOUND_BUTTON.zIndex = 110
     App.stage.addChild(SOUND_BUTTON);
 

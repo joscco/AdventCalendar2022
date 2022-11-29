@@ -87,7 +87,7 @@ export class LevelChooserScene extends Scene implements LanguageDependantItem {
 
     private setUpBackButton(): ScalingButton {
         let backToStartScreenButton = new BackToStartScreenButton()
-        backToStartScreenButton.position.set(100, 125)
+        backToStartScreenButton.position.set(80, 125)
         this.addChild(backToStartScreenButton)
         return backToStartScreenButton
     }

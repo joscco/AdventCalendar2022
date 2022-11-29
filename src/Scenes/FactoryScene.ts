@@ -112,7 +112,7 @@ export class FactoryScene extends Scene {
         this.addChild(this.winScreen)
 
         this.backToLevelScreenButton = new BackToLevelScreenButton()
-        this.backToLevelScreenButton.position.set(100, 125)
+        this.backToLevelScreenButton.position.set(80, 125)
         this.backToLevelScreenButton.zIndex = 5
         this.addChild(this.backToLevelScreenButton)
 

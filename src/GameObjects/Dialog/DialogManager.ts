@@ -35,7 +35,7 @@ export class DialogManager extends Container {
         await this.dialogBox.blendIn()
         await this.dialogBox.type()
 
-        if (this.currentNode.speeches.length === 1 && this.currentNode.autoCloseDuration) {
+        if (this.currentNode && this.currentNode.speeches.length === 1 && this.currentNode.autoCloseDuration) {
             DIALOG_MANAGER.startAutocloseTimer()
         }
     }
@@ -50,7 +50,6 @@ export class DialogManager extends Container {
 
         // starting node
         this.currentNode.start(this.currentLevel!)
-        await this.dialogBox.detype()
         this.dialogBox.setSpeeches(node)
         await this.dialogBox.type()
 
@@ -69,8 +68,6 @@ export class DialogManager extends Container {
         }
 
         this.currentNode = undefined
-
-        await this.dialogBox.detype()
         await this.dialogBox.blendOut()
         await BERND.blendOut()
 

@@ -10,8 +10,6 @@ export class DialogTextBox extends Container {
 
     LETTER_TYPE_DURATION = 0.15
     LETTER_TYPE_OFFSET = 0.02
-    LETTER_DETYPE_DURATION = 0.15
-    LETTER_DETYPE_OFFSET = 0.001
 
     private style: TextStyle
     private boxWidth: number
@@ -45,6 +43,8 @@ export class DialogTextBox extends Container {
 
     async type() {
         this.letterTweens.forEach(tween => tween.kill())
+        this.letters.forEach(letter => letter.scale.set(0))
+        await sleep(300)
         for (let i = 0; i < this.fullText.length - 1; i++) {
             this.letterTweens[i] = gsap.to(this.letters[i].scale, {
                 x: 1, y: 1, duration: this.LETTER_TYPE_DURATION, delay: i * this.LETTER_TYPE_OFFSET, ease: Back.easeOut, onStart: () => {
@@ -63,28 +63,6 @@ export class DialogTextBox extends Container {
             ease: Back.easeOut
         })
         await this.letterTweens[this.fullText.length - 1]
-    }
-
-    async detype() {
-        this.letterTweens.forEach(tween => tween.kill())
-        for (let i = this.fullText.length - 1; i > 0; i--) {
-            this.letterTweens[i] = gsap.to(this.letters[i].scale, {
-                x: 0,
-                y: 0,
-                duration: this.LETTER_DETYPE_DURATION,
-                delay: (this.fullText.length - 1 - i) * this.LETTER_DETYPE_OFFSET,
-                ease: Quad.easeIn
-            })
-        }
-        this.letterTweens[0] = gsap.to(this.letters[0].scale, {
-            x: 0,
-            y: 0,
-            duration: this.LETTER_DETYPE_DURATION,
-            delay: (this.fullText.length - 1) * this.LETTER_DETYPE_OFFSET,
-            ease: Quad.easeIn
-        })
-        await this.letterTweens[0]
-        await sleep(300)
     }
 
     private initLetters() {
