@@ -440,6 +440,6 @@
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "sheet-0.json", "sheet-1.json", "sheet-3.json", "sheet-4.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:d6e15cd8a160ebd21f949e31d43efddb:949bfc4ed220e4581004aff29c72f70a:81a6f0a70957ea4181bc37a27f6e7b67$"
+	"smartupdate": "$TexturePacker:SmartUpdate:055f5fc4953b5e3f4d7280f9f8f75bc0:e64a39751fdbe3c278b38b72ccac1100:81a6f0a70957ea4181bc37a27f6e7b67$"
 }
 }

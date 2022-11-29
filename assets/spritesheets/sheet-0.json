@@ -16,6 +16,14 @@
 	"spriteSourceSize": {"x":50,"y":54,"w":60,"h":27},
 	"sourceSize": {"w":159,"h":167}
 },
+"gameScreen/buttons/knobSlider":
+{
+	"frame": {"x":1038,"y":1125,"w":31,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":31},
+	"sourceSize": {"w":31,"h":31}
+},
 "gameScreen/cookies/pfeffernuss":
 {
 	"frame": {"x":1607,"y":1620,"w":429,"h":424},
@@ -256,6 +264,6 @@
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
 	"related_multi_packs": [ "sheet-1.json", "sheet-2.json", "sheet-3.json", "sheet-4.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:d6e15cd8a160ebd21f949e31d43efddb:949bfc4ed220e4581004aff29c72f70a:81a6f0a70957ea4181bc37a27f6e7b67$"
+	"smartupdate": "$TexturePacker:SmartUpdate:055f5fc4953b5e3f4d7280f9f8f75bc0:e64a39751fdbe3c278b38b72ccac1100:81a6f0a70957ea4181bc37a27f6e7b67$"
 }
 }
